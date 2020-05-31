@@ -4,12 +4,21 @@ let express = require("express"),
 
 let app = express(),
     router = express.Router();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000,
+      DB_URL = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/power_of_without';
+
+// ** SETUP **
 
 app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('views', './views');
 app.set('view engine', 'pug');
+
+// ** CONNECT TO DB **
+mongoose.connect(DB_URL, function(err, res) {
+  if(err) console.log("ERROR connecting to database");
+  else console.log("SUCCESSfully connected to database");
+});
 
 // ** ROUTES **
 app.get("/", function(req, res){
@@ -17,6 +26,7 @@ app.get("/", function(req, res){
 });
 
 // ** START THE SERVER **
+
 app.listen(PORT);
 console.log("Running on http://127.0.0.1:" + PORT);
 module.exports = app;
