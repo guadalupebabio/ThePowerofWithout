@@ -154,32 +154,32 @@ let settlementSchema = new Schema({
     demography: {
       diversity: {
         gender: {
-          female: Decimal,
-          male: Decimal,
+          female: Number,
+          male: Number,
         },
         ageGroups: {
-          oneToFive: Decimal,
-          sixToTwelve: Decimal,
-          thirteenToEighteen: Decimal,
-          nineteenToThirty: Decimal,
-          thirtyOneToFifty: Decimal,
-          greaterThanFifty: Decimal,
+          oneToFive: Number,
+          sixToTwelve: Number,
+          thirteenToEighteen: Number,
+          nineteenToThirty: Number,
+          thirtyOneToFifty: Number,
+          greaterThanFifty: Number,
         },
         ethnicAndRacialCategories: {
-          americanIndianOrAlaskanNative: Decimal,
-          asian: Decimal,
-          blackOrAfricanAmerican: Decimal,
-          hispanicOrLatino: Decimal,
-          nativeHawaiianOrOtherPacificIslander: Decimal
+          americanIndianOrAlaskanNative: Number,
+          asian: Number,
+          blackOrAfricanAmerican: Number,
+          hispanicOrLatino: Number,
+          nativeHawaiianOrOtherPacificIslander: Number
         },
         income: String,
         exploration: String
       },
       socialClass: {
         caste: {
-          obc: Decimal,
-          scAndST: Decimal,
-          others: Decimal,
+          obc: Number,
+          scAndST: Number,
+          others: Number,
         },
         upper: String,
         middle: String,

@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3000,
 
 app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.set('views', './views');
 app.set('view engine', 'pug');
 
@@ -24,6 +25,8 @@ mongoose.connect(DB_URL, function(err, res) {
 app.get("/", function(req, res){
   res.render("index");
 });
+
+app.use("/api", require("./app/routes/api.js"));
 
 // ** START THE SERVER **
 
