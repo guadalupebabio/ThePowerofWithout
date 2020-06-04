@@ -26,6 +26,10 @@ app.get("/", function(req, res){
   res.render("index");
 });
 
+app.get("/form", function(req, res){
+  res.render("form");
+});
+
 app.use("/api", require("./app/routes/api.js"));
 
 // ** START THE SERVER **

@@ -9,186 +9,196 @@ let mongoose = require('mongoose'),
 let settlementSchema = new Schema({
   name: String,
   country: String,
-  geolocation: String,
-  site: {
-    origin: {
-      causes: String,
-      geolocation: {type: String, enum: ['Africa', 'Europe', 'North America', 'South America', 'Asia', 'Oceania', 'Antarctica']},
-      population: Number
+  geolocation: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      required: true
     },
-    geography: {
-      topography: String,
-      withinCities: String,
-      climate: String,
-    },
-    vulnerability: {
-      weather: {
-        climateChange: String,
-        naturalDisasters: String
-      },
-      security: {
-        crimeRate: String,
-      },
-      prevalence: {
-        macro: String,
-        urban: String,
-        plan: String,
-        reg: String,
-        infras: String,
-        armcon: String,
-        govern: String
-      }
+    coordinates: {
+      type: [Number],
+      required: true
     }
   },
-  architecture: {
-    physicalNature: {
-      houseQuality: {
-        inadequate: String,
-        suitable: String,
-        optimal: String,
-      },
-      materials: {
-        tarpaulin: String,
-        tiles: String,
-        corrugatedSheet: String,
-        wood: String,
-        mud: String,
-        brick: String,
-        concrete: String,
-        others: String,
-      },
-      developmentState: String
-    },
-    infrastructure: {
-      energy: {
-        accessToGas: {
-          accessToGas: String,
-          typeOfFuel: {
-            gas: String,
-            wood: String,
-            coal: String,
-          }
-        },
-        accessToElectricity: String
-      },
-      water: {
-        accessToDrinkingWater: {
-          individualDrinkingTap: String,
-          accessToPublicTapOrOtherSources: String
-        },
-        accessToSanitation: {
-          toiletAtHome: String,
-          sharedToiletAccess: String
-        },
-        sewageSystem: {
-          sewerConnection: String,
-          garbageManagement: String
-        },
-      },
-      connectivity: {
-        accessToInternet: String,
-        accessToTV: String
-      },
-      mobility: {
-        road: {
-          quality: {type: String, enum: ["Paved", "Compacted", "Not paved"]},
-          sizeOfTheRoad: {
-            pedestrian: String,
-            bikeOrMoto: String,
-            car: String
-          },
-          nameOfTheRoad: String,
-          googleStreetView: Boolean
-        },
-        publicTransportation: {
-          stops: String,
-          proximityToPT: String,
-        },
-        amenties: {
-          proximityToAmenities: String
-        },
-      },
-    },
-    density: {
-      elevation: {
-        lessThan1: String,
-        twoToFive: String,
-        greaterThanFive: String,
-      },
-      ratio: String,
-      householdPerHouseSize: String,
-    }
-  },
-  populace: {
-    qualityOfLife: {
-      dignity: {
-        accessToFood: String,
-        dressing: String,
-        vandalism: String
-      },
-      health: {
-        wellBeing: String,
-        incidenceOfDiseases: String,
-        mortality: String
-      },
-      emotionalState: {
-        economicCondition: String,
-        accessToEducation: String,
-        accessToHealthAndSocialCare: String,
-        recreationAndLeisure: String,
-        houseQuality: String,
-      }
-    },
-    economy: {
-      jobs: {
-        unEmploymentRate: String,
-        employmentInTheFormalSector: String,
-      },
-      ownership: {
-        Owned: String,
-        Rented: String,
-        Others: String,
-      },
-      cityDependant: Boolean
-    },
-    demography: {
-      diversity: {
-        gender: {
-          female: Number,
-          male: Number,
-        },
-        ageGroups: {
-          oneToFive: Number,
-          sixToTwelve: Number,
-          thirteenToEighteen: Number,
-          nineteenToThirty: Number,
-          thirtyOneToFifty: Number,
-          greaterThanFifty: Number,
-        },
-        ethnicAndRacialCategories: {
-          americanIndianOrAlaskanNative: Number,
-          asian: Number,
-          blackOrAfricanAmerican: Number,
-          hispanicOrLatino: Number,
-          nativeHawaiianOrOtherPacificIslander: Number
-        },
-        income: String,
-        exploration: String
-      },
-      socialClass: {
-        caste: {
-          obc: Number,
-          scAndST: Number,
-          others: Number,
-        },
-        upper: String,
-        middle: String,
-        working: String,
-        lower: String,
-        other: String
-      }
-    }
-  }
+  // site: {
+  //   origin: {
+  //     causes: String,
+  //     geolocation: {type: String, enum: ['Africa', 'Europe', 'North America', 'South America', 'Asia', 'Oceania', 'Antarctica']},
+  //     population: Number
+  //   },
+  //   geography: {
+  //     topography: String,
+  //     withinCities: String,
+  //     climate: String,
+  //   },
+  //   vulnerability: {
+  //     weather: {
+  //       climateChange: String,
+  //       naturalDisasters: String
+  //     },
+  //     security: {
+  //       crimeRate: String,
+  //     },
+  //     prevalence: {
+  //       macro: String,
+  //       urban: String,
+  //       plan: String,
+  //       reg: String,
+  //       infras: String,
+  //       armcon: String,
+  //       govern: String
+  //     }
+  //   }
+  // },
+  // architecture: {
+  //   physicalNature: {
+  //     houseQuality: {
+  //       inadequate: String,
+  //       suitable: String,
+  //       optimal: String,
+  //     },
+  //     materials: {
+  //       tarpaulin: String,
+  //       tiles: String,
+  //       corrugatedSheet: String,
+  //       wood: String,
+  //       mud: String,
+  //       brick: String,
+  //       concrete: String,
+  //       others: String,
+  //     },
+  //     developmentState: String
+  //   },
+  //   infrastructure: {
+  //     energy: {
+  //       accessToGas: {
+  //         accessToGas: String,
+  //         typeOfFuel: {
+  //           gas: String,
+  //           wood: String,
+  //           coal: String,
+  //         }
+  //       },
+  //       accessToElectricity: String
+  //     },
+  //     water: {
+  //       accessToDrinkingWater: {
+  //         individualDrinkingTap: String,
+  //         accessToPublicTapOrOtherSources: String
+  //       },
+  //       accessToSanitation: {
+  //         toiletAtHome: String,
+  //         sharedToiletAccess: String
+  //       },
+  //       sewageSystem: {
+  //         sewerConnection: String,
+  //         garbageManagement: String
+  //       },
+  //     },
+  //     connectivity: {
+  //       accessToInternet: String,
+  //       accessToTV: String
+  //     },
+  //     mobility: {
+  //       road: {
+  //         quality: {type: String, enum: ["Paved", "Compacted", "Not paved"]},
+  //         sizeOfTheRoad: {
+  //           pedestrian: String,
+  //           bikeOrMoto: String,
+  //           car: String
+  //         },
+  //         nameOfTheRoad: String,
+  //         googleStreetView: Boolean
+  //       },
+  //       publicTransportation: {
+  //         stops: String,
+  //         proximityToPT: String,
+  //       },
+  //       amenties: {
+  //         proximityToAmenities: String
+  //       },
+  //     },
+  //   },
+  //   density: {
+  //     elevation: {
+  //       lessThan1: String,
+  //       twoToFive: String,
+  //       greaterThanFive: String,
+  //     },
+  //     ratio: String,
+  //     householdPerHouseSize: String,
+  //   }
+  // },
+  // populace: {
+  //   qualityOfLife: {
+  //     dignity: {
+  //       accessToFood: String,
+  //       dressing: String,
+  //       vandalism: String
+  //     },
+  //     health: {
+  //       wellBeing: String,
+  //       incidenceOfDiseases: String,
+  //       mortality: String
+  //     },
+  //     emotionalState: {
+  //       economicCondition: String,
+  //       accessToEducation: String,
+  //       accessToHealthAndSocialCare: String,
+  //       recreationAndLeisure: String,
+  //       houseQuality: String,
+  //     }
+  //   },
+  //   economy: {
+  //     jobs: {
+  //       unEmploymentRate: String,
+  //       employmentInTheFormalSector: String,
+  //     },
+  //     ownership: {
+  //       Owned: String,
+  //       Rented: String,
+  //       Others: String,
+  //     },
+  //     cityDependant: Boolean
+  //   },
+  //   demography: {
+  //     diversity: {
+  //       gender: {
+  //         female: Number,
+  //         male: Number,
+  //       },
+  //       ageGroups: {
+  //         oneToFive: Number,
+  //         sixToTwelve: Number,
+  //         thirteenToEighteen: Number,
+  //         nineteenToThirty: Number,
+  //         thirtyOneToFifty: Number,
+  //         greaterThanFifty: Number,
+  //       },
+  //       ethnicAndRacialCategories: {
+  //         americanIndianOrAlaskanNative: Number,
+  //         asian: Number,
+  //         blackOrAfricanAmerican: Number,
+  //         hispanicOrLatino: Number,
+  //         nativeHawaiianOrOtherPacificIslander: Number
+  //       },
+  //       income: String,
+  //       exploration: String
+  //     },
+  //     socialClass: {
+  //       caste: {
+  //         obc: Number,
+  //         scAndST: Number,
+  //         others: Number,
+  //       },
+  //       upper: String,
+  //       middle: String,
+  //       working: String,
+  //       lower: String,
+  //       other: String
+  //     }
+  //   }
+  // }
 });
 
 

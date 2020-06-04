@@ -1,0 +1,14 @@
+doctype html
+html 
+  head 
+  body 
+    form(action = "/api/settlements" method = "POST")
+      input(name = "name" type = "text" placeholder = "Settlement name")
+      br
+      input(name = "country" type = "text" placeholder = "Settlement country")
+      br
+      input(name = "lat" type = "text" placeholder = "Latitude")
+      br
+      input(name = "lon" type = "text" placeholder = "Longitude")
+      br
+      input(type="submit" value="Submit")
