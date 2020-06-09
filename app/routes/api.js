@@ -8,7 +8,6 @@ let router = express.Router();
 router.get("/settlements", function(req, res){
   Settlement.find({}, function(err, docs){
     if(err) throw err;
-
     res.json(docs);
   });
 });
@@ -25,8 +24,7 @@ router.post("/settlements", function(req, res){ //TODO: add verification to requ
 
   settlement.save(function (err) {
     if(err) throw err;
-
-    res.send(200);
+    res.render('test',settlement);
   });
 });
 
