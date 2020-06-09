@@ -5,7 +5,7 @@ let express = require("express"),
 let app = express(),
     router = express.Router();
 const PORT = process.env.PORT || 3000,
-      DB_URL = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/cheriedb';
+      DB_URL = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/the_power_of_without';
 
 // ** SETUP **
 
