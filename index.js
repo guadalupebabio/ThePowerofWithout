@@ -5,7 +5,7 @@ let express = require("express"),
 let app = express(),
     router = express.Router();
 const PORT = process.env.PORT || 3000,
-      DB_URL = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/power_of_without';
+      DB_URL = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/cheriedb';
 
 // ** SETUP **
 
@@ -28,6 +28,11 @@ app.get("/", function(req, res){
 
 app.get("/form", function(req, res){
   res.render("form");
+});
+
+
+app.get("/test", function(req, res){
+  res.render("test", {title: ''});
 });
 
 app.use("/api", require("./app/routes/api.js"));
