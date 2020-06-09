@@ -24,7 +24,7 @@ router.post("/settlements", function(req, res){ //TODO: add verification to requ
 
   settlement.save(function (err) {
     if(err) throw err;
-    res.render('test',settlement);
+    res.send(200);
   });
 });
 

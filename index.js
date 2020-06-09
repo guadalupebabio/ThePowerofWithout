@@ -1,6 +1,7 @@
 let express = require("express"),
     bodyParser = require("body-parser"),
-    mongoose = require("mongoose");
+    mongoose = require("mongoose"),
+    Settlement = require("./app/db/models/Settlement");
 
 let app = express(),
     router = express.Router();
@@ -30,9 +31,12 @@ app.get("/form", function(req, res){
   res.render("form");
 });
 
-
 app.get("/test", function(req, res){
-  res.render("test", {title: ''});
+  Settlement.find({}, function(err, settlements){
+    if(err) throw err;
+
+    res.render("test", {"settlements": settlements});
+  });
 });
 
 app.use("/api", require("./app/routes/api.js"));
