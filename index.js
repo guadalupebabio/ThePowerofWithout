@@ -31,11 +31,11 @@ app.get("/form", function(req, res){
   res.render("form");
 });
 
-app.get("/test", function(req, res){
+app.get("/map", function(req, res){
   Settlement.find({}, function(err, settlements){
     if(err) throw err;
 
-    res.render("test", {"settlements": settlements});
+    res.render("map", {"settlements": settlements});
   });
 });
 
