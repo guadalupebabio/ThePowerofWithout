@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 let express = require("express"),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
@@ -5,8 +7,9 @@ let express = require("express"),
 
 let app = express(),
     router = express.Router();
+
 const PORT = process.env.PORT || 3000,
-      DB_URL = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/the_power_of_without';
+      DB_URL = `mongodb+srv://${process.env.MONGODB_USERNAME}:${encodeURIComponent(process.env.MONGODB_PASSWORD)}@cluster0-d6pne.mongodb.net/the_power_of_without?retryWrites=true&w=majority`;
 
 // ** SETUP **
 
