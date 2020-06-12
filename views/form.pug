@@ -11,4 +11,20 @@ html
       br
       input(name = "lon" type = "text" placeholder = "Longitude")
       br
+      select(name = "siteOriginCauses")
+        option(value = "Squatting") Squatting
+        option(value = "Refugee Camp") Refugee Camp
+        option(value = "Illegal Subdivision") Illegal Subdivision
+      br
+      select(name = "siteOriginGeolocation")
+        option(value = "Africa") Africa
+        option(value = "Europe") Europe
+        option(value = "North America") North America
+        option(value = "South America") South America
+        option(value = "Asia") Asia
+        option(value = "Oceania") Oceania
+        option(value = "Antarctica") Antarctica
+      br
+      input(name = "siteOriginPopulation" type = "text" placeholder = "Population")
+      br
       input(type="submit" value="Submit")

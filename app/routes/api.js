@@ -19,7 +19,14 @@ router.post("/settlements", function(req, res){ //TODO: add verification to requ
   let settlement = new Settlement({
     "name": req.body.name,
     "country": req.body.country,
-    "geolocation": {type: 'Point', coordinates: [parseFloat(req.body.lat), parseFloat(req.body.lon)] }
+    "geolocation": {type: 'Point', coordinates: [parseFloat(req.body.lat), parseFloat(req.body.lon)] },
+    "site": {
+      "origin": {
+        "causes": req.body.siteOriginCauses,
+        "geolocation": req.body.siteOriginGeolocation, // Continent
+        "population": parseInt(req.body.siteOriginPopulation),
+      }
+    }
   });
 
   settlement.save(function (err) {

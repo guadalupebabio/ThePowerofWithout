@@ -20,36 +20,36 @@ let settlementSchema = new Schema({
       required: true
     }
   },
-  // site: {
-  //   origin: {
-  //     causes: String,
-  //     geolocation: {type: String, enum: ['Africa', 'Europe', 'North America', 'South America', 'Asia', 'Oceania', 'Antarctica']},
-  //     population: Number
-  //   },
-  //   geography: {
-  //     topography: String,
-  //     withinCities: String,
-  //     climate: String,
-  //   },
-  //   vulnerability: {
-  //     weather: {
-  //       climateChange: String,
-  //       naturalDisasters: String
-  //     },
-  //     security: {
-  //       crimeRate: String,
-  //     },
-  //     prevalence: {
-  //       macro: String,
-  //       urban: String,
-  //       plan: String,
-  //       reg: String,
-  //       infras: String,
-  //       armcon: String,
-  //       govern: String
-  //     }
-  //   }
-  // },
+  site: {
+    origin: {
+      causes: {type: String, enum: ["Squatting", "Refugee Camp", "Illegal Subdivision"]},
+      geolocation: {type: String, enum: ['Africa', 'Europe', 'North America', 'South America', 'Asia', 'Oceania', 'Antarctica']},
+      population: Number
+    },
+    // geography: {
+    //   topography: String,
+    //   withinCities: String,
+    //   climate: String,
+    // },
+    // vulnerability: {
+    //   weather: {
+    //     climateChange: String,
+    //     naturalDisasters: String
+    //   },
+    //   security: {
+    //     crimeRate: String,
+    //   },
+    //   prevalence: {
+    //     macro: String,
+    //     urban: String,
+    //     plan: String,
+    //     reg: String,
+    //     infras: String,
+    //     armcon: String,
+    //     govern: String
+    //   }
+    // }
+  },
   // architecture: {
   //   physicalNature: {
   //     houseQuality: {
