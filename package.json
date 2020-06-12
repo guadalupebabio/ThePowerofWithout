@@ -22,5 +22,10 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.16",
     "pug": "^3.0.0"
+  },
+  "devDependencies": {
+    "csv-parser": "^2.3.3",
+    "parse-dms": "0.0.3",
+    "request": "^2.88.2"
   }
 }

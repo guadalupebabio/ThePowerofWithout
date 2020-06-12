@@ -22,7 +22,7 @@ let settlementSchema = new Schema({
   },
   site: {
     origin: {
-      causes: {type: String, enum: ["Squatting", "Refugee Camp", "Illegal Subdivision"]},
+      causes: {type: String, enum: ["Squatting", "Refugee Camp", "Illegal Subdivision", ""]},
       geolocation: {type: String, enum: ['Africa', 'Europe', 'North America', 'South America', 'Asia', 'Oceania', 'Antarctica']},
       population: Number
     },

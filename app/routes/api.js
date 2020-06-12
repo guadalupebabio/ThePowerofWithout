@@ -24,7 +24,7 @@ router.post("/settlements", function(req, res){ //TODO: add verification to requ
       "origin": {
         "causes": req.body.siteOriginCauses,
         "geolocation": req.body.siteOriginGeolocation, // Continent
-        "population": parseInt(req.body.siteOriginPopulation),
+        "population": isNaN(parseInt(req.body.siteOriginPopulation)) ? null : parseInt(req.body.siteOriginPopulation),
       }
     }
   });
