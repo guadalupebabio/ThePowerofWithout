@@ -3,20 +3,60 @@ html
   head
     link(rel='stylesheet', href='https://unpkg.com/leaflet@1.6.0/dist/leaflet.css')
     script(src='https://unpkg.com/leaflet@1.6.0/dist/leaflet.js')
-    script(src="/api/settlements")
+    script(src="/app/routes/api/settlements")
+
     style.
       #map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
   body
     #map
     script.
-      var map = L.map('map').setView([0,0],1);
+      var map = L.map('map')
+        .setView([0,0],3);
+
       L.tileLayer('https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=AlLtvbLyE9OnbQNyl7PF', {attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'}).addTo(map);
      
       var points = !{JSON.stringify(settlements)};
       console.log(typeof points); // Notice: this is an object! 
+      
+
+      //inputting data
       for (var i = 0; i < points.length; ++i){
-        var marker = L.marker(points[i]["geolocation"]["coordinates"]).addTo(map); 
-        marker.bindPopup("<dl>" + points[i]["name"]+ "</dl>" + "<dl>" + points[i]["country"] + "</dl>");
+        var name = points[i]["name"];
+        var population = points[i]["site"].origin["population"];
+        var causes = points[i]["site"].origin["causes"];
+        var country = points[i]["country"];
+        var continent = points[i]["site"].origin["geolocation"];
+
+        if (population == null){
+          var rad = 10000;
+        }
+        else{
+          var rad = points[i]["site"].origin["population"]/20;
+        }
+
+        //circle colours and size
+        if (causes.localeCompare("Squatting")==0){
+          var col = 'red';
+        }
+        else if (causes.localeCompare("Refugee Camp")==0){
+          var col = 'blue';
+        }
+        else if (causes.localeCompare("Illegal Subdivision")==0){
+          var col = 'green';
+        }
+        else{
+          var col = 'orange';
+        }
+
+        var circle = L.circle(points[i]["geolocation"]["coordinates"], {
+        color: col,
+        fillColor: col,
+        fillOpacity: 0.5,
+        radius: rad
+        }).addTo(map);
+        circle.bindPopup(name + "<br>" + country + "<br>" + population + "<br>" + causes + "<br>" + continent);
+
       }
+      
       
       
