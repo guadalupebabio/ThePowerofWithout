@@ -30,8 +30,16 @@ app.get("/", function(req, res){
   res.render("index");
 });
 
-app.get("/form", function(req, res){
+app.get("/contribute", function(req, res){
   res.render("form");
+});
+
+app.get("/toolkit", function(req, res){
+  res.render("toolkit");
+});
+
+app.get("/about", function(req, res){
+  res.render("about");
 });
 
 app.get("/map", function(req, res){
