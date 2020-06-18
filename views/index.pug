@@ -4,9 +4,10 @@ html
     include includes/head.pug
     title The Power of Without
   body 
-    - let activeTab = 0;
-    include includes/nav.pug
-    p hello world
-    a(href = "/form") form
-    p
-    a(href = "/map") map
+    //- - let activeTab = 0;
+    //- include includes/nav.pug
+    #jumbotron
+      .vertical-centered
+        img(src = "/assets/logo.png")
+        a.button.is-white(href = "/form") Contribute
+      i.fas.fa-arrow-down

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 nav {
   background: #242424;
   height: 60px; }
@@ -12,3 +13,30 @@ nav {
       color: #dfdede; }
     nav a.active {
       border-bottom: 5px solid #FFFFFF; }
+
+#jumbotron {
+  background-image: url("/assets/cover.png");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  position: relative; }
+  #jumbotron .vertical-centered {
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center; }
+    #jumbotron .vertical-centered a {
+      font-family: "Roboto";
+      font-weight: bold;
+      font-size: 24px;
+      margin-top: 24px; }
+  #jumbotron .fa-arrow-down {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 60px;
+    color: #fff; }
