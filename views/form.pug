@@ -3,34 +3,50 @@ html
   head 
     include includes/head.pug
     title The Power of Without
+    link(rel='stylesheet', href='https://unpkg.com/leaflet@1.6.0/dist/leaflet.css')
+    script(src='https://unpkg.com/leaflet@1.6.0/dist/leaflet.js')
     link(rel="stylesheet" href="/dist/css/form.css")
   body 
     - let activeTab = 2;
     include includes/nav.pug
-    form(action = "/api/settlements" method = "POST")
-      input(name = "name" type = "text" placeholder = "Settlement name")
-      br
-      input(name = "country" type = "text" placeholder = "Settlement country")
-      br
-      input(name = "lat" type = "text" placeholder = "Latitude")
-      br
-      input(name = "lon" type = "text" placeholder = "Longitude")
-      br
-      select(name = "siteOriginCauses")
-        option(value = "Squatting") Squatting
-        option(value = "Refugee Camp") Refugee Camp
-        option(value = "Illegal Subdivision") Illegal Subdivision
-        option(value = "") N/A
-      br
-      select(name = "siteOriginGeolocation")
-        option(value = "Africa") Africa
-        option(value = "Europe") Europe
-        option(value = "North America") North America
-        option(value = "South America") South America
-        option(value = "Asia") Asia
-        option(value = "Oceania") Oceania
-        option(value = "Antarctica") Antarctica
-      br
-      input(name = "siteOriginPopulation" type = "text" placeholder = "Population")
-      br
-      input(type="submit" value="Submit")
+    .columns.is-variable.is-8
+      .column.is-narrow
+        a.active <span>Ge</span>neral
+        br
+        a <span>Si</span>te
+        br
+        a <span>Ar</span>chitecture
+        br
+        a <span>Po</span>pulation
+      .column.is-5
+        form(action = "/api/settlements" method = "POST")
+          input(name = "name" type = "text" placeholder = "Settlement name")
+          br
+          input(name = "country" type = "text" placeholder = "Settlement country")
+          br
+          input(name = "lat" type = "text" placeholder = "Latitude")
+          br
+          input(name = "lon" type = "text" placeholder = "Longitude")
+          br
+          select(name = "siteOriginCauses")
+            option(value = "Squatting") Squatting
+            option(value = "Refugee Camp") Refugee Camp
+            option(value = "Illegal Subdivision") Illegal Subdivision
+            option(value = "") N/A
+          br
+          select(name = "siteOriginGeolocation")
+            option(value = "Africa") Africa
+            option(value = "Europe") Europe
+            option(value = "North America") North America
+            option(value = "South America") South America
+            option(value = "Asia") Asia
+            option(value = "Oceania") Oceania
+            option(value = "Antarctica") Antarctica
+          br
+          input(name = "siteOriginPopulation" type = "text" placeholder = "Population")
+          br
+          input.button.is-black(type="submit" value="Submit")
+      .column
+        #map
+    script(src = "/src/js/form.js")
+    

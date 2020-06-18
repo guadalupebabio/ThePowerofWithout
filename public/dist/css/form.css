@@ -1,2 +1,18 @@
-form {
-  margin-top: 60px; }
+.columns {
+  margin-top: 100px;
+  padding: 0 5vw; }
+  .columns .column:first-child a {
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 24px;
+    color: black; }
+  .columns .column:first-child .active span {
+    border-bottom: 4px solid black; }
+
+form .button {
+  background: #242424;
+  font-weight: bold; }
+
+#map {
+  width: 100%;
+  height: 400px; }
