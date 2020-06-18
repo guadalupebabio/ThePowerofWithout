@@ -8,6 +8,10 @@
       font-weight: bold;
       font-size: 24px;
       color: black;
+
+      span{
+        transition: 0.2s all;
+      }
     }
 
     .active span{
@@ -37,12 +41,18 @@ form{
     }
   }
 
+  .button-level{
+    margin-top: 30px;
+    text-align: center;
+  }
+
   .button{
-    background: #242424;
     font-weight: bold;
-    display: block;
-    width: 50%;
-    margin: 30px auto;
+    width: 49%;
+
+    &:nth-child(2){
+      margin-left: 2%;
+    }
   }
 }
 

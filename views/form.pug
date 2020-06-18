@@ -11,13 +11,13 @@ html
     include includes/nav.pug
     .columns.is-variable.is-8
       .column.is-narrow
-        a.active <span>Ge</span>neral
+        a.active(onclick = "goToSection(1)") <span>Ge</span>neral
         br
-        a <span>Si</span>te
+        a(onclick = "goToSection(2)") <span>Si</span>te
         br
-        a <span>Ar</span>chitecture
+        a(onclick = "goToSection(3)") <span>Ar</span>chitecture
         br
-        a <span>Po</span>pulation
+        a(onclick = "goToSection(4)") <span>Po</span>pulation
       .column.is-5
         form(action = "/api/settlements" method = "POST")
           section 
@@ -34,7 +34,24 @@ html
             label(for = "email") Email Address: <i class = "fas fa-info-circle"></i>
             br
             input(name = "email" type = "text")
-            br  
+            br 
+            .button-level 
+              a.button.is-black(onclick = "goToSection(2)") Next Section
+          section.is-hidden 
+            p Site 
+            .button-level
+              a.button.is-light(onclick = "goToSection(1)") Previous Section
+              a.button.is-black(onclick = "goToSection(3)") Next Section
+          section.is-hidden
+            p Architecture  
+            .button-level
+              a.button.is-light(onclick = "goToSection(2)") Previous Section
+              a.button.is-black(onclick = "goToSection(4)") Next Section
+          section.is-hidden
+            p Population  
+            .button-level
+              a.button.is-light(onclick = "goToSection(3)") Previous Section
+              input.button.is-black(type="submit" value="Submit")
             
           //- br
           //- input(name = "country" type = "text" placeholder = "Settlement country")
@@ -60,8 +77,15 @@ html
           //- br
           //- input(name = "siteOriginPopulation" type = "text" placeholder = "Population")
           //- br
-          input.button.is-black(type="submit" value="Submit")
+          //- input.button.is-black(type="submit" value="Submit")
       .column
-        #map
+        section
+          #map
+        section.is-hidden 
+          p Site 
+        section.is-hidden 
+          p Architecture
+        section.is-hidden 
+          p Population
     script(src = "/src/js/form.js")
     
