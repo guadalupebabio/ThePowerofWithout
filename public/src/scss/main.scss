@@ -8,6 +8,7 @@
   height: 100vh;
   width: 100vw;
   position: relative;
+  margin-bottom: 60px;
 
   .vertical-centered{
     top: 50%;
@@ -32,5 +33,36 @@
     transform: translateX(-50%);
     font-size: 60px;
     color: #fff;
+  }
+}
+
+.full-height{
+  height: 100vh;
+}
+
+#column-text{
+  top: 50%;
+  transform: translateY(-50%);
+  position: relative;
+  font-size: 14px;
+
+  .column{
+    position: relative;
+  }
+
+  .column.left{
+    img{
+      padding: 50px 0 0 10vw;
+    }
+
+    p{
+      padding-left: 10vw;
+    }
+  }
+
+  .column.right{
+    p{
+      padding-right: 10vw;
+    }
   }
 }

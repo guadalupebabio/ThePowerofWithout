@@ -11,14 +11,30 @@ html
         img(src = "/assets/logo.png")
         a.button.is-white(href = "/form") Contribute
       i.fas.fa-arrow-down
-    p(style = "height:100vh") Officia et proident sint ea sit id incididunt consectetur do exercitation reprehenderit incididunt duis in. Pariatur officia sint culpa in non eu ea. Aute proident ullamco excepteur esse reprehenderit proident est et elit dolore dolore culpa proident aliquip. Adipisicing pariatur id culpa excepteur anim laboris ad. Officia cillum et ad mollit occaecat do ex aliquip.
-    | Sunt tempor sint esse tempor cupidatat ex eu. Excepteur magna elit et sit sunt eu pariatur ea nulla dolore officia consectetur. Dolore consectetur quis laboris eu excepteur et in dolor labore aliqua est dolore culpa aliquip ex enim magna. Ad cupidatat consequat aute aliquip labore excepteur non commodo ex est. Consectetur sint cupidatat eu minim non deserunt nisi veniam et. Aliquip cupidatat aliquip non aliquip ad sint occaecat mollit occaecat aute nostrud cillum elit. Nulla cillum anim reprehenderit sint occaecat laboris dolore duis ad aliqua dolor excepteur eu quis excepteur fugiat.
-    | Aliqua nisi dolore ullamco proident ea officia esse laborum officia enim do deserunt proident. Laboris aliquip aliquip veniam fugiat qui esse ipsum esse sit sit aliqua sunt proident commodo irure. Mollit Lorem culpa mollit duis in voluptate aliqua adipisicing adipisicing culpa tempor. Aliquip nulla nostrud nostrud ex adipisicing labore in reprehenderit dolore incididunt amet qui mollit adipisicing. Esse adipisicing aliquip reprehenderit proident amet incididunt ipsum magna aliquip anim velit ullamco. Incididunt laboris laboris duis sint consectetur dolor ullamco culpa.
-    | Incididunt quis enim id tempor non occaecat dolore aliqua ullamco excepteur fugiat enim. Nisi elit magna est eu veniam anim non do. Lorem officia anim dolor exercitation dolor excepteur velit eiusmod cupidatat ipsum adipisicing Lorem sit adipisicing. Aliquip Lorem nisi fugiat magna id velit elit ea nulla minim deserunt. Voluptate ea nulla incididunt ullamco ut ullamco proident.
+    section.full-height 
+      #column-text.columns.is-8.is-variable
+        .column.left 
+          img(src = "/assets/cities-without.png")
+          p The Power of Without is a collaborative initiative among institutions and local communities for identifying cost-efficient, lightweight infrastructure systems for deployment in informal settlements, to foster sustainable, resilient, and autonomous communities. A taxonomy, and methodology based in a set of workshops and classes has been developed to learn from informality.
+            br
+            br
+            strong Kent Larson and his team are collaborating with Lord Norman Foster in a new research field named "Power of Without." Today's heavy infrastructure solutions are inflexible and will not be able to be implemented at the scale and pace urbanization is taking place.
+        .column.right
+          p As the world moves towards urbanization, cities are becoming increasingly complex. By 2050, about 70% of the world's population is expected to live in urban areas,  projected to reach 6.3 billion people. To keep up with the growing urban population, traditional infrastructure systems are estimated to cost $57-trillion. Few experts anticipate that this is even remotely possible and that new strategies are needed. The cost of conventional infrastructure would exceed the combined annual GDP of the USA, China, and Europe,  and 90% of this urbanization will be in Africa and Asia.
+            br
+            br
+            | We must find new solutions to meet the complex challenges of the future. We pose an opportunity to rethink current models and invent new systems and strategies for a more livable, equitable, and resilient future. 
+          br
+          br
+          .columns.is-variable.is-1
+            .column.is-4
+              img(src = "/assets/image2.png") 
+            .column.is-8
+              img(src = "/assets/image3.png") 
     script.
       let checkScroll = function(){
-        if($(document).scrollTop() > $("#jumbotron").height()) $("nav").hide();
-        else $("nav").show(;)
+        if($(document).scrollTop() >= $("#jumbotron").height()) $("nav").show();
+        else $("nav").hide()
       }
       
       $(document).on("mousewheel", checkScroll);
