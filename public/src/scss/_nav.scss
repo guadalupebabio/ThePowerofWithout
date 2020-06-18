@@ -4,6 +4,10 @@ $underline-height: 5px;
 nav{
   background: #242424;
   height: $nav-height;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  transition: 0.2s all;
 
   a{
     color: #FFFFFF;

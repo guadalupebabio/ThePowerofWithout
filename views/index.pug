@@ -4,10 +4,22 @@ html
     include includes/head.pug
     title The Power of Without
   body 
-    //- - let activeTab = 0;
-    //- include includes/nav.pug
+    - let activeTab = 0;
+    include includes/nav.pug
     #jumbotron
       .vertical-centered
         img(src = "/assets/logo.png")
         a.button.is-white(href = "/form") Contribute
       i.fas.fa-arrow-down
+    p(style = "height:100vh") Officia et proident sint ea sit id incididunt consectetur do exercitation reprehenderit incididunt duis in. Pariatur officia sint culpa in non eu ea. Aute proident ullamco excepteur esse reprehenderit proident est et elit dolore dolore culpa proident aliquip. Adipisicing pariatur id culpa excepteur anim laboris ad. Officia cillum et ad mollit occaecat do ex aliquip.
+    | Sunt tempor sint esse tempor cupidatat ex eu. Excepteur magna elit et sit sunt eu pariatur ea nulla dolore officia consectetur. Dolore consectetur quis laboris eu excepteur et in dolor labore aliqua est dolore culpa aliquip ex enim magna. Ad cupidatat consequat aute aliquip labore excepteur non commodo ex est. Consectetur sint cupidatat eu minim non deserunt nisi veniam et. Aliquip cupidatat aliquip non aliquip ad sint occaecat mollit occaecat aute nostrud cillum elit. Nulla cillum anim reprehenderit sint occaecat laboris dolore duis ad aliqua dolor excepteur eu quis excepteur fugiat.
+    | Aliqua nisi dolore ullamco proident ea officia esse laborum officia enim do deserunt proident. Laboris aliquip aliquip veniam fugiat qui esse ipsum esse sit sit aliqua sunt proident commodo irure. Mollit Lorem culpa mollit duis in voluptate aliqua adipisicing adipisicing culpa tempor. Aliquip nulla nostrud nostrud ex adipisicing labore in reprehenderit dolore incididunt amet qui mollit adipisicing. Esse adipisicing aliquip reprehenderit proident amet incididunt ipsum magna aliquip anim velit ullamco. Incididunt laboris laboris duis sint consectetur dolor ullamco culpa.
+    | Incididunt quis enim id tempor non occaecat dolore aliqua ullamco excepteur fugiat enim. Nisi elit magna est eu veniam anim non do. Lorem officia anim dolor exercitation dolor excepteur velit eiusmod cupidatat ipsum adipisicing Lorem sit adipisicing. Aliquip Lorem nisi fugiat magna id velit elit ea nulla minim deserunt. Voluptate ea nulla incididunt ullamco ut ullamco proident.
+    script.
+      let checkScroll = function(){
+        if($(document).scrollTop() > $("#jumbotron").height()) $("nav").hide();
+        else $("nav").show(;)
+      }
+      
+      $(document).on("mousewheel", checkScroll);
+      $(document).ready(checkScroll);

@@ -1,7 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 nav {
   background: #242424;
-  height: 60px; }
+  height: 60px;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  transition: 0.2s all; }
   nav a {
     color: #FFFFFF;
     transition: 0.2s all;
