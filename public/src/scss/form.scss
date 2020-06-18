@@ -17,9 +17,32 @@
 }
 
 form{
+  label{
+    font-family: Roboto;
+    font-size: 14px;
+  }
+
+  input[type = "text"]{
+    font-family: Roboto;
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    font-size: 20px;
+    border: none;
+    border-bottom: 2px solid black;
+
+    &:focus{
+      outline: none;
+      border-bottom-color: #3a539b;
+    }
+  }
+
   .button{
     background: #242424;
     font-weight: bold;
+    display: block;
+    width: 50%;
+    margin: 30px auto;
   }
 }
 

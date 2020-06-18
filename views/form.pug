@@ -20,31 +20,46 @@ html
         a <span>Po</span>pulation
       .column.is-5
         form(action = "/api/settlements" method = "POST")
-          input(name = "name" type = "text" placeholder = "Settlement name")
-          br
-          input(name = "country" type = "text" placeholder = "Settlement country")
-          br
-          input(name = "lat" type = "text" placeholder = "Latitude")
-          br
-          input(name = "lon" type = "text" placeholder = "Longitude")
-          br
-          select(name = "siteOriginCauses")
-            option(value = "Squatting") Squatting
-            option(value = "Refugee Camp") Refugee Camp
-            option(value = "Illegal Subdivision") Illegal Subdivision
-            option(value = "") N/A
-          br
-          select(name = "siteOriginGeolocation")
-            option(value = "Africa") Africa
-            option(value = "Europe") Europe
-            option(value = "North America") North America
-            option(value = "South America") South America
-            option(value = "Asia") Asia
-            option(value = "Oceania") Oceania
-            option(value = "Antarctica") Antarctica
-          br
-          input(name = "siteOriginPopulation" type = "text" placeholder = "Population")
-          br
+          section 
+            label(for = "city") Name of the City:
+            br
+            input(name = "city" type = "text")
+            br  
+            
+            label(for = "settlement") Name of the Informal Settlement:
+            br
+            input(name = "settlement" type = "text")
+            br  
+            
+            label(for = "email") Email Address: <i class = "fas fa-info-circle"></i>
+            br
+            input(name = "email" type = "text")
+            br  
+            
+          //- br
+          //- input(name = "country" type = "text" placeholder = "Settlement country")
+          //- br
+          //- input(name = "lat" type = "text" placeholder = "Latitude")
+          //- br
+          //- input(name = "lon" type = "text" placeholder = "Longitude")
+          //- br
+          //- select(name = "siteOriginCauses")
+          //-   option(value = "Squatting") Squatting
+          //-   option(value = "Refugee Camp") Refugee Camp
+          //-   option(value = "Illegal Subdivision") Illegal Subdivision
+          //-   option(value = "") N/A
+          //- br
+          //- select(name = "siteOriginGeolocation")
+          //-   option(value = "Africa") Africa
+          //-   option(value = "Europe") Europe
+          //-   option(value = "North America") North America
+          //-   option(value = "South America") South America
+          //-   option(value = "Asia") Asia
+          //-   option(value = "Oceania") Oceania
+          //-   option(value = "Antarctica") Antarctica
+          //- br
+          //- input(name = "siteOriginPopulation" type = "text" placeholder = "Population")
+          //- br
           input.button.is-black(type="submit" value="Submit")
       .column
         #map
