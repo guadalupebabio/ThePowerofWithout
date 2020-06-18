@@ -3,11 +3,13 @@ html
   head
     link(rel='stylesheet', href='https://unpkg.com/leaflet@1.6.0/dist/leaflet.css')
     script(src='https://unpkg.com/leaflet@1.6.0/dist/leaflet.js')
-    script(src="/app/routes/api/settlements")
+    include includes/head.pug
 
     style.
-      #map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
+      #map {position: absolute; top: 60px; bottom: 0; left: 0; right: 0;}
   body
+    - let activeTab = 1;
+    include includes/nav.pug
     #map
     script.
       var map = L.map('map')

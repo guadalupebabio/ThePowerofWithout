@@ -1,0 +1,14 @@
+nav {
+  background: #242424;
+  height: 60px; }
+  nav a {
+    color: #FFFFFF;
+    transition: 0.2s all;
+    margin: 0 40px;
+    line-height: 50px;
+    border-top: 5px solid #242424;
+    border-bottom: 5px solid #242424; }
+    nav a:hover {
+      color: #dfdede; }
+    nav a.active {
+      border-bottom: 5px solid #FFFFFF; }

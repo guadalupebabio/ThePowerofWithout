@@ -1,0 +1,24 @@
+$nav-height: 60px;
+$underline-height: 5px;
+
+nav{
+  background: #242424;
+  height: $nav-height;
+
+  a{
+    color: #FFFFFF;
+    transition: 0.2s all;
+    margin: 0 40px;
+    line-height: $nav-height - 2 * $underline-height;
+    border-top: $underline-height solid #242424;
+    border-bottom: $underline-height solid #242424;
+
+    &:hover{
+      color: #dfdede;
+    }
+
+    &.active{
+      border-bottom: $underline-height solid #FFFFFF;
+    }
+  }
+}

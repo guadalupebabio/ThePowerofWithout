@@ -1,7 +1,11 @@
 doctype html
 html 
   head 
+    include includes/head.pug
+    title The Power of Without
   body 
+    - let activeTab = 2;
+    include includes/nav.pug
     form(action = "/api/settlements" method = "POST")
       input(name = "name" type = "text" placeholder = "Settlement name")
       br
