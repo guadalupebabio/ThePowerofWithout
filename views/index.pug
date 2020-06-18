@@ -3,13 +3,14 @@ html
   head 
     include includes/head.pug
     title The Power of Without
+    link(rel="stylesheet" href="/dist/css/index.css")
   body 
     - let activeTab = 0;
     include includes/nav.pug
     #jumbotron
       .vertical-centered
         img(src = "/assets/logo.png")
-        a.button.is-white(href = "/form") Contribute
+        a.button.is-white(href = "/contribute") Contribute
       i.fas.fa-arrow-down
     section.full-height 
       #column-text.columns.is-8.is-variable
