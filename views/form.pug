@@ -31,10 +31,16 @@ html
             input(name = "settlement" type = "text")
             br  
             
+            label(for = "geolocation") Coordinates</i>
+            br
+            input#coords(name = "geolocation" type = "text" disabled placeholder = "Select a point on the map")
+            br 
+            
             label(for = "email") Email Address: <i class = "fas fa-info-circle"></i>
             br
             input(name = "email" type = "text")
             br 
+            
             .button-level 
               a.button.is-black(onclick = "goToSection(2)") Next Section
           section.is-hidden 

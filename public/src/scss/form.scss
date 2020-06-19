@@ -30,8 +30,9 @@ form{
     font-family: Roboto;
     width: 100%;
     margin-bottom: 30px;
-    margin-top: 10px;
-    font-size: 20px;
+    margin-top: 6px;
+    padding: 6px 8px;
+    font-size: 16px;
     border: none;
     border-bottom: 2px solid black;
 
@@ -56,7 +57,11 @@ form{
   }
 }
 
+section{
+  height: 100%;
+}
+
 #map{
   width: 100%;
-  height: 400px;
+  height: 100%;
 }
