@@ -16,10 +16,13 @@ router.get("/settlements", function(req, res){
 router.post("/settlements", function(req, res){ //TODO: add verification to request
   // let settlement = new Settlement(req.body);
 
+  let coords = req.body.geolocation.split(",");
+
   let settlement = new Settlement({
-    "name": req.body.name,
+    "name": `${req.body.settlement}, ${req.body.city}`,
     "country": req.body.country,
-    "geolocation": {type: 'Point', coordinates: [parseFloat(req.body.lat), parseFloat(req.body.lon)] },
+    "geolocation": {type: 'Point', coordinates: [parseFloat(coords[0]), parseFloat(coords[1])] },
+    "email": req.body.email,
     "site": {
       "origin": {
         "causes": req.body.siteOriginCauses,

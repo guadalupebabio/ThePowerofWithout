@@ -9,6 +9,7 @@ let mongoose = require('mongoose'),
 let settlementSchema = new Schema({
   name: String,
   country: String,
+  email: String,
   geolocation: {
     type: {
       type: String,
