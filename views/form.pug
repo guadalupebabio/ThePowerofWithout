@@ -21,14 +21,19 @@ html
       .column.is-5
         form(action = "/api/settlements" method = "POST")
           section 
+            label(for = "settlement") Name of the Informal Settlement:
+            br
+            input(name = "settlement" type = "text")
+            br  
+            
             label(for = "city") Name of the City:
             br
             input(name = "city" type = "text")
             br  
             
-            label(for = "settlement") Name of the Informal Settlement:
+            label(for = "country") Name of the Country:
             br
-            input(name = "settlement" type = "text")
+            input(name = "country" type = "text")
             br  
             
             label(for = "geolocation") Coordinates</i>
