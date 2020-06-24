@@ -192,7 +192,7 @@ L.control.layers(baseLayers, overlays).addTo(map);
   map.on('baselayerchange', function (e) {
       currentLayerID = e.layer._leaflet_id;
       console.log(currentLayerID); 
-      if(e.layer._leaflet_id == 280 || e.layer._leaflet_id == 241){
+      if(e.layer._leaflet_id == 297 || e.layer._leaflet_id == 242){
         map.removeLayer(overlays['settlements']);
       }
       else{
