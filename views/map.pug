@@ -4,7 +4,6 @@ html
     link(rel='stylesheet', href='https://unpkg.com/leaflet@1.6.0/dist/leaflet.css')
     script(src='https://unpkg.com/leaflet@1.6.0/dist/leaflet.js')
     include includes/head.pug
-    script(src = '../countries.json')
 
     style.
       #map {position: absolute; top: 60px; bottom: 0; left: 0; right: 0;}
@@ -19,6 +18,15 @@ html
     #map
     script.
 
+      var script = document.createElement('script');
+      script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
+      script.type = 'text/javascript';
+      document.getElementsByTagName('head')[0].appendChild(script);
+
+      var countries = $.getJSON('/countries.json', function(data){});
+      //var finalcountries = $.ajax(countries.responseJSON);
+    
+
       var attri = '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
       var mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}';
      
@@ -27,8 +35,9 @@ html
       var points = !{JSON.stringify(settlements)};
       console.log(typeof points); // Notice: this is an object! 
       
-      //defining a layergroup for all data inputs
-      var layerGroup = L.layerGroup();
+      //defining layergroups for data inputs
+      var settlements = L.layerGroup();
+      var ch = L.layerGroup();
 	
       //inputting data
       for (var i = 0; i < points.length; ++i){
@@ -39,7 +48,7 @@ html
         var continent = points[i]["site"].origin["geolocation"];
 
         if (population == null){
-          var rad = 10000;
+          var rad = 90000;
         }
         else{
           var rad = points[i]["site"].origin["population"]/20;
@@ -67,16 +76,16 @@ html
         });
         circle.bindPopup(name + "<br>" + country + "<br>" + population + "<br>" + causes + "<br>" + continent);
        
-        layerGroup.addLayer(circle);
+        settlements.addLayer(circle);
         };
 
         //create the map and its base layers
 
-        var light   = L.tileLayer(mbUrl, {id: 'mapbox/light-v10', tileSize: 512, zoomOffset: -1, maxZoom: 18,
+        var light   = L.tileLayer(mbUrl, {id: 'mapbox/light-v10', maxZoom: 18, tileSize: 512, zoomOffset: -1, maxZoom: 18,
                        detectRetina: true, attribution: attri, accessToken: token}),
-            dark  = L.tileLayer(mbUrl, {id: 'mapbox/dark-v10', tileSize: 512, zoomOffset: -1, maxZoom: 18,
+            dark  = L.tileLayer(mbUrl, {id: 'mapbox/dark-v10', maxZoom: 18, tileSize: 512, zoomOffset: -1, maxZoom: 18,
                        detectRetina: true, attribution: attri, accessToken: token}),
-            satellite = L.tileLayer(mbUrl, {id: 'mapbox/satellite-streets-v11',tileSize: 512, zoomOffset: -1, maxZoom: 18,
+            satellite = L.tileLayer(mbUrl, {id: 'mapbox/satellite-streets-v11',maxZoom: 18,tileSize: 512, zoomOffset: -1, maxZoom: 18,
                        detectRetina: true, attribution: attri, accessToken: token});
         
 
@@ -84,7 +93,7 @@ html
         var map = L.map('map', {
           center: [0,0],
           zoom: 3,
-          layers: [light, layerGroup]
+          layers: [light, ch]
         });
 
         var baseLayers = {
@@ -94,9 +103,11 @@ html
         };
 
         var overlays = {
-          "settlements": layerGroup
+          "settlements": settlements,
+          "countries": ch
         };
 
+        
         //control that shows population information on hover
         var info = L.control();
 
@@ -112,7 +123,7 @@ html
         };
 
         info.addTo(map);
-            L.control.layers(baseLayers, overlays).addTo(map);
+
      
       function getColor(d) {
           return d > 1000 ? '#800026' :
@@ -146,5 +157,89 @@ html
       legend.addTo(map);
 
 
-      //for the country data (unsure code)
-    //  var geojson = L.geoJson(countries);
+      //unsure code
+      function style(feature) {
+        return {
+          weight: 2,
+          opacity: 1,
+          color: 'white',
+          dashArray: '3',
+          fillOpacity: 0.7,
+          fillColor: getColor(feature.properties.density)
+        };
+      }
+
+      function highlightFeature(e) {
+        var layer = e.target;
+
+        layer.setStyle({
+          weight: 5,
+          color: '#666',
+          dashArray: '',
+          fillOpacity: 0.7
+        });
+
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+          layer.bringToFront();
+        }
+
+        info.update(layer.feature.properties.name);
+      }
+
+      var geojson;
+
+      function resetHighlight(e) {
+        geojson.resetStyle(e.target);
+        info.update();
+      }
+
+      function zoomToFeature(e) {
+        map.fitBounds(e.target.getBounds());
+      }
+
+      function onEachFeature(feature, layer) {
+        layer.on({
+          mouseover: highlightFeature,
+          mouseout: resetHighlight,
+          click: zoomToFeature
+        });
+      }
+      L.control.layers(baseLayers, overlays).addTo(map);
+       
+       //takes out settlements when it's at satellite or light.    
+       //this is for now, will change later
+        map.on('baselayerchange', function (e) {
+            console.log(e.layer._leaflet_id);
+            if(e.layer._leaflet_id == 280 || e.layer._leaflet_id == 241){
+              map.removeLayer(overlays['settlements']);
+            }
+            else{
+              map.addLayer(overlays['settlements']);
+            }
+            });
+      //figure out how to tie the country into layers 
+      $.ajax({}).done(function(data){
+                var fh = countries.responseJSON;
+                geojson = L.geoJson(fh, {
+                style: style,
+                onEachFeature: onEachFeature
+                }).addTo(map);
+                });
+      //- map.removeLayer(overlays['settlements']);
+      //- map.on('layerremove', function(event) {
+      //-     if(event.layer == ch) {
+      //-          $.ajax({}).done(function(data){
+      //-           var fh = countries.responseJSON;
+      //-           geojson = L.geoJson(fh, {
+      //-             style: style,
+      //-             onEachFeature: onEachFeature
+      //-           }).addTo(map);
+      //-           });
+      //-     }
+      //- });
+
+      //- map.on('layeradd', function(event) {
+      //-     if(event.layer == ch) {
+      //-        console.log("bad");
+      //-     }
+      //- });
