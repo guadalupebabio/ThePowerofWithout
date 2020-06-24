@@ -3,6 +3,8 @@ script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
+console.log(pointsByCountry);
+
 var countries = $.getJSON('/countries.json', function(data){});
 //var finalcountries = $.ajax(countries.responseJSON);
 
@@ -13,7 +15,7 @@ var mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 var token = 'pk.eyJ1IjoiY2hlcmllbW13YW5nIiwiYSI6ImNrYnIwZmkzbzJydm4yb214YW5yMThhdDQifQ.wOsnvJaOKRX6asQdqi5WrA';
 
 //var points = !{JSON.stringify(settlements)};
-console.log(typeof points); // Notice: this is an object! 
+console.log(typeof points); // Notice: this is an object!
 
 //defining layergroups for data inputs
 var settlements = L.featureGroup();
@@ -55,7 +57,7 @@ for (var i = 0; i < points.length; ++i){
   radius: rad
   });
   circle.bindPopup(name + "<br>" + country + "<br>" + population + "<br>" + causes + "<br>" + continent);
- 
+
   settlements.addLayer(circle);
   };
 
@@ -67,7 +69,7 @@ for (var i = 0; i < points.length; ++i){
                  detectRetina: true, attribution: attri, accessToken: token}),
       satellite = L.tileLayer(mbUrl, {id: 'mapbox/satellite-streets-v11',maxZoom: 18,tileSize: 512, zoomOffset: -1, maxZoom: 18,
                  detectRetina: true, attribution: attri, accessToken: token});
-  
+
 
 
   var map = L.map('map', {
@@ -87,7 +89,7 @@ for (var i = 0; i < points.length; ++i){
     "countries": ch
   };
 
-  
+
   //control that shows population information on hover
   var info = L.control();
 
@@ -137,7 +139,7 @@ return div;
 legend.addTo(map);
 
 
-//zooming 
+//zooming
 function style(feature) {
   return {
     weight: 2,
@@ -170,7 +172,7 @@ var geojson;
 
 function resetHighlight(e) {
   geojson.resetStyle(e.target);
-  info.update();//the country hover info 
+  info.update();//the country hover info
 }
 
 function zoomToFeature(e) {
@@ -186,12 +188,12 @@ function onEachFeature(feature, layer) {
   });
 }
 L.control.layers(baseLayers, overlays).addTo(map);
- 
- //takes out settlements when it's at satellite or light.    
+
+ //takes out settlements when it's at satellite or light.
  //this is for now, will change later
   map.on('baselayerchange', function (e) {
       currentLayerID = e.layer._leaflet_id;
-      console.log(currentLayerID); 
+      console.log(currentLayerID);
       if(e.layer._leaflet_id == 280 || e.layer._leaflet_id == 241){
         map.removeLayer(overlays['settlements']);
       }
@@ -201,7 +203,7 @@ L.control.layers(baseLayers, overlays).addTo(map);
       });
 
 
-    //figure out how to tie the country into layers 
+    //figure out how to tie the country into layers
     $.ajax({}).done(function(data){
             var fh = countries.responseJSON;
             geojson = L.geoJson(fh, {
@@ -212,7 +214,7 @@ L.control.layers(baseLayers, overlays).addTo(map);
 
           //onclick function
    // settlements.on("click", function(){
-                
+
     //});
 
     $(settlements).click(function() {
@@ -221,10 +223,10 @@ L.control.layers(baseLayers, overlays).addTo(map);
         //map.addLayer(light);
         //map.removeLayer(light);
         //map.removeLayer(dark);
-     //   zoomToFeature;  
+     //   zoomToFeature;
     });
-           
-        
+
+
 
 //- map.removeLayer(overlays['settlements']);
 //- map.on('layerremove', function(event) {

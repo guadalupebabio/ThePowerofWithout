@@ -46,7 +46,14 @@ app.get("/map", function(req, res){
   Settlement.find({}, function(err, settlements){
     if(err) throw err;
 
-    res.render("map", {"settlements": settlements});
+    let countries = {}; // Aggregate settlements by country
+
+    settlements.forEach(function(settlement){
+      if (!(settlement.country in countries)) countries[settlement.country] = [];
+      countries[settlement.country].push(settlement);
+    });
+
+    res.render("map", {"settlements": settlements, "countries": countries});
   });
 });
 
