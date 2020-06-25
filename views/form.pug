@@ -20,6 +20,7 @@ html
         a(onclick = "goToSection(4)") <span>Po</span>pulation
       .column.is-5
         form(action = "/api/settlements" method = "POST")
+          //- General 
           section 
             label(for = "settlement") Name of the Informal Settlement:
             br
@@ -48,47 +49,82 @@ html
             
             .button-level 
               a.button.is-black(onclick = "goToSection(2)") Next Section
+              
+          //- Site  
           section.is-hidden 
-            p Site 
+            label Origin: Historical evolution of the settlement
+            br
+            each val, index in ["Squatting", "Refugee Camp", "Illegal Subdivision", "Other"]
+              input(type = "radio" name = "siteOriginCauses" id = "siteOriginCauses-" + index value = val)
+              label(for = "siteOriginCauses-" + index)= val
+              br
+            
+            br
+            label Geolocation: In which Continent is the settlement located
+            br    
+            each val, index in ['Africa', 'Europe', 'North America', 'South America', 'Asia', 'Oceania', 'Antarctica']
+              input(type = "radio" name = "siteOriginGeolocation" id = "siteOriginGeolocation-" + index value = val)
+              label(for = "siteOriginGeolocation-" + index)= val
+              br
+            
+            br  
+            label(for = "siteOriginPopulation") Population: Aprox. number of people living in the Settlement
+            br
+            input(name = "siteOriginPopulation" type = "text")
+            br 
+            
+            label Topography: Geographical features of the location of the Settlement 
+            br    
+            each val, index in ["By the coast", "Desert", "Valley", "Mountain", "Forest", "Water"]
+              input(type = "radio" name = "siteGeographyTopography" id = "siteGeographyTopography-" + index value = val)
+              label(for = "siteGeographyTopography-" + index)= val
+              br
+            
+            br
+            label Within cities: Relationship between the settlement geolocation and the city of reference
+            br    
+            - var data = ["Squatting on the fringe", "In the path of development", "In the heart of the city", "Along railway tracks", "Residential centers", "Suburban industrial areas", "Old city slum"]
+            each val, index in data
+              input(type = "radio" name = "siteGeographyWithinCities" id = "siteGeographyWithinCities-" + index value = val)
+              label(for = "siteGeographyWithinCities-" + index)= val
+              br
+            
+            br
+            label Climate
+            br    
+            each val, index in ["Tropical (Type A)", "Arid (Type B)", "Temperate (Type C)", "Continental (Type D)", "Polar (Type E)"]
+              input(type = "radio" name = "siteGeographyClimate" id = "siteGeographyClimate-" + index value = val)
+              label(for = "siteGeographyClimate-" + index)= val
+              br
+                
+            //- TODO: add prevalence
+            
+            br
+            label Security: Level of crime and insecurity in the Settlement
+            br    
+            each val, index in ["Low crime rate", "Moderate crime rate", "High crime rate"]
+              input(type = "radio" name = "siteVulnerabilitySecurityCrimeRate" id = "siteVulnerabilitySecurityCrimeRate-" + index value = val)
+              label(for = "siteVulnerabilitySecurityCrimeRate-" + index)= val
+              br
+            
             .button-level
               a.button.is-light(onclick = "goToSection(1)") Previous Section
               a.button.is-black(onclick = "goToSection(3)") Next Section
+              
+          //- Architecture  
           section.is-hidden
             p Architecture  
             .button-level
               a.button.is-light(onclick = "goToSection(2)") Previous Section
               a.button.is-black(onclick = "goToSection(4)") Next Section
+              
+          //- Population 
           section.is-hidden
             p Population  
             .button-level
               a.button.is-light(onclick = "goToSection(3)") Previous Section
               input.button.is-black(type="submit" value="Submit")
-            
-          //- br
-          //- input(name = "country" type = "text" placeholder = "Settlement country")
-          //- br
-          //- input(name = "lat" type = "text" placeholder = "Latitude")
-          //- br
-          //- input(name = "lon" type = "text" placeholder = "Longitude")
-          //- br
-          //- select(name = "siteOriginCauses")
-          //-   option(value = "Squatting") Squatting
-          //-   option(value = "Refugee Camp") Refugee Camp
-          //-   option(value = "Illegal Subdivision") Illegal Subdivision
-          //-   option(value = "") N/A
-          //- br
-          //- select(name = "siteOriginGeolocation")
-          //-   option(value = "Africa") Africa
-          //-   option(value = "Europe") Europe
-          //-   option(value = "North America") North America
-          //-   option(value = "South America") South America
-          //-   option(value = "Asia") Asia
-          //-   option(value = "Oceania") Oceania
-          //-   option(value = "Antarctica") Antarctica
-          //- br
-          //- input(name = "siteOriginPopulation" type = "text" placeholder = "Population")
-          //- br
-          //- input.button.is-black(type="submit" value="Submit")
+          
       .column
         section
           #map
