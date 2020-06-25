@@ -51,85 +51,85 @@ let settlementSchema = new Schema({
       // }
     }
   },
-  // architecture: {
-  //   physicalNature: {
-  //     houseQuality: {
-  //       inadequate: String,
-  //       suitable: String,
-  //       optimal: String,
-  //     },
-  //     materials: {
-  //       tarpaulin: String,
-  //       tiles: String,
-  //       corrugatedSheet: String,
-  //       wood: String,
-  //       mud: String,
-  //       brick: String,
-  //       concrete: String,
-  //       others: String,
-  //     },
-  //     developmentState: String
-  //   },
-  //   infrastructure: {
-  //     energy: {
-  //       accessToGas: {
-  //         accessToGas: String,
-  //         typeOfFuel: {
-  //           gas: String,
-  //           wood: String,
-  //           coal: String,
-  //         }
-  //       },
-  //       accessToElectricity: String
-  //     },
-  //     water: {
-  //       accessToDrinkingWater: {
-  //         individualDrinkingTap: String,
-  //         accessToPublicTapOrOtherSources: String
-  //       },
-  //       accessToSanitation: {
-  //         toiletAtHome: String,
-  //         sharedToiletAccess: String
-  //       },
-  //       sewageSystem: {
-  //         sewerConnection: String,
-  //         garbageManagement: String
-  //       },
-  //     },
-  //     connectivity: {
-  //       accessToInternet: String,
-  //       accessToTV: String
-  //     },
-  //     mobility: {
-  //       road: {
-  //         quality: {type: String, enum: ["Paved", "Compacted", "Not paved"]},
-  //         sizeOfTheRoad: {
-  //           pedestrian: String,
-  //           bikeOrMoto: String,
-  //           car: String
-  //         },
-  //         nameOfTheRoad: String,
-  //         googleStreetView: Boolean
-  //       },
-  //       publicTransportation: {
-  //         stops: String,
-  //         proximityToPT: String,
-  //       },
-  //       amenties: {
-  //         proximityToAmenities: String
-  //       },
-  //     },
-  //   },
-  //   density: {
-  //     elevation: {
-  //       lessThan1: String,
-  //       twoToFive: String,
-  //       greaterThanFive: String,
-  //     },
-  //     ratio: String,
-  //     householdPerHouseSize: String,
-  //   }
-  // },
+  architecture: {
+    physicalNature: {
+      houseQuality: {
+        inadequate: String,
+        suitable: String,
+        optimal: String,
+      },
+      materials: {
+        tarpaulin: String,
+        tiles: String,
+        corrugatedSheet: String,
+        wood: String,
+        mud: String,
+        brick: String,
+        concrete: String,
+        others: String,
+      },
+      developmentState: String
+    },
+    /*infrastructure: {
+      energy: {
+        accessToGas: {
+          accessToGas: String,
+          typeOfFuel: {
+            gas: String,
+            wood: String,
+            coal: String,
+          }
+        },
+        accessToElectricity: String
+      },
+      water: {
+        accessToDrinkingWater: {
+          individualDrinkingTap: String,
+          accessToPublicTapOrOtherSources: String
+        },
+        accessToSanitation: {
+          toiletAtHome: String,
+          sharedToiletAccess: String
+        },
+        sewageSystem: {
+          sewerConnection: String,
+          garbageManagement: String
+        },
+      },
+      connectivity: {
+        accessToInternet: String,
+        accessToTV: String
+      },
+      mobility: {
+        road: {
+          quality: {type: String, enum: ["Paved", "Compacted", "Not paved"]},
+          sizeOfTheRoad: {
+            pedestrian: String,
+            bikeOrMoto: String,
+            car: String
+          },
+          nameOfTheRoad: String,
+          googleStreetView: Boolean
+        },
+        publicTransportation: {
+          stops: String,
+          proximityToPT: String,
+        },
+        amenties: {
+          proximityToAmenities: String
+        },
+      },
+    },*/
+    /*density: {
+      elevation: {
+        lessThan1: String,
+        twoToFive: String,
+        greaterThanFive: String,
+      },
+      ratio: String,
+      householdPerHouseSize: String,
+    }*/
+  },
   // populace: {
   //   qualityOfLife: {
   //     dignity: {
