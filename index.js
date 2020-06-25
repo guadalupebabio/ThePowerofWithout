@@ -108,7 +108,67 @@ app.get("/contribute", function(req, res){
     ],
 
     // Architecture
-    [],
+    [
+      {
+        label: "House quality: Quality-monitoring of the livability, function and construction/deployment of the house at the Settlement",
+        name: "architecturePhysicalNatureHouseQuality",
+        type: "radio",
+        options: ["Inadequate", "Suitable", "Optimal"]
+      },
+      {
+        label: "Materials: Matter from which the house in the Settlement is made with",
+        name: "architecturePhysicalNatureMaterials",
+        type: "checkbox",
+        options: ["Mud", "Brick", "Wood", "Concrete", "Corrugated sheet", "Tarpaulin", "Tiles", "Other"]
+      },
+      {
+        label: "Development State: Stage of the evolution process where the Settlement is into",
+        name: "architecturePhysicalNatureDevelopmentState",
+        type: "radio",
+        options: ["Initial occupancy", "Transitional", "Establish"]
+      },
+      {
+        label: "Access to Energy: Percentage of dwellings that have access to power/electricity in the Settlement",
+        name: "architectureInfrastructureAccessEnergy",
+        type: "radio",
+        options: ["0-10%", "10-25%", "25-50%", ">50%"]
+      },
+      {
+        label: "Access to Water: Percentage of dwellings that have access to drinking water in the Settlement",
+        name: "architectureInfrastructureAccessWater",
+        type: "radio",
+        options: ["0-10%", "10-25%", "25-50%", ">50%"]
+      },
+      {
+        label: "Access to sanitation: Percentage of dwellings that have access to sanitation in the Settlement",
+        name: "architectureInfrastructureAccessSanitation",
+        type: "radio",
+        options: ["0-10%", "10-25%", "25-50%", ">50%"]
+      },
+      {
+        label: "Access to Internet or phone fare: Percentage of people that has access to data-plans or phone fare",
+        name: "architectureInfrastructureAccessInternet",
+        type: "radio",
+        options: ["0-10%", "10-25%", "25-50%", ">50%"]
+      },
+      {
+        label: "Mobility systems: mobility systems used by the people in the Settlement",
+        name: "architectureMobility",
+        type: "checkbox",
+        options: ["Walk", "Bike", "Car", "Public transportation"]
+      },
+      {
+        label: "Elevation: Average number of floors in the buildings",
+        name: "architectureDensityElevation",
+        type: "radio",
+        options: ["1", "2", "3", ">3"]
+      },
+      {
+        label: "House hold per house: Number of people living in a house",
+        name: "architectureDensityHouseholdPerHouseSize",
+        type: "text"
+      },
+    ],
 
     // Population
     []

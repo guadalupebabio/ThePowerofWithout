@@ -28,7 +28,7 @@ form input[type="text"] {
     outline: none;
     border-bottom-color: #3a539b; }
 
-form input[type="radio"] {
+form input[type="radio"], form input[type="checkbox"] {
   margin-right: 8px;
   margin-top: -1px;
   vertical-align: middle; }

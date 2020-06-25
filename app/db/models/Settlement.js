@@ -70,7 +70,7 @@ let settlementSchema = new Schema({
       },
       developmentState: String
     },
-    /*infrastructure: {
+    infrastructure: {
       energy: {
         accessToGas: {
           accessToGas: String,
@@ -119,8 +119,8 @@ let settlementSchema = new Schema({
           proximityToAmenities: String
         },
       },
-    },*/
-    /*density: {
+    },
+    density: {
       elevation: {
         lessThan1: String,
         twoToFive: String,
@@ -128,7 +128,7 @@ let settlementSchema = new Schema({
       },
       ratio: String,
       householdPerHouseSize: String,
-    }*/
+    }
   },
   // populace: {
   //   qualityOfLife: {
