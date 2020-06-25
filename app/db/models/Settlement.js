@@ -23,33 +23,33 @@ let settlementSchema = new Schema({
   },
   site: {
     origin: {
-      causes: {type: String, enum: ["Squatting", "Refugee Camp", "Illegal Subdivision", ""]},
+      causes: {type: String, enum: ["Squatting", "Refugee Camp", "Illegal Subdivision", "Other"]},
       geolocation: {type: String, enum: ['Africa', 'Europe', 'North America', 'South America', 'Asia', 'Oceania', 'Antarctica']},
       population: Number
     },
-    // geography: {
-    //   topography: String,
-    //   withinCities: String,
-    //   climate: String,
-    // },
-    // vulnerability: {
-    //   weather: {
-    //     climateChange: String,
-    //     naturalDisasters: String
-    //   },
-    //   security: {
-    //     crimeRate: String,
-    //   },
-    //   prevalence: {
-    //     macro: String,
-    //     urban: String,
-    //     plan: String,
-    //     reg: String,
-    //     infras: String,
-    //     armcon: String,
-    //     govern: String
-    //   }
-    // }
+    geography: {
+      topography: {type: String, enum: ["By the coast", "Desert", "Valley", "Mountain", "Forest", "Water"]},
+      withinCities: {type: String, enum: ["Squatting on the fringe", "In the path of development", "In the heart of the city", "Along railway tracks", "Residential centers", "Suburban industrial areas", "Old city slum"]},
+      climate: {type: String, enum: ["Tropical (Type A)", "Arid (Type B)", "Temperate (Type C)", "Continental (Type D)", "Polar (Type E)"]},
+    },
+    vulnerability: {
+      // weather: {
+      //   climateChange: String,
+      //   naturalDisasters: String
+      // },
+      security: {
+        crimeRate: {type: String, enum: ["Low crime rate", "Moderate crime rate", "High crime rate"]},
+      },
+      // prevalence: {
+      //   macro: String,
+      //   urban: String,
+      //   plan: String,
+      //   reg: String,
+      //   infras: String,
+      //   armcon: String,
+      //   govern: String
+      // }
+    }
   },
   // architecture: {
   //   physicalNature: {

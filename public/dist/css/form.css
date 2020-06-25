@@ -28,6 +28,11 @@ form input[type="text"] {
     outline: none;
     border-bottom-color: #3a539b; }
 
+form input[type="radio"] {
+  margin-right: 8px;
+  margin-top: -1px;
+  vertical-align: middle; }
+
 form .button-level {
   margin-top: 30px;
   text-align: center; }

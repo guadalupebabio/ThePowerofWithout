@@ -42,6 +42,12 @@ form{
     }
   }
 
+  input[type = "radio"]{
+    margin-right: 8px;
+    margin-top: -1px;
+    vertical-align: middle;
+  }
+
   .button-level{
     margin-top: 30px;
     text-align: center;
