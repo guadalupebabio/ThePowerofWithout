@@ -8,6 +8,7 @@ html
     link(rel="stylesheet" href="/dist/css/form.css")
   body 
     - let activeTab = 2;
+
     include includes/nav.pug
     .columns.is-variable.is-8
       .column.is-narrow
@@ -20,75 +21,31 @@ html
         a(onclick = "goToSection(4)") <span>Po</span>pulation
       .column.is-5
         form(action = "/api/settlements" method = "POST")
-          section 
-            label(for = "settlement") Name of the Informal Settlement:
-            br
-            input(name = "settlement" type = "text")
-            br  
-            
-            label(for = "city") Name of the City:
-            br
-            input(name = "city" type = "text")
-            br  
-            
-            label(for = "country") Name of the Country:
-            br
-            input(name = "country" type = "text")
-            br  
-            
-            label(for = "geolocation") Coordinates</i>
-            br
-            input#coords(name = "geolocation" type = "text" disabled placeholder = "Select a point on the map")
-            br 
-            
-            label(for = "email") Email Address: <i class = "fas fa-info-circle"></i>
-            br
-            input(name = "email" type = "text")
-            br 
-            
-            .button-level 
-              a.button.is-black(onclick = "goToSection(2)") Next Section
-          section.is-hidden 
-            p Site 
-            .button-level
-              a.button.is-light(onclick = "goToSection(1)") Previous Section
-              a.button.is-black(onclick = "goToSection(3)") Next Section
-          section.is-hidden
-            p Architecture  
-            .button-level
-              a.button.is-light(onclick = "goToSection(2)") Previous Section
-              a.button.is-black(onclick = "goToSection(4)") Next Section
-          section.is-hidden
-            p Population  
-            .button-level
-              a.button.is-light(onclick = "goToSection(3)") Previous Section
-              input.button.is-black(type="submit" value="Submit")
-            
-          //- br
-          //- input(name = "country" type = "text" placeholder = "Settlement country")
-          //- br
-          //- input(name = "lat" type = "text" placeholder = "Latitude")
-          //- br
-          //- input(name = "lon" type = "text" placeholder = "Longitude")
-          //- br
-          //- select(name = "siteOriginCauses")
-          //-   option(value = "Squatting") Squatting
-          //-   option(value = "Refugee Camp") Refugee Camp
-          //-   option(value = "Illegal Subdivision") Illegal Subdivision
-          //-   option(value = "") N/A
-          //- br
-          //- select(name = "siteOriginGeolocation")
-          //-   option(value = "Africa") Africa
-          //-   option(value = "Europe") Europe
-          //-   option(value = "North America") North America
-          //-   option(value = "South America") South America
-          //-   option(value = "Asia") Asia
-          //-   option(value = "Oceania") Oceania
-          //-   option(value = "Antarctica") Antarctica
-          //- br
-          //- input(name = "siteOriginPopulation" type = "text" placeholder = "Population")
-          //- br
-          //- input.button.is-black(type="submit" value="Submit")
+          //- Autofill questions from JSON object passed
+          each s, index in sections
+            section(class = (index == 0 ? "" : "is-hidden"))
+              each question, index in s
+                label(for = question.name)= question.label
+                br
+                if question.type == "coords"
+                  input#coords(name = question.name type = "text" disabled placeholder = "Select a point on the map")    
+                else if question.type == "text"    
+                  input(name = question.name type = question.type)
+                else if question.type == "radio" || question.type == "checkbox"
+                  each val, index in question.options
+                    input(type = question.type name = question.name id = question.name + "-" + index value = val)
+                    label(for = question.name + "-" + index)= val
+                    br
+                br
+
+              .button-level 
+                if index > 0
+                  a.button.is-light(onclick = "goToSection(" + (index) + ")") Previous Section
+                
+                if index == sections.length - 1
+                  input.button.is-black(type="submit" value="Submit")
+                else 
+                  a.button.is-black(onclick = "goToSection(" + (index + 2) + ")") Next Section
       .column
         section
           #map
