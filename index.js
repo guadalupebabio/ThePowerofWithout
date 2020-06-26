@@ -171,7 +171,57 @@ app.get("/contribute", function(req, res){
     ],
 
     // Population
-    []
+    [
+      {
+        label: "Health Care: Percentage of people that has access to health care",
+        name: "populaceHealthCare",
+        type: "radio",
+        options: ["0-10%", "10-25%", "25-50%", ">50%"]
+      },
+      {
+        label: "Number of hospitals, clinics or health cares in the Settlement",
+        name: "populaceHospitals",
+        type: "text",
+      },
+      {
+        label: "Education: Percentage of people that has access to schools/ Percentage of people attending to schools",
+        name: "populaceEducation",
+        type: "radio",
+        options: ["0-10%", "10-25%", "25-50%", ">50%"]
+      },
+      {
+        label: "Number of schools in the settlement",
+        name: "populaceSchools",
+        type: "text",
+      },
+      {
+        label: "Proximity to public areas or leisure activities",
+        name: "populacePublicAreas",
+        type: "radio",
+        options: ["5 min walking distance", "5-20 min walking distance", ">20 min walking distance", "I need to take a car/public transportation"]
+      },
+      {
+        label: "Unemployment rate",
+        name: "populaceUnemploymentRate",
+        type: "text",
+      },
+      {
+        label: "Ownership: Level of rights that the householder has on possessing the land at the Settlement",
+        name: "populaceOwnership",
+        type: "radio",
+        options: ["Community/city property", "Private house", "Illegal"]
+      },
+      {
+        label: "Ethnic and racial categories in the Settlement",
+        name: "populaceEthnic",
+        type: "text",
+      },
+      {
+        label: "Demography: Percentage of people in each age groups in the Settlement",
+        name: "populaceDemography",
+        type: "text",
+      },
+    ]
   ]
   res.render("form", {sections: sections});
 });
