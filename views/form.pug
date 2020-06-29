@@ -27,13 +27,14 @@ html
               each question, index in s
                 label(for = question.name)= question.label
                   | &nbsp;&nbsp;
-                  .info-button.dropdown.is-up
-                    .dropdown-trigger(onclick = "showInfo(this)") 
-                      i.fas.fa-info-circle
-                    .dropdown-menu 
-                      .dropdown-content 
-                        .dropdown-item 
-                          p infooooo
+                  if question.info
+                    .info-button.dropdown.is-up
+                      .dropdown-trigger(onclick = "showInfo(this)") 
+                        i.fas.fa-info-circle
+                      .dropdown-menu 
+                        .dropdown-content 
+                          .dropdown-item 
+                            p= question.info
                 br
                 if question.type == "coords"
                   input#coords(name = question.name type = "text" disabled placeholder = "Select a point on the map")    
