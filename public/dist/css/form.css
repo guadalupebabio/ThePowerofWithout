@@ -43,6 +43,10 @@ form .button {
   form .button:nth-child(2) {
     margin-left: 2%; }
 
+form .info-button {
+  vertical-align: middle;
+  cursor: pointer; }
+
 section {
   height: 100%; }
 

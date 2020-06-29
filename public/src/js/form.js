@@ -30,3 +30,9 @@ map.on('click',function(e){
 
    $("#coords").val(`${lat.toFixed(5)}, ${lon.toFixed(5)}`)
 });
+
+function showInfo(e){
+  let hidden = $(e.parentNode.childNodes[1]).css("display") == "none";
+  $(".dropdown-menu").hide(); // Hide all
+  if(hidden) $(e.parentNode.childNodes[1]).show(); // Show if previously hidden
+}
