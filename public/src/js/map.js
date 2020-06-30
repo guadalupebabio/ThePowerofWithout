@@ -21,6 +21,35 @@ console.log(typeof points); // Notice: this is an object!
 var settlements = L.featureGroup();
 var ch = L.layerGroup();
 
+var populationlist = [];
+
+var populationCountry = 0;
+//add country name and population 
+
+    //pointsbycountry
+
+    for (var i = 0; i < Object.keys(pointsByCountry).length; ++i){
+      for (var j = 0; j < pointsByCountry[Object.keys(pointsByCountry)[i]].length; ++j) {
+        var pop = pointsByCountry[Object.keys(pointsByCountry)[i]][j]['site']['origin'].population;
+        if (pop == null){
+          pop = 1;
+        }
+        populationCountry +=pop;
+      }
+      
+      //var cou = getObjects(countries.responseJSON, 'name', Object.keys(pointsByCountry)[i]);
+      var everypop = {};
+     //console.log(cou);
+      everypop.name = Object.keys(pointsByCountry)[i];
+      
+      everypop.population = populationCountry;
+      populationlist.push(everypop);
+
+      populationCountry = 0; 
+
+
+    }
+
 //inputting data
 for (var i = 0; i < points.length; ++i){
   var name = points[i]["name"];
@@ -106,16 +135,16 @@ for (var i = 0; i < points.length; ++i){
 
   info.addTo(map);
 
-
+//need to depend on population
 function getColor(d) {
-    return d > 1000 ? '#800026' :
-          d > 500  ? '#BD0026' :
-          d > 200  ? '#E31A1C' :
-          d > 100  ? '#FC4E2A' :
-          d > 50   ? '#FD8D3C' :
-          d > 20   ? '#FEB24C' :
-          d > 10   ? '#FED976' :
-                      '#FFEDA0';
+  return d > 15000000 ? '#800026' :
+         d > 10000000  ? '#BD0026' :
+         d > 5000000  ? '#E31A1C' :
+         d > 1000000  ? '#FC4E2A' :
+         d > 500000  ? '#FD8D3C' :
+         d > 100000   ? '#FEB24C' :
+         d > 0  ? '#FED976' :
+                    '#FFEDA0';
 }
 
   //legend
@@ -124,7 +153,7 @@ var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-    grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+    grades = [0, 100000, 500000, 1000000, 5000000, 10000000, 15000000],
     labels = [];
 
     for (var i = 0; i < grades.length; i++) {
@@ -141,14 +170,25 @@ legend.addTo(map);
 
 //zooming
 function style(feature) {
+  //console.log(feature.properties.name);
+  //console.log(typeof(feature.properties.name));
+  var objwanted = getObjects(populationlist, 'name', feature.properties.name);
+  if (objwanted.length == 0 ){
+    var popul = 0;
+  }
+  else{
+    var popul = objwanted[0].population;
+  }
+  //console.log(popul);
   return {
     weight: 2,
     opacity: 1,
     color: 'white',
     dashArray: '3',
     fillOpacity: 0.7,
-    fillColor: getColor(feature.properties.density)
+    fillColor: getColor(popul)
   };
+
 }
 
 function highlightFeature(e) {
@@ -202,7 +242,19 @@ L.control.layers(baseLayers, overlays).addTo(map);
       }
       });
 
-
+    //find value in the object that corresponds with the key. 
+    function getObjects(obj, key, val) {
+        var objects = [];
+        for (var i in obj) {
+            if (!obj.hasOwnProperty(i)) continue;
+            if (typeof obj[i] == 'object') {
+                objects = objects.concat(getObjects(obj[i], key, val));
+            } else if (i == key && obj[key] == val) {
+                objects.push(obj);
+            }
+        }
+        return objects;
+    }
     //figure out how to tie the country into layers
     $.ajax({}).done(function(data){
             var fh = countries.responseJSON;
@@ -216,6 +268,7 @@ L.control.layers(baseLayers, overlays).addTo(map);
    // settlements.on("click", function(){
 
     //});
+
 
     $(settlements).click(function() {
         console.log("clicked");
