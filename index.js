@@ -64,33 +64,36 @@ app.get("/contribute", function(req, res){
     // Site
     [
       {
-        label: "Origin: Historical evolution of the settlement",
+        label: "Origin",
         name: "siteOriginCauses",
         type: "radio",
-        options: ["Squatting", "Refugee Camp", "Illegal Subdivision", "Other"]
+        options: ["Squatting", "Refugee Camp", "Illegal Subdivision", "Other"],
+        info: "Historical evolution of the settlement"
       },
       {
-        label: "Geolocation: In which Continent is the settlement located",
+        label: "Continent",
         name: "siteOriginGeolocation",
         type: "radio",
         options: ['Africa', 'Europe', 'North America', 'South America', 'Asia', 'Oceania', 'Antarctica']
       },
       {
-        label: "Population: Aprox. number of people living in the Settlement",
+        label: "Population",
         name: "siteOriginPopulation",
         type: "text",
       },
       {
-        label: "Topography: Geographical features of the location of the Settlement ",
+        label: "Topography",
         name: "siteGeographyTopography",
         type: "radio",
-        options: ["By the coast", "Desert", "Valley", "Mountain", "Forest", "Water"]
+        options: ["By the coast", "Desert", "Valley", "Mountain", "Forest", "Water"],
+        info: "Geographical features of the location of the Settlement "
       },
       {
-        label: "Within cities: Relationship between the settlement geolocation and the city of reference",
+        label: "Within cities",
         name: "siteGeographyWithinCities",
         type: "radio",
-        options: ["Squatting on the fringe", "In the path of development", "In the heart of the city", "Along railway tracks", "Residential centers", "Suburban industrial areas", "Old city slum"]
+        options: ["Squatting on the fringe", "In the path of development", "In the heart of the city", "Along railway tracks", "Residential centers", "Suburban industrial areas", "Old city slum"],
+        info: "Relationship between the settlement geolocation and the city of reference"
       },
       {
         label: "Climate",
@@ -100,78 +103,135 @@ app.get("/contribute", function(req, res){
       },
       // TODO: add prevalence
       {
-        label: "Security: Level of crime and insecurity in the Settlement",
+        label: "Security",
         name: "siteVulnerabilitySecurityCrimeRate",
         type: "radio",
-        options: ["Low crime rate", "Moderate crime rate", "High crime rate"]
+        options: ["Low crime rate", "Moderate crime rate", "High crime rate"],
+        info: "Level of crime and insecurity in the Settlement"
       },
     ],
 
     // Architecture
     [
       {
-        label: "House quality: Quality-monitoring of the livability, function and construction/deployment of the house at the Settlement",
+        label: "House quality",
         name: "architecturePhysicalNatureHouseQuality",
         type: "radio",
         options: ["Inadequate", "Suitable", "Optimal"]
       },
       {
-        label: "Materials: Matter from which the house in the Settlement is made with",
+        label: "Materials from which the house in the Settlement is made with",
         name: "architecturePhysicalNatureMaterials",
         type: "checkbox",
-        options: ["Mud", "Brick", "Wood", "Concrete", "Corrugated sheet", "Tarpaulin", "Tiles", "Other"]
+        options: ["Mud", "Brick", "Wood", "Concrete", "Corrugated sheet", "Tarpaulin", "Tiles", "Other"],
       },
       {
-        label: "Development State: Stage of the evolution process where the Settlement is into",
+        label: "Development State",
         name: "architecturePhysicalNatureDevelopmentState",
         type: "radio",
-        options: ["Initial occupancy", "Transitional", "Establish"]
+        options: ["Initial occupancy", "Transitional", "Establish"],
+        info: "Stage of the evolution process where the Settlement is into"
       },
       {
-        label: "Access to Energy: Percentage of dwellings that have access to power/electricity in the Settlement",
+        label: "Access to Energy",
         name: "architectureInfrastructureAccessEnergy",
         type: "radio",
-        options: ["0-10%", "10-25%", "25-50%", ">50%"]
+        options: ["0-10%", "10-25%", "25-50%", ">50%"],
+        info: "Percentage of dwellings that have access to power/electricity in the Settlement"
       },
       {
-        label: "Access to Water: Percentage of dwellings that have access to drinking water in the Settlement",
+        label: "Access to Water",
         name: "architectureInfrastructureAccessWater",
         type: "radio",
-        options: ["0-10%", "10-25%", "25-50%", ">50%"]
+        options: ["0-10%", "10-25%", "25-50%", ">50%"],
+        info: "Percentage of dwellings that have access to drinking water in the Settlement"
       },
       {
-        label: "Access to sanitation: Percentage of dwellings that have access to sanitation in the Settlement",
+        label: "Access to sanitation",
         name: "architectureInfrastructureAccessSanitation",
         type: "radio",
-        options: ["0-10%", "10-25%", "25-50%", ">50%"]
+        options: ["0-10%", "10-25%", "25-50%", ">50%"],
+        info: "Percentage of dwellings that have access to sanitation in the Settlement"
       },
       {
-        label: "Access to Internet or phone fare: Percentage of people that has access to data-plans or phone fare",
+        label: "Access to Internet or phone fare",
         name: "architectureInfrastructureAccessInternet",
         type: "radio",
-        options: ["0-10%", "10-25%", "25-50%", ">50%"]
+        options: ["0-10%", "10-25%", "25-50%", ">50%"],
+        info: "Percentage of people that has access to data-plans or phone fare"
       },
       {
-        label: "Mobility systems: mobility systems used by the people in the Settlement",
+        label: "Mobility systems",
         name: "architectureMobility",
         type: "checkbox",
-        options: ["Walk", "Bike", "Car", "Public transportation"]
+        options: ["Walk", "Bike", "Car", "Public transportation"],
+        info: "Mobility systems used by the people in the Settlement"
       },
       {
-        label: "Elevation: Average number of floors in the buildings",
+        label: "Average number of floors in the buildings",
         name: "architectureDensityElevation",
         type: "radio",
         options: ["1", "2", "3", ">3"]
       },
       {
-        label: "House hold per house: Number of people living in a house",
+        label: " Number of people living in a house",
         name: "architectureDensityHouseholdPerHouseSize",
         type: "text"
       },
     ],
 
     // Population
-    []
+    [
+      {
+        label: "Health Care: Percentage of people that has access to health care",
+        name: "populaceHealthCare",
+        type: "radio",
+        options: ["0-10%", "10-25%", "25-50%", ">50%"]
+      },
+      {
+        label: "Number of hospitals, clinics or health cares in the Settlement",
+        name: "populaceHospitals",
+        type: "text",
+      },
+      {
+        label: "Education: Percentage of people that has access to schools/ Percentage of people attending to schools",
+        name: "populaceEducation",
+        type: "radio",
+        options: ["0-10%", "10-25%", "25-50%", ">50%"]
+      },
+      {
+        label: "Number of schools in the settlement",
+        name: "populaceSchools",
+        type: "text",
+      },
+      {
+        label: "Proximity to public areas or leisure activities",
+        name: "populacePublicAreas",
+        type: "radio",
+        options: ["5 min walking distance", "5-20 min walking distance", ">20 min walking distance", "I need to take a car/public transportation"]
+      },
+      {
+        label: "Unemployment rate",
+        name: "populaceUnemploymentRate",
+        type: "text",
+      },
+      {
+        label: "Ownership: Level of rights that the householder has on possessing the land at the Settlement",
+        name: "populaceOwnership",
+        type: "radio",
+        options: ["Community/city property", "Private house", "Illegal"]
+      },
+      {
+        label: "Ethnic and racial categories in the Settlement",
+        name: "populaceEthnic",
+        type: "text",
+      },
+      {
+        label: "Demography: Percentage of people in each age groups in the Settlement",
+        name: "populaceDemography",
+        type: "text",
+      },
+    ]
   ]
   res.render("form", {sections: sections});
 });
