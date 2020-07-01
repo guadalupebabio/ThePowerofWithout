@@ -1,15 +1,18 @@
 .columns {
   margin-top: 100px;
   padding: 0 5vw; }
-  .columns .column:first-child a {
+  .columns #sidebar > a {
     font-family: Roboto;
     font-weight: bold;
     font-size: 24px;
-    color: black; }
-    .columns .column:first-child a span {
-      transition: 0.2s all; }
-  .columns .column:first-child .active span {
+    color: black;
+    transition: 0.2s all; }
+  .columns #sidebar .active {
     border-bottom: 4px solid black; }
+  .columns #google_translate_element {
+    margin-top: 10px; }
+    .columns #google_translate_element .goog-logo-link {
+      vertical-align: middle; }
 
 form label {
   font-family: Roboto;

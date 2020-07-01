@@ -10,15 +10,18 @@ html
     - let activeTab = 2;
 
     include includes/nav.pug
+    
     .columns.is-variable.is-8
-      .column.is-narrow
-        a.active(onclick = "goToSection(1)") <span>Ge</span>neral
+      #sidebar.column.is-narrow
+        a.active(onclick = "goToSection(1)") General
         br
-        a(onclick = "goToSection(2)") <span>Si</span>te
+        a(onclick = "goToSection(2)") Site
         br
-        a(onclick = "goToSection(3)") <span>Ar</span>chitecture
+        a(onclick = "goToSection(3)") Architecture
         br
-        a(onclick = "goToSection(4)") <span>Po</span>pulation
+        a(onclick = "goToSection(4)") Population
+        
+        #google_translate_element
       .column.is-5
         form(action = "/api/settlements" method = "POST")
           //- Autofill questions from JSON object passed
@@ -65,4 +68,6 @@ html
         section.is-hidden 
           p Population
     script(src = "/src/js/form.js")
+    script(type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit")
+
     

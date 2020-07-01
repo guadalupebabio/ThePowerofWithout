@@ -2,20 +2,25 @@
   margin-top: 100px;
   padding: 0 5vw;
 
-  .column:first-child{
-    a{
+  #sidebar{
+    & > a{
       font-family: Roboto;
       font-weight: bold;
       font-size: 24px;
       color: black;
-
-      span{
-        transition: 0.2s all;
-      }
+      transition: 0.2s all;
     }
 
-    .active span{
+    .active{
       border-bottom: 4px solid black;
+    }
+  }
+
+  #google_translate_element{
+    margin-top: 10px;
+
+    .goog-logo-link{
+      vertical-align: middle;
     }
   }
 }

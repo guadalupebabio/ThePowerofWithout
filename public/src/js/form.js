@@ -36,3 +36,8 @@ function showInfo(e){
   $(".dropdown-menu").hide(); // Hide all
   if(hidden) $(e.parentNode.childNodes[1]).show(); // Show if previously hidden
 }
+
+// Add Google translate
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
