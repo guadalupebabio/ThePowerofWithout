@@ -22,7 +22,7 @@ html
         a(onclick = "goToSection(4)") Population
         
         #google_translate_element
-      .column.is-5
+      .column.is-5#content
         form(action = "/api/settlements" method = "POST")
           //- Autofill questions from JSON object passed
           each s, index in sections
@@ -58,7 +58,7 @@ html
                   input.button.is-black(type="submit" value="Submit")
                 else 
                   a.button.is-black(onclick = "goToSection(" + (index + 2) + ")") Next Section
-      .column
+      .column#right-sidebar
         section
           #map
         section.is-hidden 
