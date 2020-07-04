@@ -101,7 +101,6 @@ app.get("/contribute", function(req, res){
         type: "radio",
         options: ["Tropical (Type A)", "Arid (Type B)", "Temperate (Type C)", "Continental (Type D)", "Polar (Type E)"]
       },
-      // TODO: add prevalence
       {
         label: "Security",
         name: "siteVulnerabilitySecurityCrimeRate",
@@ -147,14 +146,14 @@ app.get("/contribute", function(req, res){
         info: "Percentage of dwellings that have access to drinking water in the Settlement"
       },
       {
-        label: "Access to sanitation",
+        label: "Access to Sanitation",
         name: "architectureInfrastructureAccessSanitation",
         type: "radio",
         options: ["0-10%", "10-25%", "25-50%", ">50%"],
         info: "Percentage of dwellings that have access to sanitation in the Settlement"
       },
       {
-        label: "Access to Internet or phone fare",
+        label: "Access to Internet or Phone Fare",
         name: "architectureInfrastructureAccessInternet",
         type: "radio",
         options: ["0-10%", "10-25%", "25-50%", ">50%"],

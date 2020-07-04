@@ -33,173 +33,40 @@ let settlementSchema = new Schema({
       climate: {type: String, enum: ["Tropical (Type A)", "Arid (Type B)", "Temperate (Type C)", "Continental (Type D)", "Polar (Type E)"]},
     },
     vulnerability: {
-      // weather: {
-      //   climateChange: String,
-      //   naturalDisasters: String
-      // },
       security: {
         crimeRate: {type: String, enum: ["Low crime rate", "Moderate crime rate", "High crime rate"]},
       },
-      // prevalence: {
-      //   macro: String,
-      //   urban: String,
-      //   plan: String,
-      //   reg: String,
-      //   infras: String,
-      //   armcon: String,
-      //   govern: String
-      // }
     }
   },
   architecture: {
     physicalNature: {
-      houseQuality: {
-        inadequate: String,
-        suitable: String,
-        optimal: String,
-      },
-      materials: {
-        tarpaulin: String,
-        tiles: String,
-        corrugatedSheet: String,
-        wood: String,
-        mud: String,
-        brick: String,
-        concrete: String,
-        others: String,
-      },
-      developmentState: String
+      houseQuality: {type: String, enum: ["Inadequate", "Suitable", "Optimal"]},
+      materials: [String],
+      developmentState: {type: String, enum: ["Initial occupancy", "Transitional", "Establish"]}
     },
     infrastructure: {
-      energy: {
-        accessToGas: {
-          accessToGas: String,
-          typeOfFuel: {
-            gas: String,
-            wood: String,
-            coal: String,
-          }
-        },
-        accessToElectricity: String
-      },
-      water: {
-        accessToDrinkingWater: {
-          individualDrinkingTap: String,
-          accessToPublicTapOrOtherSources: String
-        },
-        accessToSanitation: {
-          toiletAtHome: String,
-          sharedToiletAccess: String
-        },
-        sewageSystem: {
-          sewerConnection: String,
-          garbageManagement: String
-        },
-      },
-      connectivity: {
-        accessToInternet: String,
-        accessToTV: String
-      },
-      mobility: {
-        road: {
-          quality: {type: String, enum: ["Paved", "Compacted", "Not paved"]},
-          sizeOfTheRoad: {
-            pedestrian: String,
-            bikeOrMoto: String,
-            car: String
-          },
-          nameOfTheRoad: String,
-          googleStreetView: Boolean
-        },
-        publicTransportation: {
-          stops: String,
-          proximityToPT: String,
-        },
-        amenties: {
-          proximityToAmenities: String
-        },
-      },
+      accessToEnergy: {type: String, enum: ["0-10%", "10-25%", "25-50%", ">50%"]},
+      accessToWater: {type: String, enum: ["0-10%", "10-25%", "25-50%", ">50%"]},
+      accessToSanitation: {type: String, enum: ["0-10%", "10-25%", "25-50%", ">50%"]},
+      accessToInternetOrPhoneFare: {type: String, enum: ["0-10%", "10-25%", "25-50%", ">50%"]},
+      mobilitySystems: [String],
     },
     density: {
-      elevation: {
-        lessThan1: String,
-        twoToFive: String,
-        greaterThanFive: String,
-      },
-      ratio: String,
+      averageFloors: {type: String, enum: ["1", "2", "3", ">3"]},
       householdPerHouseSize: String,
     }
   },
-  // populace: {
-  //   qualityOfLife: {
-  //     dignity: {
-  //       accessToFood: String,
-  //       dressing: String,
-  //       vandalism: String
-  //     },
-  //     health: {
-  //       wellBeing: String,
-  //       incidenceOfDiseases: String,
-  //       mortality: String
-  //     },
-  //     emotionalState: {
-  //       economicCondition: String,
-  //       accessToEducation: String,
-  //       accessToHealthAndSocialCare: String,
-  //       recreationAndLeisure: String,
-  //       houseQuality: String,
-  //     }
-  //   },
-  //   economy: {
-  //     jobs: {
-  //       unEmploymentRate: String,
-  //       employmentInTheFormalSector: String,
-  //     },
-  //     ownership: {
-  //       Owned: String,
-  //       Rented: String,
-  //       Others: String,
-  //     },
-  //     cityDependant: Boolean
-  //   },
-  //   demography: {
-  //     diversity: {
-  //       gender: {
-  //         female: Number,
-  //         male: Number,
-  //       },
-  //       ageGroups: {
-  //         oneToFive: Number,
-  //         sixToTwelve: Number,
-  //         thirteenToEighteen: Number,
-  //         nineteenToThirty: Number,
-  //         thirtyOneToFifty: Number,
-  //         greaterThanFifty: Number,
-  //       },
-  //       ethnicAndRacialCategories: {
-  //         americanIndianOrAlaskanNative: Number,
-  //         asian: Number,
-  //         blackOrAfricanAmerican: Number,
-  //         hispanicOrLatino: Number,
-  //         nativeHawaiianOrOtherPacificIslander: Number
-  //       },
-  //       income: String,
-  //       exploration: String
-  //     },
-  //     socialClass: {
-  //       caste: {
-  //         obc: Number,
-  //         scAndST: Number,
-  //         others: Number,
-  //       },
-  //       upper: String,
-  //       middle: String,
-  //       working: String,
-  //       lower: String,
-  //       other: String
-  //     }
-  //   }
-  // }
+  populace: {
+    accessToHealthCare: {type: String, enum: ["0-10%", "10-25%", "25-50%", ">50%"]},
+    accessToEducation: {type: String, enum: ["0-10%", "10-25%", "25-50%", ">50%"]},
+    publicAreas: {type: String, enum: ["5 min walking distance", "5-20 min walking distance", ">20 min walking distance", "I need to take a car/public transportation"]},
+    ownershipRights: {type: String, enum: ["Community/city property", "Private house", "Illegal"]},
+    numberHospitals: Number,
+    numberSchools: Number,
+    unemploymentRate: Number,
+    ethnicRacialCategories: String,
+    demography: String,
+  }
 });
 
 
