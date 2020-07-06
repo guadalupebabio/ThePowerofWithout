@@ -28,7 +28,46 @@ router.post("/settlements", function(req, res){ //TODO: add verification to requ
         "causes": req.body.siteOriginCauses,
         "geolocation": req.body.siteOriginGeolocation, // Continent
         "population": isNaN(parseInt(req.body.siteOriginPopulation)) ? null : parseInt(req.body.siteOriginPopulation),
+      },
+      "geography": {
+        "topography": req.body.siteGeographyTopography,
+        "withinCities": req.body.siteGeographyWithinCities,
+        "climate": req.body.siteGeographyClimate,
+      },
+      "vulnerability": {
+        "security": {
+          "crimeRate": req.body.siteVulnerabilitySecurityCrimeRate,
+        },
       }
+    },
+    "architecture": {
+      "physicalNature": {
+        "houseQuality": req.body.architecturePhysicalNatureHouseQuality,
+        "materials": req.body.architecturePhysicalNatureMaterials,
+        "developmentState": req.body.architecturePhysicalNatureMaterials
+      },
+      "infrastructure": {
+        "accessToEnergy": req.body.architectureInfrastructureAccessEnergy,
+        "accessToWater": req.body.architectureInfrastructureAccessWater,
+        "accessToSanitation": req.body.architectureInfrastructureAccessSanitation,
+        "accessToInternetOrPhoneFare": req.body.architectureInfrastructureAccessInternet,
+        "mobilitySystems": req.body.architectureMobility,
+      },
+      "density": {
+        "averageFloors": req.body.architectureDensityElevation,
+        "householdPerHouseSize": req.body.architectureDensityHouseholdPerHouseSize,
+      }
+    },
+    "populace": {
+      "accessToHealthCare": req.body.accessToHealthCare,
+      "accessToEducation": req.body.accessToEducation,
+      "publicAreas": req.body.publicAreas,
+      "ownershipRights": req.body.ownershipRights,
+      "numberHospitals": req.body.numberHospitals,
+      "numberSchools": req.body.numberSchools,
+      "unemploymentRate": req.body.unemploymentRate,
+      "ethnicRacialCategories": req.body.ethnicRacialCategories,
+      "demography": req.body.demography,
     }
   });
 
