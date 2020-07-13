@@ -64,8 +64,8 @@ let settlementSchema = new Schema({
     numberHospitals: Number,
     numberSchools: Number,
     unemploymentRate: Number,
-    ethnicRacialCategories: String,
-    demography: String,
+    // ethnicRacialCategories: String,
+    // demography: String,
   }
 });
 

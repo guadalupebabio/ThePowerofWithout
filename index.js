@@ -3,7 +3,8 @@ require('dotenv').config();
 let express = require("express"),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
-    Settlement = require("./app/db/models/Settlement");
+    Settlement = require("./app/db/models/Settlement"),
+    User = require("./app/db/models/Settlement");
 
 let app = express(),
     router = express.Router();
@@ -220,16 +221,16 @@ app.get("/contribute", function(req, res){
         type: "radio",
         options: ["Community/city property", "Private house", "Illegal"]
       },
-      {
-        label: "Ethnic and racial categories in the Settlement",
-        name: "populaceEthnic",
-        type: "text",
-      },
-      {
-        label: "Demography: Percentage of people in each age groups in the Settlement",
-        name: "populaceDemography",
-        type: "text",
-      },
+      // {
+      //   label: "Ethnic and racial categories in the Settlement",
+      //   name: "populaceEthnic",
+      //   type: "text",
+      // },
+      // {
+      //   label: "Demography: Percentage of people in each age groups in the Settlement",
+      //   name: "populaceDemography",
+      //   type: "text",
+      // },
     ]
   ]
   res.render("form", {sections: sections});
