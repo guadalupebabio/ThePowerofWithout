@@ -22,7 +22,13 @@ html
         
           #google_translate_element
       .column.is-6#content
-        form(action = "/api/settlements" method = formMethod)
+        if sections.length > 1
+          .notification 
+            if redirect == "true"
+              p Thanks for contributing a settlement! You can work on adding more information now, or complete it at a later date—we've sent a link to your email!
+            else 
+              p= "Updating data for " + settlement.name 
+        form(action = "/api/settlements" method = method)
           //- Autofill questions from JSON object passed
           each s, index in sections
             section(class = (index == 0 ? "" : "is-hidden"))

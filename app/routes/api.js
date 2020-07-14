@@ -20,7 +20,7 @@ router.post("/settlements", function(req, res){
 
   let coords = req.body.geolocation.split(",");
 
-  crypto.randomBytes(24, function(err, buffer) {
+  crypto.randomBytes(12, function(err, buffer) {
     let token = buffer.toString('hex');
 
     let settlement = new Settlement({
@@ -36,14 +36,12 @@ router.post("/settlements", function(req, res){
       "secret": token
     })
 
-    Promise.all([settlement.save(), user.save()])
-      .then(function(){
-        req.flash('form-redirect', true);
-        res.redirect("/contribute/u/" + token);
+    settlement.save(function(){
+      user.save(function(){
+        req.flash('form-redirect', "true");
+        res.redirect("/contribute/u/" + settlement._id + "/" + token);
       })
-      .catch(function(err){
-        throw err;
-      });
+    });
   });
 });
 

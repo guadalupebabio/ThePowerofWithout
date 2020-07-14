@@ -4,7 +4,7 @@ let express = require("express"),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
     Settlement = require("./app/db/models/Settlement"),
-    User = require("./app/db/models/Settlement"),
+    User = require("./app/db/models/User"),
     flash = require('connect-flash'),
     cookieParser = require('cookie-parser'),
     session = require('express-session');
@@ -68,7 +68,7 @@ app.get("/contribute", function(req, res){ // Create the initial settlement
   res.render("form", {sections: sections, method: "POST"});
 });
 
-app.get("/contribute/u/:key", function(req, res){ // Update the settlement
+app.get("/contribute/u/:contribution/:secret", function(req, res){ // Update the settlement
   let sections = [
     // Site
     [
@@ -240,9 +240,13 @@ app.get("/contribute/u/:key", function(req, res){ // Update the settlement
       //   type: "text",
       // },
     ]
-  ]
-  ///req.params.key
-  res.render("form", {sections: sections, redirect: req.flash('form-redirect'), method: "POST"});
+  ];
+
+  User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
+    Settlement.findOne({_id: user.contribution}, function(err, settlement){
+      res.render("form", {settlement: settlement, sections: sections, redirect: req.flash('form-redirect'), method: "POST"});
+    });
+  })
 });
 
 app.get("/toolkit", function(req, res){
