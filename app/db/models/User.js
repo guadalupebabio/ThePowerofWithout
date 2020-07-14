@@ -1,5 +1,6 @@
 /*
   User.js
+  Stores a user-settlement they created pair
 */
 
 let mongoose = require('mongoose'),
@@ -7,8 +8,8 @@ let mongoose = require('mongoose'),
 
 let userSchema = new Schema({
   email: String,
-  name: String,
-  contributions: [String],
+  contribution: String,
+  secret: String
 });
 
 

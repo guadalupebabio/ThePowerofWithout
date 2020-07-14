@@ -4,7 +4,10 @@ let express = require("express"),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
     Settlement = require("./app/db/models/Settlement"),
-    User = require("./app/db/models/Settlement");
+    User = require("./app/db/models/Settlement"),
+    flash = require('connect-flash'),
+    cookieParser = require('cookie-parser'),
+    session = require('express-session');
 
 let app = express(),
     router = express.Router();
@@ -19,6 +22,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.set('views', './views');
 app.set('view engine', 'pug');
+app.use(cookieParser());
+app.use(session({secret: "cookie key", cookie: { maxAge: 60000 }}));
+app.use(flash());
 
 // ** CONNECT TO DB **
 mongoose.connect(DB_URL, function(err, res) {
@@ -31,37 +37,39 @@ app.get("/", function(req, res){
   res.render("index");
 });
 
-app.get("/contribute", function(req, res){
-  let sections = [
-    // General
-    [
-      {
-        label: "Name of the Informal Settlement",
-        name: "settlement",
-        type: "text"
-      },
-      {
-        label: "Name of the City",
-        name: "city",
-        type: "text"
-      },
-      {
-        label: "Name of the Country",
-        name: "country",
-        type: "text"
-      },
-      {
-        label: "Coordinates",
-        name: "geolocation",
-        type: "coords",
-      },
-      {
-        label: "Email Address",
-        name: "email",
-        type: "text",
-      },
-    ],
+app.get("/contribute", function(req, res){ // Create the initial settlement
+  let sections = [[
+    {
+      label: "Name of the Informal Settlement",
+      name: "settlement",
+      type: "text"
+    },
+    {
+      label: "Name of the City",
+      name: "city",
+      type: "text"
+    },
+    {
+      label: "Name of the Country",
+      name: "country",
+      type: "text"
+    },
+    {
+      label: "Coordinates",
+      name: "geolocation",
+      type: "coords",
+    },
+    {
+      label: "Email Address",
+      name: "email",
+      type: "text",
+    },
+  ]];
+  res.render("form", {sections: sections});
+});
 
+app.get("/contribute/u/:key", function(req, res){ // Update the settlement
+  let sections = [
     // Site
     [
       {
@@ -233,7 +241,8 @@ app.get("/contribute", function(req, res){
       // },
     ]
   ]
-  res.render("form", {sections: sections});
+  ///req.params.key
+  res.render("form", {sections: sections, redirect: req.flash('form-redirect')});
 });
 
 app.get("/toolkit", function(req, res){
