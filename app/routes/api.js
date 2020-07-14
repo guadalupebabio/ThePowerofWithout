@@ -14,7 +14,7 @@ router.get("/settlements", function(req, res){
   });
 });
 
-// Add new settlement to database, takes a JSON request structured exactly the same as the Settlement schema
+// Add new settlement to database
 router.post("/settlements", function(req, res){
   //TODO: add verification to request
 
@@ -47,6 +47,7 @@ router.post("/settlements", function(req, res){
   });
 });
 
+// Update existing settlement
 // router.put("/settlements", function(req, res){
 //   //TODO: add verification to request, make user accounts,
 //   // let settlement = new Settlement(req.body);

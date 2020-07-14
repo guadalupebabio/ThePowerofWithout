@@ -8,22 +8,13 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 }).addTo(map);
 
 function goToSection(i){
-  if(i > 1){
-    $("#content").removeClass("is-5");
-    $("#right-sidebar").hide();
-  }
-  else{
-    $("#content").addClass("is-5");
-    $("#right-sidebar").show();
-  }
-
-  $(".column:first-child a").removeClass("active");
+  $("#sidebar a").removeClass("active");
   $("form section").addClass("is-hidden");
-  $(".column:nth-child(3) section").addClass("is-hidden");
+  $("#right-sidebar section").addClass("is-hidden");
 
-  $(".column:first-child a:nth-of-type(" + i + ")").addClass("active");
+  $("#sidebar > a:nth-of-type(" + i + ")").addClass("active");
   $("form section:nth-of-type(" + i + ")").removeClass("is-hidden");
-  $(".column:nth-child(3) section:nth-of-type(" + i + ")").removeClass("is-hidden");
+  $("#right-sidebar section:nth-of-type(" + i + ")").removeClass("is-hidden");
 }
 
 var marker = null;

@@ -65,7 +65,7 @@ app.get("/contribute", function(req, res){ // Create the initial settlement
       type: "text",
     },
   ]];
-  res.render("form", {sections: sections});
+  res.render("form", {sections: sections, method: "POST"});
 });
 
 app.get("/contribute/u/:key", function(req, res){ // Update the settlement
@@ -242,7 +242,7 @@ app.get("/contribute/u/:key", function(req, res){ // Update the settlement
     ]
   ]
   ///req.params.key
-  res.render("form", {sections: sections, redirect: req.flash('form-redirect')});
+  res.render("form", {sections: sections, redirect: req.flash('form-redirect'), method: "POST"});
 });
 
 app.get("/toolkit", function(req, res){
