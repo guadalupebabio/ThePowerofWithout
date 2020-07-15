@@ -65,7 +65,7 @@ app.get("/contribute", function(req, res){ // Create the initial settlement
       type: "text",
     },
   ]];
-  res.render("form", {sections: sections, method: "POST"});
+  res.render("form", {sections: sections, url: "/api/settlements"});
 });
 
 app.get("/contribute/u/:contribution/:secret", function(req, res){ // Update the settlement
@@ -244,7 +244,8 @@ app.get("/contribute/u/:contribution/:secret", function(req, res){ // Update the
 
   User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
     Settlement.findOne({_id: user.contribution}, function(err, settlement){
-      res.render("form", {settlement: settlement, sections: sections, redirect: req.flash('form-redirect'), method: "POST"});
+      //TODO: include already filled out information in form
+      res.render("form", {settlement: settlement, sections: sections, redirect: req.flash('form-redirect'), url: "/api/settlements/u/" + user.contribution + "/" + req.params.secret});
     });
   })
 });

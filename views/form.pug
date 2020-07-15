@@ -24,11 +24,13 @@ html
       .column.is-6#content
         if sections.length > 1
           .notification 
-            if redirect == "true"
+            if redirect == "1"
               p Thanks for contributing a settlement! You can work on adding more information now, or complete it at a later date—we've sent a link to your email!
+            else if redirect == "2"
+              p Successfully updated settlement data! 
             else 
               p= "Updating data for " + settlement.name 
-        form(action = "/api/settlements" method = method)
+        form(action = url method = "POST")
           //- Autofill questions from JSON object passed
           each s, index in sections
             section(class = (index == 0 ? "" : "is-hidden"))

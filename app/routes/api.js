@@ -38,7 +38,7 @@ router.post("/settlements", function(req, res){
 
     settlement.save(function(){
       user.save(function(){
-        req.flash('form-redirect', "true");
+        req.flash('form-redirect', "1");
         res.redirect("/contribute/u/" + settlement._id + "/" + token);
       })
     });
@@ -46,69 +46,68 @@ router.post("/settlements", function(req, res){
 });
 
 // Update existing settlement
-// router.put("/settlements", function(req, res){
-//   //TODO: add verification to request, make user accounts,
-//   // let settlement = new Settlement(req.body);
-//
-//   let coords = req.body.geolocation.split(",");
-//
-//   let settlement = new Settlement({
-//     "name": `${req.body.settlement}, ${req.body.city}`,
-//     "country": req.body.country,
-//     "geolocation": {type: 'Point', coordinates: [parseFloat(coords[0]), parseFloat(coords[1])] },
-//     "email": req.body.email,
-//     "site": {
-//       "origin": {
-//         "causes": req.body.siteOriginCauses,
-//         "geolocation": req.body.siteOriginGeolocation, // Continent
-//         "population": isNaN(parseInt(req.body.siteOriginPopulation)) ? null : parseInt(req.body.siteOriginPopulation),
-//       },
-//       "geography": {
-//         "topography": req.body.siteGeographyTopography,
-//         "withinCities": req.body.siteGeographyWithinCities,
-//         "climate": req.body.siteGeographyClimate,
-//       },
-//       "vulnerability": {
-//         "security": {
-//           "crimeRate": req.body.siteVulnerabilitySecurityCrimeRate,
-//         },
-//       }
-//     },
-//     "architecture": {
-//       "physicalNature": {
-//         "houseQuality": req.body.architecturePhysicalNatureHouseQuality,
-//         "materials": req.body.architecturePhysicalNatureMaterials,
-//         "developmentState": req.body.architecturePhysicalNatureMaterials
-//       },
-//       "infrastructure": {
-//         "accessToEnergy": req.body.architectureInfrastructureAccessEnergy,
-//         "accessToWater": req.body.architectureInfrastructureAccessWater,
-//         "accessToSanitation": req.body.architectureInfrastructureAccessSanitation,
-//         "accessToInternetOrPhoneFare": req.body.architectureInfrastructureAccessInternet,
-//         "mobilitySystems": req.body.architectureMobility,
-//       },
-//       "density": {
-//         "averageFloors": req.body.architectureDensityElevation,
-//         "householdPerHouseSize": req.body.architectureDensityHouseholdPerHouseSize,
-//       }
-//     },
-//     "populace": {
-//       "accessToHealthCare": req.body.accessToHealthCare,
-//       "accessToEducation": req.body.accessToEducation,
-//       "publicAreas": req.body.publicAreas,
-//       "ownershipRights": req.body.ownershipRights,
-//       "numberHospitals": req.body.numberHospitals,
-//       "numberSchools": req.body.numberSchools,
-//       "unemploymentRate": req.body.unemploymentRate,
-//       "ethnicRacialCategories": req.body.ethnicRacialCategories,
-//       "demography": req.body.demography,
-//     }
-//   });
-//
-//   settlement.save(function (err) {
-//     if(err) throw err;
-//     res.send(200);
-//   });
-// });
+router.post("/settlements/u/:id/:secret", function(req, res){
+  //TODO: add verification to request, error handling
+
+  User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
+    Settlement.findOneAndUpdate(
+      {
+        _id: req.params.id
+      },
+      {
+      "site": {
+        "origin": {
+          "causes": req.body.siteOriginCauses,
+          "geolocation": req.body.siteOriginGeolocation, // Continent
+          "population": req.body.siteOriginPopulation != null && !isNaN(parseInt(req.body.siteOriginPopulation)) ? parseInt(req.body.siteOriginPopulation) : null,
+        },
+        "geography": {
+          "topography": req.body.siteGeographyTopography,
+          "withinCities": req.body.siteGeographyWithinCities,
+          "climate": req.body.siteGeographyClimate,
+        },
+        "vulnerability": {
+          "security": {
+            "crimeRate": req.body.siteVulnerabilitySecurityCrimeRate,
+          },
+        }
+      },
+      "architecture": {
+        "physicalNature": {
+          "houseQuality": req.body.architecturePhysicalNatureHouseQuality,
+          "materials": req.body.architecturePhysicalNatureMaterials,
+          "developmentState": req.body.architecturePhysicalNatureMaterials
+        },
+        "infrastructure": {
+          "accessToEnergy": req.body.architectureInfrastructureAccessEnergy,
+          "accessToWater": req.body.architectureInfrastructureAccessWater,
+          "accessToSanitation": req.body.architectureInfrastructureAccessSanitation,
+          "accessToInternetOrPhoneFare": req.body.architectureInfrastructureAccessInternet,
+          "mobilitySystems": req.body.architectureMobility,
+        },
+        "density": {
+          "averageFloors": req.body.architectureDensityElevation,
+          "householdPerHouseSize": req.body.architectureDensityHouseholdPerHouseSize,
+        }
+      },
+      "populace": {
+        "accessToHealthCare": req.body.accessToHealthCare,
+        "accessToEducation": req.body.accessToEducation,
+        "publicAreas": req.body.publicAreas,
+        "ownershipRights": req.body.ownershipRights,
+        "numberHospitals": req.body.numberHospitals,
+        "numberSchools": req.body.numberSchools,
+        "unemploymentRate": req.body.unemploymentRate,
+        "ethnicRacialCategories": req.body.ethnicRacialCategories,
+        "demography": req.body.demography,
+      }
+    },
+    function(err){
+      req.flash('form-redirect', "2");
+      res.redirect("/contribute/u/" + req.params.id + "/" + req.params.secret);
+    })
+  })
+
+});
 
 module.exports = router;
