@@ -49,6 +49,8 @@ router.post("/settlements", function(req, res){
 router.post("/settlements/u/:id/:secret", function(req, res){
   //TODO: add verification to request, error handling
 
+  console.log(req.body.architecturePhysicalNatureMaterials);
+
   User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
     Settlement.findOneAndUpdate(
       {
@@ -76,7 +78,7 @@ router.post("/settlements/u/:id/:secret", function(req, res){
         "physicalNature": {
           "houseQuality": req.body.architecturePhysicalNatureHouseQuality,
           "materials": req.body.architecturePhysicalNatureMaterials,
-          "developmentState": req.body.architecturePhysicalNatureMaterials
+          "developmentState": req.body.architecturePhysicalNatureDevelopmentState
         },
         "infrastructure": {
           "accessToEnergy": req.body.architectureInfrastructureAccessEnergy,
@@ -91,13 +93,13 @@ router.post("/settlements/u/:id/:secret", function(req, res){
         }
       },
       "populace": {
-        "accessToHealthCare": req.body.accessToHealthCare,
-        "accessToEducation": req.body.accessToEducation,
-        "publicAreas": req.body.publicAreas,
-        "ownershipRights": req.body.ownershipRights,
-        "numberHospitals": req.body.numberHospitals,
-        "numberSchools": req.body.numberSchools,
-        "unemploymentRate": req.body.unemploymentRate,
+        "accessToHealthCare": req.body.populaceHealthCare,
+        "accessToEducation": req.body.populaceEducation,
+        "publicAreas": req.body.populacePublicAreas,
+        "ownershipRights": req.body.populaceOwnership,
+        "numberHospitals": req.body.populaceHospitals,
+        "numberSchools": req.body.populaceSchools,
+        "unemploymentRate": req.body.populaceUnemploymentRate,
         "ethnicRacialCategories": req.body.ethnicRacialCategories,
         "demography": req.body.demography,
       }
