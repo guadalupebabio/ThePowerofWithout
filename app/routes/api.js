@@ -2,7 +2,8 @@ let express = require("express"),
     mongoose = require("mongoose"),
     Settlement = require("../db/models/Settlement"),
     User = require("../db/models/User"),
-    crypto = require('crypto');
+    crypto = require('crypto'),
+    geo = require("../util/geo.js");
 
 let router = express.Router();
 
@@ -12,6 +13,13 @@ router.get("/settlements", function(req, res){
     if(err) throw err;
     res.json(docs);
   });
+});
+
+// Given Lat and Lon, return what country the point is.
+router.get("/get-country", function(req, res){
+  let lat = parseFloat(req.query.lat),
+      lon = parseFloat(req.query.lon);
+  res.send(geo.getCountry(lat, lon));
 });
 
 // Add new settlement to database

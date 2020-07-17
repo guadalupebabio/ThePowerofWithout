@@ -49,7 +49,10 @@ html
                 if question.type == "coords"
                   input#coords(name = question.name type = "text" readonly placeholder = "Select a point on the map")    
                 else if question.type == "text"    
-                  input(name = question.name type = question.type value = question.value)
+                  if question.disabled
+                    input(name = question.name type = question.type readonly value = question.value)
+                  else
+                    input(name = question.name type = question.type value = question.value)
                 else if question.type == "radio" || question.type == "checkbox"
                   each val, index in question.options
                     if question.type == "radio"

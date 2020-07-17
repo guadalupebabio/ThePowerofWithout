@@ -23,12 +23,16 @@ map.on('click',function(e){
    lat = e.latlng.lat;
    lon = e.latlng.lng;
 
-   console.log(marker == null);
-
    if(marker == null) marker = L.marker([lat,lon]).addTo(map);
    else marker.setLatLng(e.latlng);
 
-   $("#coords").val(`${lat.toFixed(5)}, ${lon.toFixed(5)}`)
+   // Set coordinate field
+   $("#coords").val(`${lat.toFixed(5)}, ${lon.toFixed(5)}`);
+
+   // Prefill country values
+   $.get(`/api/get-country?lat=${lat}&lon=${lon}`, function(data) {
+     $("input[name='country']").val(data);
+   });
 });
 
 function showInfo(e){

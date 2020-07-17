@@ -45,6 +45,11 @@ app.get("/contribute", function(req, res){ // Create the initial settlement
       type: "text"
     },
     {
+      label: "Coordinates",
+      name: "geolocation",
+      type: "coords",
+    },
+    {
       label: "Name of the City",
       name: "city",
       type: "text"
@@ -53,11 +58,6 @@ app.get("/contribute", function(req, res){ // Create the initial settlement
       label: "Name of the Country",
       name: "country",
       type: "text"
-    },
-    {
-      label: "Coordinates",
-      name: "geolocation",
-      type: "coords",
     },
     {
       label: "Email Address",
