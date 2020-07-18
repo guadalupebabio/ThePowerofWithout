@@ -65,8 +65,29 @@ app.get("/contribute", function(req, res){ // Create the initial settlement
       type: "text",
     },
   ]];
-  res.render("form", {sections: sections, url: "/api/settlements"});
+  res.render("form", {sections: sections, url: "/api/settlements", notification: 'Already created a settlement? Edit it <a href = "/contribute/u">here</a>', map: true});
 });
+
+app.get("/contribute/u/", function(req, res){ // Find settlement that you've already created
+  let sections = [[
+    {
+      label: "Name of the Informal Settlement",
+      name: "settlement",
+      type: "text"
+    },
+    {
+      label: "Name of the City",
+      name: "city",
+      type: "text"
+    },
+    {
+      label: "Email Address",
+      name: "email",
+      type: "text",
+    },
+  ]];
+  res.render("form", {sections: sections, url: "/api/get-settlement", notification: req.flash("form-redirect") == "3" ? "No settlement found" : null});
+})
 
 app.get("/contribute/u/:contribution/:secret", function(req, res){ // Update the settlement
   User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
@@ -277,8 +298,13 @@ app.get("/contribute/u/:contribution/:secret", function(req, res){ // Update the
           // },
         ]
       ];
-      console.log(settlement);
-      res.render("form", {settlement: settlement, sections: sections, redirect: req.flash('form-redirect'), url: "/api/settlements/u/" + user.contribution + "/" + req.params.secret});
+      let redirect = req.flash('form-redirect'),
+          notification = "Updating data for " + settlement.name;
+
+      if(redirect == "1") notification = "Thanks for contributing a settlement! You can work on adding more information now, or complete it at a later date—we've sent a link to your email!";
+      else if(redirect == "2") notification = "Successfully updated settlement data!";
+
+      res.render("form", {settlement: settlement, sections: sections, notification: notification, url: "/api/settlements/u/" + user.contribution + "/" + req.params.secret});
     });
   })
 });

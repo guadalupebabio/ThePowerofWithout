@@ -22,6 +22,32 @@ router.get("/get-country", function(req, res){
   res.send(geo.getCountry(lat, lon));
 });
 
+// Given name and email, redirect to the correct settlement.
+router.post("/get-settlement", function(req, res){
+  Settlement.findOne({
+    "name": `${req.body.settlement}, ${req.body.city}`
+  }, function(err, settlement){
+    if(!err && settlement) User.findOne({
+      "contribution": settlement._id,
+      "email": req.body.email
+    }, function(err, user){
+      if(!err && user){
+        res.redirect("/contribute/u/" + settlement._id + "/" + user.secret);
+      }
+      else{
+        req.flash('form-redirect', "3");
+        res.redirect("/contribute/u/");
+      }
+    })
+    else {
+      req.flash('form-redirect', "3");
+      res.redirect("/contribute/u/");
+    }
+  })
+
+
+});
+
 // Add new settlement to database
 router.post("/settlements", function(req, res){
   //TODO: add verification to request
