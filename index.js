@@ -65,7 +65,7 @@ app.get("/contribute", function(req, res){ // Create the initial settlement
       type: "text",
     },
   ]];
-  res.render("form", {sections: sections, url: "/api/settlements", notification: 'Already created a settlement? Edit it <a href = "/contribute/u">here</a>', map: true});
+  res.render("form", {sections: sections, url: "/api/settlements", notification: 'Already created a settlement? Edit it <a href = "/contribute/u">here</a>', map: true, error: req.flash("form-error")});
 });
 
 app.get("/contribute/u/", function(req, res){ // Find settlement that you've already created
@@ -86,7 +86,7 @@ app.get("/contribute/u/", function(req, res){ // Find settlement that you've alr
       type: "text",
     },
   ]];
-  res.render("form", {sections: sections, url: "/api/get-settlement", notification: req.flash("form-redirect") == "3" ? "No settlement found" : null});
+  res.render("form", {sections: sections, url: "/api/get-settlement", notification: req.flash("form-notification"), error: req.flash("form-error")});
 })
 
 app.get("/contribute/u/:contribution/:secret", function(req, res){ // Update the settlement
@@ -298,13 +298,8 @@ app.get("/contribute/u/:contribution/:secret", function(req, res){ // Update the
           // },
         ]
       ];
-      let redirect = req.flash('form-redirect'),
-          notification = "Updating data for " + settlement.name;
 
-      if(redirect == "1") notification = "Thanks for contributing a settlement! You can work on adding more information now, or complete it at a later date—we've sent a link to your email!";
-      else if(redirect == "2") notification = "Successfully updated settlement data!";
-
-      res.render("form", {settlement: settlement, sections: sections, notification: notification, url: "/api/settlements/u/" + user.contribution + "/" + req.params.secret});
+      res.render("form", {settlement: settlement, sections: sections, notification: req.flash('form-notification') || "Updating data for " + settlement.name, url: "/api/settlements/u/" + user.contribution + "/" + req.params.secret, error: req.flash("form-error")});
     });
   })
 });

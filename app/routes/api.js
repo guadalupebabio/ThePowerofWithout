@@ -7,6 +7,20 @@ let express = require("express"),
 
 let router = express.Router();
 
+// Middleware which throws an error if any of the form fields are empty
+function preventEmptyFormFields(req, res, next){
+  for(let field in req.body){
+    if(req.body.hasOwnProperty(field) && !req.body[field].length) {
+      req.flash('form-error', "Please fill out all fields");
+      req.error = true;
+      break;
+    }
+  }
+  next();
+}
+
+//TODO; middleware to clean and strip form strigns
+
 // Returns a JSON array containing settlement data
 router.get("/settlements", function(req, res){
   Settlement.find({}, function(err, docs){
@@ -23,8 +37,9 @@ router.get("/get-country", function(req, res){
 });
 
 // Given name and email, redirect to the correct settlement.
-router.post("/get-settlement", function(req, res){
-  Settlement.findOne({
+router.post("/get-settlement", preventEmptyFormFields, function(req, res){
+  if(req.error) res.redirect("/contribute/u/");
+  else Settlement.findOne({
     "name": `${req.body.settlement}, ${req.body.city}`
   }, function(err, settlement){
     if(!err && settlement) User.findOne({
@@ -35,24 +50,31 @@ router.post("/get-settlement", function(req, res){
         res.redirect("/contribute/u/" + settlement._id + "/" + user.secret);
       }
       else{
-        req.flash('form-redirect', "3");
+        req.flash('form-notification', "No settlement found");
         res.redirect("/contribute/u/");
       }
     })
     else {
-      req.flash('form-redirect', "3");
+      req.flash('form-notification', "No settlement found");
       res.redirect("/contribute/u/");
     }
-  })
-
-
+  });
 });
 
 // Add new settlement to database
-router.post("/settlements", function(req, res){
-  //TODO: add verification to request
+router.post("/settlements", preventEmptyFormFields, function(req, res){
+  if(req.error) {
+    res.redirect("/contribute");
+    return
+  }
 
-  let coords = req.body.geolocation.split(",");
+  let coords = req.body.geolocation.split(",").map((d) => parseFloat(d));
+
+  if(coords.length != 2 || isNaN(coords[0]) || isNaN(coords[1])){
+    req.flash("form-error", "Invalid Coordinates");
+    res.redirect("/contribute");
+    return;
+  }
 
   crypto.randomBytes(12, function(err, buffer) {
     let token = buffer.toString('hex');
@@ -60,7 +82,7 @@ router.post("/settlements", function(req, res){
     let settlement = new Settlement({
       "name": `${req.body.settlement}, ${req.body.city}`,
       "country": req.body.country,
-      "geolocation": {type: 'Point', coordinates: [parseFloat(coords[0]), parseFloat(coords[1])] },
+      "geolocation": {type: 'Point', coordinates: coords},
       "email": req.body.email,
     });
 
@@ -72,7 +94,7 @@ router.post("/settlements", function(req, res){
 
     settlement.save(function(){
       user.save(function(){
-        req.flash('form-redirect', "1");
+        req.flash('form-notification', "Thanks for contributing a settlement! You can work on adding more information now, or complete it at a later date—we've sent a link to your email!");
         res.redirect("/contribute/u/" + settlement._id + "/" + token);
       })
     });
@@ -81,10 +103,6 @@ router.post("/settlements", function(req, res){
 
 // Update existing settlement
 router.post("/settlements/u/:id/:secret", function(req, res){
-  //TODO: add verification to request, error handling
-
-  console.log(req.body.architecturePhysicalNatureMaterials);
-
   User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
     Settlement.findOneAndUpdate(
       {
@@ -139,7 +157,7 @@ router.post("/settlements/u/:id/:secret", function(req, res){
       }
     },
     function(err){
-      req.flash('form-redirect', "2");
+      req.flash('form-notification', "Successfully updated settlement data!");
       res.redirect("/contribute/u/" + req.params.id + "/" + req.params.secret);
     })
   })
