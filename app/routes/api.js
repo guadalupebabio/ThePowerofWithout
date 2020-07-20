@@ -19,7 +19,19 @@ function preventEmptyFormFields(req, res, next){
   next();
 }
 
-//TODO; middleware to clean and strip form strigns
+// Middleware which cleans spaces from all form inputs
+function cleanFormFields(req, res, next){
+  if(req.error) next();
+  else {
+    for(let field in req.body){
+      if(req.body.hasOwnProperty(field)) req.body[field] = req.body[field].trim();
+    }
+
+    next();
+  }
+}
+
+//TODO: email verification
 
 // Returns a JSON array containing settlement data
 router.get("/settlements", function(req, res){
@@ -37,7 +49,7 @@ router.get("/get-country", function(req, res){
 });
 
 // Given name and email, redirect to the correct settlement.
-router.post("/get-settlement", preventEmptyFormFields, function(req, res){
+router.post("/get-settlement", preventEmptyFormFields, cleanFormFields, function(req, res){
   if(req.error) res.redirect("/contribute/u/");
   else Settlement.findOne({
     "name": `${req.body.settlement}, ${req.body.city}`
@@ -62,7 +74,7 @@ router.post("/get-settlement", preventEmptyFormFields, function(req, res){
 });
 
 // Add new settlement to database
-router.post("/settlements", preventEmptyFormFields, function(req, res){
+router.post("/settlements", preventEmptyFormFields, cleanFormFields, function(req, res){
   if(req.error) {
     res.redirect("/contribute");
     return
@@ -102,7 +114,7 @@ router.post("/settlements", preventEmptyFormFields, function(req, res){
 });
 
 // Update existing settlement
-router.post("/settlements/u/:id/:secret", function(req, res){
+router.post("/settlements/u/:id/:secret", cleanFormFields, function(req, res){
   User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
     Settlement.findOneAndUpdate(
       {
