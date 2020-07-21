@@ -31,7 +31,16 @@ function cleanFormFields(req, res, next){
   }
 }
 
-//TODO: email verification
+// Middleware which validates the email address
+function validateEmail(req, res, next){
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if(req.error == null && !re.test(req.body.email)) {
+    req.flash('form-error', "Please enter a valid email address");
+    req.error = true;
+  }
+
+  next();
+}
 
 // Returns a JSON array containing settlement data
 router.get("/settlements", function(req, res){
@@ -49,7 +58,7 @@ router.get("/get-country", function(req, res){
 });
 
 // Given name and email, redirect to the correct settlement.
-router.post("/get-settlement", preventEmptyFormFields, cleanFormFields, function(req, res){
+router.post("/get-settlement", preventEmptyFormFields, cleanFormFields, validateEmail, function(req, res){
   if(req.error) res.redirect("/contribute/u/");
   else Settlement.findOne({
     "name": `${req.body.settlement}, ${req.body.city}`
@@ -74,7 +83,7 @@ router.post("/get-settlement", preventEmptyFormFields, cleanFormFields, function
 });
 
 // Add new settlement to database
-router.post("/settlements", preventEmptyFormFields, cleanFormFields, function(req, res){
+router.post("/settlements", preventEmptyFormFields, cleanFormFields, validateEmail, function(req, res){
   if(req.error) {
     res.redirect("/contribute");
     return
