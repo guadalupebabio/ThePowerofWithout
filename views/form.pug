@@ -12,18 +12,23 @@ html
     include includes/nav.pug
     
     .columns.is-variable.is-8
-      #sidebar.column.is-narrow
-        a.active(onclick = "goToSection(1)") General
-        br
-        a(onclick = "goToSection(2)") Site
-        br
-        a(onclick = "goToSection(3)") Architecture
-        br
-        a(onclick = "goToSection(4)") Population
+      if sections.length > 1
+        #sidebar.column.is-narrow
+          a.active(onclick = "goToSection(1)") Site
+          br
+          a(onclick = "goToSection(2)") Architecture
+          br
+          a(onclick = "goToSection(3)") Population
         
-        #google_translate_element
-      .column.is-5#content
-        form(action = "/api/settlements" method = "POST")
+          #google_translate_element
+      .column.is-6#content
+        if error.length
+          .notification.is-danger
+            p!= error
+        if notification.length
+          .notification 
+            p!= notification
+        form(action = url method = "POST")
           //- Autofill questions from JSON object passed
           each s, index in sections
             section(class = (index == 0 ? "" : "is-hidden"))
@@ -40,12 +45,18 @@ html
                             p= question.info
                 br
                 if question.type == "coords"
-                  input#coords(name = question.name type = "text" disabled placeholder = "Select a point on the map")    
+                  input#coords(name = question.name type = "text" readonly placeholder = "Select a point on the map")    
                 else if question.type == "text"    
-                  input(name = question.name type = question.type)
+                  if question.disabled
+                    input(name = question.name type = question.type readonly value = question.value)
+                  else
+                    input(name = question.name type = question.type value = question.value)
                 else if question.type == "radio" || question.type == "checkbox"
                   each val, index in question.options
-                    input(type = question.type name = question.name id = question.name + "-" + index value = val)
+                    if question.type == "radio"
+                      input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == question.value))
+                    else 
+                      input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
                     label(for = question.name + "-" + index)= val
                     br
                 br
@@ -59,14 +70,17 @@ html
                 else 
                   a.button.is-black(onclick = "goToSection(" + (index + 2) + ")") Next Section
       .column#right-sidebar
-        section
-          #map
-        section.is-hidden 
-          p Site 
-        section.is-hidden 
-          p Architecture
-        section.is-hidden 
-          p Population
+        if sections.length == 1 
+          section
+            if map
+              #map
+        else 
+          section.is-hidden 
+            p Site 
+          section.is-hidden 
+            p Architecture
+          section.is-hidden 
+            p Population
     script(src = "/src/js/form.js")
     script(type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit")
 

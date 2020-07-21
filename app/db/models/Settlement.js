@@ -23,49 +23,49 @@ let settlementSchema = new Schema({
   },
   site: {
     origin: {
-      causes: {type: String, enum: ["Squatting", "Refugee Camp", "Illegal Subdivision", "Other"]},
-      geolocation: {type: String, enum: ['Africa', 'Europe', 'North America', 'South America', 'Asia', 'Oceania', 'Antarctica']},
+      causes: String,
+      geolocation: String,
       population: Number
     },
     geography: {
-      topography: {type: String, enum: ["By the coast", "Desert", "Valley", "Mountain", "Forest", "Water"]},
-      withinCities: {type: String, enum: ["Squatting on the fringe", "In the path of development", "In the heart of the city", "Along railway tracks", "Residential centers", "Suburban industrial areas", "Old city slum"]},
-      climate: {type: String, enum: ["Tropical (Type A)", "Arid (Type B)", "Temperate (Type C)", "Continental (Type D)", "Polar (Type E)"]},
+      topography: String,
+      withinCities: String,
+      climate: String,
     },
     vulnerability: {
       security: {
-        crimeRate: {type: String, enum: ["Low crime rate", "Moderate crime rate", "High crime rate"]},
+        crimeRate: String,
       },
     }
   },
   architecture: {
     physicalNature: {
-      houseQuality: {type: String, enum: ["Inadequate", "Suitable", "Optimal"]},
+      houseQuality: String,
       materials: [String],
-      developmentState: {type: String, enum: ["Initial occupancy", "Transitional", "Establish"]}
+      developmentState: String
     },
     infrastructure: {
-      accessToEnergy: {type: String, enum: ["0-10%", "10-25%", "25-50%", ">50%"]},
-      accessToWater: {type: String, enum: ["0-10%", "10-25%", "25-50%", ">50%"]},
-      accessToSanitation: {type: String, enum: ["0-10%", "10-25%", "25-50%", ">50%"]},
-      accessToInternetOrPhoneFare: {type: String, enum: ["0-10%", "10-25%", "25-50%", ">50%"]},
+      accessToEnergy: String,
+      accessToWater: String,
+      accessToSanitation: String,
+      accessToInternetOrPhoneFare: String,
       mobilitySystems: [String],
     },
     density: {
-      averageFloors: {type: String, enum: ["1", "2", "3", ">3"]},
+      averageFloors: String,
       householdPerHouseSize: String,
     }
   },
   populace: {
-    accessToHealthCare: {type: String, enum: ["0-10%", "10-25%", "25-50%", ">50%"]},
-    accessToEducation: {type: String, enum: ["0-10%", "10-25%", "25-50%", ">50%"]},
-    publicAreas: {type: String, enum: ["5 min walking distance", "5-20 min walking distance", ">20 min walking distance", "I need to take a car/public transportation"]},
-    ownershipRights: {type: String, enum: ["Community/city property", "Private house", "Illegal"]},
+    accessToHealthCare: String,
+    accessToEducation: String,
+    publicAreas: String,
+    ownershipRights: String,
     numberHospitals: Number,
     numberSchools: Number,
     unemploymentRate: Number,
-    ethnicRacialCategories: String,
-    demography: String,
+    // ethnicRacialCategories: String,
+    // demography: String,
   }
 });
 
