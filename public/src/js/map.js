@@ -97,11 +97,9 @@ for (var i = 0; i < Object.keys(pointsByCountry).length; ++i){
 
 
     }
-
-function circlechoose (zoomlevel){
   
   for (var i = 0; i < points.length; ++i){
-    var continentcheck;
+    //var continentcheck;
     var name = points[i]["name"];
     var population = points[i]["site"].origin["population"];
     var causes = points[i]["site"].origin["causes"];
@@ -143,6 +141,7 @@ function circlechoose (zoomlevel){
     //}
     
        markers.addLayer(circle);
+       console.log(markers);
   /*   if (zoomlevel == 5){
       continentcheck = checkContinents(continent);
       console.log(continentcheck);
@@ -170,7 +169,7 @@ function circlechoose (zoomlevel){
         console.log(settlements);
     } */
   }
-}
+
   //create the map and its base layers
 
   var light   = L.tileLayer(mbUrl, {id: 'mapbox/light-v10', maxZoom: 18, tileSize: 512, zoomOffset: -1, maxZoom: 18,
@@ -353,7 +352,6 @@ function onEachFeature(feature, layer) {
 map.on('zoomend', function() {
   var zoomlevel = map.getZoom();
       if (zoomlevel  > 4){
-        circlechoose(zoomlevel);
 
         map.addLayer(markers);
         //console.log(zoomlevel);
