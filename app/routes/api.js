@@ -3,10 +3,10 @@ let express = require("express"),
     crypto = require('crypto'),
     geo = require("../util/geo.js");
 
-module.exports = function(User, Settlement){  
+module.exports = function(User, Settlement, Pin){
   let router = express.Router();
 
-  // Middleware which throws an error if any of the form fields are empty
+  // Middleware which throws an error if any of the form fields are empty TODO: refactor
   function preventEmptyFormFields(req, res, next){
     for(let field in req.body){
       if(req.body.hasOwnProperty(field) && !req.body[field].length) {
@@ -40,6 +40,14 @@ module.exports = function(User, Settlement){
 
     next();
   }
+
+  // Returns all 3rd party pins
+  router.get("/pins", function(req, res){
+    Pin.find({}, function(err, docs){
+      if(err) throw err;
+      res.json(docs);
+    });
+  });
 
   // Returns a JSON array containing settlement data
   router.get("/settlements", function(req, res){

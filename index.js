@@ -28,7 +28,8 @@ app.use(flash());
 const main_conn = mongoose.createConnection(DB_URL),
       app_conn = mongoose.createConnection(APP_DB_URL),
       Settlement = require("./app/db/models/Settlement")(main_conn),
-      User = require("./app/db/models/User")(main_conn);
+      User = require("./app/db/models/User")(main_conn),
+      Pin = require("./app/db/models/Pin")(app_conn);
 
 // ** ROUTES **
 app.get("/", function(req, res){
@@ -325,7 +326,7 @@ app.get("/map", function(req, res){
   });
 });
 
-app.use("/api", require("./app/routes/api.js")(User, Settlement));
+app.use("/api", require("./app/routes/api.js")(User, Settlement, Pin));
 
 // ** START THE SERVER **
 
