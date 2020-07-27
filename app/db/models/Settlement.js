@@ -69,5 +69,6 @@ let settlementSchema = new Schema({
   }
 });
 
-
-module.exports = mongoose.model('Settlement', settlementSchema);
+module.exports = function(conn){
+  return conn.model('Settlement', settlementSchema);
+}

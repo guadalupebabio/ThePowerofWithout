@@ -3,8 +3,6 @@ require('dotenv').config();
 let express = require("express"),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
-    Settlement = require("./app/db/models/Settlement"),
-    User = require("./app/db/models/User"),
     flash = require('connect-flash'),
     cookieParser = require('cookie-parser'),
     session = require('express-session');
@@ -13,10 +11,10 @@ let app = express(),
     router = express.Router();
 
 const PORT = process.env.PORT || 3000,
-      DB_URL = `mongodb+srv://${process.env.MONGODB_USERNAME}:${encodeURIComponent(process.env.MONGODB_PASSWORD)}@cluster0-d6pne.mongodb.net/the_power_of_without?retryWrites=true&w=majority`;
+      DB_URL = `mongodb+srv://${process.env.MONGODB_USERNAME}:${encodeURIComponent(process.env.MONGODB_PASSWORD)}@cluster0-d6pne.mongodb.net/the_power_of_without?retryWrites=true&w=majority`,
+      APP_DB_URL = `mongodb+srv://${process.env.APP_MONGODB_USERNAME}:${process.env.APP_MONGODB_PASSWORD}@cluster1.oxiff.mongodb.net/test?retryWrites=true&w=majority`;
 
 // ** SETUP **
-
 app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -27,10 +25,10 @@ app.use(session({secret: "cookie key", cookie: { maxAge: 60000 }}));
 app.use(flash());
 
 // ** CONNECT TO DB **
-mongoose.connect(DB_URL, function(err, res) {
-  if(err) console.log("ERROR connecting to database");
-  else console.log("SUCCESSfully connected to database");
-});
+const main_conn = mongoose.createConnection(DB_URL),
+      app_conn = mongoose.createConnection(APP_DB_URL),
+      Settlement = require("./app/db/models/Settlement")(main_conn),
+      User = require("./app/db/models/User")(main_conn);
 
 // ** ROUTES **
 app.get("/", function(req, res){
@@ -327,7 +325,7 @@ app.get("/map", function(req, res){
   });
 });
 
-app.use("/api", require("./app/routes/api.js"));
+app.use("/api", require("./app/routes/api.js")(User, Settlement));
 
 // ** START THE SERVER **
 

@@ -12,5 +12,6 @@ let userSchema = new Schema({
   secret: String
 });
 
-
-module.exports = mongoose.model('User', userSchema);
+module.exports = function(conn){
+  return conn.model('User', userSchema);
+}
