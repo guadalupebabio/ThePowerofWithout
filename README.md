@@ -20,11 +20,13 @@ This project runs off a Node.js backend, with a MongoDB database. Follow these s
   - Email me so I can add you as an admin on the database
   - In the "Security" tab on MongoDB Cloud's dashboard, click "Database Access" and make a new database user for yourself (see below).
   ![](./docs/images/docs-1.png)
-  - Create a file in the root directory of the repository called `.env` with the following layout:
+  - Create a file in the root directory of the repository called `.env` with the following layout (there is a third party database we integrate with this app, so you should also include these credentials):
 
   ```
   MONGODB_USERNAME=<the database username you just created>
   MONGODB_PASSWORD=<the database password you just created>
+  APP_MONGODB_USERNAME=<email me, jjshen@mit.edu for these credentials>
+  APP_MONGODB_PASSWORD=<email me, jjshen@mit.edu for these credentials>
   ```
 
   Importantly, this file is in the gitignore because you should not publish these credentials. Keep this file safe and private.
