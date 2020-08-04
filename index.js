@@ -326,6 +326,13 @@ app.get("/map", function(req, res){
   });
 });
 
+app.get("/pins", function(req, res){
+  Pin.find({}, function(err, docs){
+    if(err) throw err;
+    res.render("pins", {"pins": docs});
+  });
+});
+
 app.use("/api", require("./app/routes/api.js")(User, Settlement, Pin));
 
 // ** START THE SERVER **
