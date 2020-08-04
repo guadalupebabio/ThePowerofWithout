@@ -5,7 +5,8 @@ let express = require("express"),
     mongoose = require("mongoose"),
     flash = require('connect-flash'),
     cookieParser = require('cookie-parser'),
-    session = require('express-session');
+    session = require('express-session'),
+    snapPointsToGrid = require('./app/util/snapPointsToGrid.js');
 
 let app = express(),
     router = express.Router();
@@ -329,7 +330,22 @@ app.get("/map", function(req, res){
 app.get("/pins", function(req, res){
   Pin.find({}, function(err, docs){
     if(err) throw err;
-    res.render("pins", {"pins": docs});
+    res.render("pins", {"pins": docs.map(function(d, i){
+      d.pin.coordinates = [d.pin.coordinates[1], d.pin.coordinates[0]];
+      return d;
+    })});
+  });
+});
+
+app.get("/pins/snap", function(req, res){
+  Pin.find({}, function(err, docs){
+    if(err) throw err;
+    res.render("pins", {"pins": docs.map(function(d, i){
+      if(i == 0) console.log(d.pin.coordinates);
+      d.pin.coordinates = snapPointsToGrid(d.pin.coordinates[1], d.pin.coordinates[0]);
+      if(i == 0) console.log(d.pin.coordinates);
+      return d;
+    })});
   });
 });
 

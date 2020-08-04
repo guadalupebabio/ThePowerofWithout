@@ -13,7 +13,7 @@ html
     include includes/head.pug
 
   body
-    #map
+    #map(style = "height:100vh;width:100vw;")
     script.
       var pins = !{JSON.stringify(pins)};
     script(src = "/src/js/pins.js")
