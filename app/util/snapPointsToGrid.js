@@ -3,7 +3,7 @@
 */
 
 const Distance = require('geo-distance'),
-      precision = 0.005; // Grid is every 0.005 degrees
+      precision = 0.002; // Grid is every 0.002 degrees
 
 module.exports = function(lat, long){
   let latBounds = [Math.floor(lat / precision) * precision, Math.ceil(lat / precision) * precision],

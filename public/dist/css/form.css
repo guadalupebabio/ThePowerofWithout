@@ -31,6 +31,13 @@ form input[type="text"] {
     outline: none;
     border-bottom-color: #3a539b; }
 
+form .range {
+  display: flex;
+  width: 100%; }
+  form .range input[type="range"] {
+    margin: 0 10px;
+    flex: 1; }
+
 form input[type="radio"], form input[type="checkbox"] {
   margin-right: 8px;
   margin-top: -1px;

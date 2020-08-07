@@ -152,7 +152,7 @@ app.get("/contribute/u/:contribution/:secret", function(req, res){ // Update the
           {
             label: "Security",
             name: "siteVulnerabilitySecurityCrimeRate",
-            type: "radio",
+            type: "range",
             value: getFormValue(["site", "vulnerability", "security", "crimeRate"]),
             options: ["Low crime rate", "Moderate crime rate", "High crime rate"],
             info: "Level of crime and insecurity in the Settlement"
@@ -299,7 +299,7 @@ app.get("/contribute/u/:contribution/:secret", function(req, res){ // Update the
         ]
       ];
 
-      res.render("form", {settlement: settlement, sections: sections, notification: req.flash('form-notification') || "Updating data for " + settlement.name, url: "/api/settlements/u/" + user.contribution + "/" + req.params.secret, error: req.flash("form-error")});
+      res.render("form", {settlement: settlement, sections: sections, notification: req.flash('form-notification'), url: "/api/settlements/u/" + user.contribution + "/" + req.params.secret, error: req.flash("form-error")});
     });
   })
 });

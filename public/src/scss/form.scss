@@ -47,6 +47,17 @@ form{
     }
   }
 
+  .range{
+    display: flex;
+    width: 100%;
+
+    input[type = "range"]{
+      // width: calc(100% - 20px);
+      margin: 0 10px;
+      flex: 1
+    }
+  }
+
   input[type = "radio"], input[type = "checkbox"]{
     margin-right: 8px;
     margin-top: -1px;

@@ -28,6 +28,9 @@ html
         if notification.length
           .notification 
             p!= notification
+        else if settlement
+          .notification
+            p= "Updating data for " + settlement.name
         form(action = url method = "POST")
           //- Autofill questions from JSON object passed
           each s, index in sections
@@ -59,6 +62,14 @@ html
                       input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
                     label(for = question.name + "-" + index)= val
                     br
+                else if question.type == "range"
+                  .range
+                    label(for = question.name)= question.options[0]
+                    input(type = "range" min = "1" max = `${question.options.length}` value = (question.value ? question.value : null) name = question.name id = question.name oninput=`${question.name + "output"}.value = "Value: " + ${JSON.stringify(question)}.options[${question.name}.value - 1]`)
+                    label(for = question.name)= question.options[question.options.length - 1]
+                  output(name = question.name + "output" id = question.name + 'output')= (question.value ? "Value: " + question.options[question.value - 1] :  null)
+                  br
+                    
                 br
 
               .button-level 
