@@ -65,9 +65,8 @@ html
                 else if question.type == "range"
                   .range
                     label(for = question.name)= question.options[0]
-                    input(type = "range" min = "1" max = `${question.options.length}` value = (question.value ? question.value : null) name = question.name id = question.name oninput=`${question.name + "output"}.value = "Value: " + ${JSON.stringify(question)}.options[${question.name}.value - 1]`)
+                    input(type = "range" min = "1" max = `${question.options.length}` value = (question.value ? question.value : null) name = question.name id = question.name)
                     label(for = question.name)= question.options[question.options.length - 1]
-                  output(name = question.name + "output" id = question.name + 'output')= (question.value ? "Value: " + question.options[question.value - 1] :  null)
                   br
                     
                 br
