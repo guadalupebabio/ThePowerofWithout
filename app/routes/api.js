@@ -4,7 +4,8 @@ let express = require("express"),
     geo = require("../util/geo.js"),
     cleanFormFields = require("../middleware/cleanFormFields.js"),
     preventEmptyFormFields = require("../middleware/preventEmptyFormFields.js"),
-    validateEmail = require("../middleware/validateEmail.js");
+    validateEmail = require("../middleware/validateEmail.js"),
+    sendEmail = require("../util/email.js");
 
 module.exports = function(User, Settlement, Pin){
   let router = express.Router();
@@ -90,6 +91,7 @@ module.exports = function(User, Settlement, Pin){
 
       settlement.save(function(){
         user.save(function(){
+          sendEmail(req.body.email, settlement._id, token);
           req.flash('form-notification', "Thanks for contributing a settlement! You can work on adding more information now, or complete it at a later date—we've sent a link to your email!");
           res.redirect("/contribute/u/" + settlement._id + "/" + token);
         })
