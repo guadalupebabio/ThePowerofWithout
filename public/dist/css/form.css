@@ -63,3 +63,10 @@ section {
 #map {
   width: 100%;
   height: 100%; }
+
+#info {
+  position: sticky;
+  top: 100px; }
+
+.info-button {
+  display: inline-block; }

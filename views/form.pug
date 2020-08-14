@@ -39,13 +39,8 @@ html
                 label(for = question.name)= question.label
                   | &nbsp;&nbsp;
                   if question.info
-                    .info-button.dropdown.is-up
-                      .dropdown-trigger(onclick = "showInfo(this)") 
-                        i.fas.fa-info-circle
-                      .dropdown-menu 
-                        .dropdown-content 
-                          .dropdown-item 
-                            p= question.info
+                    .info-button(data-label = `${question.label}` data-info = `${question.info}`)
+                      i.fas.fa-info-circle
                 br
                 if question.type == "coords"
                   input#coords(name = question.name type = "text" readonly placeholder = "Select a point on the map")    
@@ -85,6 +80,9 @@ html
             if map
               #map
         else 
+          #info.box(style = "display:none;")
+            h1.heading Info
+            p
           section.is-hidden 
             p Site 
           section.is-hidden 

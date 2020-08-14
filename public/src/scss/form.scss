@@ -1,7 +1,6 @@
 .columns{
   margin-top: 100px;
   padding: 0 5vw;
-
   #sidebar{
     & > a{
       font-family: Roboto;
@@ -91,4 +90,13 @@ section{
 #map{
   width: 100%;
   height: 100%;
+}
+
+#info{
+  position: sticky;
+  top: 100px;
+}
+
+.info-button{
+  display: inline-block;
 }
