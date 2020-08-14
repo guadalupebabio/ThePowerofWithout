@@ -30,11 +30,9 @@ if($("#map").length != 0){ // if map exists, create it
 function goToSection(i){
   $("#sidebar a").removeClass("active");
   $("form section").addClass("is-hidden");
-  $("#right-sidebar section").addClass("is-hidden");
 
   $("#sidebar > a:nth-of-type(" + i + ")").addClass("active");
   $("form section:nth-of-type(" + i + ")").removeClass("is-hidden");
-  $("#right-sidebar section:nth-of-type(" + i + ")").removeClass("is-hidden");
 }
 
 function showInfo(info, label){
@@ -47,15 +45,43 @@ function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
 }
 
-// Info Button Handler
-$(document).click(function(e){
-  console.log("yooo");
+// Icon Button Handlers
+function hideAll(){
   $("#info").hide();
-});
+  $("#comment").hide();
+  $("#link").hide();
+  $("#upload").hide();
+}
+
+$(document).click(hideAll);
+$(".box").click((e) => e.stopPropagation())
 
 $(".info-button").click(function(e){
-  let data = $(this).data();
   e.stopPropagation();
+  hideAll();
+
+  let data = $(this).data();
   $("#info").show();
   $("#info p").text(`${data.label}: ${data.info}`);
+})
+
+$(".comment-button").click(function(e){
+  e.stopPropagation();
+  hideAll();
+
+  $("#comment").show();
+})
+
+$(".link-button").click(function(e){
+  e.stopPropagation();
+  hideAll();
+
+  $("#link").show();
+})
+
+$(".upload-button").click(function(e){
+  e.stopPropagation();
+  hideAll();
+
+  $("#upload").show();
 })

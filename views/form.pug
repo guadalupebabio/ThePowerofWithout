@@ -36,11 +36,21 @@ html
           each s, index in sections
             section(class = (index == 0 ? "" : "is-hidden"))
               each question, index in s
-                label(for = question.name)= question.label
-                  | &nbsp;&nbsp;
-                  if question.info
-                    .info-button(data-label = `${question.label}` data-info = `${question.info}`)
-                      i.fas.fa-info-circle
+                .level
+                  .level-left 
+                    .level-item 
+                      label(for = question.name)= question.label
+                  if sections.length > 1 
+                    .level-right 
+                      if question.info
+                        .info-button.level-item(data-label = `${question.label}` data-info = `${question.info}`)
+                          i.fas.fa-info-circle
+                      .level-item.comment-button
+                          i.fa-comment.fas
+                      .level-item.link-button
+                          i.fas.fa-link
+                      .level-item.upload-button
+                          i.fas.fa-image
                 br
                 if question.type == "coords"
                   input#coords(name = question.name type = "text" readonly placeholder = "Select a point on the map")    
@@ -83,12 +93,23 @@ html
           #info.box(style = "display:none;")
             h1.heading Info
             p
-          section.is-hidden 
-            p Site 
-          section.is-hidden 
-            p Architecture
-          section.is-hidden 
-            p Population
+          #comment.box(style = "display:none;")
+            h1.heading Comment
+            p.subtitle.is-size-6 Add some clarifying information about this question, if necessary.
+            input(type = "text") 
+            input.button.is-black(type="submit" value="Save Comment")
+          #link.box(style = "display:none;")
+            h1.heading Link
+            p.subtitle.is-size-6 Add a link with supporting information, if necessary.
+            input(type = "text") 
+            input.button.is-black(type="submit" value="Save Link")
+          #upload.box(style = "display:none;")
+            h1.heading Upload
+            p.subtitle.is-size-6 Upload a photo to provide more context, if necessary.
+            input(type = "file") 
+            br
+            br
+            input.button.is-black(type="submit" value="Upload Image")
     script(src = "/src/js/form.js")
     script(type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit")
 

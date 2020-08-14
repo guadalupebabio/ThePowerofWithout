@@ -24,26 +24,26 @@
   }
 }
 
+input[type = "text"]{
+  font-family: Roboto;
+  width: 100%;
+  margin-bottom: 30px;
+  margin-top: 6px;
+  padding: 6px 8px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid black;
+
+  &:focus{
+    outline: none;
+    border-bottom-color: #3a539b;
+  }
+}
+
 form{
   label{
     font-family: Roboto;
     font-size: 14px;
-  }
-
-  input[type = "text"]{
-    font-family: Roboto;
-    width: 100%;
-    margin-bottom: 30px;
-    margin-top: 6px;
-    padding: 6px 8px;
-    font-size: 16px;
-    border: none;
-    border-bottom: 2px solid black;
-
-    &:focus{
-      outline: none;
-      border-bottom-color: #3a539b;
-    }
   }
 
   .range{
@@ -77,9 +77,12 @@ form{
     }
   }
 
-  .info-button{
-    vertical-align: middle;
-    cursor: pointer;
+  .level{
+    margin-bottom: -20px !important;
+
+    .level-right .level-item{
+      cursor: pointer;
+    }
   }
 }
 
@@ -92,11 +95,7 @@ section{
   height: 100%;
 }
 
-#info{
+#info, #comment, #link, #upload{
   position: sticky;
   top: 100px;
-}
-
-.info-button{
-  display: inline-block;
 }
