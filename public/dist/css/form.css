@@ -49,8 +49,8 @@ form .button-level {
 
 form .button {
   font-weight: bold;
-  width: 49%; }
-  form .button:nth-child(2) {
+  width: 32%; }
+  form .button:nth-child(2), form .button:nth-child(3) {
     margin-left: 2%; }
 
 form .level {

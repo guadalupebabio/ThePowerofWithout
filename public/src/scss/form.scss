@@ -70,9 +70,9 @@ form{
 
   .button{
     font-weight: bold;
-    width: 49%;
+    width: 32%;
 
-    &:nth-child(2){
+    &:nth-child(2), &:nth-child(3){
       margin-left: 2%;
     }
   }

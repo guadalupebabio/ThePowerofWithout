@@ -77,10 +77,11 @@ html
               .button-level 
                 if index > 0
                   a.button.is-light(onclick = "goToSection(" + (index) + ")") Previous Section
-                
+                                
                 if index == sections.length - 1
-                  input.button.is-black(type="submit" value="Submit")
+                  input.button.is-black(type="submit" value="Save & Submit")
                 else 
+                  input.button.is-dark(type="submit" value="Save")
                   a.button.is-black(onclick = "goToSection(" + (index + 2) + ")") Next Section
       .column#right-sidebar
         if sections.length == 1 
