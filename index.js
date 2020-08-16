@@ -30,6 +30,8 @@ const main_conn = mongoose.createConnection(DB_URL),
       app_conn = mongoose.createConnection(APP_DB_URL),
       Settlement = require("./app/db/models/Settlement")(main_conn),
       User = require("./app/db/models/User")(main_conn),
+      Comment = require("./app/db/models/Comment")(main_conn),
+      Link = require("./app/db/models/Link")(main_conn),
       Pin = require("./app/db/models/Pin")(app_conn);
 
 // ** ROUTES **
