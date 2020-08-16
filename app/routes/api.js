@@ -7,7 +7,7 @@ let express = require("express"),
     validateEmail = require("../middleware/validateEmail.js"),
     sendEmail = require("../util/email.js");
 
-module.exports = function(User, Settlement, Pin){
+module.exports = function(User, Settlement, Pin, Comment, Link){
   let router = express.Router();
 
   // Returns all 3rd party pins
@@ -101,6 +101,7 @@ module.exports = function(User, Settlement, Pin){
 
   // Update existing settlement
   router.post("/settlements/u/:id/:secret", cleanFormFields, function(req, res){
+
     User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
       Settlement.findOneAndUpdate(
         {
@@ -161,6 +162,40 @@ module.exports = function(User, Settlement, Pin){
     })
 
   });
+
+  router.post("/settlements/u/:id/:secret/comment", function(req, res){
+    User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
+      Comment.updateOne(
+        { settlementId: req.params.id },
+        { $set: {
+          email: req.body.email,
+          formFieldName: req.body.formFieldName,
+          comment: req.body.comment
+        } },
+        { upsert: true },
+        function(err, comment){
+          res.send(200);
+        }
+      );
+    })
+  })
+
+  router.post("/settlements/u/:id/:secret/link", function(req, res){
+    User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
+      Link.updateOne(
+        { settlementId: req.params.id },
+        { $set: {
+          email: req.body.email,
+          formFieldName: req.body.formFieldName,
+          link: req.body.link
+        } },
+        { upsert: true },
+        function(err, link){
+          res.send(200);
+        }
+      );
+    })
+  })
 
   return router;
 };

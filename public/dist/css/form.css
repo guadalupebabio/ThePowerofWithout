@@ -65,6 +65,10 @@ section {
   width: 100%;
   height: 100%; }
 
-#info, #comment, #link, #upload {
+#info, #comment, #link {
   position: sticky;
   top: 100px; }
+  #info .help, #comment .help, #link .help {
+    display: none;
+    margin-top: -25px;
+    margin-bottom: 30px; }

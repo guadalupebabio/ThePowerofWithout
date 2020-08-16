@@ -301,7 +301,17 @@ app.get("/contribute/u/:contribution/:secret", function(req, res){ // Update the
         ]
       ];
 
-      res.render("form", {settlement: settlement, sections: sections, notification: req.flash('form-notification'), url: "/api/settlements/u/" + user.contribution + "/" + req.params.secret, error: req.flash("form-error")});
+      Promise.all([
+        Comment.find({
+          settlementId: user.contribution
+        }),
+        Link.find({
+          settlementId: user.contribution
+        })
+      ]).then(function(data){
+        console.log(data[0], data[1]);
+        res.render("form", {settlement: settlement, comments: data[0], links: data[1], sections: sections, notification: req.flash('form-notification'), url: "/api/settlements/u/" + user.contribution + "/" + req.params.secret, error: req.flash("form-error"), email: user.email});
+      })
     });
   })
 });
@@ -351,7 +361,7 @@ app.get("/pins/snap", function(req, res){
   });
 });
 
-app.use("/api", require("./app/routes/api.js")(User, Settlement, Pin));
+app.use("/api", require("./app/routes/api.js")(User, Settlement, Pin, Comment, Link));
 
 // ** START THE SERVER **
 

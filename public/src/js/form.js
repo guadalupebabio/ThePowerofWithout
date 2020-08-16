@@ -50,7 +50,6 @@ function hideAll(){
   $("#info").hide();
   $("#comment").hide();
   $("#link").hide();
-  $("#upload").hide();
 }
 
 $(document).click(hideAll);
@@ -69,7 +68,11 @@ $(".comment-button").click(function(e){
   e.stopPropagation();
   hideAll();
 
+  //TODO: set value of input text based on what's stored in the database
+
   $("#comment").show();
+  $("#comment input.button").data($(this).data()); //Bind this current question's data to the input
+  $("#comment .help").hide();
 })
 
 $(".link-button").click(function(e){
@@ -77,11 +80,37 @@ $(".link-button").click(function(e){
   hideAll();
 
   $("#link").show();
+  $("#link input.button").data($(this).data()); //Bind this current question's data to the input
+  $("#link .help").hide();
 })
 
-$(".upload-button").click(function(e){
-  e.stopPropagation();
-  hideAll();
+function saveComment(){
+  let data = $("#comment input.button").data(),
+      comment = $("#comment input.text").val();
 
-  $("#upload").show();
-})
+  $.post(`${data.url}/comment`, {email: data.email, comment: comment, formFieldName: data.name}, function(data) {
+    $("#comment .help").show();
+  });
+}
+
+function saveLink(){
+  let data = $("#link input.button").data(),
+      link = $("#link input.text").val();
+
+  $("#link .help").hide();
+
+  let isLink = (link) => {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return pattern.test(link);
+  }
+
+  if(!isLink(link)) $("#link .help.is-danger").show();
+  else $.post(`${data.url}/link`, {email: data.email, link: link, formFieldName: data.name}, function(data) {
+    $("#link .help.is-success").show();
+  });
+}

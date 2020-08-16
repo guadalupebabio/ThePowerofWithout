@@ -45,9 +45,9 @@ html
                       if question.info
                         .info-button.level-item(data-label = `${question.label}` data-info = `${question.info}`)
                           i.fas.fa-info-circle
-                      .level-item.comment-button
+                      .level-item.comment-button(data-name = `${question.name}` data-email = `${email}`)
                           i.fa-comment.fas
-                      .level-item.link-button
+                      .level-item.link-button(data-name = `${question.name}` data-email = `${email}`)
                           i.fas.fa-link
                 br
                 if question.type == "coords"
@@ -94,13 +94,16 @@ html
           #comment.box(style = "display:none;")
             h1.heading Comment
             p.subtitle.is-size-6 Add some clarifying information about this question, if necessary.
-            input(type = "text") 
-            input.button.is-black(type="submit" value="Save Comment")
+            input.text(type = "text") 
+            p.help.is-success Successfully saved comment!
+            input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
           #link.box(style = "display:none;")
             h1.heading Link
             p.subtitle.is-size-6 Add a link with supporting information, if necessary.
-            input(type = "text") 
-            input.button.is-black(type="submit" value="Save Link")
+            input.text(type = "text") 
+            p.help.is-success Successfully saved link!
+            p.help.is-danger Please enter a valid link
+            input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)
     script(src = "/src/js/form.js")
     script(type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit")
 

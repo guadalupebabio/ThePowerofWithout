@@ -95,7 +95,13 @@ section{
   height: 100%;
 }
 
-#info, #comment, #link, #upload{
+#info, #comment, #link{
   position: sticky;
   top: 100px;
+
+  .help{
+    display: none;
+    margin-top: -25px;
+    margin-bottom: 30px;
+  }
 }
