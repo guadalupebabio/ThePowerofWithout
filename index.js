@@ -309,7 +309,6 @@ app.get("/contribute/u/:contribution/:secret", function(req, res){ // Update the
           settlementId: user.contribution
         })
       ]).then(function(data){
-        console.log(data[0], data[1]);
         res.render("form", {settlement: settlement, comments: data[0], links: data[1], sections: sections, notification: req.flash('form-notification'), url: "/api/settlements/u/" + user.contribution + "/" + req.params.secret, error: req.flash("form-error"), email: user.email});
       })
     });

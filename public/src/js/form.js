@@ -68,10 +68,15 @@ $(".comment-button").click(function(e){
   e.stopPropagation();
   hideAll();
 
-  //TODO: set value of input text based on what's stored in the database
+  let data = $(this).data(),
+      commentI = comments.findIndex((d) => d.formFieldName == data.name)
+
+  //Set value of input text based on what's stored in the database
+  if(commentI == -1) $("#comment input.text").val("");
+  else $("#comment input.text").val(comments[commentI].comment);
 
   $("#comment").show();
-  $("#comment input.button").data($(this).data()); //Bind this current question's data to the input
+  $("#comment input.button").data(data); //Bind this current question's data to the input
   $("#comment .help").hide();
 })
 
@@ -79,8 +84,15 @@ $(".link-button").click(function(e){
   e.stopPropagation();
   hideAll();
 
+  let data = $(this).data(),
+      linkI = links.findIndex((d) => d.formFieldName == data.name)
+
+  //Set value of input text based on what's stored in the database
+  if(linkI == -1) $("#link input.text").val("");
+  else $("#link input.text").val(links[linkI].link);
+
   $("#link").show();
-  $("#link input.button").data($(this).data()); //Bind this current question's data to the input
+  $("#link input.button").data(data); //Bind this current question's data to the input
   $("#link .help").hide();
 })
 
@@ -88,8 +100,18 @@ function saveComment(){
   let data = $("#comment input.button").data(),
       comment = $("#comment input.text").val();
 
-  $.post(`${data.url}/comment`, {email: data.email, comment: comment, formFieldName: data.name}, function(data) {
+  // Save new comment to server
+  $.post(`${data.url}/comment`, {email: data.email, comment: comment, formFieldName: data.name}, function(res) {
     $("#comment .help").show();
+
+    // Save new comment for this browser session
+    let commentI = comments.findIndex((d) => d.formFieldName == data.name);
+    if(commentI == -1) comments.push({
+      formFieldName: data.name,
+      comment: comment
+    })
+    else comments[commentI].comment = comment;
+
   });
 }
 
@@ -110,7 +132,15 @@ function saveLink(){
   }
 
   if(!isLink(link)) $("#link .help.is-danger").show();
-  else $.post(`${data.url}/link`, {email: data.email, link: link, formFieldName: data.name}, function(data) {
+  else $.post(`${data.url}/link`, {email: data.email, link: link, formFieldName: data.name}, function(res) {
     $("#link .help.is-success").show();
+
+    // Save new link for this browser session
+    let linkI = links.findIndex((d) => d.formFieldName == data.name);
+    if(linkI == -1) links.push({
+      formFieldName: data.name,
+      link: link
+    })
+    else links[linkI].link = link;
   });
 }
