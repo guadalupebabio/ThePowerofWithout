@@ -1,0 +1,208 @@
+
+html{
+    background-color: black;
+}
+
+.leaflet-pop-small{
+    border-radius: 20px; 
+
+}
+
+.circle-icon{
+    background:red;
+    color: red;
+    opacity: 0.5;
+    border-color: 2px grey;
+    font-weight:bold;
+    text-align:center;
+    border-radius:50%;
+    line-height:30px;
+    outline-width:30px;
+    height:30px;
+    width:30px;
+}
+
+.circle-icon2{
+    background:orange;
+    border-color: 2px grey;
+    opacity: 0.7;
+    font-weight:bold;
+    text-align:center;
+    border-radius:50%;
+    line-height:30px;
+    outline-width:30px;
+    height:30px;
+    width:30px;
+}
+
+
+.circle-icon3{
+    background:green;
+    border-color: 2px grey;
+    opacity: 0.7;
+    font-weight:bold;
+    text-align:center;
+    border-radius:50%;
+    line-height:30px;
+    outline-width:30px;
+    height:30px;
+    width:30px;
+}
+
+
+.circle-icon4{
+    background:blue;
+    border-color: 2px grey;
+    opacity: 0.7;
+    font-weight:bold;
+    text-align:center;
+    border-radius:50%;
+    line-height:30px;
+    outline-width:30px;
+    height:30px;
+    width:30px;
+}
+
+#map {
+    position: absolute; 
+    bottom: 50px;
+    right: 25px;
+    left: 25px;
+    top: 138px;
+}
+
+.info { 
+    padding: 6px 8px; 
+    font: 14px/16px Arial, Helvetica, sans-serif; 
+    background: white; 
+    background: rgba(255,255,255,0.8); 
+    box-shadow: 0 0 15px rgba(0,0,0,0.2); 
+    border-radius: 5px; 
+} 
+
+.info h4 {
+    margin: 0 0 5px; 
+    color: #777; 
+}
+              
+              
+.legend { 
+    text-align: left; 
+    line-height: 18px; 
+    color: #555; 
+} 
+
+.legend i { 
+    width: 18px; 
+    height: 18px; 
+    float: left; 
+    margin-right: 8px; 
+    opacity: 0.7; 
+}
+
+ul.buttonnavigate{
+    position: absolute;
+    transform: rotate(-90deg);
+    list-style: none;
+    background-color: black;
+    left: -76px;
+    top: 50%;
+
+}
+
+ul.buttonnavigate li {
+    display: inline;
+    font-size: 18px;
+}
+
+ul.buttonnavigate li+li:before{
+    padding: 8px;
+    color: white;
+    content: "|";
+}
+
+ul.buttonnavigate li a {
+    color:grey;
+    text-decoration: none;
+}
+
+ul.buttonnavigate li a:hover {
+    color: white;
+    text-decoration: bold;
+}
+
+#clicked{
+    color: white;
+    text-decoration: bold;
+}
+
+#notclicked{
+    color: grey;
+    text-decoration: none;
+}
+
+ul.settlementnavigate{
+    position: absolute;
+    list-style: none;
+    background-color: black;
+    bottom: 15px;
+    left: 40%; 
+}
+
+ul.settlementnavigate li {
+    display: inline;
+    font-size: 18px;
+}
+
+ul.settlementnavigate li+li:before{
+    padding: 8px;
+    color: white;
+    content: "       ";
+}
+
+ul.settlementnavigate li a {
+    color:grey;
+    text-decoration: none;
+}
+
+ul.settlementnavigate li a:hover {
+    color: white;
+    text-decoration: bold;
+}
+
+#totalpop{
+    position: absolute;
+    top: 80px;
+    color: white;
+    left: 25px; 
+}
+
+span.tpopulation{
+    font-family: 'Roboto';
+    font-size: 32px; 
+    font-weight: bold; 
+}
+
+span.people{
+    padding-left: 8px;
+    font-family: 'Roboto';
+    font-weight: bold; 
+}
+
+#informality{
+    position: absolute;
+    top: 80px;
+    color: white;
+    right: 25px;
+}
+
+span.informality{
+    font-family: 'Roboto';
+    font-size: 30px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+#popinform{
+    background: linear-gradient(90deg, #E9D48C 17.71%, #C36B6B 81.77%);
+}
