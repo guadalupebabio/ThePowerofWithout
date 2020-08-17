@@ -28,21 +28,27 @@ html
         if notification.length
           .notification 
             p!= notification
+        else if settlement
+          .notification
+            p= "Updating data for " + settlement.name
         form(action = url method = "POST")
           //- Autofill questions from JSON object passed
           each s, index in sections
             section(class = (index == 0 ? "" : "is-hidden"))
               each question, index in s
-                label(for = question.name)= question.label
-                  | &nbsp;&nbsp;
-                  if question.info
-                    .info-button.dropdown.is-up
-                      .dropdown-trigger(onclick = "showInfo(this)") 
-                        i.fas.fa-info-circle
-                      .dropdown-menu 
-                        .dropdown-content 
-                          .dropdown-item 
-                            p= question.info
+                .level
+                  .level-left 
+                    .level-item 
+                      label(for = question.name)= question.label
+                  if sections.length > 1 
+                    .level-right 
+                      if question.info
+                        .info-button.level-item(data-label = `${question.label}` data-info = `${question.info}`)
+                          i.fas.fa-info-circle
+                      .level-item.comment-button(data-name = `${question.name}` data-email = `${email}`)
+                          i.fa-comment.fas
+                      .level-item.link-button(data-name = `${question.name}` data-email = `${email}`)
+                          i.fas.fa-link
                 br
                 if question.type == "coords"
                   input#coords(name = question.name type = "text" readonly placeholder = "Select a point on the map")    
@@ -59,6 +65,13 @@ html
                       input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
                     label(for = question.name + "-" + index)= val
                     br
+                else if question.type == "range"
+                  .range
+                    label(for = question.name)= question.options[0]
+                    input(type = "range" min = "1" max = `${question.options.length}` value = (question.value ? question.value : null) name = question.name id = question.name)
+                    label(for = question.name)= question.options[question.options.length - 1]
+                  br
+                    
                 br
 
               .button-level 
@@ -75,12 +88,26 @@ html
             if map
               #map
         else 
-          section.is-hidden 
-            p Site 
-          section.is-hidden 
-            p Architecture
-          section.is-hidden 
-            p Population
+          #info.box(style = "display:none;")
+            h1.heading Info
+            p
+          #comment.box(style = "display:none;")
+            h1.heading Comment
+            p.subtitle.is-size-6 Add some clarifying information about this question, if necessary.
+            input.text(type = "text") 
+            p.help.is-success Successfully saved comment!
+            input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+          #link.box(style = "display:none;")
+            h1.heading Link
+            p.subtitle.is-size-6 Add a link with supporting information, if necessary.
+            input.text(type = "text") 
+            p.help.is-success Successfully saved link!
+            p.help.is-danger Please enter a valid link
+            input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)
+    if comments && links 
+      script.
+        let comments = !{JSON.stringify(comments)};
+        let links = !{JSON.stringify(links)};
     script(src = "/src/js/form.js")
     script(type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit")
 

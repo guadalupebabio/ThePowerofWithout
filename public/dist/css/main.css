@@ -5,7 +5,8 @@ nav {
   position: fixed;
   top: 0;
   width: 100vw;
-  transition: 0.2s all; }
+  transition: 0.2s all;
+  z-index: 100; }
   nav a {
     color: #FFFFFF;
     transition: 0.2s all;

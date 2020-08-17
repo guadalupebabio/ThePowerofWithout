@@ -14,11 +14,7 @@
     .columns #google_translate_element .goog-logo-link {
       vertical-align: middle; }
 
-form label {
-  font-family: Roboto;
-  font-size: 14px; }
-
-form input[type="text"] {
+input[type="text"] {
   font-family: Roboto;
   width: 100%;
   margin-bottom: 30px;
@@ -27,9 +23,20 @@ form input[type="text"] {
   font-size: 16px;
   border: none;
   border-bottom: 2px solid black; }
-  form input[type="text"]:focus {
+  input[type="text"]:focus {
     outline: none;
     border-bottom-color: #3a539b; }
+
+form label {
+  font-family: Roboto;
+  font-size: 14px; }
+
+form .range {
+  display: flex;
+  width: 100%; }
+  form .range input[type="range"] {
+    margin: 0 10px;
+    flex: 1; }
 
 form input[type="radio"], form input[type="checkbox"] {
   margin-right: 8px;
@@ -46,9 +53,10 @@ form .button {
   form .button:nth-child(2) {
     margin-left: 2%; }
 
-form .info-button {
-  vertical-align: middle;
-  cursor: pointer; }
+form .level {
+  margin-bottom: -20px !important; }
+  form .level .level-right .level-item {
+    cursor: pointer; }
 
 section {
   height: 100%; }
@@ -56,3 +64,11 @@ section {
 #map {
   width: 100%;
   height: 100%; }
+
+#info, #comment, #link {
+  position: sticky;
+  top: 100px; }
+  #info .help, #comment .help, #link .help {
+    display: none;
+    margin-top: -25px;
+    margin-bottom: 30px; }

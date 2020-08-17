@@ -40,3 +40,11 @@ This project runs off a Node.js backend, with a MongoDB database. Follow these s
 - If everything works properly, going to localhost:3000 in your browser should work.
 - *Important*: everytime you change the code, you need to re-run `node index.js` for the changes to be reflected.
   - (This is really annoying, so a potential workaround is [node-dev](https://www.npmjs.com/package/node-dev), which automatically restarts node on any changes to the code. Once you've installed node-dev, you can run `node-dev index.js` instead of `node index.js`.
+  
+## Project Organization 
+
+* `index.js`: The main Node.js file
+* `app`: All other Node.js files are here 
+* `public`: Everything in this folder is a static file served by the frontend (don't include sensitive information here). Read more about this type of folder [here](https://expressjs.com/en/starter/static-files.html).
+* `util`: This folder is deprecated, don't worry about it.
+* `views`: This folder contains the Pug layouts which are rendered by the backend. Read more about Pug files [here](https://pugjs.org/api/getting-started.html).

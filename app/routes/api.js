@@ -4,9 +4,10 @@ let express = require("express"),
     geo = require("../util/geo.js"),
     cleanFormFields = require("../middleware/cleanFormFields.js"),
     preventEmptyFormFields = require("../middleware/preventEmptyFormFields.js"),
-    validateEmail = require("../middleware/validateEmail.js");
+    validateEmail = require("../middleware/validateEmail.js"),
+    sendEmail = require("../util/email.js");
 
-module.exports = function(User, Settlement, Pin){
+module.exports = function(User, Settlement, Pin, Comment, Link){
   let router = express.Router();
 
   // Returns all 3rd party pins
@@ -90,6 +91,7 @@ module.exports = function(User, Settlement, Pin){
 
       settlement.save(function(){
         user.save(function(){
+          sendEmail(req.body.email, settlement._id, token);
           req.flash('form-notification', "Thanks for contributing a settlement! You can work on adding more information now, or complete it at a later date—we've sent a link to your email!");
           res.redirect("/contribute/u/" + settlement._id + "/" + token);
         })
@@ -99,6 +101,7 @@ module.exports = function(User, Settlement, Pin){
 
   // Update existing settlement
   router.post("/settlements/u/:id/:secret", cleanFormFields, function(req, res){
+
     User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
       Settlement.findOneAndUpdate(
         {
@@ -159,6 +162,40 @@ module.exports = function(User, Settlement, Pin){
     })
 
   });
+
+  router.post("/settlements/u/:id/:secret/comment", function(req, res){
+    User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
+      Comment.updateOne(
+        { settlementId: req.params.id },
+        { $set: {
+          email: req.body.email,
+          formFieldName: req.body.formFieldName,
+          comment: req.body.comment
+        } },
+        { upsert: true },
+        function(err, comment){
+          res.send(200);
+        }
+      );
+    })
+  })
+
+  router.post("/settlements/u/:id/:secret/link", function(req, res){
+    User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
+      Link.updateOne(
+        { settlementId: req.params.id },
+        { $set: {
+          email: req.body.email,
+          formFieldName: req.body.formFieldName,
+          link: req.body.link
+        } },
+        { upsert: true },
+        function(err, link){
+          res.send(200);
+        }
+      );
+    })
+  })
 
   return router;
 };
