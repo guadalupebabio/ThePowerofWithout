@@ -10,14 +10,6 @@ let express = require("express"),
 module.exports = function(User, Settlement, Pin, Comment, Link){
   let router = express.Router();
 
-  // Returns all 3rd party pins
-  router.get("/pins", function(req, res){
-    Pin.find({}, function(err, docs){
-      if(err) throw err;
-      res.json(docs);
-    });
-  });
-
   // Returns a JSON array containing settlement data
   router.get("/settlements", function(req, res){
     Settlement.find({}, function(err, docs){

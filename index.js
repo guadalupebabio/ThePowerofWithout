@@ -324,40 +324,29 @@ app.get("/about", function(req, res){
 });
 
 app.get("/map", function(req, res){
-  Settlement.find({}, function(err, settlements){
-    if(err) throw err;
+  Promise.all([
+    Settlement.find({}),
+    Pin.find({})
+  ]).then(function(data){
+    let settlements = data[0],
+        pins = data[1];
 
-    let countries = {}; // Aggregate settlements by country
+    // Snap Pins
+    pins = pins.map(function(d, i){
+      d.pin.coordinates = snapPointsToGrid(d.pin.coordinates[1], d.pin.coordinates[0]);
+      return d;
+    });
+
+    // Aggregate settlements by country
+    let countries = {};
 
     settlements.forEach(function(settlement){
       if (!(settlement.country in countries)) countries[settlement.country] = [];
       countries[settlement.country].push(settlement);
     });
 
-    res.render("map", {"settlements": settlements, "countries": countries});
-  });
-});
-
-app.get("/pins", function(req, res){
-  Pin.find({}, function(err, docs){
-    if(err) throw err;
-    res.render("pins", {"pins": docs.map(function(d, i){
-      d.pin.coordinates = [d.pin.coordinates[1], d.pin.coordinates[0]];
-      return d;
-    })});
-  });
-});
-
-app.get("/pins/snap", function(req, res){
-  Pin.find({}, function(err, docs){
-    if(err) throw err;
-    res.render("pins", {"pins": docs.map(function(d, i){
-      if(i == 0) console.log(d.pin.coordinates);
-      d.pin.coordinates = snapPointsToGrid(d.pin.coordinates[1], d.pin.coordinates[0]);
-      if(i == 0) console.log(d.pin.coordinates);
-      return d;
-    })});
-  });
+    res.render("map", {"settlements": settlements, "countries": countries, "pins": pins});
+  })
 });
 
 app.use("/api", require("./app/routes/api.js")(User, Settlement, Pin, Comment, Link));
