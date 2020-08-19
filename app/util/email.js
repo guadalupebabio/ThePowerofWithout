@@ -28,7 +28,7 @@ module.exports = function(to, settlement, token){
     <br/>
     We are very appreciative of the time you have taken to assist with our Taxonomy, and we are committed to utilizing this information to implement worthwhile improvements to the world map of informality. New map information is posted to our website. We are also aware that some of the questions asked were challenging and extensive. If you want to edit your response, you can do so here:
     <br/>
-    <a href = "http://thepowerofwithout.media.mit.edu/contribute/u/${settlement}/${token}">http://thepowerofwithout.media.mit.edu/contribute/u/${settlement}/${token}</a>
+    <a href = "https://powerofwithout.herokuapp.com/contribute/u/${settlement}/${token}">https://powerofwithout.herokuapp.com/contribute/u/${settlement}/${token}</a>
     <br/>
     <br/>
     Once again, we are extremely grateful for your contribution, your insight, and your thoughtful suggestions.
@@ -55,7 +55,7 @@ module.exports = function(to, settlement, token){
     Your participation will give voice to an Informal Settlement around the globe, and your comments will be taken into consideration to improve our work. We will keep you updated about the research conducted on “the Power of Without” and if you are interested, it would be an honor to collaborate further.
 
     We are very appreciative of the time you have taken to assist with our Taxonomy, and we are committed to utilizing this information to implement worthwhile improvements to the world map of informality. New map information is posted to our website. We are also aware that some of the questions asked were challenging and extensive. If you want to edit your response, you can do so here:
-    http://thepowerofwithout.media.mit.edu/contribute/u/${settlement}/${token}
+    https://powerofwithout.herokuapp.com/contribute/u/${settlement}/${token}
 
     Once again, we are extremely grateful for your contribution, your insight, and your thoughtful suggestions.
 

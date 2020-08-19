@@ -207,7 +207,7 @@ sliderControl = L.control.sliderControl({
 // adds every circle marker into marker layer
 for (var i = 0; i < points.length; ++i){
     //var continentcheck;
-    
+
     if (!(typeof points[i]["site"] === 'undefined')){
       var name = points[i]["name"];
     
@@ -281,7 +281,7 @@ for (var i = 0; i < points.length; ++i){
       circle.options.finalpop = finalpop;
 
       checkCountries(country); //adds country into list if not there already
-      
+
       addclustergroup(country, circle); //adds the circle into a clustergroup based on the country
       //markers.addLayer(circle);
         }
@@ -406,7 +406,7 @@ function checkCountries(country){
     */  
     }
   });
-  return false; 
+  return false;
 }
 
 //creating markers
@@ -504,16 +504,16 @@ var legend = L.control({position: 'bottomleft'});
       popvalues = [0, 100000, 500000, 1000000, 5000000, 10000000, 15000000],
       labels = ['<strong> Population of Settlements in each Country </strong> <br>'];
       labels.push(
-        '<i style="background:' + getColor(-1) + '"></i> ' + 
+        '<i style="background:' + getColor(-1) + '"></i> ' +
         ('no settlements recorded'+ '<br>'));
     for (var i = 0; i < popvalues.length; i++){
       from = popvalues[i];
       to = popvalues[i+1];
-    
-    
+
+
     labels.push(
       '<i style="background:' + getColor(from + 1) + '"></i> ' +
-     from + (to ? '&ndash;' + to + '<br>' : '+'));    
+     from + (to ? '&ndash;' + to + '<br>' : '+'));
     }
 
     div.innerHTML = labels.join('\n');
@@ -612,7 +612,7 @@ function onEachFeature(feature, layer) {
   });
 }
 
-//find value in the object that corresponds with the key. 
+//find value in the object that corresponds with the key.
 function getObjects(obj, key, val) {
         var objects = [];
         for (var i in obj) {
@@ -640,12 +640,12 @@ $.ajax({}).done(function(data){
             });
             var allPointsLG = L.layerGroup([geojson]).addTo(map);
               overlaysObj["countries"] = allPointsLG;
-              
+
              //overlaysObj["settlements"] = settlements;
 
-            
 
-           
+
+
 });
 
 
@@ -686,7 +686,7 @@ function changeoflayers(layout){
     map.removeLayer(pinslayer);
     if (map.hasLayer(overlaysObj["countries"])){
       map.removeLayer(overlaysObj["countries"]);
-      } 
+      }
     }
     if (layout === "country"){
       sidebar.hide();
@@ -754,12 +754,12 @@ $("#buttonnavigate").on("click", function(event){
 //   allrad[i] = radoverall;
 // }
 
-//altermarkers(); 
+//altermarkers();
 
 
 
  //pie charts
-/* var legendpie = L.control({position: 'bottomright'}); 
+/* var legendpie = L.control({position: 'bottomright'});
 
 legendpie.onAdd = function (map){
       var div = L.DomUtil.create('div','info legend');
@@ -797,7 +797,7 @@ anychart.onDocumentReady(function(){
   chart.container('legendgraph');
   chart.draw();
   chart.sort("desc");
-  //form data of different qualities. 
+  //form data of different qualities.
   //depending on zoom level (country, settlements, continents)
   //display qualitative data percentage
 });
