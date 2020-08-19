@@ -21,9 +21,9 @@ if($("#map").length != 0){ // if map exists, create it
      $("#coords").val(`${lat.toFixed(5)}, ${lon.toFixed(5)}`);
 
      // Prefill country values
-     $.get(`/api/get-country?lat=${lat}&lon=${lon}`, function(data) {
-       $("input[name='country']").val(data);
-     });
+     // $.get(`/api/get-country?lat=${lat}&lon=${lon}`, function(data) {
+     //   $("input[name='country']").val(data);
+     // });
   });
 }
 
