@@ -9,8 +9,7 @@ html{
 }
 
 .circle-icon{
-    background:red;
-    color: red;
+    background:#800026;
     opacity: 0.5;
     border-color: 2px grey;
     font-weight:bold;
@@ -23,7 +22,7 @@ html{
 }
 
 .circle-icon2{
-    background:orange;
+    background:#BD0026;
     border-color: 2px grey;
     opacity: 0.7;
     font-weight:bold;
@@ -37,7 +36,7 @@ html{
 
 
 .circle-icon3{
-    background:green;
+    background:#E31A1C;
     border-color: 2px grey;
     opacity: 0.7;
     font-weight:bold;
@@ -51,7 +50,7 @@ html{
 
 
 .circle-icon4{
-    background:blue;
+    background:#FC4E2A;
     border-color: 2px grey;
     opacity: 0.7;
     font-weight:bold;
@@ -63,6 +62,42 @@ html{
     width:30px;
 }
 
+.circle-icon5{
+    background:#FD8D3C;
+    border-color: 2px grey;
+    opacity: 0.7;
+    font-weight:bold;
+    text-align:center;
+    border-radius:50%;
+    line-height:30px;
+    outline-width:30px;
+    height:30px;
+    width:30px;
+}
+.circle-icon6{
+    background:#FEB24C;
+    border-color: 2px grey;
+    opacity: 0.7;
+    font-weight:bold;
+    text-align:center;
+    border-radius:50%;
+    line-height:30px;
+    outline-width:30px;
+    height:30px;
+    width:30px;
+}
+.circle-icon7{
+    background:#FED976;
+    border-color: 2px grey;
+    opacity: 0.7;
+    font-weight:bold;
+    text-align:center;
+    border-radius:50%;
+    line-height:30px;
+    outline-width:30px;
+    height:30px;
+    width:30px;
+}
 #map {
     position: absolute; 
     bottom: 50px;
@@ -105,7 +140,7 @@ ul.buttonnavigate{
     transform: rotate(-90deg);
     list-style: none;
     background-color: black;
-    left: -76px;
+    left: -123px;
     top: 50%;
 
 }
@@ -205,4 +240,48 @@ span.informality{
 
 #popinform{
     background: linear-gradient(90deg, #E9D48C 17.71%, #C36B6B 81.77%);
+}
+
+#poprates{
+    position: absolute;
+    top: 113px;
+    color: white;
+    right: 220px;
+    font-size: 10px;
+}
+span.lowpop{
+    font-family: 'Roboto';
+    padding-right: 80px;
+}
+
+
+span.name{
+    font-family: 'Roboto';
+    font-size: 25px;
+    font-weight: bold;
+}
+
+span.country{
+    font-family: 'Roboto';
+    font-size: 25px;
+    font-weight: bold;
+    padding-bottom: 30px;
+}
+
+span.labels{
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+span.tags{
+    font-family: 'Roboto';
+    font-size: 14px;
+}
+
+span.values{
+    font-family: 'Roboto';
+    font-size: 14px;
 }
