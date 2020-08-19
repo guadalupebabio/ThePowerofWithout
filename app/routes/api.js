@@ -1,7 +1,7 @@
 let express = require("express"),
     mongoose = require("mongoose"),
     crypto = require('crypto'),
-    geo = require("../util/geo.js"),
+    // geo = require("../util/geo.js"),
     cleanFormFields = require("../middleware/cleanFormFields.js"),
     preventEmptyFormFields = require("../middleware/preventEmptyFormFields.js"),
     validateEmail = require("../middleware/validateEmail.js"),
@@ -19,11 +19,11 @@ module.exports = function(User, Settlement, Pin, Comment, Link){
   });
 
   // Given Lat and Lon, return what country the point is.
-  router.get("/get-country", function(req, res){
-    let lat = parseFloat(req.query.lat),
-        lon = parseFloat(req.query.lon);
-    res.send(geo.getCountry(lat, lon));
-  });
+  // router.get("/get-country", function(req, res){
+  //   let lat = parseFloat(req.query.lat),
+  //       lon = parseFloat(req.query.lon);
+  //   res.send(geo.getCountry(lat, lon));
+  // });
 
   // Given name and email, redirect to the correct settlement.
   router.post("/get-settlement", preventEmptyFormFields, cleanFormFields, validateEmail, function(req, res){
