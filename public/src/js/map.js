@@ -287,6 +287,9 @@ for (var i = 0; i < points.length; ++i){
         }
     }
 
+var origins = ["Topography", "Within Cities", "Weather", "Security"];
+var architectures = ["House Quality", "Materials", "Development State", "Access to Energy", "Access to Water", "Access to Sanitation", "Access to Internet or Phone Fare", "Mobility Systems", "Elevation"];
+var populaces = ["Health Care", "Number of Hospitals, Clinics, or Health Cares", "Education", "Number of Schools", "Proximity to Public Areas or Leisure Activities", "Unemployment Rate", "Ownernship", "Ethic and Racial Categories"];
 function updateDataInSidebar(name, country, continent, finalcauses, finalpop) {
   var wcauses = "Causes";
   var wpop = "Population"
@@ -295,10 +298,21 @@ function updateDataInSidebar(name, country, continent, finalcauses, finalpop) {
     "<span class = \"country\">" + country + ", " + continent + "</span>" +  "<br>" + "<br>" + "<br>" +
     "<span class = \"labels\">ORIGIN</span>" + "<br>" +  "<br>" +
     "<span class = \"tags\">" + wcauses.bold() + ": " + finalcauses + "</span>"  + 
-    "<span class = \"tags\">" + wpop.bold() + ": " + finalpop + "</span>" + "<br>" + 
+    "<span class = \"tags\">" + wpop.bold() + ": " + finalpop + "</span>" + 
+    createspans(origins) +  
     "<span class = \"labels\">ARCHITECTURE</span>" + "<br>" + "<br>" + "<br>" + 
-    "<span class = \"labels\">POPULACE </span>" + "<br>"+ "<br>" + "<br>" 
+    createspans(architectures)+
+    "<span class = \"labels\">POPULACE </span>" + "<br>"+ "<br>" + "<br>" +
+    createspans(populaces)
     );
+}
+
+function createspans(array){
+  var finalspan = "";
+  for (var i = 0; i < array.length; i++){
+    finalspan += "<span class = \"tags\">" + array[i].bold() + ": unknown" + "</span>" 
+  }
+  return finalspan; 
 }
 
 //check for attributes
