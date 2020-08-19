@@ -2,7 +2,6 @@ var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
-console.log(pointsByCountry);
 
 var countries = $.getJSON('/countries.json', function(data){});
 //var finalcountries = $.ajax(countries.responseJSON);
@@ -53,7 +52,7 @@ for (var i = 0; i < variables.length; i++) {
     .attr('value', variables[i])
     .appendTo($select);
 }
-//add country name and population 
+//add country name and population
 
 
 
@@ -87,14 +86,14 @@ for (var i = 0; i < Object.keys(pointsByCountry).length; ++i){
        populationCountry +=pop;
        finalpopulation +=pop;
       }
-      
+
       var everypop = {};
       everypop.name = Object.keys(pointsByCountry)[i];
       everypop.population = populationCountry;
       everypop.causes = pointsByCountry[Object.keys(pointsByCountry)[i]][0]['site']['origin'].causes;
       populationlist.push(everypop);
 
-      populationCountry = 0; 
+      populationCountry = 0;
 
 
     }
@@ -118,16 +117,16 @@ map.addControl(sidebar);
 // adds every circle marker into marker layer
 for (var i = 0; i < points.length; ++i){
     //var continentcheck;
-    
+
     if (!(typeof points[i]["site"] === 'undefined')){
       var name = points[i]["name"];
       console.log(name);
-    
+
       var population = points[i]["site"].origin["population"];
       var causes = points[i]["site"].origin["causes"];
       var country = points[i]["country"];
       var continent = points[i]["site"].origin["geolocation"];
-    
+
       if (population == null){
         var rad = 20;
       }
@@ -152,7 +151,7 @@ for (var i = 0; i < points.length; ++i){
         }
       }
       if (causes != null){
-        //colour of circles based on causes 
+        //colour of circles based on causes
         if (causes.localeCompare("Squatting")==0){
           var col = '#FC4E2A';
         }
@@ -166,8 +165,8 @@ for (var i = 0; i < points.length; ++i){
           var col = 'orange';
         }
       }
-      
-  
+
+
       //initializing the circles;
       var circle = L.circleMarker(points[i]["geolocation"]["coordinates"], {
           color: col,
@@ -181,17 +180,17 @@ for (var i = 0; i < points.length; ++i){
         sidebar.show();
       });
 
-      
-      
+
+
       checkCountries(country); //adds country into list if not there already
-      
+
       addclustergroup(country, circle); //adds the circle into a clustergroup based on the country
       //markers.addLayer(circle);
         }
     }
-    
-    
-    
+
+
+
 
 
 //check if they're in the same country
@@ -204,7 +203,7 @@ function checkCountries(country){
   countrieslist.push(country);
   var colorchosen = populationlist[i].causes;
   clusters[i] = L.markerClusterGroup({
-    
+
     iconCreateFunction: function(cluster){
       if (colorchosen === "Squatting"){
         return L.divIcon({
@@ -234,10 +233,10 @@ function checkCountries(country){
           iconSize: [editradius(populationlist[i].population), editradius(populationlist[i].population)]
         });
       }
-      
+
     }
   });
-  return false; 
+  return false;
 }
 
 function editradius(input){
@@ -296,7 +295,7 @@ var info = L.control();
     '<br>Informality index</br>';
   };
 
-info.addTo(map); 
+info.addTo(map);
 
 //colour depending on population
 function getColor(d) {
@@ -318,16 +317,16 @@ var legend = L.control({position: 'bottomleft'});
       popvalues = [0, 100000, 500000, 1000000, 5000000, 10000000, 15000000],
       labels = ['<strong> Population of Settlements in each Country </strong> <br>'];
       labels.push(
-        '<i style="background:' + getColor(-1) + '"></i> ' + 
+        '<i style="background:' + getColor(-1) + '"></i> ' +
         ('no settlements recorded'+ '<br>'));
     for (var i = 0; i < popvalues.length; i++){
       from = popvalues[i];
       to = popvalues[i+1];
-    
-    
+
+
     labels.push(
       '<i style="background:' + getColor(from + 1) + '"></i> ' +
-     from + (to ? '&ndash;' + to + '<br>' : '+'));    
+     from + (to ? '&ndash;' + to + '<br>' : '+'));
     }
 
     div.innerHTML = labels.join('\n');
@@ -397,7 +396,7 @@ function onEachFeature(feature, layer) {
   });
 }
 
-//find value in the object that corresponds with the key. 
+//find value in the object that corresponds with the key.
 function getObjects(obj, key, val) {
         var objects = [];
         for (var i in obj) {
@@ -413,7 +412,7 @@ function getObjects(obj, key, val) {
 
 //country outline into geojson
 $.ajax({}).done(function(data){
-            
+
   var fh = countries.responseJSON;
   geojson= L.geoJson(fh, {
               pointToLayer:
@@ -425,12 +424,12 @@ $.ajax({}).done(function(data){
             });
             var allPointsLG = L.layerGroup([geojson]).addTo(map);
               overlaysObj["countries"] = allPointsLG;
-              
+
              //overlaysObj["settlements"] = settlements;
 
-            
 
-           
+
+
 });
 
 
@@ -467,19 +466,19 @@ function changeoflayers(layout){
     legend.remove(map);
     if (map.hasLayer(overlaysObj["countries"])){
       map.removeLayer(overlaysObj["countries"]);
-      } 
+      }
     }
     if (layout === "country"){
       sidebar.hide();
       removefromMap();
       legend.addTo(map);
       map.removeLayer(dark);
-      map.addLayer(light);  
+      map.addLayer(light);
       map.addLayer(overlaysObj["countries"]);
-    } 
+    }
   };
 
-/* 
+/*
 map.on('baselayerchange', function(a){
   console.log("the layer changed to " + a.name);
   if (a.name === "Settlements"){
@@ -490,13 +489,13 @@ map.on('baselayerchange', function(a){
     legend.remove(map);
     if (map.hasLayer(overlaysObj["countries"])){
       map.removeLayer(overlaysObj["countries"]);
-    } 
+    }
   }
   if (a.name === "Countries"){
     removefromMap();
     legend.addTo(map);
     map.removeLayer(dark);
-    map.addLayer(light);  
+    map.addLayer(light);
     map.addLayer(overlaysObj["countries"]);
   }
 }) */
@@ -524,12 +523,12 @@ $("#buttonnavigate").on("click", function(event){
 //   allrad[i] = radoverall;
 // }
 
-//altermarkers(); 
+//altermarkers();
 
 
 
  //pie charts
-/* var legendpie = L.control({position: 'bottomright'}); 
+/* var legendpie = L.control({position: 'bottomright'});
 
 legendpie.onAdd = function (map){
       var div = L.DomUtil.create('div','info legend');
@@ -567,7 +566,7 @@ anychart.onDocumentReady(function(){
   chart.container('legendgraph');
   chart.draw();
   chart.sort("desc");
-  //form data of different qualities. 
+  //form data of different qualities.
   //depending on zoom level (country, settlements, continents)
   //display qualitative data percentage
 });
