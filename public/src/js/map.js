@@ -299,11 +299,11 @@ function updateDataInSidebar(name, country, continent, finalcauses, finalpop) {
     "<span class = \"labels\">ORIGIN</span>" + "<br>" +  "<br>" +
     "<span class = \"tags\">" + wcauses.bold() + ": " + finalcauses + "</span>"  + 
     "<span class = \"tags\">" + wpop.bold() + ": " + finalpop + "</span>" + 
-    createspans(origins) +  
+    createspans(origins) +  "<br>" +
     "<span class = \"labels\">ARCHITECTURE</span>" + "<br>" + "<br>" + "<br>" + 
-    createspans(architectures)+
+    createspans(architectures)+ "<br>"+
     "<span class = \"labels\">POPULACE </span>" + "<br>"+ "<br>" + "<br>" +
-    createspans(populaces)
+    createspans(populaces) + "<br>"
     );
 }
 
