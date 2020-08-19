@@ -6,7 +6,8 @@ let express = require("express"),
     flash = require('connect-flash'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
-    snapPointsToGrid = require('./app/util/snapPointsToGrid.js');
+    snapPointsToGrid = require('./app/util/snapPointsToGrid.js'),
+    MongoStore = require('connect-mongo')(session);
 
 let app = express(),
     router = express.Router();
@@ -22,7 +23,6 @@ app.use(bodyParser.json());
 app.set('views', './views');
 app.set('view engine', 'pug');
 app.use(cookieParser());
-app.use(session({secret: "cookie key", cookie: { maxAge: 60000 }}));
 app.use(flash());
 
 // ** CONNECT TO DB **
@@ -33,6 +33,8 @@ const main_conn = mongoose.createConnection(DB_URL),
       Comment = require("./app/db/models/Comment")(main_conn),
       Link = require("./app/db/models/Link")(main_conn),
       Pin = require("./app/db/models/Pin")(app_conn);
+
+app.use(session({secret: "cookie key", store: new MongoStore({mongooseConnection: main_conn})}));
 
 // ** ROUTES **
 app.get("/", function(req, res){
