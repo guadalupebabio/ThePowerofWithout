@@ -1,8 +1,11 @@
 nav.level.is-mobile
-  .level-left 
-    a.is-size-4.level-item(href = "/") The Power of Without 
-    a.level-item(class = (activeTab == 1 ? "active" : "")  href = "/map") Settlements Map
-    a.level-item(class = (activeTab == 2 ? "active" : "") href = "/contribute") Contribute 
-    a.level-item(class = (activeTab == 3 ? "active" : "") href = "/toolkit") The tools
+  .level-left  
+    a.logo-div-black(href = "/" id="logo-div") 
+    a.level-item(class = (activeTab == 1 ? "active" : "")  href = "/map") MAP OF INFORMALITY
+    a.level-item(class = (activeTab == 2 ? "active" : "") href = "/contribute") CONTRIBUTE
+    a.level-item(class = (activeTab == 3 ? "active" : "") href = "/toolkit") THE TOOLS
   .level-right
+    #google_translate_element
     a.level-item(class = (activeTab == 4 ? "active" : "") href = "/about") About
+
+script(type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit")

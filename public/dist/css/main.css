@@ -1,20 +1,124 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 nav {
-  background: #242424;
+  /* background: #242424; */
+  /* color: #242424 ; */
+  /* height: 60px; */
   height: 60px;
   position: fixed;
   top: 0;
   width: 100vw;
   transition: 0.2s all;
-  z-index: 2000; }
+  
+  z-index: 2000; 
+
+}
+
+  .nav-after-scroll{
+
+  /* background: #242424; */
+  /* color: #242424 ; */
+
+  background: #242424;
+  color:white;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  transition: 0.2s all;
+  
+  z-index: 2000; 
+  }
   nav a {
-    color: #FFFFFF;
+    /* color: #FFFFFF; */
+    color: #242424 ;
     transition: 0.2s all;
     margin: 0 40px;
-    line-height: 50px;
-    border-top: 5px solid #242424;
-    border-bottom: 5px solid #242424; }
+    /* line-height: 50px; */
+    font-weight :bold;
+    /* border-top: 5px solid #242424; */
+    /* border-bottom: 5px solid #242424;  */
+  }
+
+  .nav-a-after-scroll{
+    /* color: #FFFFFF; */
+    color:white ;
+    transition: 0.2s all;
+    /* margin: 0 40px; */
+    /* line-height: 50px; */
+    font-weight :bold;
+    /* border-top: 5px solid #242424; */
+    /* border-bottom: 5px solid #242424;  */
+  } 
+  .nav-a-after-scroll:hover{
+
+    /* color: #dfdede; 
+     */
+    color: #242424;
+    background-color:white;
+    /* border-radius: 2px; */
+    font-weight :bold;
+
+    /* border-bottom: 5px solid white;  */
+  
+  }  
+  /* nav a.is-size-4.level-item{
+    
+    background-image:url("../../assets/logo_black.svg");
+    width: 206px;
+    height: 60px;
+    background-repeat: no-repeat;
+    margin:3rem;
+
+  } */
+  #google_translate_element{
+    margin-top: 10px;
+
+
+  }
+  .goog-logo-link{
+    vertical-align: middle;
+  }
+  .logo-div-black{
+
+    background-image:url("../../assets/logo_black.svg");
+    width: 206px;
+    height: 60px;
+    background-repeat: no-repeat;
+    margin:3rem;
+ 
+  }
+
+  .logo-div-white{
+    
+    background-image:url("../../assets/logo.png");
+    width: 206px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 206px 60px;
+    margin:3rem;
+
+  }
+
     nav a:hover {
-      color: #dfdede; }
+
+      /* color: #dfdede; 
+       */
+      color: #242424 ;
+      font-weight :bold;
+      border-bottom: 5px solid #242424; 
+    
+    }
+
+    nav a:hover {
+
+      /* color: #dfdede; 
+       */
+      color: #242424 ;
+      font-weight :bold;
+      border-bottom: 5px solid #242424; 
+    
+    }
+
     nav a.active {
-      border-bottom: 5px solid #FFFFFF; }
+      border-bottom: 5px solid #FFFFFF; 
+    }

@@ -2,6 +2,13 @@
   margin-top: 100px;
   padding: 0 5vw;
   #sidebar{
+
+    .nav-column{
+      
+      background-color:#242424!important;
+      transform:rotate(-90deg);
+  
+    }
     & > a{
       font-family: Roboto;
       font-weight: bold;
@@ -10,18 +17,21 @@
       transition: 0.2s all;
     }
 
+
+  
+
     .active{
       border-bottom: 4px solid black;
     }
   }
 
-  #google_translate_element{
-    margin-top: 10px;
+  // #google_translate_element{
+  //   margin-top: 10px;
 
-    .goog-logo-link{
-      vertical-align: middle;
-    }
-  }
+  //   .goog-logo-link{
+  //     vertical-align: middle;
+  //   }
+  // }
 }
 
 input[type = "text"]{
@@ -77,13 +87,25 @@ form{
     }
   }
 
-  .level{
-    margin-bottom: -20px !important;
 
-    .level-right .level-item{
-      cursor: pointer;
-    }
-  }
+  // .level{
+  //   margin-bottom: -20px !important;
+
+  //   .level-right .level-item{
+  //     cursor: pointer;
+  //   }
+  // }
+  // .level .is-narrow{
+  //   margin-bottom: -20px !important;
+  //   background-color:#242424;
+
+  //   // .level-right .level-item{
+  //   //   cursor: pointer;
+  //   // }
+  // }
+
+
+
 }
 
 section{
