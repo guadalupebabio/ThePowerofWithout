@@ -1,0 +1,95 @@
+.black-nav{
+    background: #242424!important;
+    display:flex;
+    flex-direction:row;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    transition: 0.2s all;
+    z-index: 2000; 
+    justify-content:space-between;
+  
+  }
+  .black-nav a{
+
+    color:white;
+  }
+  .black-nav-left{
+
+    display:flex;
+    flex-direction:row;
+  }
+  .black-nav-right{
+
+    display:flex;
+    flex-direction:row;
+  }
+    .nav-after-scroll{
+  
+    /* background: #242424; */
+    /* color: #242424 ; */
+  
+    background: #242424;
+    color:white;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    transition: 0.2s all;
+    
+    z-index: 2000; 
+    }
+    nav a {
+      /* color: #FFFFFF; */
+      color: #242424 ;
+      transition: 0.2s all;
+      margin: 0 40px;
+      /* line-height: 50px; */
+      font-weight :bold;
+      /* border-top: 5px solid #242424; */
+      /* border-bottom: 5px solid #242424;  */
+    }
+  
+    .nav-a-after-scroll{
+      /* color: #FFFFFF; */
+      color:white ;
+      transition: 0.2s all;
+      /* margin: 0 40px; */
+      /* line-height: 50px; */
+      font-weight :bold;
+      /* border-top: 5px solid #242424; */
+      /* border-bottom: 5px solid #242424;  */
+    } 
+    .nav-a-after-scroll:hover{
+
+      color: #242424;
+      background-color:white;
+      font-weight :bold;
+    
+    }  
+
+    #google_translate_element{
+      margin-top: 10px;
+  
+  
+    }
+    .goog-logo-link{
+      vertical-align: middle;
+    }
+
+
+.logo-div-white{
+    
+    background-image:url("../../assets/W_white.png");
+    width: 206px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 206px 60px;
+    padding: 0;
+    /* margin:3rem; */
+
+  }
+
+
+  

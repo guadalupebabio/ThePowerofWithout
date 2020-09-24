@@ -88,7 +88,7 @@ nav {
  
   }
 
-  .logo-div-white{
+  /* .logo-div-white{
     
     background-image:url("../../assets/logo.png");
     width: 206px;
@@ -97,8 +97,10 @@ nav {
     background-size: 206px 60px;
     margin:3rem;
 
-  }
+  } */
 
+
+  
     nav a:hover {
 
       /* color: #dfdede; 

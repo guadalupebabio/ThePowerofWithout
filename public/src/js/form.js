@@ -144,3 +144,27 @@ function saveLink(){
     else links[linkI].link = link;
   });
 }
+
+
+const modalDiv = document.getElementById("modal-div");
+
+// const continueButton = document.getElementById("continue-button");
+// continueButton.addEventListener("click",()=>{
+//    modalDiv.className = "modal-container"
+
+// });
+
+const startButton = document.getElementById("start-button");
+startButton.addEventListener("click",()=>{
+   modalDiv.className = "modal-container"
+
+});
+
+window.addEventListener("click",(ev)=>{
+
+  if (ev.target !== modalDiv) {
+    modalDiv.className = "modal-container-hide";
+  }
+
+});
+
