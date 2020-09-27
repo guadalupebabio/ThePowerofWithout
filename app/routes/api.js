@@ -6,6 +6,9 @@ let express = require("express"),
     preventEmptyFormFields = require("../middleware/preventEmptyFormFields.js"),
     validateEmail = require("../middleware/validateEmail.js"),
     sendEmail = require("../util/email.js");
+    
+    
+const { sectionDataContainer , modalData}= require("../../data.js")
 
 module.exports = function(User, Settlement, Pin, Comment, Link){
   let router = express.Router();
@@ -91,7 +94,20 @@ module.exports = function(User, Settlement, Pin, Comment, Link){
           // res.redirect("/contribute/u/" + settlement._id + "/" + token);
           // res.send("all is well");
           // res.redirect("/contribute")
-          res.status(200);
+          // console.log(fillInFormData);
+          // console.log(modalData);
+          res.render("form", {
+            sectionData: sectionDataContainer,
+            modalData : modalData,
+            modalClass : "modal-container",
+            redirectUrl : "/contribute/u/" + settlement._id + "/" + token,
+            url: "/api/settlements",
+            notification:
+              'Already created a settlement? Edit it <a href = "/contribute/u">here</a>',
+            map: true,
+            error: req.flash("form-error"),
+          });
+          // res.status(200);
 
         })
       });

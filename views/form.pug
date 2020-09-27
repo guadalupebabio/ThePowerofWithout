@@ -11,8 +11,8 @@ html
 
     include includes/nav-black.pug
     
-
-    #modal-div.modal-container
+    
+    #modal-div(class=`${modalClass}`)
       .modal-description
         p #{modalData.description}
       .modal-items-description
@@ -21,7 +21,7 @@ html
             .modal-icon(style=`background-image:url(${icon.image})`)
             .modal-icon-description          
               p #{icon.description}             
-      input(type="submit" value="Continue" id="continue-button")
+      a(href=`${redirectUrl}` id="continue-button") Continue
 
     .columns.is-variable.is-8
 
@@ -95,55 +95,84 @@ html
                       .level-middle
                         each question, j in category.questions
                           .level-item-question
-                            .left-level-items
-                              .level-item-left
-                                .label
-                                  label(for = "hilz")= question.name 
-                                .question-info
-                                  if question.info
-                                    //- .info-button.level-item(data-label = `${category.label}` data-info = `${question.info}`)
-                                    //- i.fas.fa-info-circle
-                                    .alert-button              
-                              br
-                              if question.type == "coords"                               
-                                input#coords(name = question.name type = "text" readonly placeholder = "Select a point on the map")  
-                              else if question.type == "text"    
-                                if question.disabled
-                                  input(name = question.name type = question.type readonly value = question.value)
-                                else
-                                  input(name = question.name type = question.type value = question.value)
-                              else if question.type == "radio" || question.type == "checkbox"
-                                each val, index in question.options                           
-                                  if question.type == "radio"                                                                         
-                                    if val == "Other"
-                                      .other-radio-div
-                                        input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == question.value)) 
-                                        input( style="margin-bottom:0!important; font-weight:bold; color:#242424;font-size:14px;" name = question.name type = "text" value = "Other")                  
-                                    else  
-                                      input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == question.value))                                                                                                                    
-                                  else
-                                    input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
-                                  if val != "Other"
-                                    label(for = question.name + "-" + index)= val
-                                  br
-                              else if question.type == "range"
-                                .range
-                                  label(for = question.name)= question.options[0]
-                                  input(type = "range" min = "1" max = `${question.options.length}` value = (question.value ? question.value : null) name = question.name id = question.name)
-                                  label(for = question.name)= question.options[question.options.length - 1]
-                                br
-                              else if question.type == "c"
-                                  
-                              br
 
-                            .right-level-items
-                              .level-item-right
-                                .chat-button(data-name = `${question.name}` data-email = `${email}`)
-                                  //- i.fa-comment.fas
-                                .link-button(data-name = `${question.name}` data-email = `${email}`)
-                                  //- i.fas.fa-link
-                                .comment-button(data-name = `${question.name}` data-email = `${email}`)
-                                  //- i.fa-comment.fas
+                            if question.type!="range"                
+                              .left-level-items
+                                .level-item-left
+                                  .label
+                                    label(for = "hilz")= question.name 
+                                  .question-info
+                                    if question.info
+                                      //- .info-button.level-item(data-label = `${category.label}` data-info = `${question.info}`)
+                                      //- i.fas.fa-info-circle
+                                      .alert-button              
+                                br
+                                if question.type == "coords"                               
+                                  input#coords(name = question.name type = "text" readonly placeholder = "Select a point on the map")  
+                                else if question.type == "text"    
+                                  if question.disabled
+                                    input(name = question.name type = question.type readonly value = question.value)
+                                  else
+                                    input(name = question.name type = question.type value = question.value)
+                                else if question.type == "radio" || question.type == "checkbox"
+                                  each val, index in question.options                           
+                                    if question.type == "radio"                                                                         
+                                      if val == "Other"
+                                        .other-radio-div
+                                          input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == question.value)) 
+                                          input( style="margin-bottom:0!important; font-weight:bold;font-size:14px;" name = question.name type = "text" placeholder = "Other")                  
+                                      else  
+                                        input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == question.value))                                                                                                                    
+                                    else
+                                      input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
+                                    if val != "Other"
+                                      label(for = question.name + "-" + index)= val
+                                    br
+                                else if question.type == "range"
+                                  .range
+                                    label(for = question.name)= question.options[0]
+                                    input(type = "range"  min = "0" max = "10" value = (question.value ? question.value : null) name = question.name id = question.name)
+                                    label(for = question.name)= question.options[1]
+                                  br
+                                else if question.type == "c"                         
+                                br
+
+
+                              .right-level-items
+                                .level-item-right
+                                  .chat-button(data-name = `${question.name}` data-email = `${email}`)
+                                    //- i.fa-comment.fas
+                                  .link-button(data-name = `${question.name}` data-email = `${email}`)
+                                    //- i.fas.fa-link
+                                  .comment-button(data-name = `${question.name}` data-email = `${email}`)
+                                    //- i.fa-comment.fas
+                            else
+                              .range-level-items
+                                .top-level-items
+                                  .level-item-left
+                                    .label
+                                      label(for = "hilz")= question.name 
+                                    .question-info
+                                      if question.info
+                                        //- .info-button.level-item(data-label = `${category.label}` data-info = `${question.info}`)
+                                        //- i.fas.fa-info-circle
+                                        .alert-button      
+                                  br
+                                  .right-level-items
+                                    .level-item-right
+                                      .chat-button(data-name = `${question.name}` data-email = `${email}`)
+                                        //- i.fa-comment.fas
+                                      .link-button(data-name = `${question.name}` data-email = `${email}`)
+                                        //- i.fas.fa-link
+                                      .comment-button(data-name = `${question.name}` data-email = `${email}`)   
+
+                                .range
+                                  .range-options
+                                    label(for = question.name)= question.options[0]
+                                    label(for = question.name)= question.options[1]  
+                                  input(type = "range"  min = "0" max = "10" value = (question.value ? question.value : null) name = question.name id = question.name)
+                                                
+                          br
           .button-level
             input(style="width:40%"  name = "edit-previous-button" type = "text" value = "Edit a previous settlement")
             input.button.is-black(id="start-button" style="width:40%" type="submit" value="Start")
