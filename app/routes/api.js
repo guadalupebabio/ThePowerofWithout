@@ -52,6 +52,9 @@ module.exports = function(User, Settlement, Pin, Comment, Link){
 
   // Add new settlement to database
   router.post("/settlements", preventEmptyFormFields, cleanFormFields, validateEmail, function(req, res){
+
+    console.log(req.body);
+
     if(req.error) {
       res.redirect("/contribute");
       return
@@ -83,9 +86,13 @@ module.exports = function(User, Settlement, Pin, Comment, Link){
 
       settlement.save(function(){
         user.save(function(){
-          sendEmail(req.body.email, settlement._id, token);
+          // sendEmail(req.body.email, settlement._id, token);
           req.flash('form-notification', "Thanks for contributing a settlement! You can work on adding more information now, or complete it at a later date—we've sent a link to your email!");
-          res.redirect("/contribute/u/" + settlement._id + "/" + token);
+          // res.redirect("/contribute/u/" + settlement._id + "/" + token);
+          // res.send("all is well");
+          // res.redirect("/contribute")
+          res.status(200);
+
         })
       });
     });
@@ -191,3 +198,5 @@ module.exports = function(User, Settlement, Pin, Comment, Link){
 
   return router;
 };
+
+
