@@ -356,6 +356,7 @@ For the fill-in form
   display:flex;
   flex-direction:column;
   width:80%;
+  align-items: center;
  
 }
 
@@ -395,6 +396,7 @@ For the fill-in form
 .level-item-header {
 
 width:20%;
+display: flex;
 
 
 }
@@ -475,7 +477,7 @@ width:20%;
   flex-direction:row;
   justify-content:space-between;
   width:800px;
-  margin-top:3rem;
+  /* margin-top:3rem; */
 
 
 }

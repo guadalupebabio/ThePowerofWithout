@@ -218,6 +218,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                       name: "Population",
                       type: "text",
                       info: "Feedback from the population question",
+                      placeholder : "Number"
                     },
                   ],
                 },
@@ -297,88 +298,183 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                   ],
                 },
               ],
-            },
+            },{
+
+              section: "Architecture",
+              subsections:[
+
+                { label : "PHYSICAL NATURE",
+                  questions : [
+
+                    { name :"House Quality", 
+                      type : "range",
+                      options:  ["Low","High"],
+                      value: getFormValue(["site", "origin", "causes"]),
+                      info:"Related to the point or place where the settlement begins, arises or derived"
+                    },{
+                       name : "Materials",
+                       type : "radio",
+                       options : ["Mud", "Brick","Concrete","Wood","Corrugates", "Sheet", "Tarpaulin", "Tiles","Others"],
+                       value: getFormValue(["site", "origin", "causes"]),
+                       info:
+                         "Related to the point or place where the settlement begins, arises or derived",                 
+                    },{
+                        name: "Development State",
+                        type:"range",
+                        options:["Initial","Established"],
+                        value: getFormValue(["site", "origin", "causes"]),
+                        info:
+                          "Related to the point or place where the settlement begins, arises or derived",  
+                    }
+                  ]
+                },{
+                  label: "INFRASTRUCTURE",
+                  questions:[{
+                    name:"Access to Energy",
+                    type:"range",
+                    options : ["Low","High"],
+                    value: getFormValue(["site", "origin", "causes"]),
+                    info:
+                      "Related to the point or place where the settlement begins, arises or derived",  
+                  },
+                  { 
+                    name : "Source of Energy",
+                    type:"radio",
+                    options:["Coal","Wood","Gas","Electricity","Other"],
+                    value: getFormValue(["site", "origin", "causes"]),
+                    info:
+                      "Related to the point or place where the settlement begins, arises or derived",  
+
+                  },{
+                    name : "Access to Water",
+                    type : "double-range",
+                    options : ["Low","High","Public","Private"],
+                    value: getFormValue(["site", "origin", "causes"]),
+                    info:
+                      "Related to the point or place where the settlement begins, arises or derived",                    
+                  },{
+                    name : "Access to Sanitation",
+                    type : "double-range",
+                    options : ["Low","High","Public","Private"],
+                    value: getFormValue(["site", "origin", "causes"]),
+                    info:
+                      "Related to the point or place where the settlement begins, arises or derived",  
+                  },{
+                    name:"Access to Internet",
+                    type :"range",
+                    options : ["Low","High"],
+                    value: getFormValue(["site", "origin", "causes"]),
+                    info:
+                      "Related to the point or place where the settlement begins, arises or derived",  
+                  },
+                  {
+                    name:"Physical State of the Streets",
+                    type :"range",
+                    options : ["Low","High"],
+                    value: getFormValue(["site", "origin", "causes"]),
+                    info:
+                      "Related to the point or place where the settlement begins, arises or derived",  
+                  },{
+                    name:"Mobility Systems",
+                    type :"radio",
+                    options : ["Walking","Biking", "By Car","By Public Transport","Other"],
+                    value: getFormValue(["site", "origin", "causes"]),
+                    info:
+                      "Related to the point or place where the settlement begins, arises or derived",  
+
+                  }
+                ]
+                }
+              ]
+            },{
+              section : "POPULACE",
+              subsections : [
+
+                { label : "QUALITY OF LIFE",
+                  questions : [
+                    {
+                      name : "Household per house",
+                      type : "range",
+                      options : ["1","5","10 or more"],
+                      value: getFormValue(["site", "origin", "causes"]),
+                      info:
+                        "Related to the point or place where the settlement begins, arises or derived",  
+                    },{
+                      name : "Access to Health Care",
+                      type :"range",
+                      options: ["Low","High"],
+                      value: getFormValue(["site", "origin", "causes"]),
+                      info:
+                        "Related to the point or place where the settlement begins, arises or derived",  
+                    },{
+                      name : "Access to Education",
+                      type:"range",
+                      options : ["Low,High"],
+                      value: getFormValue(["site", "origin", "causes"]),
+                      info:
+                        "Related to the point or place where the settlement begins, arises or derived",  
+                    },{
+
+                      name :"Unemployment Rate",
+                      type:"range",
+                      options:["Low","High"],
+                      value: getFormValue(["site", "origin", "causes"]),
+                      info:
+                        "Related to the point or place where the settlement begins, arises or derived",  
+                    },{
+                      name:"Employment in the formal sector",
+                      type:"range",
+                      options : ["0%","100%"],
+                      value: getFormValue(["site", "origin", "causes"]),
+                      info:
+                        "Related to the point or place where the settlement begins, arises or derived",  
+                    },{
+                      name :"Ownership",
+                      type:"range",
+                      options :["Illegal","Community/City Property","Private"],
+                      value: getFormValue(["site", "origin", "causes"]),
+                      info:
+                        "Related to the point or place where the settlement begins, arises or derived",  
+                    },{
+                      name : "Age groups",
+                      type:"range",
+                      options :["10","20","30","40","50",">60"],
+                      value: getFormValue(["site", "origin", "causes"]),
+                      info:
+                        "Related to the point or place where the settlement begins, arises or derived",  
+                    },{
+                      name : "Gender",
+                      type:"range",
+                      options : ["Male","Female"],
+                      value: getFormValue(["site", "origin", "causes"]),
+                      info:
+                        "Related to the point or place where the settlement begins, arises or derived",  
+                    }
+                  ]  
+                }
+              ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               
+            }
           ],
+
         };
 
         // Architecture
-        // [
-        //   {
-        //     label: "House quality",
-        //     name: "architecturePhysicalNatureHouseQuality",
-        //     type: "radio",
-        //     value: getFormValue(["architecture", "physicalNature", "houseQuality"]),
-        //     options: ["Inadequate", "Suitable", "Optimal"]
-        //   },
-        //   {
-        //     label: "Materials from which the house in the Settlement is made with",
-        //     name: "architecturePhysicalNatureMaterials",
-        //     type: "checkbox",
-        //     value: getFormValue(["architecture", "physicalNature", "materials"]),
-        //     options: ["Mud", "Brick", "Wood", "Concrete", "Corrugated sheet", "Tarpaulin", "Tiles", "Other"],
-        //   },
-        //   {
-        //     label: "Development State",
-        //     name: "architecturePhysicalNatureDevelopmentState",
-        //     type: "radio",
-        //     value: getFormValue(["architecture", "physicalNature", "developmentState"]),
-        //     options: ["Initial occupancy", "Transitional", "Establish"],
-        //     info: "Stage of the evolution process where the Settlement is into"
-        //   },
-        //   {
-        //     label: "Access to Energy",
-        //     name: "architectureInfrastructureAccessEnergy",
-        //     type: "radio",
-        //     value: getFormValue(["architecture", "infrastructure", "accessToEnergy"]),
-        //     options: ["0-10%", "10-25%", "25-50%", ">50%"],
-        //     info: "Percentage of dwellings that have access to power/electricity in the Settlement"
-        //   },
-        //   {
-        //     label: "Access to Water",
-        //     name: "architectureInfrastructureAccessWater",
-        //     type: "radio",
-        //     value: getFormValue(["architecture", "infrastructure", "accessToWater"]),
-        //     options: ["0-10%", "10-25%", "25-50%", ">50%"],
-        //     info: "Percentage of dwellings that have access to drinking water in the Settlement"
-        //   },
-        //   {
-        //     label: "Access to Sanitation",
-        //     name: "architectureInfrastructureAccessSanitation",
-        //     type: "radio",
-        //     value: getFormValue(["architecture", "infrastructure", "accessToSanitation"]),
-        //     options: ["0-10%", "10-25%", "25-50%", ">50%"],
-        //     info: "Percentage of dwellings that have access to sanitation in the Settlement"
-        //   },
-        //   {
-        //     label: "Access to Internet or Phone Fare",
-        //     name: "architectureInfrastructureAccessInternet",
-        //     type: "radio",
-        //     value: getFormValue(["architecture", "infrastructure", "accessToInternetOrPhoneFare"]),
-        //     options: ["0-10%", "10-25%", "25-50%", ">50%"],
-        //     info: "Percentage of people that has access to data-plans or phone fare"
-        //   },
-        //   {
-        //     label: "Mobility systems",
-        //     name: "architectureMobility",
-        //     type: "checkbox",
-        //     value: getFormValue(["architecture", "infrastructure", "mobilitySystems"]),
-        //     options: ["Walk", "Bike", "Car", "Public transportation"],
-        //     info: "Mobility systems used by the people in the Settlement"
-        //   },
-        //   {
-        //     label: "Average number of floors in the buildings",
-        //     name: "architectureDensityElevation",
-        //     type: "radio",
-        //     value: getFormValue(["architecture", "density", "averageFloors"]),
-        //     options: ["1", "2", "3", ">3"]
-        //   },
-        //   {
-        //     label: " Number of people living in a house",
-        //     name: "architectureDensityHouseholdPerHouseSize",
-        //     value: getFormValue(["architecture", "density", "householdPerHouseSize"]),
-        //     type: "text"
-        //   },
-        // ],
+
 
         // Population
         // [
