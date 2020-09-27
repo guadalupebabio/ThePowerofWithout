@@ -21,8 +21,8 @@
   }
   .nav{
     position:fixed;
-    top:30%;
-    right:88%;
+    top:45%;
+    right:89.6%;
     display:flex;
     flex-direction :row;
     align-items:center;
@@ -69,12 +69,86 @@ form label {
   font-family: Roboto;
   font-size: 14px; }
 
-form .range {
-  display: flex;
-  width: 100%; }
-  form .range input[type="range"] {
-    margin: 0 10px;
-    flex: 1; }
+/* 
+
+Range styling
+
+
+*/
+form .range{
+
+  display:flex;
+  flex-direction:column;
+}
+form .range-options{
+  width:100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  margin-top:1rem;
+  
+}
+
+form .range input[type=range] {
+  -webkit-appearance: none;
+  margin-top: 1rem;
+  width: 100%;
+  z-index: 1;
+}
+
+form .range input[type=range]:focus {
+  outline: none;
+}
+form .range input[type=range]::-webkit-slider-runnable-track {
+  /* width: 100%; */
+  height: 0.2rem;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  background: #242424;
+  border-radius: 25px;
+  /* border: 0px solid #000101; */
+}
+form .range input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 100%;
+  background: #242424;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -0.4rem;
+}
+form .range input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #242424;
+}
+form .range input[type=range]::-moz-range-track {
+  height: 0.2rem;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  background: #242424;
+  border-radius: 25px;
+}
+form .range input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 100%;
+  background: #242424;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+form .range input[type=range]::-ms-track {
+  /* width: 100%; */
+  height: 0.2rem;
+  cursor: pointer;
+  background: transparent;
+  transition:0.2s;
+  border-color: transparent;
+  border-width: 39px 0;
+  color: transparent;
+}
 
 form input[type="radio"], form input[type="checkbox"] {
   margin-right: 8px;
@@ -168,6 +242,7 @@ Modal CSS
   margin-right: 1rem;
 }
 
+
 #continue-button{
 
   width: 20%;
@@ -179,9 +254,8 @@ Modal CSS
   background-color:white;
   color:black;
 
-
-
 }
+
 /* 
 
 Contains the form structure
@@ -226,6 +300,21 @@ For the fill-in form
   /* justify-content: space-around; */
 }
 
+.top-level-items{
+
+  display:flex;
+  flex-direction: row;
+  justify-content:space-between;
+  margin-bottom:1rem;
+}
+
+.range-level-items{
+
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  
+}
 
 .fill-in-row .fill-in-level-row-item{
   display:flex;
@@ -269,6 +358,7 @@ For the fill-in form
   width:80%;
  
 }
+
 
 .level-item-question{
   display:flex;
@@ -325,7 +415,7 @@ width:20%;
   display:flex;
   flex-direction:row;
   justify-content:space-between;
-  align-items: center;
+  /* align-items: center; */
   /* width : 100px; */
 
 }

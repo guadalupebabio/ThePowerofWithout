@@ -130,6 +130,8 @@ app.get("/contribute", function (req, res) {
   res.render("form", {
     sectionData: sectionDataContainer,
     modalData : modalData,
+    modalClass : "modal-container-hide",
+    redirectUrl : "/contribute",
     url: "/api/settlements",
     notification:
       'Already created a settlement? Edit it <a href = "/contribute/u">here</a>',
@@ -263,7 +265,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     {
                       name: "Resiliance to natural conditions",
                       type: "range",
-                      options: ["Low"],
+                      options: ["Low","High"],
                       value: getFormValue(["site", "origin", "causes"]),
                       info:
                         "Related to the point or place where the settlement begins, arises or derived",
@@ -271,7 +273,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     {
                       name: "Crime rate",
                       type: "range",
-                      options: ["Low"],
+                      options:  ["Low","High"],
                       value: getFormValue(["site", "origin", "causes"]),
                       info:
                         "Related to the point or place where the settlement begins, arises or derived",
@@ -279,7 +281,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     {
                       name: "Perseption of Insecurity",
                       type: "range",
-                      options: ["Low"],
+                      options:  ["Low","High"],
                       value: getFormValue(["site", "origin", "causes"]),
                       info:
                         "Related to the point or place where the settlement begins, arises or derived",
@@ -287,7 +289,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     {
                       name: "Prevalence",
                       type: "range",
-                      options: ["Low"],
+                      options:  ["Low","High"],
                       value: getFormValue(["site", "origin", "causes"]),
                       info:
                         "Related to the point or place where the settlement begins, arises or derived",
@@ -648,6 +650,12 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
             comments: data[0],
             links: data[1],
             sectionData: sectionDataContainer,
+            modalData : { 
+                description:"",
+                icons:[]
+            },         
+            modalClass : "modal-container-hide",
+            redirectUrl:"",
             notification: req.flash("form-notification"),
             url:
               "/api/settlements/u/" +

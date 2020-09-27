@@ -1,4 +1,4 @@
-export default const sectionDataContainer = {
+ const sectionDataContainer = {
     header: "fill-in-form",
     sections: [
       {
@@ -40,7 +40,8 @@ export default const sectionDataContainer = {
     ],
   };
 
-  let modalData = {
+
+  const modalData = {
 
     description:
       "Thank you for taking the time to fill the survey!  When you continue to the next section,\
@@ -71,12 +72,4 @@ export default const sectionDataContainer = {
     ],
   };
 
-  res.render("form", {
-    sectionData: sectionDataContainer,
-    modalData : modalData,
-    url: "/api/settlements",
-    notification:
-      'Already created a settlement? Edit it <a href = "/contribute/u">here</a>',
-    map: true,
-    error: req.flash("form-error"),
-  });
+ module.exports = {sectionDataContainer,modalData}
