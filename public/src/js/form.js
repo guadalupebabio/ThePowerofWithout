@@ -1,3 +1,5 @@
+// const { info } = require("node-sass");
+
 if($("#map").length != 0){ // if map exists, create it
   var map = L.map('map')
     .setView([0,0],3);
@@ -28,11 +30,23 @@ if($("#map").length != 0){ // if map exists, create it
 }
 
 function goToSection(i){
-  $("#sidebar a").removeClass("active");
-  $("form section").addClass("is-hidden");
+  // $("#sidebar a").removeClass("active");
+  // $("form section").addClass("is-hidden");
 
-  $("#sidebar > a:nth-of-type(" + i + ")").addClass("active");
-  $("form section:nth-of-type(" + i + ")").removeClass("is-hidden");
+  // $("#sidebar > a:nth-of-type(" + i + ")").addClass("active");
+  // $("form section:nth-of-type(" + i + ")").removeClass("is-hidden");
+ console.log(i);
+ if (i==0) {
+  window.scrollTo(0,0);
+ } else if (i==1){
+  window.scrollTo(0,2100);
+
+ }else{ 
+
+  window.scrollTo(0,4600);
+
+ }
+
 }
 
 function showInfo(info, label){
@@ -63,6 +77,18 @@ $(".info-button").click(function(e){
   $("#info").show();
   $("#info p").text(`${data.label}: ${data.info}`);
 })
+
+
+function showInfo(data){
+
+  hideAll();
+  const infoDiv = document.getElementById("info");
+  infoDiv.classList.toggle("info-div");
+  infoDiv.childNodes[1].innerText = data;
+  
+
+
+}
 
 $(".comment-button").click(function(e){
   e.stopPropagation();
@@ -96,6 +122,23 @@ $(".link-button").click(function(e){
   $("#link .help").hide();
 })
 
+
+// $(".chat-button").click(function(e){
+//   e.stopPropagation();
+//   hideAll();
+//   let data = $(this).data(),
+//       linkI = links.findIndex((d) => d.formFieldName == data.name)
+//   //Set value of input text based on what's stored in the database
+//   if(linkI == -1) $("#chat input.text").val("");
+//   else $("#chat input.text").val(links[linkI].link);
+
+//   $("#chat").show();
+//   $("#chat input.button").data(data); //Bind this current question's data to the input
+//   $("#chat .help").hide();
+// })
+
+
+
 function saveComment(){
   let data = $("#comment input.button").data(),
       comment = $("#comment input.text").val();
@@ -114,6 +157,8 @@ function saveComment(){
 
   });
 }
+
+
 
 function saveLink(){
   let data = $("#link input.button").data(),

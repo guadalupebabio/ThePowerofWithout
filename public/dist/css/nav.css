@@ -14,6 +14,14 @@
   .black-nav a{
 
     color:white;
+    border:none!important;
+  }
+  .black-nav a:hover{
+
+    color: #242424;
+    background-color:white;
+    font-weight :bold;
+    /* margin: 0 40px; */
   }
   .black-nav-left{
 
@@ -25,49 +33,13 @@
     display:flex;
     flex-direction:row;
   }
-    .nav-after-scroll{
-  
-    /* background: #242424; */
-    /* color: #242424 ; */
-  
-    background: #242424;
-    color:white;
-    height: 60px;
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    transition: 0.2s all;
-    
-    z-index: 2000; 
-    }
-    nav a {
-      /* color: #FFFFFF; */
-      color: #242424 ;
-      transition: 0.2s all;
-      margin: 0 40px;
-      /* line-height: 50px; */
-      font-weight :bold;
-      /* border-top: 5px solid #242424; */
-      /* border-bottom: 5px solid #242424;  */
-    }
-  
-    .nav-a-after-scroll{
-      /* color: #FFFFFF; */
-      color:white ;
-      transition: 0.2s all;
-      /* margin: 0 40px; */
-      /* line-height: 50px; */
-      font-weight :bold;
-      /* border-top: 5px solid #242424; */
-      /* border-bottom: 5px solid #242424;  */
-    } 
-    .nav-a-after-scroll:hover{
 
-      color: #242424;
-      background-color:white;
-      font-weight :bold;
-    
-    }  
+    /* .black-nav-left :hover{
+      transition: 0.2s all!important;
+      color: #242424!important;
+      background-color:white!important;
+      font-weight :bold!important;   
+    }   */
 
     #google_translate_element{
       margin-top: 10px;

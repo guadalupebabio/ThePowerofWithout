@@ -28,11 +28,11 @@ html
       if sectionData.header=="update-settlement"     
         #sidebar.nav-column
           .nav
-            a.active(onclick = "goToSection(1)") Site
+            a.active(onclick = "goToSection(2)") Populace
             br
-            a(onclick = "goToSection(2)") Architecture
+            a(onclick = "goToSection(1)") Architecture
             br
-            a(onclick = "goToSection(3)") Population
+            a(onclick = "goToSection(0)") Site
         
       .middle-column#content         
         form(action = url method = "POST")
@@ -86,8 +86,8 @@ html
           else if sectionData.header=="update-settlement"
             each section, index in sectionData.sections
               br
-              section(class = (index == 0 ? "" : "is-hidden"))  
-                               
+              //- section(class = (index == 0 ? "" : "is-hidden"))  
+              section(class = (index))                   
                 each category, index in section.subsections        
                   .level-category
                     .level-left-category 
@@ -110,15 +110,15 @@ html
                                   br
                                   .right-level-items
                                     .level-item-right
-                                      .chat-button(data-name = `${question.name}` data-email = `${email}`)
+                                      .comment-button(data-name = `${question.name}` data-email = `${email}`)
                                         //- i.fa-comment.fas
                                       .link-button(data-name = `${question.name}` data-email = `${email}`)
                                         //- i.fas.fa-link
-                                      .comment-button(data-name = `${question.name}` data-email = `${email}`)   
+                                      .chat-button(data-name = `${question.name}` data-email = `${email}`)   
                                 .range
                                   .range-options
-                                    label(for = question.name)= question.options[0]
-                                    label(for = question.name)= question.options[1]  
+                                    each option in question.options
+                                      label(for = question.name)= option
                                   input(type = "range"  min = "0" max = "10" value = (question.value ? question.value : null) name = question.name id = question.name)
                             else if question.type=="double-range"
                               .range-level-items
@@ -134,11 +134,11 @@ html
                                   br
                                   .right-level-items
                                     .level-item-right
-                                      .chat-button(data-name = `${question.name}` data-email = `${email}`)
+                                      .comment-button(data-name = `${question.name}` data-email = `${email}`) 
                                         //- i.fa-comment.fas
                                       .link-button(data-name = `${question.name}` data-email = `${email}`)
                                         //- i.fas.fa-link
-                                      .comment-button(data-name = `${question.name}` data-email = `${email}`)   
+                                      .chat-button(data-name = `${question.name}` data-email = `${email}`)  
                                 .range
                                   .range-options
                                     label(for = question.name)= question.options[0]
@@ -155,9 +155,7 @@ html
                                     label(for = "hilz")= question.name 
                                   .question-info
                                     if question.info
-                                      //- .info-button.level-item(data-label = `${category.label}` data-info = `${question.info}`)
-                                      //- i.fas.fa-info-circle
-                                      .alert-button              
+                                      .alert-button(onclick=`showInfo("${question.info}")`)              
                                 //- br
                                 if question.type == "coords"                               
                                   input#coords(name = question.name type = "text" readonly placeholder = "Select a point on the map")  
@@ -182,22 +180,23 @@ html
                                     br                    
                               .right-level-items
                                 .level-item-right
-                                  .chat-button(data-name = `${question.name}` data-email = `${email}`)
+                                  .comment-button(data-name = `${question.name}` data-email = `${email}`)
                                     //- i.fa-comment.fas
                                   .link-button(data-name = `${question.name}` data-email = `${email}`)
                                     //- i.fas.fa-link
-                                  .comment-button(data-name = `${question.name}` data-email = `${email}`)
+                                  .chat-button(data-name = `${question.name}` data-email = `${email}`)
                                     //- i.fa-comment.fas                                     
                           br
                           br
                   br
           .button-level
-            input(style="width:40%"  name = "edit-previous-button" type = "text" value = "Edit a previous settlement")
-            input.button.is-black(id="start-button" style="width:40%" type="submit" value="Start")
 
+            if sectionData.header=="fill-in-form" 
+              input(style="width:40%"  name = "edit-previous-button" type = "text" value = "Edit a previous settlement")
+              input.button.is-black(id="start-button" style="width:40%" type="submit" value="Start")
+            else        
+              input.button.is-dark(style="position:relative;left:70%;" type="submit" value="Submit")
 
-            
-            
 
               //- if index > 0
               //-   a.button.is-light(onclick = "goToSection(" + (index) + ")") Previous Section
@@ -217,7 +216,7 @@ html
         else 
           #info.box(style = "display:none;")
             h1.heading Info
-            p
+            p Yo
           #comment.box(style = "display:none;")
             h1.heading Comment
             p.subtitle.is-size-6 Add some clarifying information about this question, if necessary.
@@ -231,11 +230,26 @@ html
             p.help.is-success Successfully saved link!
             p.help.is-danger Please enter a valid link
             input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)
+          #chat.box(style = "display:none;")
+            h1.heading Image
+            p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+            input.text(type = "text") 
+            p.help.is-success Successfully saved link!
+            p.help.is-danger Please enter a valid link
+            input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
     if comments && links 
       script.
         let comments = !{JSON.stringify(comments)};
         let links = !{JSON.stringify(links)};
+
+    .form-footer(style="background-color:#242424;color:white;height:4rem;display:flex;align-items:center;flex-direction:row")
+      .footer-copy-right(style="margin:28px;")
+        <hr style="height:2px;background-color:#242424;margin:2px;color:white">
+          p &copy; City Science 2020
+
+      
     script(src = "/src/js/form.js")
+
     //- script(type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit")
 
     

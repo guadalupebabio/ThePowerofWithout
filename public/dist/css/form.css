@@ -2,6 +2,9 @@
   /* margin-top: 100px; */
   margin: 4rem!important;
   margin: 6rem 4rem 4rem 4rem!important;
+  /* display:flex;
+  flex-direction:row;
+  justify-content:space-evenly; */
   /* padding: 0 5vw;  */
 
 }
@@ -16,7 +19,7 @@
   
   .nav-column{
 
-    width:10%;
+    /* width:10%; */
     
   }
   .nav{
@@ -43,7 +46,26 @@
     border-right : 1px solid white ;
     padding-right : 0.5rem;
   }
-
+  .nav a:hover{
+    font-family: Roboto;
+    font-weight: bold;
+    margin:1rem 0rem 1rem 1rem;
+    color: black;
+    background-color: white;
+    transition: 0.2s all; 
+    border-right : 1px solid white ;
+    padding-right : 0.5rem;
+  }
+  .nav a:active{
+    font-family: Roboto;
+    font-weight: bold;
+    margin:1rem 0rem 1rem 1rem;
+    color: black;
+    background-color: white;
+    transition: 0.2s all; 
+    border-right : 1px solid white ;
+    padding-right : 0.5rem;
+  }
 
   .columns #sidebar .active {
     border-bottom: 4px solid black; }
@@ -275,6 +297,8 @@ Can contain either the map or the popup modals
 
 width:40%;
 margin: 2rem;
+position: relative;
+left: 5%;
 
 }
 
@@ -369,9 +393,10 @@ For the fill-in form
 }
 
 .chat-button{
-  background-image:url("../../assets/chat_24px.png");
-  height:19px;
-  width:19px;
+  /* background-image:url("../../assets/chat_24px.png"); */
+    background-image:url("../../assets/add_photo_alternate_24px.png");
+  height:24px;
+  width:24px;
   background-repeat:no-repeat;
   margin:0rem 0.5rem 0.5rem 0 ;
 }
@@ -384,10 +409,10 @@ For the fill-in form
   margin:0rem 0.5rem 0.5rem 0 ;
 }
 .comment-button{
-
-  background-image:url("../../assets/add_photo_alternate_24px.png");
-  height:24px;
-  width:24px;
+  background-image:url("../../assets/chat_24px.png");
+  /* background-image:url("../../assets/add_photo_alternate_24px.png"); */
+  height:19px;
+  width:19px;
   background-repeat:no-repeat;
   margin:0rem 0.5rem 0.5rem 0 ;
 
@@ -397,6 +422,13 @@ For the fill-in form
 
 width:20%;
 display: flex;
+
+
+}
+
+.info-div{
+
+  display:block!important;
 
 
 }
