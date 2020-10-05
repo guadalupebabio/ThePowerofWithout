@@ -105,17 +105,17 @@ let settlementSchema = new Schema({
   architecture: {
     physicalNature: {
       houseQuality: String,
-      materials: [String],
+      materials: Array,
       developmentState: String
     },
     infrastructure: {
       accessToEnergy: String,
-      sourceOfEnergy:String,
-      accessToWater: String,
-      accessToSanitation: String,
+      sourceOfEnergy:Array,
+      accessToWater: Array,
+      accessToSanitation: Array,
       accessToInternetOrPhoneFare: String,
       physicalStateOfStreets:String,
-      mobilitySystems: [String],
+      mobilitySystems: Array,
     }
   },
   populace: {

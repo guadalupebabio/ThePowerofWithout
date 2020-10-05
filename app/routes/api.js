@@ -8,7 +8,8 @@ let express = require("express"),
     sendEmail = require("../util/email.js");
     
     
-const { sectionDataContainer , modalData}= require("../../data.js")
+const { sectionDataContainer , modalData}= require("../../data.js");
+const e = require("express");
 
 module.exports = function(User, Settlement, Pin, Comment, Link){
   let router = express.Router();
@@ -118,131 +119,100 @@ module.exports = function(User, Settlement, Pin, Comment, Link){
   // router.post("/settlements/u/:id/:secret", cleanFormFields, function(req, res){
     router.post("/settlements/u/:id/:secret",function(req, res){
 
-      console.log(req.body);
-
-    // User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
-    //   Settlement.findOneAndUpdate(
-    //     {
-    //       _id: req.params.id
-    //     },
-    //     {
-    //     "site": {
-    //       "origin": {
-    //         "causes": req.body.siteOriginCauses,
-    //         "population": req.body.siteOriginPopulation != null && !isNaN(parseInt(req.body.siteOriginPopulation)) ? parseInt(req.body.siteOriginPopulation) : null,
-    //       },
-    //       "geography": {
-    //         "topography": req.body.siteGeographyTopography,
-    //         "withinCities": req.body.siteGeographyWithinCities,
-    //       },
-    //       "vulnerability": {
-    //           "resilienceToNaturalConditions": "",
-    //           "crimeRate": req.body.siteVulnerabilitySecurityCrimeRate,
-    //           "perceptionOfInsecurity": "",
-    //           "prevalance":""
-    //       }
-    //     },
-    //     "architecture": {
-    //       "physicalNature": {
-    //         "houseQuality": req.body.architecturePhysicalNatureHouseQuality,
-    //         "materials": req.body.architecturePhysicalNatureMaterials,
-    //         "developmentState": req.body.architecturePhysicalNatureDevelopmentState
-    //       },
-    //       "infrastructure": {
-    //         "accessToEnergy": req.body.architectureInfrastructureAccessEnergy,
-    //         "sourceOfEnergy": " ",
-    //         "accessToWater": req.body.architectureInfrastructureAccessWater,
-    //         "accessToSanitation": req.body.architectureInfrastructureAccessSanitation,
-    //         "physicalStateOfStreets": " ",
-    //         "accessToInternetOrPhoneFare": req.body.architectureInfrastructureAccessInternet,
-    //         "mobilitySystems": req.body.architectureMobility,
-
-    //       }
-    //     },
-    //     "populace": {
-
-    //       qualityOfLife:{
-    //         "householdPerHouseSize":"",
-    //         "accessToHealthCare": req.body.populaceHealthCare,
-    //         "accessToEducation": req.body.populaceEducation,
-    //         "publicAreas": req.body.populacePublicAreas,
-    //         "unemploymentRate": req.body.populaceUnemploymentRate,
-    //         "employmentInTheInformalSector":"",
-    //         "ownershipRights": req.body.populaceOwnership,
-    //         "ageGroups":"",
-    //         "gender":""
-
-    //       }
-    //     }
-    //   },
-    //   function(err){
-    //     req.flash('form-notification', "Successfully updated settlement data!");
-    //     res.redirect("/contribute/u/" + req.params.id + "/" + req.params.secret);
-    //   })
-    // })
+      // console.log(req.body["Causes"]);
+      // console.log(req.body)
+      let siteOriginCauses = req.body["Causes"] ;
+      let siteOriginPopulation = req.body["Population"]!= null && !isNaN(parseInt(req.body["Population"])) ? parseInt(req.body["Population"]) : null;
+      let siteGeographyTopography =   req.body["Topography Feautures"] ;
+      let siteGeographyWithin = req.body["Location within the city"] ;
+      let siteVulnerabilityResilience = req.body["Resilience to natural conditions"];
+      let siteVulnerabilityCrimeRate = req.body["Crime rate"];
+      let siteVulnerabilityPerception = req.body["Perception of Insecurity"];
+      let siteVulnerabilityPrevalance = req.body["Prevalence"];
+      let architecturePhysicalNatureHouseQuality = req.body["House Quality"];
+      let architecturePhysicalNatureMaterials  =  req.body["Materials"] ;
+      let architecturePhysicalNatureDev = req.body["Development State"];
+      let architectureInfrastructureEnergyAccess = req.body["Access to Energy"];
+      let architectureInfrastructureEnergySource =   req.body["Source of Energy"] ;
+      let architectureInfrastructureWaterAccess = req.body["Access to Water"] ;
+      let architectureInfrastructureSanitationAccess = req.body["Access to Sanitation"] ;
+      let architectureInfrastructureInternetAccess = req.body["Access to Internet"] ;
+      let architectureInfrastructureStreetState = req.body["Physical State of the Streets"] ;
+      let architectureMobilitySystems =   req.body["Mobility Systems"];
+      let populaceLifeQualityHouseHold =req.body["Household per house"] ;
+      let populaceLifeQualityHealthCare = req.body["populaceHealthCare"] ;
+      let populaceLifeQualityEducation=  req.body['Access to Education'] ;
+      let populaceLifeQualityInformalSector =req.body['Employment in the formal sector']; 
+      let populaceLifeQualityUnemploymentRate = req.body['Unemployment Rate'];
+      let populaceLifeQualityOwnership = req.body["Ownership"];
+      let populaceLifeQualityageGroups =req.body['Age groups'];
+      let populaceLifeQualityGender =req.body["Gender"];
 
 
+      User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
+      Settlement.findOneAndUpdate(
+        {
+          _id: req.params.id
+        },
+        {
+        "site": {
+          "origin": {
+            "causes": siteOriginCauses,
+            "population":siteOriginPopulation
+          },
+          "geography": {
+            "topography": siteGeographyTopography,
+            "withinCities": siteGeographyWithin,
+          },
+          "vulnerability": {
+              "resilienceToNaturalConditions": siteVulnerabilityResilience,
+              "crimeRate": siteVulnerabilityCrimeRate,
+              "perceptionOfInsecurity": siteVulnerabilityPerception,
+              "prevalance":siteVulnerabilityPrevalance
+          }
+        },
+        "architecture": {
+          "physicalNature": {
+            "houseQuality": architecturePhysicalNatureHouseQuality,
+            "materials": architecturePhysicalNatureMaterials,
+            "developmentState": architecturePhysicalNatureDev
+          },
+          "infrastructure": {
+            "accessToEnergy": architectureInfrastructureEnergyAccess,
+            "sourceOfEnergy": architectureInfrastructureEnergySource,
+            "accessToWater": architectureInfrastructureWaterAccess ,
+            "accessToSanitation": architectureInfrastructureSanitationAccess,
+            "physicalStateOfStreets": architectureInfrastructureStreetState,
+            "accessToInternetOrPhoneFare": architectureInfrastructureInternetAccess,
+            "mobilitySystems":architectureMobilitySystems ,
 
+          }
+        },
+        "populace": {
 
+          qualityOfLife:{
+            "householdPerHouseSize":populaceLifeQualityHouseHold ,
+            "accessToHealthCare":populaceLifeQualityHealthCare,
+            "accessToEducation": populaceLifeQualityEducation,
+            "unemploymentRate": populaceLifeQualityUnemploymentRate,
+            "employmentInTheInformalSector":populaceLifeQualityInformalSector,
+            "ownershipRights": populaceLifeQualityOwnership,
+            "ageGroups":populaceLifeQualityageGroups,
+            "gender":populaceLifeQualityGender
 
-    // User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
-    //   Settlement.findOneAndUpdate(
-    //     {
-    //       _id: req.params.id
-    //     },
-    //     {
-    //     "site": {
-    //       "origin": {
-    //         "causes": req.body.siteOriginCauses,
-    //         "geolocation": req.body.siteOriginGeolocation, // Continent
-    //         "population": req.body.siteOriginPopulation != null && !isNaN(parseInt(req.body.siteOriginPopulation)) ? parseInt(req.body.siteOriginPopulation) : null,
-    //       },
-    //       "geography": {
-    //         "topography": req.body.siteGeographyTopography,
-    //         "withinCities": req.body.siteGeographyWithinCities,
-    //         "climate": req.body.siteGeographyClimate,
-    //       },
-    //       "vulnerability": {
-    //         "security": {
-    //           "crimeRate": req.body.siteVulnerabilitySecurityCrimeRate,
-    //         },
-    //       }
-    //     },
-    //     "architecture": {
-    //       "physicalNature": {
-    //         "houseQuality": req.body.architecturePhysicalNatureHouseQuality,
-    //         "materials": req.body.architecturePhysicalNatureMaterials,
-    //         "developmentState": req.body.architecturePhysicalNatureDevelopmentState
-    //       },
-    //       "infrastructure": {
-    //         "accessToEnergy": req.body.architectureInfrastructureAccessEnergy,
-    //         "accessToWater": req.body.architectureInfrastructureAccessWater,
-    //         "accessToSanitation": req.body.architectureInfrastructureAccessSanitation,
-    //         "accessToInternetOrPhoneFare": req.body.architectureInfrastructureAccessInternet,
-    //         "mobilitySystems": req.body.architectureMobility,
-    //       },
-    //       "density": {
-    //         "averageFloors": req.body.architectureDensityElevation,
-    //         "householdPerHouseSize": req.body.architectureDensityHouseholdPerHouseSize,
-    //       }
-    //     },
-    //     "populace": {
-    //       "accessToHealthCare": req.body.populaceHealthCare,
-    //       "accessToEducation": req.body.populaceEducation,
-    //       "publicAreas": req.body.populacePublicAreas,
-    //       "ownershipRights": req.body.populaceOwnership,
-    //       "numberHospitals": req.body.populaceHospitals,
-    //       "numberSchools": req.body.populaceSchools,
-    //       "unemploymentRate": req.body.populaceUnemploymentRate,
-    //       "ethnicRacialCategories": req.body.ethnicRacialCategories,
-    //       "demography": req.body.demography,
-    //     }
-    //   },
-    //   function(err){
-    //     req.flash('form-notification', "Successfully updated settlement data!");
-    //     res.redirect("/contribute/u/" + req.params.id + "/" + req.params.secret);
-    //   })
-    // })
+          }
+        }
+      },
+      function(err){
+        if (err){ console.log(err);}
+      
+       else{
+        console.log("successfully updated");
+        req.flash('form-notification', "Successfully updated settlement data!");
+        res.redirect("/contribute/u/" + req.params.id + "/" + req.params.secret);
+       }
+      })
+    })
 
   });
 

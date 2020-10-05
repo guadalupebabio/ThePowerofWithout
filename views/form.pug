@@ -143,11 +143,11 @@ html
                                   .range-options
                                     label(for = question.name)= question.options[0]
                                     label(for = question.name)= question.options[1]  
-                                  input(type = "range"  min = "0" max = "10" value = (question.value ? question.value : null) name = question.name id = question.name)                                                      
+                                  input(type = "range"  min = "0" max = "10" value = (question.value!=null ? question.value[0] : null) name = question.name id = question.name)                                                      
                                   .range-options
                                     label(for = question.name)= question.options[2]
                                     label(for = question.name)= question.options[3]  
-                                  input(type = "range"  min = "0" max = "10" value = (question.value ? question.value : null) name = question.name id = question.name)    
+                                  input(type = "range"  min = "0" max = "10" value = (question.value!=null ? question.value[1] : null) name = question.name id = question.name)    
                             else                 
                               .left-level-items
                                 .level-item-left
@@ -169,10 +169,10 @@ html
                                     if question.type == "radio"                                                                         
                                       if val == "Other"
                                         .other-radio-div
-                                          input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == question.value)) 
-                                          input( style="margin-bottom:0!important; font-weight:bold;font-size:14px;" name = question.name type = "text" placeholder = "Other")                  
+                                          input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))   
+                                          input( style="margin-bottom:0!important; font-weight:bold;font-size:14px;" name = question.name type = "text" value= (question.value!=null ? question.value[1] : null) placeholder = "Other")                  
                                       else  
-                                        input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == question.value))                                                                                                                    
+                                        input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))                                                                                                                    
                                     else
                                       input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
                                     if val != "Other"
