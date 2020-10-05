@@ -106,7 +106,7 @@ html
                                       if question.info
                                         //- .info-button.level-item(data-label = `${category.label}` data-info = `${question.info}`)
                                         //- i.fas.fa-info-circle
-                                        .alert-button      
+                                        .alert-button(onclick=`showInfo("${question.info}")`)       
                                   br
                                   .right-level-items
                                     .level-item-right
@@ -130,7 +130,7 @@ html
                                       if question.info
                                         //- .info-button.level-item(data-label = `${category.label}` data-info = `${question.info}`)
                                         //- i.fas.fa-info-circle
-                                        .alert-button      
+                                        .alert-button(onclick=`showInfo("${question.info}")`)        
                                   br
                                   .right-level-items
                                     .level-item-right
@@ -214,7 +214,7 @@ html
             if map
               #map
         else 
-          #info.box(style = "display:none;")
+          #info.box(class="info-div-hide")
             h1.heading Info
             p Yo
           #comment.box(style = "display:none;")

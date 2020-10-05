@@ -12,6 +12,10 @@ let express = require("express"),
 let app = express(),
   router = express.Router();
 
+
+const { information } = require("./00infromationdefs.js");
+
+
 const PORT = process.env.PORT || 3000,
   DB_URL = `mongodb+srv://${process.env.MONGODB_USERNAME}:${encodeURIComponent(
     process.env.MONGODB_PASSWORD
@@ -211,13 +215,13 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                         "Other",
                       ],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",
+                      info: information["Origin"]
+                        ,
                     },
                     {
                       name: "Population",
                       type: "text",
-                      info: "Feedback from the population question",
+                      info: information["Population"],
                       placeholder : "Number"
                     },
                   ],
@@ -238,8 +242,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                         "Other",
                       ],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",
+                      info:information["Topography features"]
                     },
                     {
                       name: "Location within the city",
@@ -255,8 +258,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                         "Other",
                       ],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",
+                      info:information["Location within the city"]
                     },
                   ],
                 },
@@ -264,36 +266,32 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                   label: "VULNERABILITY",
                   questions: [
                     {
-                      name: "Resiliance to natural conditions",
+                      name: "Resilience to natural conditions",
                       type: "range",
                       options: ["Low","High"],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",
+                      info: information["Resilience to natural conditions"]
                     },
                     {
                       name: "Crime rate",
                       type: "range",
                       options:  ["Low","High"],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",
+                      info: information["Crime Rate"]
                     },
                     {
                       name: "Perseption of Insecurity",
                       type: "range",
                       options:  ["Low","High"],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",
+                      info:information["Personal perception of insecurity"]
                     },
                     {
                       name: "Prevalence",
                       type: "range",
                       options:  ["Low","High"],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",
+                      info:information["Prevalence"]
                     },
                   ],
                 },
@@ -310,21 +308,19 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                       type : "range",
                       options:  ["Low","High"],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:"Related to the point or place where the settlement begins, arises or derived"
+                      info:information["House quality"]
                     },{
                        name : "Materials",
                        type : "radio",
-                       options : ["Mud", "Brick","Concrete","Wood","Corrugates", "Sheet", "Tarpaulin", "Tiles","Others"],
+                       options : ["Mud", "Brick","Concrete","Wood","Corrugates", "Sheet", "Tarpaulin", "Tiles","Other"],
                        value: getFormValue(["site", "origin", "causes"]),
-                       info:
-                         "Related to the point or place where the settlement begins, arises or derived",                 
+                       info:information["Materials"]            
                     },{
                         name: "Development State",
                         type:"range",
                         options:["Initial","Established"],
                         value: getFormValue(["site", "origin", "causes"]),
-                        info:
-                          "Related to the point or place where the settlement begins, arises or derived",  
+                        info:information["Materials"] 
                     }
                   ]
                 },{
@@ -334,53 +330,46 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     type:"range",
                     options : ["Low","High"],
                     value: getFormValue(["site", "origin", "causes"]),
-                    info:
-                      "Related to the point or place where the settlement begins, arises or derived",  
+                    info:information["Development State"]
                   },
                   { 
                     name : "Source of Energy",
                     type:"radio",
                     options:["Coal","Wood","Gas","Electricity","Other"],
                     value: getFormValue(["site", "origin", "causes"]),
-                    info:
-                      "Related to the point or place where the settlement begins, arises or derived",  
+                    info:information["Access to Energy"]
 
                   },{
                     name : "Access to Water",
                     type : "double-range",
                     options : ["Low","High","Public","Private"],
                     value: getFormValue(["site", "origin", "causes"]),
-                    info:
-                      "Related to the point or place where the settlement begins, arises or derived",                    
+                    info:information["Access to Water"]                  
                   },{
                     name : "Access to Sanitation",
                     type : "double-range",
                     options : ["Low","High","Public","Private"],
                     value: getFormValue(["site", "origin", "causes"]),
-                    info:
-                      "Related to the point or place where the settlement begins, arises or derived",  
+                    info:information["Access to sanitation"]
                   },{
                     name:"Access to Internet",
                     type :"range",
                     options : ["Low","High"],
                     value: getFormValue(["site", "origin", "causes"]),
-                    info:
-                      "Related to the point or place where the settlement begins, arises or derived",  
+                    info:information["Access to internet"]
                   },
                   {
                     name:"Physical State of the Streets",
                     type :"range",
                     options : ["Low","High"],
                     value: getFormValue(["site", "origin", "causes"]),
-                    info:
-                      "Related to the point or place where the settlement begins, arises or derived",  
+                    info:information["Physical state Of the streets"] 
                   },{
                     name:"Mobility Systems",
                     type :"radio",
                     options : ["Walking","Biking", "By Car","By Public Transport","Other"],
                     value: getFormValue(["site", "origin", "causes"]),
-                    info:
-                      "Related to the point or place where the settlement begins, arises or derived",  
+                    info:information["Mobility systems"]
 
                   }
                 ]
@@ -397,58 +386,50 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                       type : "range",
                       options : ["1","5","10 or more"],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",  
+                      info:information["House holds per house"]
                     },{
                       name : "Access to Health Care",
                       type :"range",
                       options: ["Low","High"],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",  
+                      info:information["Access to Health Care"]
                     },{
                       name : "Access to Education",
                       type:"range",
                       options : ["Low,High"],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",  
+                      info:information["Access to Education"]
                     },{
 
                       name :"Unemployment Rate",
                       type:"range",
                       options:["Low","High"],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",  
+                      info:information["Unemployment rate"]
                     },{
                       name:"Employment in the formal sector",
                       type:"range",
                       options : ["0%","100%"],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",  
+                      info:information["Employment in the formal sector"]
                     },{
                       name :"Ownership",
                       type:"range",
                       options :["Illegal","Community/City Property","Private"],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",  
+                      info:information["Ownership"]  
                     },{
                       name : "Age groups",
                       type:"range",
                       options :["10","20","30","40","50",">60"],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",  
+                      info:information["Age groups"]
                     },{
                       name : "Gender",
                       type:"range",
                       options : ["Male","Female"],
                       value: getFormValue(["site", "origin", "causes"]),
-                      info:
-                        "Related to the point or place where the settlement begins, arises or derived",  
+                      info:information["Gender"]
                     }
                   ]  
                 }
@@ -456,6 +437,10 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
             }
           ],
         };
+
+
+
+
         Promise.all([
           Comment.find({
             settlementId: user.contribution,

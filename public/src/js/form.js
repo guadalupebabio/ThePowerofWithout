@@ -62,6 +62,8 @@ function googleTranslateElementInit() {
 // Icon Button Handlers
 function hideAll(){
   $("#info").hide();
+  const infoDiv = document.getElementById("info");
+  infoDiv.classList.toggle("info-div");
   $("#comment").hide();
   $("#link").hide();
 }
@@ -69,14 +71,14 @@ function hideAll(){
 $(document).click(hideAll);
 $(".box").click((e) => e.stopPropagation())
 
-$(".info-button").click(function(e){
-  e.stopPropagation();
-  hideAll();
+// $(".info-button").click(function(e){
+//   e.stopPropagation();
+//   hideAll();
 
-  let data = $(this).data();
-  $("#info").show();
-  $("#info p").text(`${data.label}: ${data.info}`);
-})
+//   let data = $(this).data();
+//   $("#info").show();
+//   $("#info p").text(`${data.label}: ${data.info}`);
+// })
 
 
 function showInfo(data){
@@ -85,14 +87,16 @@ function showInfo(data){
   const infoDiv = document.getElementById("info");
   infoDiv.classList.toggle("info-div");
   infoDiv.childNodes[1].innerText = data;
+  console.log(data);
   
 
 
 }
 
 $(".comment-button").click(function(e){
-  e.stopPropagation();
   hideAll();
+  e.stopPropagation();
+ 
 
   let data = $(this).data(),
       commentI = comments.findIndex((d) => d.formFieldName == data.name)
@@ -107,8 +111,9 @@ $(".comment-button").click(function(e){
 })
 
 $(".link-button").click(function(e){
-  e.stopPropagation();
   hideAll();
+  e.stopPropagation();
+  
 
   let data = $(this).data(),
       linkI = links.findIndex((d) => d.formFieldName == data.name)
@@ -200,10 +205,12 @@ const modalDiv = document.getElementById("modal-div");
 // });
 
 const startButton = document.getElementById("start-button");
+if (startButton){
 startButton.addEventListener("click",()=>{
    modalDiv.className = "modal-container"
 
 });
+}
 
 window.addEventListener("click",(ev)=>{
 

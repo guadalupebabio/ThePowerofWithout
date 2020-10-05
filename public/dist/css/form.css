@@ -428,9 +428,14 @@ display: flex;
 
 .info-div{
 
-  display:block!important;
+  display:block;
 
 
+}
+.info-div-hide{
+
+
+  display:none;
 }
 
 
