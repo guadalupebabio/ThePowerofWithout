@@ -6,6 +6,7 @@ let nodemailer = require('nodemailer'),
     transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
+        type: "login", 
         user: 'thepowerofwithout@gmail.com',
         pass: process.env.EMAIL_PASSWORD
       }
@@ -71,6 +72,7 @@ module.exports = function(to, settlement, token){
   };
 
   transporter.sendMail(mailOptions, function(error, info){
+    // console.log("This is the password",process.env.EMAIL_PASSWORD)
     console.log(error);
     console.log(info);
   });
