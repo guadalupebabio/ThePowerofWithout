@@ -29,7 +29,7 @@ module.exports = function(to, settlement, token){
     <br/>
     We are very appreciative of the time you have taken to assist with our Taxonomy, and we are committed to utilizing this information to implement worthwhile improvements to the world map of informality. New map information is posted to our website. We are also aware that some of the questions asked were challenging and extensive. If you want to edit your response, you can do so here:
     <br/>
-    <a href = "https://powerofwithout.herokuapp.com/contribute/u/${settlement}/${token}">https://powerofwithout.herokuapp.com/contribute/u/${settlement}/${token}</a>
+    <a href = "https://power-of-without.herokuapp.com/contribute/u/${settlement}/${token}">https://power-of-without.herokuapp.com/contribute/u/${settlement}/${token}</a>
     <br/>
     <br/>
     Once again, we are extremely grateful for your contribution, your insight, and your thoughtful suggestions.
