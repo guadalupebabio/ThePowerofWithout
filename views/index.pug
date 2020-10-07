@@ -62,10 +62,10 @@ html
               a Send feedback
           .contribute-summary
             .contribute-summary-title
-              <b>MAP OF INFORMALITY</b> 
+              <b>CONTRIBUTE</b> 
             .contribute-summary-text
-              a Add a missing settlement
-              a Edit a previous entry
+              a(href="/contribute") Add a missing settlement
+              a(href="/contribute") Edit a previous entry
           .tools-summary
             .tool-summary-title
               <b> THE TOOLS</b>
@@ -88,6 +88,7 @@ html
               <br/>
               p <b> Jeffrey J Shen </b>, Research Assistant, Web Developer
               p <b>Cherie Wang </b>, Research Assistant, Web Developer
+              p <b>Hillary Tamirepi </b>, Research Assistant, Web Developer
         .links-summary
           a(href="https://www.facebook.com/MITCities" target="_blank")  Facebook
           a(href="https://www.instagram.com/mitcityscience/" target="_blank")  Instagram
@@ -161,8 +162,10 @@ html
         updateContentSubscribeButton.className= "update-div-contents-subscribe"
 
       }) 
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+      }
 
-script(type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit")
 
 
 

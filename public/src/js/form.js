@@ -1,5 +1,7 @@
 // const { info } = require("node-sass");
 
+
+
 if($("#map").length != 0){ // if map exists, create it
   var map = L.map('map')
     .setView([0,0],3);
@@ -49,10 +51,16 @@ function goToSection(i){
 
 }
 
-function showInfo(info, label){
+function showInfo(info){
+  // hideAll();
   $("#info").show();
-  $("#info p").text(`${label}: ${info}`);
+  $("#info p").text(`${info}`);
 }
+
+function closeModal(){
+  $("#previous-modal-div").hide();
+}
+
 
 // Add Google translate
 function googleTranslateElementInit() {
@@ -62,36 +70,38 @@ function googleTranslateElementInit() {
 // Icon Button Handlers
 function hideAll(){
   $("#info").hide();
-  const infoDiv = document.getElementById("info");
-  infoDiv.classList.toggle("info-div");
   $("#comment").hide();
   $("#link").hide();
+  // $("#previous-modal-div").hide();
 }
 
 $(document).click(hideAll);
 $(".box").click((e) => e.stopPropagation())
 
-// $(".info-button").click(function(e){
-//   e.stopPropagation();
-//   hideAll();
-
-//   let data = $(this).data();
-//   $("#info").show();
-//   $("#info p").text(`${data.label}: ${data.info}`);
-// })
-
-
-function showInfo(data){
-
+$(".alert-button").click(function(e){
+  e.stopPropagation();
   hideAll();
-  const infoDiv = document.getElementById("info");
-  infoDiv.classList.toggle("info-div");
-  infoDiv.childNodes[1].innerText = data;
-  console.log(data);
+
+  // let data = $(this).data();
+  $("#info").show();
+  // $("#info p").text(`${data.label}: ${data.info}`);
+})
+
+
+// function showInfo(data){
+
+//   hideAll();
+//   const infoDiv = document.getElementById("info");
+//   if (info){
+//   infoDiv.className = "info-div";
+//   infoDiv.childNodes[1].innerText = data;
+//   infoDiv.style="display:block!important;"
+//   console.log(data);
+//   }
   
 
 
-}
+// }
 
 $(".comment-button").click(function(e){
   hideAll();
@@ -197,7 +207,7 @@ function saveLink(){
 
 
 const modalDiv = document.getElementById("modal-div");
-
+// const previousModalDiv = document.getElementById("previous-modal-div");
 // const continueButton = document.getElementById("continue-button");
 // continueButton.addEventListener("click",()=>{
 //    modalDiv.className = "modal-container"
@@ -209,14 +219,60 @@ if (startButton){
 startButton.addEventListener("click",()=>{
    modalDiv.className = "modal-container"
 
+   const privacyQuestion = document.getElementById("privacy-checkbox-0");
+   
+   if (!privacyQuestion.checked){
+      console.log("alert message");
+      alert("Please make sure the privacy checkbox is checked");
+
+   
+   }
+
 });
 }
 
+// window.addEventListener("click",(ev)=>{
+
+//   if ((ev.target !== previousModalDiv)) {
+//     previousModalDiv.className = "previous-modal-container-hide";
+//   }
+
+// });
 window.addEventListener("click",(ev)=>{
 
-  if (ev.target !== modalDiv) {
+  if ((ev.target !== modalDiv)) {
     modalDiv.className = "modal-container-hide";
   }
 
 });
 
+async function postData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
+
+
+const editPreviousButton = document.getElementById("edit-previous-button");
+
+if (editPreviousButton){
+  
+  editPreviousButton.addEventListener("click",()=>{
+    const previousModalDiv = document.getElementById("previous-modal-div");
+    previousModalDiv.className = "previous-modal-container";
+    $("#previous-modal-div").show();
+  })
+}

@@ -15,6 +15,7 @@ let app = express(),
 
 const { information } = require("./00infromationdefs.js");
 
+const {aboutPageData,previousSettlementModal} = require("./data.js");
 
 const PORT = process.env.PORT || 3000,
   DB_URL = `mongodb+srv://${process.env.MONGODB_USERNAME}:${encodeURIComponent(
@@ -135,6 +136,8 @@ app.get("/contribute", function (req, res) {
     sectionData: sectionDataContainer,
     modalData : modalData,
     modalClass : "modal-container-hide",
+    previousModalData: previousSettlementModal,
+    previousModalClass : "previous-modal-container-hide",
     redirectUrl : "/contribute",
     url: "/api/settlements",
     notification:
@@ -171,6 +174,13 @@ app.get("/contribute/u/", function (req, res) {
   res.render("form", {
     sections: sections,
     url: "/api/get-settlement",
+    modalData : { 
+      description:"",
+      icons:[]
+   },     
+    modalClass : "modal-container-hide",
+    previousModalData: previousSettlementModal,
+    previousModalClass : "previous-modal-container-hide",
     notification: req.flash("form-notification"),
     error: req.flash("form-error"),
   });
@@ -461,8 +471,11 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
             modalData : { 
                 description:"",
                 icons:[]
-            },         
+            },     
+
             modalClass : "modal-container-hide",
+            previousModalData: previousSettlementModal,
+            previousModalClass : "previous-modal-container-hide",
             redirectUrl:"",
             notification: req.flash("form-notification"),
             url:
@@ -484,7 +497,10 @@ app.get("/toolkit", function (req, res) {
 });
 
 app.get("/about", function (req, res) {
-  res.render("about");
+  res.render("about",{
+  aboutInfo:aboutPageData
+}
+  );
 });
 
 app.get("/map", function (req, res) {

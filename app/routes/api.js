@@ -5,11 +5,13 @@ let express = require("express"),
     cleanFormFields = require("../middleware/cleanFormFields.js"),
     preventEmptyFormFields = require("../middleware/preventEmptyFormFields.js"),
     validateEmail = require("../middleware/validateEmail.js"),
-    sendEmail = require("../util/email.js");
+    sendEmail = require("../util/email.js"),
+    checkPrivacyChecked = require("../middleware/checkPrivacyChecked.js");
     
-    
-const { sectionDataContainer , modalData}= require("../../data.js");
+const {information} = require("../../00infromationdefs.js");
+const { previousSettlementModal,sectionDataContainer , modalData}= require("../../data.js");
 const e = require("express");
+
 
 module.exports = function(User, Settlement, Pin, Comment, Link){
   let router = express.Router();
@@ -31,7 +33,12 @@ module.exports = function(User, Settlement, Pin, Comment, Link){
 
   // Given name and email, redirect to the correct settlement.
   router.post("/get-settlement", preventEmptyFormFields, cleanFormFields, validateEmail, function(req, res){
-    if(req.error) res.redirect("/contribute/u/");
+    console.log('This is the data I am getting',req.body);
+    // res.render("form")
+    if(req.error) {
+      res.get("/contribute/")
+      console.log(req.error);
+      ;}
     else Settlement.findOne({
       "name": `${req.body.settlement}, ${req.body.city}`
     }, function(err, settlement){
@@ -40,25 +47,27 @@ module.exports = function(User, Settlement, Pin, Comment, Link){
         "email": req.body.email
       }, function(err, user){
         if(!err && user){
+          console.log("I've found it");
           res.redirect("/contribute/u/" + settlement._id + "/" + user.secret);
         }
         else{
           req.flash('form-notification', "No settlement found");
-          res.redirect("/contribute/u/");
+          res.redirect("/contribute");
         }
       })
       else {
+        console.log("no settlement found");
         req.flash('form-notification', "No settlement found");
-        res.redirect("/contribute/u/");
+        res.redirect("/contribute");
       }
     });
   });
 
   // Add new settlement to database
-  router.post("/settlements", preventEmptyFormFields, cleanFormFields, validateEmail, function(req, res){
+  router.post("/settlements", preventEmptyFormFields, cleanFormFields, validateEmail,checkPrivacyChecked, function(req, res){
 
    
-    console.log(req.body);
+    // console.log(req.body);
 
     if(req.error) {
       res.redirect("/contribute");
@@ -210,7 +219,7 @@ module.exports = function(User, Settlement, Pin, Comment, Link){
        else{
         console.log("successfully updated");
         req.flash('form-notification', "Successfully updated settlement data!");
-        res.redirect("/contribute/u/" + req.params.id + "/" + req.params.secret);
+        res.redirect("/");
        }
       })
     })

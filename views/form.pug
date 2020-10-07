@@ -11,18 +11,34 @@ html
 
     include includes/nav-black.pug
     
-    
-    #modal-div(class=`${modalClass}`)
-      .modal-description
-        p #{modalData.description}
-      .modal-items-description
-        each icon in modalData.icons
-          .modal-item 
-            .modal-icon(style=`background-image:url(${icon.image})`)
-            .modal-icon-description          
-              p #{icon.description}             
-      a(href=`${redirectUrl}` id="continue-button") Continue
+    if (modalData)
+      #modal-div(class=`${modalClass}`)
+        .modal-description
+          p #{modalData.description}
+        .modal-items-description
+          each icon in modalData.icons
+            .modal-item 
+              .modal-icon(style=`background-image:url(${icon.image})`)
+              .modal-icon-description          
+                p #{icon.description}             
+        a(href=`${redirectUrl}` id="continue-button") Continue
 
+    if (previousModalClass)
+     #previous-modal-div(class=`${previousModalClass}`)  
+      .previous-modal-close-button(onclick="closeModal()")
+      .previous-modal-description 
+        form(action = "/api/get-settlement" method = "POST") 
+          each field in previousModalData
+            .fill-in-level-row-item
+              label(for = field.name + "-" + index)= field.label
+              br          
+            if field.type == "text"  
+              input(id=field.id name = field.name type = "text" placeholder = field.placeholder) 
+              br
+              br
+          input.button.is-black(id="previous-continue-button" style="position:relative;left:30%;width:40%" type="submit" value="Continue")
+
+      
     .columns.is-variable.is-8
 
       if sectionData.header=="update-settlement"     
@@ -72,7 +88,7 @@ html
                             if question.type == "radio"
                               input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == question.value))
                             else 
-                              input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
+                              input(type = question.type name = question.name id = question.name + "-" + index val = "Privacy" checked = false)
                             label( style="font-size:0.8rem" for = question.name + "-" + index)= val
                             br
                         else if question.type == "range"
@@ -192,20 +208,10 @@ html
           .button-level
 
             if sectionData.header=="fill-in-form" 
-              input(style="width:40%"  name = "edit-previous-button" type = "text" value = "Edit a previous settlement")
+              input.button.is-black(style="width:40%" id ="edit-previous-button" name = "edit-previous-button" type = "button" value = "Edit a previous settlement")
               input.button.is-black(id="start-button" style="width:40%" type="submit" value="Start")
             else        
               input.button.is-dark(style="position:relative;left:70%;" type="submit" value="Submit")
-
-
-              //- if index > 0
-              //-   a.button.is-light(onclick = "goToSection(" + (index) + ")") Previous Section
-                              
-              //- if inde == sections.length - 1
-                
-              //- else 
-              //-   input.button.is-dark(type="submit" value="Save")
-              //-   a.button.is-black(onclick = "goToSection(" + (index + 2) + ")") Next Section
 
 
       .right-column#right-sidebar
@@ -214,9 +220,9 @@ html
             if map
               #map
         else 
-          #info.box(class="info-div-hide")
+          #info.box(style = "display:none;")
             h1.heading Info
-            p Yo
+            p
           #comment.box(style = "display:none;")
             h1.heading Comment
             p.subtitle.is-size-6 Add some clarifying information about this question, if necessary.

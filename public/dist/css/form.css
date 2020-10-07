@@ -264,20 +264,71 @@ Modal CSS
   margin-right: 1rem;
 }
 
-
 #continue-button{
 
   width: 20%;
   height:10%;
   border:0;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
+  text-decoration:underline;
   outline:0;
-  font-size:1rem;
+  font-size:1.5rem;
   background-color:white;
   color:black;
 
+  margin-left:1.5rem;
+
 }
 
+.previous-modal-container{
+
+  height: 550px;
+  width: 850px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-evenly;
+  margin:1rem;
+  padding:2rem;
+  z-index:99999;
+  position: fixed;
+  top : 15%;
+  left : 20%;
+  background-color: white;
+  border:1px solid black;
+
+}
+
+
+.previous-modal-description{
+
+  width: 70%;
+
+}
+.previous-modal-container-hide{
+
+
+  display:none;
+
+
+
+}
+
+.previous-modal-close-button{
+
+  position:relative;
+  top: 1%;
+  left:45%;
+  width:24px;
+  height:24px;
+  background-size:24px 24px;
+  background-position-x: 0;
+  background-position-y: 0;
+  background-repeat: no-repeat;
+  background-image:url("../../assets/clear_24px\ \(1\).png");
+  padding:1rem;
+
+}
 /* 
 
 Contains the form structure
@@ -428,15 +479,15 @@ display: flex;
 
 .info-div{
 
-  display:block;
+  /* display:flex!important; */
 
 
 }
-.info-div-hide{
+/* .info-div-hide{
 
 
-  display:none;
-}
+  display:none!important;
+} */
 
 
 .level-item-header  label{

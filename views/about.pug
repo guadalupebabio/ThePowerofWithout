@@ -2,35 +2,78 @@ doctype html
 html 
   head 
     include includes/head.pug
+    link(rel="stylesheet" href="/dist/css/about.css")
     title The Power of Without
   body 
     - let activeTab = 4;
-    include includes/nav.pug
-    p about
-    h1 MISSION
-    br
-    p As the world moves towards urbanization, cities are becoming increasingly complex. By 2050, about 70% of the world's population is expected to live in urban areas,  projected to reach 6.3 billion people. To keep up with the growing urban population, traditional infrastructure systems are estimated to cost $57-trillion. Few experts anticipate that this is even remotely possible and that new strategies are needed. The cost of conventional infrastructure would exceed the combined annual GDP of the USA, China, and Europe,  and 90% of this urbanization will be in Africa and Asia.
-    br
-    br
-    h1 METHOD 
-    br
-    p We must find new solutions to meet the complex challenges of the future. We pose an opportunity to rethink current models and invent new systems and strategies for a more livable, equitable, and resilient future. 
-    p The qualities of informal communities can vary greatly from country to country.  Therefore, informality is difficult to understand and quantify, which makes it even harder to comprehend. We want to leverage the tools and our expertise to understand the cities of today and tomorrow. To better understand and study informal settlements and communities, our team has developed a taxonomy of existing taxonomies of informality. This taxonomy is further understood using a series of qualitative and quantitative questions that are answered by the stakeholders on each community to understand both the strengths of each community and their challenges.  Moreover, since those who live and work in these communities are the true experts, we think this task should be crowdsourced.
-    br
-    br
-    h1 MEANS
-    br
-    p  Content, Tools & Data to understand informlaity
-    br
-    br
-    h1 WHO WE ARE
-    br
-    p Kent Larson and the City Science group proposes that new strategies must be found to create the places where people live and work in addition to the mobility systems that connect them, in order to meet the profound challenges of the future. The scale and rate of urban expansion in the global south is creating challenges for unplanned and informal communities. This is a critical challenge that will impact a large number of cities and segments of the global population.
-    br
-    p Since last year, we’ve been researching and building the tools that are displayed on this website as a sum-up of our research on informlaity. This platform in particular will help individuals advocate for themselves and raise awareness. We’ve spent the last few weeks changing gears to be able to quickly launch this tool that will help people most unheard but those who should play the main role in this conversation
-    br
-    br
-    h1 GET IN TOUCH
-    br
-    p informality@media.mit.edu
-    
+    include includes/nav-black.pug
+
+    .about-info-container
+      for data in aboutInfo 
+        h1 #{data.label}
+        br
+        p #{data.info}
+        br
+        br
+    .footer
+      .footer-top-half
+        .summary-of-site
+          .map-of-informality-summary
+            .map-of-informality-summary-title
+              <b>MAP OF INFORMALITY</b>
+            .map-of-informality-summary-text
+              a Country
+              a Settlement
+              <br/>
+              a Report error on the map
+              a Send feedback
+          .contribute-summary
+            .contribute-summary-title
+              <b>Contribute</b> 
+            .contribute-summary-text
+              a(href="/contribute") Add a missing settlement
+              a(href="/contribute") Edit a previous entry
+          .tools-summary
+            .tool-summary-title
+              <b> THE TOOLS</b>
+            .tool-summary-text  
+              a(href="") The Toolkit
+              a MAS.552 Settlements Without
+              a Security App 
+              a The Platform
+          .team
+            .tool-summary-title
+              <b> THE TEAM </b>
+            .tool-summary-text
+              p <b> Kent Larson </b>, Director
+              p <b> Maggie Church</b>, Program Coordinator, Communications
+              <br/>
+              p <b> Luis Alonso </b>, Research Lead
+              p <b> Guadalupe Babio</b>, Research Lead, Design Manager
+              p <b>Maitane Iruretagoyena </b>, Research Lead
+              p <b> Leticia Izquierdo</b>, Research Assistant
+              <br/>
+              p <b> Jeffrey J Shen </b>, Research Assistant, Web Developer
+              p <b>Cherie Wang </b>, Research Assistant, Web Developer
+              p <b>Hillary Tamirepi </b>, Research Assistant, Web Developer
+        .links-summary
+          a(href="https://www.facebook.com/MITCities" target="_blank")  Facebook
+          a(href="https://www.instagram.com/mitcityscience/" target="_blank")  Instagram
+          a(href="https://www.youtube.com/channel/UC_xYLSGw48SThpbogRNyggQ" target="_blank")  Youtube
+      .footer-bottom-half 
+        .footer-bottom-half-accessories
+          .footer-bottom-half-description
+            p The material on this website can be used freely in any publication provided that: 
+            p 1. It is duly credited as a project by the MIT Media Lab, City Science Group. 
+            p 2. A PDF copy of the publication is sent to settlements@mit.edu
+          .footer-bottom-half-logos   
+            .footer-bottom-half-logo-1
+
+            .footer-bottom-half-logo-2 
+        .footer-copy-right
+          <hr style="height:2px;background-color:#242424;margin:0px">
+            p &copy; City Science 2020
+    script.
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+      }

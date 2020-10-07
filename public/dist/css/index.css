@@ -110,7 +110,7 @@
   width : 30px;
   background-color: #242424;
   position: fixed;
-  top: 500px;
+  top: 700px;
   left: 0px;
   z-index:999;
   visibility:hidden;
@@ -122,10 +122,10 @@
 .update-div-shortened-alternate{
  
   height: 100px;
-  width : 30px;
+  width : 28px;
   background-color: #242424;
   position: fixed;
-  top: 500px;
+  top: 700px;
   left: 0px;
   z-index:999;
   visibility:visible;
@@ -141,6 +141,7 @@
   text-decoration : underline;
   font-weight : bold;
   color: white;
+  
 
 
 }
@@ -188,7 +189,7 @@
 .update-div-contents-subscribe {
   position: absolute;
   width: 191px;
-  height: 47px;
+  height: 27px;
   top: 35%;
   right: 0px;
   display:block;
@@ -328,7 +329,11 @@
   width: 670px;
   height: 392px;
 }
+.footer a {
 
+
+  color:#242424;
+}
 .footer {
   position: absolute;
   top: 2117px;
@@ -336,6 +341,7 @@
   width: 1440px;
   display: flex;
   flex-direction: column;
+  margin:5px;
 }
 
 .footer-top-half {
