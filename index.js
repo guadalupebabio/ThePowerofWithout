@@ -541,6 +541,6 @@ app.use(
 
 // ** START THE SERVER **
 
-app.listen(PORT);
-console.log("Running on http://127.0.0.1:" + PORT);
+app.listen(process.env.PORT||PORT);
+console.log("Running on http://127.0.0.1:" + process.env.PORT);
 module.exports = app;
