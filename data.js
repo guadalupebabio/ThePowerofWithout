@@ -8,10 +8,10 @@
         value: "City",
       },
       {
-        label: "Name of the Informal Settlement",
+        label: "Name of Community",
         name: "settlement",
         type: "text",
-        value: "Settlements",
+        value: "Community",
       },
       {
         label: "Draw area on the map (Use polygon shape)",
@@ -20,10 +20,10 @@
         value: "Draw area",
       },
       {
-        label: "Settlement Area",
+        label: "Community Area",
         name: "area",
         type: "area",
-        value: "",
+        value: "Area",
       },
       {
         label: "Email Address",

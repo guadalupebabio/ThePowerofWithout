@@ -52,11 +52,7 @@ if($("#map").length != 0){ // if map exists, create it
       var basemap = e.target.value;
       setBasemap(basemap);
     });
-  
-//   var layer = new L.GIBSLayer('MODIS_Aqua_SurfaceReflectance_Bands721', {
-//     date: new Date('2015/04/01'),
-//     // transparent: true
-// }).addTo(map);
+
 
 // Initialise the FeatureGroup to store editable layers
 var editableLayers = new L.FeatureGroup();
@@ -123,7 +119,7 @@ map.on('draw:created', function(e) {
 
 map.on('draw:deleted', function(e) {
   $("#coords").val("");
-  $("#area").val("area");
+  $("#area").val("");
 });
 
 
@@ -335,7 +331,23 @@ function saveLink(){
   });
 }
 
+$(document).on("focusin", "#coords", function() {
+  $(this).prop('readonly', true);  
+});
 
+$(document).on("focusout", "#coords", function() {
+  $(this).prop('readonly', false); 
+});
+
+
+$(document).on("focusin", "#area", function() {
+  $(this).prop('readonly', true);  
+
+});
+
+$(document).on("focusout", "#area", function() {
+  $(this).prop('readonly', false); 
+});
 const modalDiv = document.getElementById("modal-div");
 // const previousModalDiv = document.getElementById("previous-modal-div");
 // const continueButton = document.getElementById("continue-button");
@@ -347,20 +359,46 @@ const modalDiv = document.getElementById("modal-div");
 const startButton = document.getElementById("start-button");
 if (startButton){
 startButton.addEventListener("click",()=>{
-   modalDiv.className = "modal-container"
+  //  modalDiv.className = "modal-container"
 
-   const privacyQuestion = document.getElementById("privacy-checkbox-0");
+  //  const privacyQuestion = document.getElementById("privacy-checkbox-0");
    
-   if (!privacyQuestion.checked){
-      console.log("alert message");
-      alert("Please make sure the privacy checkbox is checked");
-
-   
-   }
-
+  //  if (!privacyQuestion.checked){
+  //     // console.log("alert message");
+  //     alert("Please make sure the privacy checkbox is checked");
+  //  }
+  // const coords = document.getElementById("coords");
+  // const area = document.getElementById("area");
+  // console.log(area.value);
+  validateForm();
 });
 }
 
+function validateForm(){
+//   const privacyQuestion = document.getElementById("privacy-checkbox-0");
+//   if (!privacyQuestion.checked){
+//     // console.log("alert message");
+//     alert("Please make sure the privacy checkbox is checked");
+//     // break;
+//     return 
+//  }
+ const coords = document.getElementById("coords");
+ const area = document.getElementById("area");
+ console.log(area);
+ if ((coords.value=="")||(area.value=="")){
+  // console.log("alert message");
+  alert("Please make sure you have drawn coords on the map");
+  // break;
+
+}
+
+// if ((area.value=="")){
+//   // console.log("alert message");
+//   alert("Please make sure you have drawn coords on the map");
+
+// }
+
+}
 // window.addEventListener("click",(ev)=>{
 
 //   if ((ev.target !== previousModalDiv)) {

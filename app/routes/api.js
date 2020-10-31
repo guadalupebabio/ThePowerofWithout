@@ -70,7 +70,8 @@ module.exports = function(User, Settlement, Pin, Comment, Link){
     // console.log(req.body);
 
     if(req.error) {
-      res.redirect("/contribute");
+      // res.redirect("/contribute");
+      req.flash("form-error", "Invalid Coordinates")
       return
     }
 
