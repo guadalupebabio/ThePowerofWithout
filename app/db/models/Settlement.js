@@ -78,12 +78,15 @@ let settlementSchema = new Schema({
   geolocation: {
     type: {
       type: String,
-      enum: ['Point'],
+      enum: ['polygon'],
       required: true
     },
     coordinates: {
       type: [Number],
       required: true
+    },
+    area:{ 
+      type:Number
     }
   },
   site: {

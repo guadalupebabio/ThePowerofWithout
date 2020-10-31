@@ -5,6 +5,15 @@ html
     title The Power of Without
     link(rel='stylesheet', href='https://unpkg.com/leaflet@1.6.0/dist/leaflet.css')
     script(src='https://unpkg.com/leaflet@1.6.0/dist/leaflet.js')
+    script(src="src/GIBSMetadata.js")
+    script(src="src/GIBSLayer.js")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js")
+    script(src="https://unpkg.com/esri-leaflet@2.5.1/dist/esri-leaflet.js"
+    integrity="sha512-q7X96AASUF0hol5Ih7AeZpRF6smJS55lcvy+GLWzJfZN+31/BQ8cgNx2FGF+IQSA4z2jHwB20vml+drmooqzzQ=="
+    crossorigin="")
+
+
     link(rel="stylesheet" href="/dist/css/form.css")
   body 
     - let activeTab = 2;
@@ -36,7 +45,7 @@ html
               input(id=field.id name = field.name type = "text" placeholder = field.placeholder) 
               br
               br
-          input.button.is-black(id="previous-continue-button" style="position:relative;left:30%;width:40%" type="submit" value="Continue")
+          input.button.is-black(id="previous-continue-button" style="position:relative;left:30%;width:100px" type="submit" value="Continue")
 
       
     .columns.is-variable.is-8
@@ -77,12 +86,14 @@ html
                       br
                       .fill-in-level-row-input
                         if question.type == "coords"
-                          input#coords(name = question.name type = "text" readonly placeholder = question.value)    
+                          input#coords(name = question.name type = "text" readonly placeholder = question.value)   
+                        else if question.type == "area"
+                          input#area(name = question.name type = "text" readonly placeholder = question.value)  
                         else if question.type == "text"    
                           if question.disabled
                             input(name = question.name type = question.type readonly value = question.value)
                           else
-                            input(name = question.name type = question.type placeholder = question.value)
+                            input(name = question.name type = question.type placeholder = question.value)        
                         else if question.type == "radio" || question.type == "checkbox"
                           each val, index in question.options
                             if question.type == "radio"
@@ -209,7 +220,7 @@ html
 
             if sectionData.header=="fill-in-form" 
               input.button.is-black(style="width:40%" id ="edit-previous-button" name = "edit-previous-button" type = "button" value = "Edit a previous settlement")
-              input.button.is-black(id="start-button" style="width:40%" type="submit" value="Start")
+              input.button.is-black(id="start-button" style="width:100%" type="submit" value="Start")
             else        
               input.button.is-dark(style="position:relative;left:70%;" type="submit" value="Submit")
 
@@ -219,6 +230,11 @@ html
           section
             if map
               #map
+                #basemaps-wrapper
+                  select#basemaps
+                    option(value="Streets") Streets
+                    option(value="ImageryClarity") ImageryClarity
+
         else 
           #info.box(style = "display:none;")
             h1.heading Info

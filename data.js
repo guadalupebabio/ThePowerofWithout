@@ -14,10 +14,16 @@
         value: "Settlements",
       },
       {
-        label: "Settlement Location (Set a point on the map)",
+        label: "Draw area on the map (Use polygon shape)",
         name: "geolocation",
         type: "coords",
-        value: "Select a point on the map",
+        value: "Draw area",
+      },
+      {
+        label: "Settlement Area",
+        name: "area",
+        type: "area",
+        value: "",
       },
       {
         label: "Email Address",

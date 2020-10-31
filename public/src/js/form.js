@@ -2,33 +2,166 @@
 
 
 
+
+
 if($("#map").length != 0){ // if map exists, create it
   var map = L.map('map')
     .setView([0,0],3);
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-  	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    attribution:'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  	// attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
   	subdomains: 'abcd',
   	maxZoom: 19
   }).addTo(map);
 
-  var marker = null;
+  var imagerylayer = L.esri.basemapLayer('Streets').addTo(map);
+  var layerLabels;
+  
+  function setBasemap (basemap) {
+    if (imagerylayer) {
+      map.removeLayer(imagerylayer);
+    }
+  
+    imagerylayer = L.esri.basemapLayer(basemap);
+  
+    map.addLayer(imagerylayer);
+  
+    if (layerLabels) {
+      map.removeLayer(layerLabels);
+    }
+  
+    if (
+      basemap === 'ShadedRelief' ||
+      basemap === 'Oceans' ||
+      basemap === 'Gray' ||
+      basemap === 'DarkGray' ||
+      basemap === 'Terrain'
+    ) {
+      layerLabels = L.esri.basemapLayer(basemap + 'Labels');
+      map.addLayer(layerLabels);
+    } else if (basemap.includes('Imagery')) {
+      layerLabels = L.esri.basemapLayer('ImageryLabels');
+      map.addLayer(layerLabels);
+    }
+  }
+  
+  document
+    .querySelector('#basemaps')
+    .addEventListener('change', function (e) {
+      var basemap = e.target.value;
+      setBasemap(basemap);
+    });
+  
+//   var layer = new L.GIBSLayer('MODIS_Aqua_SurfaceReflectance_Bands721', {
+//     date: new Date('2015/04/01'),
+//     // transparent: true
+// }).addTo(map);
 
-  map.on('click',function(e){
-     lat = e.latlng.lat;
-     lon = e.latlng.lng;
+// Initialise the FeatureGroup to store editable layers
+var editableLayers = new L.FeatureGroup();
+// map.addLayer(editableLayers);
 
-     if(marker == null) marker = L.marker([lat,lon]).addTo(map);
-     else marker.setLatLng(e.latlng);
+var drawPluginOptions = {
+  // position: 'topright',
+  draw: {
+    // polygon:true,
+    polygon: {
+      allowIntersection: false, // Restricts shapes to simple polygons
+      drawError: {
+        color: '#e1e100', // Color the shape will turn when intersects
+        message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+      },
+      shapeOptions: {
+        color: '#97009c'
+      }
+    },
+    // disable toolbar item by setting it to false
+    polyline: false,
+    circle: false, // Turns off this drawing tool
+    rectangle: false,
+    marker: false,
+    },
 
-     // Set coordinate field
-     $("#coords").val(`${lat.toFixed(5)}, ${lon.toFixed(5)}`);
+  edit: {
+    featureGroup: editableLayers, //REQUIRED!!
+    remove: true,
+    edit:false
+  },
+
+};
+
+// Initialise the draw control and pass it the FeatureGroup of editable layers
+var drawControl = new L.Control.Draw(drawPluginOptions);
+map.addControl(drawControl);
+
+// var editableLayers = new L.FeatureGroup();
+map.addLayer(editableLayers);
+
+
+var storeLayers = [];
+map.on('draw:created', function(e) {
+  var type = e.layerType,
+    layer = e.layer;
+  var coords = layer.editing.latlngs[0][0];
+  console.log(coords);
+  let string = `${coords[0].lat},${coords[0].lng}`;
+  for (let i = 1; i< coords.length;i++){
+    string+=`,${coords[i].lat},${coords[i].lng}` 
+  }
+  $("#coords").val(string);
+  console.log(string);
+  editableLayers.addLayer(layer);
+
+
+  var seeArea = L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
+
+  $("#area").val(`${seeArea}`);
+
+});
+
+
+map.on('draw:deleted', function(e) {
+  $("#coords").val("");
+  $("#area").val("area");
+});
+
+
+
+
+// map.on('draw:edited', function(e) {
+//   var type = e.layerType,
+//     layer = e.layer._layers[0];
+//   console.log(e);
+//   var coords = layer.editing.latlngs[0][0];
+//   console.log(coords);
+//   let string = `${coords[0].lat},${coords[0].lng}`;
+//   for (let i = 1; i< coords.length;i++){
+//     string+=`,${coords[i].lat},${coords[i].lng}` 
+//   }
+//   $("#coords").val(string); 
+// });
+
+// let's start drawing markers here
+
+  // var marker = null;
+
+  // map.on('click',function(e){
+  //   console.log(e.target)
+    //  lat = e.latlng.lat;
+    //  lon = e.latlng.lng;
+
+    //  if(marker == null) marker = L.marker([lat,lon]).addTo(map);
+    //  else marker.setLatLng(e.latlng);
+
+    //  // Set coordinate field
+    //  $("#coords").val(`${lat.toFixed(5)}, ${lon.toFixed(5)}`);
 
      // Prefill country values
      // $.get(`/api/get-country?lat=${lat}&lon=${lon}`, function(data) {
      //   $("input[name='country']").val(data);
      // });
-  });
+  // });
 }
 
 function goToSection(i){
@@ -44,12 +177,9 @@ function goToSection(i){
   window.scrollTo(0,2100);
 
  }else{ 
-
   window.scrollTo(0,4600);
+ }}
 
- }
-
-}
 
 function showInfo(info){
   // hideAll();

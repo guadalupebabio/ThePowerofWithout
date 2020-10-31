@@ -209,7 +209,15 @@ section {
     display: none;
     margin-top: -25px;
     margin-bottom: 30px; }
+    
+#basemaps-wrapper{
 
+  z-index: 999;
+  position:relative;
+  top:2%;
+  left:75%;
+
+}
 
 
 /* 

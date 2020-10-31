@@ -76,19 +76,23 @@ module.exports = function(User, Settlement, Pin, Comment, Link){
 
     let coords = req.body.geolocation.split(",").map((d) => parseFloat(d));
 
-    if(coords.length != 2 || isNaN(coords[0]) || isNaN(coords[1])){
-      req.flash("form-error", "Invalid Coordinates");
-      res.redirect("/contribute");
-      return;
-    }
+    
+    // if(coords.length != 2 || isNaN(coords[0]) || isNaN(coords[1])){
+    //   req.flash("form-error", "Invalid Coordinates");
+    //   res.redirect("/contribute");
+    //   return;
+    // }
+
+    console.log(req.body);
 
     crypto.randomBytes(12, function(err, buffer) {
       let token = buffer.toString('hex');
 
       let settlement = new Settlement({
         "name": `${req.body.settlement}, ${req.body.city}`,
+        "area": parseFloat(req.body.area),
         "country": req.body.country,
-        "geolocation": {type: 'Point', coordinates: coords},
+        "geolocation": {type: 'polygon', coordinates: coords},
         "email": req.body.email,
       });
 
