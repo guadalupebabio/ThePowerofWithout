@@ -9,11 +9,12 @@ let express = require("express"),
     checkPrivacyChecked = require("../middleware/checkPrivacyChecked.js");
     
 const {information} = require("../../00infromationdefs.js");
-const { previousSettlementModal,sectionDataContainer , modalData}= require("../../data.js");
+const {finalSurveyData, previousSettlementModal,sectionDataContainer , modalData}= require("../../data.js");
 const e = require("express");
+// const Survey = require("../db/models/Survey.js");
 
 
-module.exports = function(User, Settlement, Pin, Comment, Link){
+module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
   let router = express.Router();
 
   // Returns a JSON array containing settlement data
@@ -130,6 +131,8 @@ module.exports = function(User, Settlement, Pin, Comment, Link){
     });
   });
 
+
+
   // Update existing settlement
   // router.post("/settlements/u/:id/:secret", cleanFormFields, function(req, res){
     router.post("/settlements/u/:id/:secret",function(req, res){
@@ -223,12 +226,65 @@ module.exports = function(User, Settlement, Pin, Comment, Link){
       
        else{
         console.log("successfully updated");
-        req.flash('form-notification', "Successfully updated settlement data!");
-        res.redirect("/");
+        // req.flash('form-notification', "Successfully updated settlement data!");
+        res.render("form", {
+          sectionData: finalSurveyData,
+          modalData : { 
+              description:"",
+              icons:[]
+          },     
+          modalClass : "modal-container-hide",
+          previousModalData: "",
+          previousModalClass : "previous-modal-container-hide",
+          redirectUrl : "/contribute/u/" + req.params.id + "/" +req.params.secret,
+          url: "/api/final-survey",
+          notification:
+            'Already created a settlement? Edit it <a href = "/contribute/u">here</a>',
+          map: true,
+          error: req.flash("form-error"),
+          email: "",
+        });
+
+
        }
       })
     })
 
+
+
+  });
+
+  router.post("/final-survey",(req,res)=>{
+
+    //  console.log(req.body);
+     let finalSurvey = new Survey({
+      settlementRelationship: req.body["settlementRelationship"],
+      informalSettlementName:req.body["informalSettlementName"],
+      informalSettlementDefinition:req.body["informalSettlementDefinition"],
+      surveyFillInDuration:req.body["surveyFillInDuration"],
+      surveyRelevance:req.body["surveyRelevance"],
+      generalFeedBack:req.body["generalFeedBack"],
+      originImportanceScale: isNaN(parseInt(req.body["originImportanceScale"])) ? 0: parseInt(req.body["originImportanceScale"]) ,
+      geographyImportanceScale:isNaN(parseInt(req.body["geographyImportanceScale"])) ? 0 : parseInt(req.body["geographyImportanceScale"]),
+      vulnerabilityImportanceScale: isNaN(parseInt(req.body["vulnerabilityImportanceScale"])) ? 0 : parseInt(req.body["vulnerabilityImportanceScale"]),
+      physicalNatureImportanceScale: isNaN(parseInt(req.body["physicalNatureImportanceScale"])) ? 0 :parseInt(req.body["physicalNatureImportanceScale"]) ,
+      infrastructureImportanceScale: isNaN(parseInt(req.body["infrastructureImportanceScale"])) ? 0 : parseInt(req.body["infrastructureImportanceScale"]),
+      densityImportanceScale:isNaN(parseInt(req.body["densityImportanceScale"])) ? 0:parseInt(req.body["densityImportanceScale"]),
+      qualityOfLifeImportanceScale: isNaN(parseInt(req.body["qualityOfLifeImportanceScale"])) ? 0 : parseInt(req.body["qualityOfLifeImportanceScale"]),
+      economyImportanceScale:  isNaN(parseInt(req.body["economyImportanceScale"])) ? 0:parseInt(req.body["economyImportanceScale"]),
+      demographyImportanceScale:isNaN(parseInt(req.body["demographyImportanceScale"])) ? 0 :parseInt(req.body["demographyImportanceScale"])
+
+     })
+     !isNaN(parseInt(req.body["Population"])) ? parseInt(req.body["Population"]) : null
+     finalSurvey.save((err)=>{
+       if(err){
+        console.log(err);
+       }
+       else{
+         console.log("successfully saved");
+         res.redirect("/");
+       }
+     })
   });
 
   router.post("/settlements/u/:id/:secret/comment", function(req, res){

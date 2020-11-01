@@ -151,8 +151,78 @@
   ]
 
 
+const finalSurveyData = {
+     header : "final-survey",
+     appreciationMessage1 : "Thank you again for taking the time to fill the survey!  Whenever you want you can edit, complement, or update your responses with the link that has been sent to your email account.",
+     appreciationMessage2:`Finally, since you are among the first people to test this platform we will require an extra 2 minutes from your time to give us general feedback of the survey. Please be as honest as you can so we can improve it for the next users.`,
+     appreciationMessage3:  `Thank you again, and let’s keep in touch!`,
+     appreciationMessage4: "Guadalupe, Maitane and Luis.",
+     appreciationMessage5:`The City Science Team`,
+     questions:[
+       {
+      name:"What is your relationship with the settlement?",
+      id:"settlementRelationship",
+      type:"radio",
+      options: ["I live there", "I work there", "I go at least once a week", "I go occasionally"," I work in an organisation/ institution/ NGO that has connection with the settlement","Other"],
+      info:"",
+      value:""
+    },
+    {
+      name:"How do you call informal settlements",
+      id:"informalSettlementName",
+      type:"text",
+      value:"",
+      info:"Could be in your native language",
+      placeholder:"Your Comment"
+    },
+    {
+      name:"How would you define informal settlements",
+      type:"text",
+      id:"informalSettlementDefinition",
+      value:"",
+      info:"Could be in your native language",
+      placeholder:"Your Comment"
+    },
+    
+    {
+      name:"How long did it take you to fill the survey",
+      type:"range",
+      id:"surveyFillInDuration",
+      value:"",
+      options:["5mins or less", "10mins", "20mins or more"],
+      info:"Make a rough estimate"
+    },
+    {
+      name:"How relevant were the questions asked?",
+      type:"range",
+      id:"surveyRelevance",
+      value:"",
+      info:"",
+      options:["Irrelevant","Relevant"],
+      
+    },
+    {
+      name:"General Feedback",
+      type:"text",
+      id:"generalFeedBack",
+      value:"",
+      options:"",
+      info:"",
+      placeholder:"Your Comment"
+    },
+    {
+      name:"How would you rate the importance of these aspects to measure informality?",
+      type:"grid",
+      id:"gridData",
+      options:[[{label:"Origin",id:"originImportanceScale"},{label:"Physical Nature",id:"physicalNatureImportanceScale"},{label:"Quality of Life",id:"qualityOfLifeImportanceScale"}],
+      [{label:"Geography",id:"geographyImportanceScale"}, {label:"Infrastructure",id:"infrastructureImportanceScale"},{label:"Economy",id:"economyImportanceScale"}],
+      [{label:"Vulnerability",id:"vulnerabilityImportanceScale"}, {label:"Density",id:"densityImportanceScale"},{label:"Demography",id:"demographyImportanceScale"}]],
+      
+    }  
+  ]
 
- module.exports = {aboutPageData,sectionDataContainer,modalData,previousSettlementModal}
+}
+ module.exports = {finalSurveyData,aboutPageData,sectionDataContainer,modalData,previousSettlementModal}
 
 
 

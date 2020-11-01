@@ -15,7 +15,7 @@ let app = express(),
 
 const { information } = require("./00infromationdefs.js");
 
-const {modalData,sectionDataContainer,aboutPageData,previousSettlementModal} = require("./data.js");
+const {modalData,sectionDataContainer,aboutPageData,previousSettlementModal, finalSurveyData} = require("./data.js");
 
 const PORT = process.env.PORT || 3000,
   DB_URL = `mongodb+srv://${process.env.MONGODB_USERNAME}:${encodeURIComponent(
@@ -38,8 +38,9 @@ const main_conn = mongoose.createConnection(DB_URL),
   Settlement = require("./app/db/models/Settlement")(main_conn),
   User = require("./app/db/models/User")(main_conn),
   Comment = require("./app/db/models/Comment")(main_conn),
-  Link = require("./app/db/models/Link")(main_conn);
-Pin = require("./app/db/models/Pin")(app_conn);
+  Link = require("./app/db/models/Link")(main_conn),
+  Survey = require("./app/db/models/Survey")(main_conn),
+  Pin = require("./app/db/models/Pin")(app_conn);
 
 app.use(
   session({
@@ -452,9 +453,6 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
           ],
         };
 
-
-
-
         Promise.all([
           Comment.find({
             settlementId: user.contribution,
@@ -485,6 +483,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
               req.params.secret,
             error: req.flash("form-error"),
             email: user.email,
+            finalSurveyData:""
           });
         });
       });
@@ -502,6 +501,34 @@ app.get("/about", function (req, res) {
 }
   );
 });
+
+// app.get("/final-survey",function(req,res){
+
+//   res.render("form", {
+//     settlement: "",
+//     comments: "",
+//     links: "",
+//     sectionData:"",
+//     modalData : { 
+//         description:"",
+//         icons:[]
+//     },     
+//     modalClass : "modal-container-hide",
+//     previousModalData: "",
+//     previousModalClass : "previous-modal-container-hide",
+//     redirectUrl:"",
+//     notification: req.flash("form-notification"),
+//     url:"",
+//     error: req.flash("form-error"),
+//     email: "",
+//     finalSurveyData:finalSurveyData
+
+//   });
+// })
+
+
+
+
 
 app.get("/map", function (req, res) {
   Promise.all([Settlement.find({}), Pin.find({})]).then(function (data) {
@@ -536,7 +563,7 @@ app.get("/map", function (req, res) {
 
 app.use(
   "/api",
-  require("./app/routes/api.js")(User, Settlement, Pin, Comment, Link)
+  require("./app/routes/api.js")(User, Settlement, Survey, Pin, Comment, Link)
 );
 
 // ** START THE SERVER **

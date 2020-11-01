@@ -601,3 +601,106 @@ display: flex;
   font-weight:bold;
 
 }
+
+/**
+*Final survey css
+* 
+*/
+
+.level-category-survey{
+
+
+  position:relative;
+  left:40%;
+  color:black;
+  /* font-size:1.2rem; */
+
+}
+.final-survey-questions{
+
+
+  position:relative;
+  left:40%;
+  color:black;
+  /* font-size:5rem; */
+
+
+}
+.final-survey-question{
+
+
+  display:flex;
+  flex-direction:row;
+  /* align-items: center; */
+
+
+
+}
+.final-question-level-items{
+
+ width:100%;
+  
+}
+
+.final-question-level-item{
+
+ display:flex;
+ flex-direction:row;
+ align-items:center;
+ justify-content:space-between
+
+   
+ }
+
+ .survey-buttons{
+
+  position:relative;
+  left:40%;
+
+ }
+
+ .grid{
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  width:80%
+ }
+ 
+.grid-cell{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:space-between
+}
+ 
+.grid-cell input{
+
+width: 50px;
+}
+.column1{
+  display:flex;
+  flex-direction:column;
+  
+}.column2{
+
+  display:flex;
+  flex-direction:column;
+}
+
+.column3{
+
+
+  display:flex;
+  flex-direction:column;
+  
+}
+
+.level-item-left{
+
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items:center
+
+}

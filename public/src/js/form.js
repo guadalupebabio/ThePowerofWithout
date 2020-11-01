@@ -359,53 +359,26 @@ const modalDiv = document.getElementById("modal-div");
 const startButton = document.getElementById("start-button");
 if (startButton){
 startButton.addEventListener("click",()=>{
-  //  modalDiv.className = "modal-container"
 
-  //  const privacyQuestion = document.getElementById("privacy-checkbox-0");
-   
-  //  if (!privacyQuestion.checked){
-  //     // console.log("alert message");
-  //     alert("Please make sure the privacy checkbox is checked");
-  //  }
-  // const coords = document.getElementById("coords");
-  // const area = document.getElementById("area");
-  // console.log(area.value);
   validateForm();
 });
 }
 
 function validateForm(){
-//   const privacyQuestion = document.getElementById("privacy-checkbox-0");
-//   if (!privacyQuestion.checked){
-//     // console.log("alert message");
-//     alert("Please make sure the privacy checkbox is checked");
-//     // break;
-//     return 
-//  }
+
  const coords = document.getElementById("coords");
  const area = document.getElementById("area");
- console.log(area);
- if ((coords.value=="")||(area.value=="")){
-  // console.log("alert message");
-  alert("Please make sure you have drawn coords on the map");
-  // break;
+//  console.log(area);
+if (coords) {
+  if ((coords.value=="")||(area.value=="")){
+    // console.log("alert message");
+    alert("Please make sure you have drawn coords on the map");
+    // break;
+  }
+}
 
 }
 
-// if ((area.value=="")){
-//   // console.log("alert message");
-//   alert("Please make sure you have drawn coords on the map");
-
-// }
-
-}
-// window.addEventListener("click",(ev)=>{
-
-//   if ((ev.target !== previousModalDiv)) {
-//     previousModalDiv.className = "previous-modal-container-hide";
-//   }
-
-// });
 window.addEventListener("click",(ev)=>{
 
   if ((ev.target !== modalDiv)) {
@@ -432,7 +405,30 @@ async function postData(url = '', data = {}) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
+function validateInput(id){
 
+  
+  // const cell = document.getElementById(id);
+
+  let input  =parseInt(id.value);
+  // console.log(cell)
+  console.log(input);
+
+  // console.log("this is my",e);
+
+  if (isNaN(input)){
+    alert("Please enter a valid input");
+    id.value = ""
+
+  }
+  else if (0>input || input>10){ 
+    alert("Please Enter a value less than 10 and greater than 0");
+    id.value = ""
+  }
+
+
+
+}
 
 const editPreviousButton = document.getElementById("edit-previous-button");
 
