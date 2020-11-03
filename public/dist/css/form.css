@@ -218,6 +218,44 @@ section {
   left:75%;
 
 }
+#basemaps{
+
+  display:flex;
+  flex-direction:row;
+  box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12)
+}
+
+#imagery{
+
+  text-align:center;
+  height:20px;
+  width:70px;
+  border:1px solid black;
+  background-color:white;
+  color:black;
+  
+
+
+}
+#streets{
+
+  text-align:center;
+  height:20px;
+  width:50px;
+  border:1px solid black;
+  background-color:white;
+  color:black;
+  
+}
+
+
+
 
 
 /* 
@@ -704,3 +742,88 @@ width: 50px;
   align-items:center
 
 }
+
+.survey-buttons{
+
+
+  display:flex;
+  align-items:center;
+  flex-direction:row;
+}
+#edit-previous-button{
+
+  outline:0;
+  border:0;
+  border-bottom: 2px solid black;
+  color: black;
+  background-color:white;
+  font-size:1.2rem;
+  margin:0.5rem
+
+
+
+}
+#edit-previous-button-link{
+
+
+  outline:0;
+  border:0;
+  border-bottom: 2px solid black;
+  color: black;
+  padding-bottom:2rem;
+  background-color:white;
+  font-size:1.5rem;
+  height:1.5rem;
+  margin:0.5rem
+
+
+
+}
+
+/**
+
+Close buttons for info, link, comment, image boxes in Contribute form
+
+
+*/
+
+#close-info{
+  position:relative;
+  background-image: url("../../assets/clear_24px\ \(1\).png");
+  width:24px;
+  height:24px;
+  top:2%;
+  left:95%;
+
+
+}
+#close-comment{
+  position:relative;
+  width:24px;
+  height:24px;
+  background-image: url("../../assets/clear_24px\ \(1\).png");
+  top:2%;
+  left:95%;
+}
+#close-link{
+  position:relative;
+  width:24px;
+  height:24px;
+  background-image: url("../../assets/clear_24px\ \(1\).png");
+  top:2%;
+  left:95%;
+
+
+}
+
+#close-chat{
+  position:relative;
+  width:24px;
+  height:24px;
+  background-image: url("../../assets/clear_24px\ \(1\).png");
+  top:2%;
+  left:95%;
+
+
+}
+

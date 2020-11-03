@@ -47,12 +47,18 @@ if($("#map").length != 0){ // if map exists, create it
   }
   
   document
-    .querySelector('#basemaps')
-    .addEventListener('change', function (e) {
-      var basemap = e.target.value;
+     
+    .querySelector('#imagery')
+    .addEventListener('click', function (e) {
+      var basemap = "ImageryClarity";
       setBasemap(basemap);
     });
-
+  document
+    .querySelector('#streets')
+    .addEventListener('click', function (e) {
+      var basemap = "Streets"
+      setBasemap(basemap);
+    });
 
 // Initialise the FeatureGroup to store editable layers
 var editableLayers = new L.FeatureGroup();
@@ -178,9 +184,10 @@ function goToSection(i){
 
 
 function showInfo(info){
-  // hideAll();
+
   $("#info").show();
-  $("#info p").text(`${info}`);
+  $("#info h1").text(`${info.header}: `);
+  $("#info p").text(`${info.text}`);
 }
 
 function closeModal(){
@@ -200,6 +207,31 @@ function hideAll(){
   $("#link").hide();
   // $("#previous-modal-div").hide();
 }
+
+
+const infoClose = document.getElementById("close-info");
+if(infoClose){
+infoClose.addEventListener("click",()=>{
+  $("#info").hide();
+
+})
+const commentClose = document.getElementById("close-comment");
+
+commentClose.addEventListener("click",()=>{
+  $("#comment").hide();
+
+})
+
+const linkClose = document.getElementById("close-link");
+
+linkClose.addEventListener("click",()=>{
+  $("#link").hide();
+
+})
+}
+
+
+
 
 $(document).click(hideAll);
 $(".box").click((e) => e.stopPropagation())
