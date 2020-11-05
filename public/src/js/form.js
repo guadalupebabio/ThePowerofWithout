@@ -264,19 +264,29 @@ $(".alert-button").click(function(e){
 $(".comment-button").click(function(e){
   hideAll();
   e.stopPropagation();
- 
-
   let data = $(this).data(),
-      commentI = comments.findIndex((d) => d.formFieldName == data.name)
-
+      commentI = comments.findIndex((d) =>
+         
+      {
+        // Add some clarifying information about this question, if necessary.
+        // console.log("Form field name",d.formFieldName)
+        document.getElementById("comment-input").innerText= `Feedback for the ${`"${data.name}"`} question`;
+        d.formFieldName == data.name
+      }
+      
+      
+      )
   //Set value of input text based on what's stored in the database
   if(commentI == -1) $("#comment input.text").val("");
   else $("#comment input.text").val(comments[commentI].comment);
-
   $("#comment").show();
   $("#comment input.button").data(data); //Bind this current question's data to the input
   $("#comment .help").hide();
+
 })
+
+
+
 
 $(".link-button").click(function(e){
   hideAll();
@@ -284,7 +294,14 @@ $(".link-button").click(function(e){
   
 
   let data = $(this).data(),
-      linkI = links.findIndex((d) => d.formFieldName == data.name)
+      linkI = links.findIndex((d) => {
+
+
+        document.getElementById("link-input").innerText= `Insert a reference link for the ${`"${data.name}"`} question`;
+        d.formFieldName == data.name
+      
+      
+      })
 
   //Set value of input text based on what's stored in the database
   if(linkI == -1) $("#link input.text").val("");
@@ -459,6 +476,32 @@ function validateInput(id){
   }
 
 
+
+}
+
+
+
+
+
+function validateUpdateInput(id){
+
+  const cell = document.getElementById(id);
+
+  let input  =parseInt(cell.value);
+  // console.log(cell)
+  // console.log(input);
+
+  // // console.log("this is my",e);
+
+  if (isNaN(input)){
+    alert("Please enter a valid input");
+    cell.value = ""
+
+  }
+  else if (0>input || input>100){ 
+    alert("Please Enter a value less than 100 and greater than 0");
+    cell.value = ""
+  }
 
 }
 

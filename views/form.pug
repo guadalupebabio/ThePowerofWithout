@@ -172,7 +172,45 @@ html
                                   .range-options
                                     label(for = question.name)= question.options[2]
                                     label(for = question.name)= question.options[3]  
-                                  input(type = "range"  min = "0" max = "10" value = (question.value!=null ? question.value[1] : null) name = question.name id = question.name)    
+                                  input(type = "range"  min = "0" max = "10" value = (question.value!=null ? question.value[1] : null) name = question.name id = question.name)                    
+                           
+                            else if question.type=="grid"
+                              .range-level-items
+                                .top-level-items
+                                  .level-item-left
+                                    .label
+                                      label(for = question.id)= question.name 
+                                    .question-info
+                                      if question.info
+                                        .alert-button(onclick=`showInfo({header: "${question.name}",text:"${question.info}"})`)   
+                                  br
+                                  .right-level-items
+                                    .level-item-right
+                                      .comment-button(data-name = `${question.name}` data-email = `${email}`) 
+                                        //- i.fa-comment.fas
+                                      .link-button(data-name = `${question.name}` data-email = `${email}`)
+                                        //- i.fas.fa-link
+                                      .chat-button(data-name = `${question.name}` data-email = `${email}`)  
+                                .grid
+                                  .column1
+                                    for option,index in question.options[0] 
+                                        .grid-cell
+                                          label(for=option.id)= option.label
+                                          input(id= option.id    value=option.value  name = option.id type = "text" onchange=`validateUpdateInput("${option.id}")`  placeholder = "0") 
+                                          label(for=option.id)= "/100%"
+                                  .column2
+                                    for option,index in question.options[1] 
+                                        .grid-cell
+                                          label(for=option.id)= option.label
+                                          input(id= option.id name = option.id value=option.value  type = "text" onchange=`validateUpdateInput("${option.id}")`  placeholder = "0") 
+                                          label(for=option.id)= "/100%"
+                                  .column3                       
+                                    for option,index in question.options[2] 
+                                        .grid-cell
+                                          label(for=option.id)= option.label
+                                          input(id= option.id name = option.id  value=option.value type = "text" onchange=`validateUpdateInput("${option.id}")`  placeholder = "0") 
+                                          label(for=option.id)= "/100%"
+
                             else                 
                               .left-level-items
                                 .level-item-left
@@ -188,7 +226,7 @@ html
                                   if question.disabled
                                     input(name = question.name type = question.type readonly value = question.value  placeholder=question.placeholder)
                                   else
-                                    input(name = question.name type = question.type value = question.value)
+                                    input(name = question.name type = question.type value = question.value  placeholder=!(question.placeholder==null) ? question.placeholder : null)
                                 else if question.type == "radio" || question.type == "checkbox"
                                   each val, index in question.options                           
                                     if question.type == "radio"                                                                         
@@ -202,7 +240,8 @@ html
                                       input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
                                     if val != "Other"
                                       label(for = question.name + "-" + index)= val
-                                    br                    
+                                    br    
+
                               .right-level-items
                                 .level-item-right
                                   .comment-button(data-name = `${question.name}` data-email = `${email}`)
@@ -300,12 +339,7 @@ html
                             label(for = question.id + "-" + index)= val
                           br   
                           br 
-                    br                 
-                    //- .right-level-items
-                    //-   .level-item-right
-                    //-     .comment-button(data-name = `${question.name}` data-email = `${email}`)
-                        //- .link-button(data-name = `${question.name}` data-email = `${email}`) 
-                        //- .chat-button(data-name = `${question.name}` data-email = `${email}`)                   
+                    br                                
                 br
                 br
           .button-level
@@ -342,15 +376,15 @@ html
             p
           #comment.box(style = "display:none;")
             #close-comment
-            h1.heading Comment
-            p.subtitle.is-size-6 Add some clarifying information about this question, if necessary.
+            h1.heading Comment       
+            p(id="comment-input").subtitle.is-size-6
             input.text(type = "text") 
             p.help.is-success Successfully saved comment!
             input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
           #link.box(style = "display:none;")
             #close-link
             h1.heading Link
-            p.subtitle.is-size-6 Add a link with supporting information, if necessary.
+            p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
             input.text(type = "text") 
             p.help.is-success Successfully saved link!
             p.help.is-danger Please enter a valid link

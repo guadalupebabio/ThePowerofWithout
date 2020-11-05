@@ -7,6 +7,8 @@ const information = {
     "Crime Rate" : "Crime Rate in the Settlement.",
     "Personal perception of insecurity": "Personal perception of insecurity.",
     "Prevalence": "The economic, urban and governance resilience level of the settlement.",
+    "Community Engagement":"Level of participation of the community in political matters (voting, neighbor association, etc)",
+    "Elevation":"Average number of floors in the building",
     "House quality": "Quality-monitoring of the livability, function and construction/deployment of the house at the Settlement.",
     "Materials": "Matter from which the house in the Settlement is made with.",
     "Development State": "Stage of the evolution process where the Settlement is into.",
@@ -19,12 +21,16 @@ const information = {
     "Elevation": "Average number of floors in the buildings." ,
     "House holds per house": "Number of people living in a house.",
     "Distance to public areas": "Average proximity to public areas or leisure activities.",
+    "Proximity to public areas of leisure activities": "Average proximity to public areas or leisure activities.",
     "Access to Health Care":"Percentage of people with access to health care.",
+    "HealthCare Facilities":"Number of hospitals, clinics or health cares that people have access in the community or in the proximity of the community",  
     "Access to Education":" Percentage of people that has access to schools / Percentage of people attending to schools",
+    "Number of Schools in the Community" : "Number of Schools in the Community",
     "Unemployment rate":"Percent of the labor force that is jobless.",
     "Employment in the formal sector": "Among the people working in the settlement. Percentage of people working for the formal sector. It encompasses all jobs with normal hours and regular wages, and are recognized as income sources on which income taxes must be paid.",
     "Ownership":"Level of rights that the householder has on possessing the land at the Settlement.",
     "Age groups": "Percentage of people in each age groups in the Settlement.",
+    "Ethnic Identities" : "Ethnic Identities",
     "Gender": "Which gender is more predominant among the different ages."
 
 };

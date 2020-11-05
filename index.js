@@ -219,6 +219,8 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                       value: getFormValue(["site", "vulnerability", "crimeRate"]),
                       info: information["Crime Rate"]
                     },
+
+
                     {
                       name: "Perseption of Insecurity",
                       type: "range",
@@ -226,6 +228,17 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                       value:  getFormValue(["site", "vulnerability", "perceptionOfInsecurity"]),
                       info:information["Personal perception of insecurity"]
                     },
+
+
+                    {
+                      name: "Community engagement in decision making processes",
+                      type: "range",
+                      options:  ["Low","High"],
+                      value:  getFormValue(["site", "vulnerability", "communityEngagement"]),
+                      info:information["Community Engangement"]                      
+
+                    },
+
                     {
                       name: "Prevalence",
                       type: "range",
@@ -246,7 +259,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
 
                     { name :"House Quality", 
                       type : "range",
-                      options:  ["Low","High"],
+                      options:  ["Inadequate","Optimal"],
                       value: getFormValue(["architecture", "physicalNature", "houseQuality"]),
                       info:information["House quality"]
                     },{
@@ -301,7 +314,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                   {
                     name:"Physical State of the Streets",
                     type :"range",
-                    options : ["Low","High"],
+                    options : ["Not Paved","Paved"],
                     value: getFormValue(["architecture", "infrastructure", "physicalStateOfStreets"]),
                     info:information["Physical state Of the streets"] 
                   },{
@@ -313,6 +326,27 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
 
                   }
                 ]
+                },{
+                  label: "DENSITY",
+                  questions:[
+                    {
+                      name : "Elevation",
+                      type : "range",
+                      options : ["1 floors","3 floors","6 or more floors"],
+                      value: getFormValue(["architecture", "density", "elevation"]),
+                      info:information["Elevation"]
+                    },
+                    {
+                      name : "Household per house",
+                      type : "range",
+                      options : ["1","5","10 or more"],
+                      value: getFormValue(["architecture", "density", "householdPerHouseSize"]),
+                      info:information["House holds per house"]
+                    }
+
+
+                  ]
+
                 }
               ]
             },{
@@ -321,25 +355,44 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
 
                 { label : "QUALITY OF LIFE",
                   questions : [
+         
                     {
-                      name : "Household per house",
-                      type : "range",
-                      options : ["1","5","10 or more"],
-                      value: getFormValue(["populace", "qualityOfLife", "householdPerHouseSize"]),
-                      info:information["House holds per house"]
-                    },{
+                      name : "Proximity to public areas of leisure activities",
+                      type :"range",
+                      options: ["0min","20min or more"],
+                      value:  getFormValue(["populace", "qualityOfLife", "proximity"]),
+                      info:information["Proximity to public areas of leisure activities"]
+                   }
+                     ,
+                      {
                       name : "Access to Health Care",
                       type :"range",
                       options: ["Low","High"],
                       value:  getFormValue(["populace", "qualityOfLife", "accessToHealthCare"]),
                       info:information["Access to Health Care"]
-                    },{
+                    },
+                    {
+                      name : "Number of Hospitals, Clinics or Health Cares",
+                      type :"range",
+                      options: ["0","6 or more"],
+                      value:  getFormValue(["populace", "qualityOfLife", "numberOfHealthCareFacilities"]),
+                      info:information["HealthCare Facilities"]
+                    },                      
+                    {
                       name : "Access to Education",
                       type:"range",
-                      options : ["Low,High"],
+                      options : ["Low" ,"High"],
                       value:getFormValue(["populace", "qualityOfLife", "accessToEducation"]),
                       info:information["Access to Education"]
-                    },{
+                    },
+                    {
+                      name : "Number of Schools in the Community",
+                      type:"range",
+                      options : ["0","6 or more"],
+                      value:getFormValue(["populace", "qualityOfLife", "numberOfSchools"]),
+                      info: information["Number of Schools in the Community"]
+                    }                     
+                    ,{
 
                       name :"Unemployment Rate",
                       type:"range",
@@ -360,11 +413,25 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                       info:information["Ownership"]  
                     },{
                       name : "Age groups",
-                      type:"range",
-                      options :["10","20","30","40","50",">60"],
-                      value: getFormValue(["populace", "qualityOfLife", "ageGroups"]),
+                      type:"grid",
+                      id:"ageGroups",
+                      options :[[{label:"0-5 years",id:"0-5years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","0-5years"])},
+                      {label:"19-30 years",id:"19-30years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","19-30years"])}],
+                      [{label:"6-12 years",id:"6-12years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","6-12years"])},
+                      {label:"31-50 years",id:"31-50years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","31-50years"])}],
+                      [{label:"13-18 years",id:"13-18years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","13-18years"])},
+                      {label:"50 or more",id:"50+years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","50+years"])}]],
                       info:information["Age groups"]
-                    },{
+                    }                     
+                    ,
+                    {
+                      name:"List ethnic and racial categories in the Community",
+                      type:"text",
+                      placeholder:"Your Comment",
+                      value:getFormValue(["populace", "qualityOfLife", "ethinicIdentities"]),
+                      info:information["Ethnic Identities"]
+                    }
+                    ,{
                       name : "Gender",
                       type:"range",
                       options : ["Male","Female"],
