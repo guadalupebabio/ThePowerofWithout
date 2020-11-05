@@ -173,10 +173,10 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
           floors.push(stringI)
         }
         floors =floors.concat(["6 or more"])
-        console.log(minutes);
-        console.log(clinics);
-        console.log(percent);
-        console.log(differences);
+        // console.log(minutes);
+        // console.log(clinics);
+        // console.log(percent);
+        // console.log(differences);
         let sectionDataContainer = {
           // Site
           header: "update-settlement",

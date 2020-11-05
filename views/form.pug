@@ -143,8 +143,8 @@ html
                                 .range
                                   if (question.id)
                                     .range-options                                  
-                                      label(id= question.id + "-label1" for = question.name)= question.options[parseInt(question.value)][0]
-                                      label(id= question.id + "-label2" for = question.name)= question.options[parseInt(question.value)][1]
+                                      label(id= question.id + "-label1" for = question.name)= !isNaN((parseInt(question.value)))? question.options[parseInt(question.value)][0] : question.options[0][1]
+                                      label(id= question.id + "-label2" for = question.name)= !isNaN((parseInt(question.value)))? question.options[parseInt(question.value)][1] : question.options[0][0]
                                     input( oninput=onchange=`editRangeLabels({id:"${question.id}",options:[${question.options.map((value)=>{{ return `["${value[0]}","${value[1]}"]`}})}]})` onchange=`editRangeLabels({id:"${question.id}",options:[${question.options.map((value)=>{{ return `["${value[0]}","${value[1]}"]`}})}]})` id=`${question.id}` type = "range"  min = "0" max = `${question.options.length-1}` value = (question.value ? question.value : null) name = question.name )
 
                                   else
