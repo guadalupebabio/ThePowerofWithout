@@ -515,3 +515,21 @@ if (editPreviousButton){
     $("#previous-modal-div").show();
   })
 }
+
+function editRangeLabels(info){
+  let id = info.id
+
+
+  let options = info.options
+  const slider = document.getElementById(id);
+  const label1 =  document.getElementById(id+"-label1");
+  const label2 =  document.getElementById(id+"-label2");
+  let input  =parseInt(slider.value);
+  label1.innerText = options[parseInt(input)][1]
+  label2.innerText = options[parseInt(input)][0]
+
+  // console.log(options[parseInt(input)]);
+  
+
+  // return "showRange"
+}

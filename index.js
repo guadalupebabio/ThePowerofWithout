@@ -121,7 +121,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
         err,
         settlement
       ) {
-        console.log(settlement);
+        // console.log(settlement);
         function getFormValue(tree) {
           // Given the location of a field in a schema (i.e. ["site", "origin", "causes"]), return its value or null if it doesnt exist
           let val = settlement;
@@ -132,7 +132,51 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
           
           return val;
         }
-        console.log(getFormValue(["site", "origin", "causes"]));
+        // console.log(getFormValue(["site", "origin", "causes"]));
+        
+
+        var minutes = ["0min"];
+        for (let i =1 ; i< 20;i++){
+          let stringI = i.toString();      
+          minutes.push(stringI)
+        }
+        minutes = minutes.concat(["20min or more"])
+        var clinics = ["0"];
+        for (let i =1 ; i< 6;i++){
+          let stringI = i.toString();      
+          clinics.push(stringI)
+        }
+        clinics = clinics.concat(["6 or more"])
+
+
+        var percent = []   
+        for (let i =0 ; i< 101;i++){
+          let stringI = i.toString();      
+          percent.push(stringI+"%")
+        }
+
+        var differences = []
+        for (let i =0 ; i< 101;i++){
+          let string1 = i.toString(); 
+          let string2 = (100-i).toString();
+          differences.push([ string1 +  "% Male" , string2 + "% Female"])
+        }
+        var households = []
+        for (let i =0 ; i< 6;i++){
+          let stringI = i.toString();      
+          households.push(stringI)
+        }
+        households =households.concat(["10 or more"])
+        var floors = []
+        for (let i =1 ; i< 6;i++){
+          let stringI = i.toString();      
+          floors.push(stringI)
+        }
+        floors =floors.concat(["6 or more"])
+        console.log(minutes);
+        console.log(clinics);
+        console.log(percent);
+        console.log(differences);
         let sectionDataContainer = {
           // Site
           header: "update-settlement",
@@ -228,8 +272,6 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                       value:  getFormValue(["site", "vulnerability", "perceptionOfInsecurity"]),
                       info:information["Personal perception of insecurity"]
                     },
-
-
                     {
                       name: "Community engagement in decision making processes",
                       type: "range",
@@ -237,15 +279,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                       value:  getFormValue(["site", "vulnerability", "communityEngagement"]),
                       info:information["Community Engangement"]                      
 
-                    },
-
-                    {
-                      name: "Prevalence",
-                      type: "range",
-                      options:  ["Low","High"],
-                      value: getFormValue(["site", "vulnerability", "prevalance"]),
-                      info:information["Prevalence"]
-                    },
+                    }
                   ],
                 },
               ],
@@ -332,14 +366,14 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     {
                       name : "Elevation",
                       type : "range",
-                      options : ["1 floors","3 floors","6 or more floors"],
+                      options : floors,
                       value: getFormValue(["architecture", "density", "elevation"]),
                       info:information["Elevation"]
                     },
                     {
                       name : "Household per house",
                       type : "range",
-                      options : ["1","5","10 or more"],
+                      options : households,
                       value: getFormValue(["architecture", "density", "householdPerHouseSize"]),
                       info:information["House holds per house"]
                     }
@@ -359,11 +393,11 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     {
                       name : "Proximity to public areas of leisure activities",
                       type :"range",
-                      options: ["0min","20min or more"],
+                      options: minutes,
                       value:  getFormValue(["populace", "qualityOfLife", "proximity"]),
                       info:information["Proximity to public areas of leisure activities"]
                    }
-                     ,
+                   ,
                       {
                       name : "Access to Health Care",
                       type :"range",
@@ -374,7 +408,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     {
                       name : "Number of Hospitals, Clinics or Health Cares",
                       type :"range",
-                      options: ["0","6 or more"],
+                      options: clinics,
                       value:  getFormValue(["populace", "qualityOfLife", "numberOfHealthCareFacilities"]),
                       info:information["HealthCare Facilities"]
                     },                      
@@ -388,12 +422,11 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     {
                       name : "Number of Schools in the Community",
                       type:"range",
-                      options : ["0","6 or more"],
+                      options : clinics,
                       value:getFormValue(["populace", "qualityOfLife", "numberOfSchools"]),
                       info: information["Number of Schools in the Community"]
                     }                     
                     ,{
-
                       name :"Unemployment Rate",
                       type:"range",
                       options:["Low","High"],
@@ -402,7 +435,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     },{
                       name:"Employment in the formal sector",
                       type:"range",
-                      options : ["0%","100%"],
+                      options :percent,
                       value: getFormValue(["populace", "qualityOfLife", "employmentInTheInformalSector"]),
                       info:information["Employment in the formal sector"]
                     },{
@@ -422,8 +455,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                       [{label:"13-18 years",id:"13-18years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","13-18years"])},
                       {label:"50 or more",id:"50+years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","50+years"])}]],
                       info:information["Age groups"]
-                    }                     
-                    ,
+                    },
                     {
                       name:"List ethnic and racial categories in the Community",
                       type:"text",
@@ -434,7 +466,8 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     ,{
                       name : "Gender",
                       type:"range",
-                      options : ["Male","Female"],
+                      id:"Gender",
+                      options : differences,
                       value:getFormValue(["populace", "qualityOfLife", "gender"]),
                       info:information["Gender"]
                     }

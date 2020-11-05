@@ -105,7 +105,7 @@ html
                         else if question.type == "range"
                           .range
                             label(for = question.name)= question.options[0]
-                            input(type = "range" min = "1" max = `${question.options.length}` value = (question.value ? question.value : null) name = question.name id = question.name)
+                            input(type = "range" min = "1" max =  `${question.options.length-1}` value = (question.value ? question.value : null) name = question.name id = question.name)
                             label(for = question.name)= question.options[question.options.length - 1]
                           br
 
@@ -141,10 +141,18 @@ html
                                         //- i.fas.fa-link
                                       .chat-button(data-name = `${question.name}` data-email = `${email}`)   
                                 .range
-                                  .range-options
-                                    each option in question.options
-                                      label(for = question.name)= option
-                                  input(type = "range"  min = "0" max = "10" value = (question.value ? question.value : null) name = question.name id = question.name)
+                                  if (question.id)
+                                    .range-options                                  
+                                      label(id= question.id + "-label1" for = question.name)= question.options[parseInt(question.value)][0]
+                                      label(id= question.id + "-label2" for = question.name)= question.options[parseInt(question.value)][1]
+                                    input( oninput=onchange=`editRangeLabels({id:"${question.id}",options:[${question.options.map((value)=>{{ return `["${value[0]}","${value[1]}"]`}})}]})` onchange=`editRangeLabels({id:"${question.id}",options:[${question.options.map((value)=>{{ return `["${value[0]}","${value[1]}"]`}})}]})` id=`${question.id}` type = "range"  min = "0" max = `${question.options.length-1}` value = (question.value ? question.value : null) name = question.name )
+
+                                  else
+                                    .range-options                                  
+                                      label(for = question.name)= question.options[0]
+                                      label(for = question.name)= question.options[question.options.length-1]
+                                    input(type = "range"  min = "0" max = `${question.options.length-1}` value = (question.value ? question.value : null) name = question.name id = question.name)                                
+
                             else if question.type=="double-range"
                               .range-level-items
                                 .top-level-items
@@ -168,11 +176,11 @@ html
                                   .range-options
                                     label(for = question.name)= question.options[0]
                                     label(for = question.name)= question.options[1]  
-                                  input(type = "range"  min = "0" max = "10" value = (question.value!=null ? question.value[0] : null) name = question.name id = question.name)                                                      
+                                  input(type = "range"  min = "0" max =  `${question.options.length-3}` value = (question.value!=null ? question.value[0] : null) name = question.name id = question.name)                                                      
                                   .range-options
                                     label(for = question.name)= question.options[2]
                                     label(for = question.name)= question.options[3]  
-                                  input(type = "range"  min = "0" max = "10" value = (question.value!=null ? question.value[1] : null) name = question.name id = question.name)                    
+                                  input(type = "range"  min = "0" max =  `${question.options.length-3}` value = (question.value!=null ? question.value[1] : null) name = question.name id = question.name)                    
                            
                             else if question.type=="grid"
                               .range-level-items

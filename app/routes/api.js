@@ -85,7 +85,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
     //   return;
     // }
 
-    console.log(req.body);
+    // console.log(req.body);
 
     crypto.randomBytes(12, function(err, buffer) {
       let token = buffer.toString('hex');
@@ -138,7 +138,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
     router.post("/settlements/u/:id/:secret",function(req, res){
 
       // console.log(req.body["Causes"]);
-      console.log(req.body)
+      // console.log(req.body)
       let siteOriginCauses = req.body["Causes"] ;
       let siteOriginPopulation = req.body["Population"]!= null && !isNaN(parseInt(req.body["Population"])) ? parseInt(req.body["Population"]) : null;
       let siteGeographyTopography =   req.body["Topography Feautures"] ;
@@ -195,7 +195,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
               "resilienceToNaturalConditions": siteVulnerabilityResilience,
               "crimeRate": siteVulnerabilityCrimeRate,
               "perceptionOfInsecurity": siteVulnerabilityPerception,
-              "prevalance":siteVulnerabilityPrevalance,
+              // "prevalance":siteVulnerabilityPrevalance,
               "communityEngagement": siteVulnerabilityCommunityEngagement
           }
         },
