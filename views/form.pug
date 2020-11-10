@@ -105,7 +105,7 @@ html
                         else if question.type == "range"
                           .range
                             label(for = question.name)= question.options[0]
-                            input(type = "range" min = "1" max =  `${question.options.length-1}` value = (question.value ? question.value : null) name = question.name id = question.name)
+                            input(type = "range" min = "0" max =  `100` value = (question.value ? question.value : null) name = question.name id = question.name)
                             label(for = question.name)= question.options[question.options.length - 1]
                           br
 
@@ -151,7 +151,7 @@ html
                                     .range-options                                  
                                       label(for = question.name)= question.options[0]
                                       label(for = question.name)= question.options[question.options.length-1]
-                                    input(type = "range"  min = "0" max = `${question.options.length-1}` value = (question.value ? question.value : null) name = question.name id = question.name)                                
+                                    input(type = "range"  min = "0" max = `100` value = (question.value ? question.value : null) name = question.name id = question.name)                                
 
                             else if question.type=="double-range"
                               .range-level-items
@@ -176,11 +176,11 @@ html
                                   .range-options
                                     label(for = question.name)= question.options[0]
                                     label(for = question.name)= question.options[1]  
-                                  input(type = "range"  min = "0" max =  `${question.options.length-3}` value = (question.value!=null ? question.value[0] : null) name = question.name id = question.name)                                                      
+                                  input(type = "range"  min = "0" max =  `100` value = (question.value!=null ? question.value[0] : null) name = question.name id = question.name)                                                      
                                   .range-options
                                     label(for = question.name)= question.options[2]
                                     label(for = question.name)= question.options[3]  
-                                  input(type = "range"  min = "0" max =  `${question.options.length-3}` value = (question.value!=null ? question.value[1] : null) name = question.name id = question.name)                    
+                                  input(type = "range"  min = "0" max =  `100` value = (question.value!=null ? question.value[1] : null) name = question.name id = question.name)                    
                            
                             else if question.type=="grid"
                               .range-level-items
@@ -291,7 +291,7 @@ html
                         .range-options
                           each option in question.options
                             label(for = option)= option
-                        input(type = "range"  min = "0" max = `${question.options.length-1}`  value = (question.value ? question.value : null) name=question.id id=question.id)
+                        input(type = "range"  min = "0" max = `100`  value = (question.value ? question.value : null) name=question.id id=question.id)
                   else                 
                     .final-question-level-items
                       .final-question-level-item
