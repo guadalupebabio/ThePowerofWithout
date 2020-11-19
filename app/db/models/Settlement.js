@@ -150,8 +150,8 @@ let settlementSchema = new Schema({
       },
 
     }
+  },
 
-  }
 });
 
 
@@ -168,5 +168,5 @@ let settlementSchema = new Schema({
 
 
 module.exports = function(conn){
-  return conn.model('Settlement', settlementSchema);
+  return conn.model('SettlementData', settlementSchema);
 }

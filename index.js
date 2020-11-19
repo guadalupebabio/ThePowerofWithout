@@ -266,7 +266,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
 
 
                     {
-                      name: "Perseption of Insecurity",
+                      name: "Perception of Insecurity",
                       type: "range",
                       options:  ["Low","High"],
                       value:  getFormValue(["site", "vulnerability", "perceptionOfInsecurity"]),

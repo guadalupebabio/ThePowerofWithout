@@ -164,7 +164,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
 
       // let populaceLifeQualityHouseHold =req.body["Household per house"] ;
       let populaceLifeQualityProximity = req.body["Proximity to public areas of leisure activities"];
-      let populaceLifeQualityHealthCare = req.body["populaceHealthCare"] ;
+      let populaceLifeQualityHealthCare = req.body["Access to Health Care"] ;
       let populaceLifeQualityEducation=  req.body['Access to Education'] ;
       let populaceLifeQualityNumberOfSchools = req.body["Number of Schools in the Community"];
       let populaceLifeQualityInformalSector =req.body['Employment in the formal sector']; 
@@ -174,6 +174,10 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
       let populaceLifeQualityGender =req.body["Gender"];
       let populaceLifeQualityNumberOfHealthCareFacilities = req.body["Proximity to public areas of leisure activities"];
       let populaceLifeQualityEthnicity = req.body["List ethnic and racial categories in the Community"]
+
+      // console.log(req.body)
+      // console.log("Healthcare",populaceLifeQualityHealthCare )
+
 
 
       User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
@@ -259,7 +263,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
           previousModalData: "",
           previousModalClass : "previous-modal-container-hide",
           redirectUrl : "/contribute/u/" + req.params.id + "/" +req.params.secret,
-          url: "/api/final-survey",
+          url: "/api/final-survey/" + req.params.id + "/" +req.params.secret,
           notification:
             'Already created a settlement? Edit it <a href = "/contribute/u">here</a>',
           map: true,
@@ -276,10 +280,12 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
 
   });
 
-  router.post("/final-survey",(req,res)=>{
+  router.post("/final-survey/:id/:secret",(req,res)=>{
 
     //  console.log(req.body);
      let finalSurvey = new Survey({
+      settlementID: req.params.id,
+      userSession:req.params.secret,
       settlementRelationship: req.body["settlementRelationship"],
       informalSettlementName:req.body["informalSettlementName"],
       informalSettlementDefinition:req.body["informalSettlementDefinition"],

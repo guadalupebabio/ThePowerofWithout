@@ -36,8 +36,7 @@
         name: "privacy-checkbox",
         type: "checkbox",
         options: [
-          "By submitting your email address, you consent to us keeping you informed about updates to our website and about other products and services that we think might interest you.\
-        You can unsubscribe at any time. Please read our Privacy Statement and Terms & Conditions.",
+          "Keep me informed about updates of the Power of Without research and website. You can unsubscribe at any time.",
         ],
       },
     ],
@@ -214,9 +213,10 @@ const finalSurveyData = {
       name:"How would you rate the importance of these aspects to measure informality?",
       type:"grid",
       id:"gridData",
-      options:[[{label:"Origin",id:"originImportanceScale"},{label:"Physical Nature",id:"physicalNatureImportanceScale"},{label:"Quality of Life",id:"qualityOfLifeImportanceScale"}],
+      options:[
+      [{label:"Origin",id:"originImportanceScale"},{label:"Physical Nature",id:"physicalNatureImportanceScale"},{label:"Quality of Life",id:"qualityOfLifeImportanceScale"}],
       [{label:"Geography",id:"geographyImportanceScale"}, {label:"Infrastructure",id:"infrastructureImportanceScale"},{label:"Economy",id:"economyImportanceScale"}],
-      [{label:"Vulnerability",id:"vulnerabilityImportanceScale"}, {label:"Density",id:"densityImportanceScale"},{label:"Demography",id:"demographyImportanceScale"}]],
+      [{label:"Vulnerability",id:"vulnerabilityImportanceScale"}, {label:"Density",id:"densityImportanceScale"},{label:"Demography",id:"demographyImportanceScale"}]]
       
     }  
   ]

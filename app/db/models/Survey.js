@@ -7,6 +7,8 @@
 let mongoose = require('mongoose'),
 Schema = mongoose.Schema;
 let surveySchema = new Schema({
+    settlementID: String,
+    userSession:String,
     settlementRelationship: Array,
     informalSettlementName:String,
     informalSettlementDefinition:String,
