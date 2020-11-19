@@ -277,7 +277,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                       type: "range",
                       options:  ["Low","High"],
                       value:  getFormValue(["site", "vulnerability", "communityEngagement"]),
-                      info:information["Community Engangement"]                      
+                      info:information["Community Engagement"]                      
 
                     }
                   ],
