@@ -5,64 +5,145 @@ nav {
   top: 0;
   width: 100vw;
   transition: 0.2s all;
-  z-index: 2000; 
+  z-index: 2000;
 }
 nav a {
-
-  color: #242424 ;
+  color: #242424;
   transition: 0.2s all;
   margin: 0 40px;
-  font-weight :bold;
+  font-weight: bold;
 }
 
-  .nav-after-scroll{
+.nav-after-scroll {
   background: #242424;
-  color:white;
+  color: white;
   height: 60px;
   position: fixed;
   top: 0;
   width: 100vw;
   transition: 0.2s all;
-  z-index: 2000; 
-  }
-  .nav-a-after-scroll{
-    color:white ;
-    transition: 0.2s all;
-    font-weight :bold;
-  } 
-  .nav-a-after-scroll:hover{
+  z-index: 2000;
+}
+.nav-a-after-scroll {
+  color: white;
+  transition: 0.2s all;
+  font-weight: bold;
+}
+.nav-a-after-scroll:hover {
+  color: #242424;
+  background-color: white;
+  font-weight: bold;
+}
 
-    color: #242424;
-    background-color:white;
-    font-weight :bold;
-  }  
+#google_translate_element {
+  margin-top: 10px;
+}
+.goog-logo-link {
+  vertical-align: middle;
+}
+.logo-div-black {
+  background-image: url("../../assets/W_black.png");
+  width: 206px;
+  height: 60px;
+  background-size: 206px 60px;
+  background-repeat: no-repeat;
+  margin: 3rem;
+}
 
-  #google_translate_element{
-    margin-top: 10px;
-  }
-  .goog-logo-link{
-    vertical-align: middle;
-  }
-  .logo-div-black{
+nav a:hover {
+  color: #242424;
+  font-weight: bold;
+  border-bottom: 5px solid #242424;
+}
 
-    background-image:url("../../assets/W_black.png");
-    width: 206px;
-    height: 60px;
-    background-size: 206px 60px;
-    background-repeat: no-repeat;
-    margin:3rem;
- 
-  }
-  
-    nav a:hover {
-
-      color: #242424 ;
-      font-weight :bold;
-      border-bottom: 5px solid #242424; 
-    
-    }
-
-
-    /* nav a.active {
+/* nav a.active {
       border-bottom: 5px solid #FFFFFF; 
     } */
+@media only screen and (max-width: 768px) {
+  nav {
+    /* width: 50%; */
+  } 
+  .level-left{
+    width: 50%;
+
+  }
+  .level-right{
+
+    width: 50%;
+  }
+
+  nav a{
+
+    width:20%;
+    margin:1rem;
+
+  }
+  #google_translate_element{
+
+    width : 40%!important;
+  }
+
+  .goog-te-combo{
+
+    width : 50%!important;
+
+  }
+  .skiptranslate{
+
+   display:flex;
+   flex-direction:column
+  }
+  .goog-logo-link{
+
+    width: 20%;
+  }
+  .level-item{
+
+    /* width : 0%!important;
+     */
+     justify-content:normal!important;
+  }
+
+}
+
+@media only screen and (min-width:768px) and (max-width: 1200px) {
+  nav {
+    /* width: 50%; */
+  } 
+  .level-left{
+    width: 60%;
+
+  }
+  .level-right{
+
+    width: 40%;
+  }
+
+  nav a{
+
+    /* width:20%; */
+    margin:2rem;
+
+  }
+  #google_translate_element{
+
+    width : 40%!important;
+  }
+
+  .goog-te-combo{
+
+    width : 50%!important;
+
+  }
+  .skiptranslate{
+
+   display:flex;
+   flex-direction:column
+  }
+  .goog-logo-link{
+
+    width: 20%;
+  }
+ 
+
+}

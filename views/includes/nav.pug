@@ -1,11 +1,11 @@
 nav.level.is-mobile
   .level-left  
-    a.logo-div-white(href = "/" id="logo-div") 
-    a.level-item(class = (activeTab == 1 ? "active" : "")  href = "/map") MAP OF INFORMALITY
-    a.level-item(class = (activeTab == 2 ? "active" : "") href = "/contribute") CONTRIBUTE
-    a.level-item(class = (activeTab == 3 ? "active" : "") href = "/") THE TOOLS
+    .logo-div-white(id="logo-div") 
+    a(class = (activeTab == 1 ? "active" : "")  href = "/map") MAP OF INFORMALITY
+    a(class = (activeTab == 2 ? "active" : "") href = "/contribute") CONTRIBUTE
+    a(class = (activeTab == 3 ? "active" : "") href = "/") THE TOOLS
   .level-right
     #google_translate_element
-    a.level-item(class = (activeTab == 4 ? "active" : "") href = "/about") About
+    a(class = (activeTab == 4 ? "active" : "") href = "/about") ABOUT
 
 script(type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit")

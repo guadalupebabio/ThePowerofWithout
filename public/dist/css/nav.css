@@ -81,3 +81,15 @@
     /* margin:3rem; */
 
   }
+
+  @media only screen and (max-width: 800px) {
+   
+    .black-nav{
+
+      width:60%;
+    }
+
+
+
+
+  }
