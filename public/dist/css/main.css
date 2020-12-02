@@ -59,10 +59,11 @@ nav a:hover {
 /* nav a.active {
       border-bottom: 5px solid #FFFFFF; 
     } */
-@media only screen and (max-width: 768px) {
-  nav {
-    /* width: 50%; */
-  } 
+@media only screen and (min-width:468px) and (max-width: 768px) {
+  .nav-collapsed-container{
+    display:none;
+  }
+
   .level-left{
     width: 50%;
 
@@ -107,9 +108,116 @@ nav a:hover {
 }
 
 @media only screen and (min-width:768px) and (max-width: 1200px) {
+
+  .nav-collapsed-container{
+    display:none;
+  }
+  .nav-collapsed-menu {
+    display:none;
+  }
+
+  .level-left{
+    width: 60%;
+
+  }
+  .level-right{
+
+    width: 40%;
+  }
+
+  nav a{
+
+    /* width:20%; */
+    /* margin:2rem; */
+    height:80%;
+    font-size:0.8rem;
+
+  }
+  #google_translate_element{
+
+    width : 40%!important;
+  }
+
+  .goog-te-combo{
+
+    width : 50%!important;
+
+  }
+  .skiptranslate{
+
+   display:flex;
+   flex-direction:column
+  }
+  .goog-logo-link{
+
+    width: 20%;
+  }
+ 
+
+}
+
+
+@media only screen and (max-width: 468px) {
   nav {
     /* width: 50%; */
+    display:none!important;
   } 
+
+  .logo-div-black{
+    
+    margin:0 0 0 1rem !important;
+    /* margin-left:1rem; */
+
+
+  }
+  .nav-collapsed-container{
+    display:flex;
+    flex-direction:row;
+    z-index:2000;
+    position:fixed;
+    top:0;
+  
+  }
+  .nav-collapsed-menu {
+     background-image:url("../../assets/menu_24px.png");
+     width:30px;
+     height:30px;
+     background-repeat:no-repeat;
+     background-size:30px 30px;
+     margin:1rem 0 1rem 1rem;
+
+
+  }
+  .taxonomy-description{
+    /* width:20%!important; */
+
+    left:24px!important;
+    top: 141px!important;
+    width: 80%!important;
+
+    /* height:0!important; */
+  }
+
+  .taxonomy-description p{
+    font-size: 2rem!important;
+
+    /* height:0!important; */
+  }
+  .contribution-description{
+    left:24px!important;
+
+  }
+  .contribution-link a{
+
+    left:24px!important;
+
+  }
+  .update-div{
+
+
+  width:100%!important;
+  }
+
   .level-left{
     width: 60%;
 
