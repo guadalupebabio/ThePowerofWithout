@@ -8,7 +8,7 @@
         value: "City",
       },
       {
-        label: "Name of Community",
+        label: "Name of Informal Community",
         name: "settlement",
         type: "text",
         value: "Community",
