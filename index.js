@@ -380,7 +380,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     {
                       name : "Dweling size", //New!! question
                       type : "range",
-                      options : rooms, ////New!!
+                      options : households, ////New!!
                       value: getFormValue(["architecture", "density", "Dweling size"]), ////New!!
                       info:information["Dweling size"] ////New!!
                     }
@@ -402,7 +402,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                       type :"range",
                       options: minutes,
                       value:  getFormValue(["populace", "qualityOfLife", "proximity"]),
-                      info:information["Proximity to public areas of leisure activities"]
+                      info:information["Distance to public areas"]
                    }
                    ,
                    {
