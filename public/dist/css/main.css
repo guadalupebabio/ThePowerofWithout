@@ -297,4 +297,29 @@ nav a:hover {
   }
  
 
+  .taxonomy-architecture-div-mobile{
+    display:block!important;
+    background-image: url("../../assets/Rectangle\ 14.png");
+    width: 686px;
+    height: 631px;
+  }
+  .taxonomy-architecture-div{
+    display:none;
+  }
+
+  .section-container{
+
+     width:inherit;
+     height:inherit;
+    
+  }
+  .project-description{
+    position: unset!important;
+    width:inherit!important;
+
+    left:0px!important;
+  }
+
+
+
 }
