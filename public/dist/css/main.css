@@ -56,6 +56,10 @@ nav a:hover {
   border-bottom: 5px solid #242424;
 }
 
+.nav-collapsed-container{
+  display:none;
+}
+
 /* nav a.active {
       border-bottom: 5px solid #FFFFFF; 
     } */
@@ -109,6 +113,9 @@ nav a:hover {
 
 @media only screen and (min-width:768px) and (max-width: 1200px) {
 
+  .logo-div-black{
+    margin:0.1rem!important;
+  }
   .nav-collapsed-container{
     display:none;
   }
@@ -117,20 +124,20 @@ nav a:hover {
   }
 
   .level-left{
-    width: 60%;
+    width: 75%;
 
   }
   .level-right{
 
-    width: 40%;
+    width: 25%;
+    justify-content:space-around!important;
   }
 
   nav a{
 
-    /* width:20%; */
-    /* margin:2rem; */
     height:80%;
     font-size:0.8rem;
+    margin: 1.5rem!important;
 
   }
   #google_translate_element{
