@@ -7,8 +7,7 @@ html
   body 
     - let activeTab = 0;
     include includes/nav.pug
-    #update-shortened.update-div-shortened
-      p Subscribe
+
     #jumbotron
       .taxonomy-description
         p The Taxonomy helps us to understand informality
@@ -17,20 +16,22 @@ html
       .contribution-link
         a(href = "/contribute") Contribute
       //- i.fas.fa-arrow-down
-    #subsciption-update.update-div 
-      #close-subscribe-button.update-div-close-button
-      .update-div-contents 
-        .update-div-contents-tag
-          p Stay Updated
-        #update-contents-subscribe.update-div-contents-subscribe
-          a <b>Subscribe</b>
-        #update-contents-subcribe-email.update-div-contents-subscribe-email        
-          input(
-            type="text"
-            placeholder="Email"
-            value="Email"
-          )
-          #subscribe-button.update-div-contents-subscribe-button
+      #update-shortened.update-div-shortened
+        p Subscribe
+      #subsciption-update.update-div 
+        #close-subscribe-button.update-div-close-button
+        .update-div-contents 
+          .update-div-contents-tag
+            p Stay Updated
+          #update-contents-subscribe.update-div-contents-subscribe
+            a <b>Subscribe</b>
+          #update-contents-subcribe-email.update-div-contents-subscribe-email        
+            input(
+              type="text"
+              placeholder="Email"
+              value="Email"
+            )
+            #subscribe-button.update-div-contents-subscribe-button
     section.full-height 
       .section-container
         .taxonomy-architecture-div

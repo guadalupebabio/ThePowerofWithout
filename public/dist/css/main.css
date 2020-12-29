@@ -165,6 +165,16 @@ nav a:hover {
 
 
 @media only screen and (max-width: 468px) {
+
+  #jumbotron{
+
+    height:100vh!important;
+    background-position: inherit!important;
+
+
+
+
+  }
   nav {
     /* width: 50%; */
     display:none!important;
@@ -213,7 +223,10 @@ nav a:hover {
   .contribution-description{
     left:24px!important;
 
+
   }
+
+
   .contribution-link a{
 
     left:24px!important;
@@ -222,7 +235,25 @@ nav a:hover {
   .update-div{
 
 
-  width:100%!important;
+    width:100%!important;
+    position:relative!important;
+    top:72%!important;
+
+
+
+
+  }
+  .update-div-alternate{
+
+    position:relative!important;
+    top:72%!important;
+
+  }
+
+  .update-div-shortened{
+    position:relative!important;
+    top:72%!important;
+
   }
 
   .level-left{
