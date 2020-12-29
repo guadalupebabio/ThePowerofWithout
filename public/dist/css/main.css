@@ -295,13 +295,23 @@ nav a:hover {
 
     width: 20%;
   }
+
+  .full-height{
+
+    height:auto!important;
+  }
  
 
   .taxonomy-architecture-div-mobile{
     display:block!important;
     background-image: url("../../assets/Rectangle\ 14.png");
-    width: 686px;
-    height: 631px;
+    /* width: 686px;
+    height: 631px; */
+    width:100%!important;
+    height:325px!important;
+    background-size: 100%;
+    background-repeat: no-repeat;
+
   }
   .taxonomy-architecture-div{
     display:none;
@@ -311,6 +321,8 @@ nav a:hover {
 
      width:inherit;
      height:inherit;
+     display:flex;
+     flex-direction:column;
     
   }
   .project-description{
@@ -318,6 +330,33 @@ nav a:hover {
     width:inherit!important;
 
     left:0px!important;
+    height:100%!important;
+  }
+
+  .project-description-gif{
+
+    margin:0!important;
+    width:100%!important;
+    background-size:100% 200px !important;
+  }
+
+  .picture-1{
+
+    position:unset!important;
+    width:353px!important;
+    height:202px!important;
+    background-size: 353px 202px!important;
+
+    /* height: 200px!important;
+    width:100%!important; */
+  }
+  .picture-2{
+    display:none;
+  }
+  .pow-short-description{
+    margin-top:1rem;
+    display:block!important;
+    font-weight:bold;
   }
 
 
