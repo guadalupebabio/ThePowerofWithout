@@ -347,8 +347,6 @@ nav a:hover {
     height:202px!important;
     background-size: 353px 202px!important;
 
-    /* height: 200px!important;
-    width:100%!important; */
   }
   .picture-2{
     display:none;
@@ -359,6 +357,40 @@ nav a:hover {
     font-weight:bold;
   }
 
+  .footer{
+    display:none!important;
+  }
+  .footer-mobile{
 
+    display:block!important;
+  }
+  .footer-mobile-bottom-half{
+
+    display:flex!important;
+    flex-direction:row!important;
+    margin:0.5rem;
+    justify-content:space-between;
+  }
+  .footer-copy-right{
+
+    margin-top:1rem!important;
+  }
+
+  .team-summary-title{
+
+    margin-bottom:1rem!important;
+    
+  }
+  .team{
+    width:100%!important;
+    height:auto!important;
+  }
+  .team-summary-text{
+    font-size:0.7rem;
+  }
+  .footer-bottom-half-logos {
+    position:unset!important;
+    width:auto!important;
+  }
 
 }

@@ -380,6 +380,16 @@
   flex-direction: row;
   align-items: center;
 }
+
+
+.footer-mobile{
+
+  display:none;
+}
+.footer-mobile-bottom-half{
+
+  display:none;
+}
 .summary-of-site {
   display: flex;
   flex-direction: row;
