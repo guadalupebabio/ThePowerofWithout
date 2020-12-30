@@ -416,6 +416,9 @@ nav a:hover {
   }
   .collapsed-links{
     /* margin-left:1rem; */
+    background-color:white;
+    width:80%;
+    opacity:0.9;
 
   }
   .collapsed-links a{
