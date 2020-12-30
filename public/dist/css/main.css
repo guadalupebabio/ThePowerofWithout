@@ -416,13 +416,22 @@ nav a:hover {
   }
   .collapsed-links{
     /* margin-left:1rem; */
+    display:flex!important;
+    visibility:visible!important;
     background-color:white;
     width:80%;
     opacity:0.9;
+    transform: translateY(1rem)!important;
+    transition: transform 0.5s;
+   
+  
 
   }
   .collapsed-links-hidden{
-    display:none;
+    /* display:none; */
+    visibility:hidden;
+    /* transform: translateY(-2rem); */
+    transition: transform 0.2s!important;
   }
 
   .collapsed-links a{
