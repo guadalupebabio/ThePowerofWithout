@@ -421,6 +421,10 @@ nav a:hover {
     opacity:0.9;
 
   }
+  .collapsed-links-hidden{
+    display:none;
+  }
+
   .collapsed-links a{
 
     color: #242424!important;

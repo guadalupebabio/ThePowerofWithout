@@ -194,6 +194,16 @@ html
         updateContentSubscribeButton.className= "update-div-contents-subscribe"
 
       }) 
+
+      var hamburgerMenu = document.getElementById("nav-hamburger-menu");
+      if (hamburgerMenu){  
+        hamburgerMenu.addEventListener("click",()=>{
+          var mobileMenuLinks = document.getElementById("mobile-links");
+          if (mobileMenuLinks){
+            mobileMenuLinks.classList.toggle("collapsed-links-hidden");
+          }
+        });
+      }
       function googleTranslateElementInit() {
         new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
       }
