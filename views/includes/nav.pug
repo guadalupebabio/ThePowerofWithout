@@ -10,8 +10,14 @@ nav.level.is-mobile
 
 
 .nav-collapsed-container
-  .nav-collapsed-menu 
-  .logo-div-black(id="logo-div") 
+  .nav-collapsed-top
+    .nav-collapsed-menu 
+    .logo-div-black(id="logo-div") 
+  #mobile-links.collapsed-links
+    a(class = (activeTab == 1 ? "active" : "")  href = "/map") MAP OF INFORMALITY
+    a(class = (activeTab == 2 ? "active" : "") href = "/contribute") CONTRIBUTE
+    a(class = (activeTab == 3 ? "active" : "") href = "/") THE TOOLS
+    a(class = (activeTab == 4 ? "active" : "") href = "/about") ABOUT
 
   
 script(type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit")

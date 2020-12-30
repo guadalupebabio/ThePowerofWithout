@@ -393,4 +393,37 @@ nav a:hover {
     width:auto!important;
   }
 
+  .collapsed-links{
+    display:flex; 
+    flex-direction:column;
+    z-index:999;
+  }
+  .nav-collapsed-top{
+    display:flex;
+    flex-direction:row;
+    
+  }
+
+
+  .nav-collapsed-container{
+
+    display:flex;
+    flex-direction:column;
+    /* align-items:center; */
+
+
+
+  }
+  .collapsed-links{
+    /* margin-left:1rem; */
+
+  }
+  .collapsed-links a{
+
+    color: #242424!important;
+    font-weight: bold;
+    margin:1rem;
+  }
+
+
 }
