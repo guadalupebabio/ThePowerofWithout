@@ -755,4 +755,29 @@ Close buttons for info, link, comment, image boxes in Contribute form
     justify-content:space-evenly;
   }
 
+  .modal-container{
+
+      width:auto!important;
+      left:0!important;
+      height:auto!important;
+      position:absolute!important;
+      padding: 0.5rem!important;
+
+
+  }
+  .modal-icon{
+    margin:1rem!important;
+  }
+  .modal-item{
+    margin:0.2rem;
+
+  }
+  #continue-button{
+    margin:0!important;
+    width:auto!important;
+    height:auto!important;
+
+
+  }
+
 }
