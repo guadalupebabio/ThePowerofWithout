@@ -69,6 +69,10 @@
       vertical-align: middle;
     }
 
+.black-nav-collapsed-container{
+  display:none;
+}
+
 
 .logo-div-white{
     
@@ -82,21 +86,38 @@
 
   }
 
-  @media only screen and (max-width: 800px) {
+  /* @media only screen and (max-width: 800px) {
    
     .black-nav{
       width:60%;
     }
 
-    
+  
 
-    /* #jumbotron{
+  } */
 
-      background-size:100%!important;
+
+  @media only screen and (max-width: 468px) {
+   
+    .black-nav{
+      display:none!important;
+    }
+
+    .black-nav-collapsed-menu{
+
+      background-image:url("../../assets/menu_white_24px.png");
+      width:30px;
+      height:30px;
       background-repeat:no-repeat;
+      background-size:30px 30px;
+      margin:1rem 0 1rem 1rem;
+ 
+    }
+    .black-nav-collapsed-container{
 
-    } */
-
-
+      display:block!important;
+      background-color:#242424;
+    }
+  
 
   }

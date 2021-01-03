@@ -75,11 +75,12 @@ html
                             if question.disabled
                               input(name = question.name type = question.type readonly value = question.value required)
                             else
-                              input(name = question.name type = question.type placeholder = question.value required)                        
-                          
+                              input(name = question.name type = question.type placeholder = question.value required) 
+
                 each question, line in sectionData.sections 
                   if line>1
                     br
+                    
                     .fill-in-level-row-item
                       .fill-in-level-row-title                  
                         label(for = question.name + "-" + index)=question.label
@@ -109,6 +110,15 @@ html
                             label(for = question.name)= question.options[question.options.length - 1]
                           br
 
+                    if question.name == "geolocation"
+                      if map
+                        #map-mobile
+                          #basemaps-wrapper
+                            #basemaps
+                              #imagery
+                                p Satellite                  
+                              #streets
+                                p Map         
 
           else if sectionData.header=="update-settlement"
             each section, index in sectionData.sections
@@ -375,7 +385,6 @@ html
                       p Satellite                  
                     #streets
                       p Map
-
 
         else 
           #info.box(style = "display:none;")

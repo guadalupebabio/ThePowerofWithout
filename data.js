@@ -18,6 +18,7 @@
         name: "geolocation",
         type: "coords",
         value: "Draw area",
+        map: "map"
       },
       {
         label: "Community Area",
