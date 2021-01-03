@@ -194,9 +194,10 @@ function goToSection(i){
 
 function showInfo(info){
 
-  $("#info").show();
-  $("#info h1").text(`${info.header}: `);
-  $("#info p").text(`${info.text}`);
+  console.log("i did receive",info);
+  $(`#${info.header}-info`).show();
+  $(`#${info.header}-info h1`).text(`${info.header}: `);
+  $(`#${info.header}-info p`).text(`${info.text}`);
 }
 
 function closeModal(){
@@ -218,26 +219,32 @@ function hideAll(){
 }
 
 
-const infoClose = document.getElementById("close-info");
-if(infoClose){
-infoClose.addEventListener("click",()=>{
-  $("#info").hide();
+function onClose(id){
+  $(`#${id}`).hide();
 
-})
-const commentClose = document.getElementById("close-comment");
-
-commentClose.addEventListener("click",()=>{
-  $("#comment").hide();
-
-})
-
-const linkClose = document.getElementById("close-link");
-
-linkClose.addEventListener("click",()=>{
-  $("#link").hide();
-
-})
 }
+
+
+// const infoClose = document.getElementById("close-info");
+// if(infoClose){
+// infoClose.addEventListener("click",()=>{
+//   $("#info").hide();
+
+// })
+// const commentClose = document.getElementById("close-comment");
+
+// commentClose.addEventListener("click",()=>{
+//   $("#comment").hide();
+
+// })
+
+// const linkClose = document.getElementById("close-link");
+
+// linkClose.addEventListener("click",()=>{
+//   $("#link").hide();
+
+// })
+// }
 
 
 
@@ -304,12 +311,8 @@ $(".link-button").click(function(e){
 
   let data = $(this).data(),
       linkI = links.findIndex((d) => {
-
-
         document.getElementById("link-input").innerText= `Insert a reference link for the ${`"${data.name}"`} question`;
         d.formFieldName == data.name
-      
-      
       })
 
   //Set value of input text based on what's stored in the database

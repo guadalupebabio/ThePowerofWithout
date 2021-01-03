@@ -189,7 +189,9 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                   label: "ORIGIN",
                   questions: [
                     {
+
                       name: "Causes",
+                      id:"causes",
                       type: "radio",
                       options: [
                         "Squatting",
@@ -203,6 +205,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     },
                     {
                       name: "Population",
+                      id:"causes",
                       type: "text",
                       info: information["Population"],
                       value: getFormValue(["site", "origin", "population"]),
@@ -215,6 +218,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                   questions: [
                     {
                       name: "Topography Feautures",
+                      id:"topographyFeatures",
                       type: "radio",
                       options: [
                         "Dessert",
@@ -230,6 +234,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     },
                     {
                       name: "Location within the city",
+                      id:"cityLocation",
                       type: "radio",
                       options: [
                         "Squatting on the fringe",
@@ -251,6 +256,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                   questions: [
                     {
                       name: "Resilience to natural conditions",
+                      id:"vulnerability",
                       type: "range",
                       options: ["Low","High"],
                       value: getFormValue(["site", "vulnerability", "resilienceToNaturalConditions"]),
@@ -258,6 +264,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     },
                     {
                       name: "Crime rate",
+                      id:"crimeRate",
                       type: "range",
                       options:  ["Low","High"],
                       value: getFormValue(["site", "vulnerability", "crimeRate"]),
@@ -267,6 +274,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
 
                     {
                       name: "Perception of Insecurity",
+                      id:"perceptionOfInsecurity",
                       type: "range",
                       options:  ["Low","High"],
                       value:  getFormValue(["site", "vulnerability", "perceptionOfInsecurity"]),
@@ -274,6 +282,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     },
                     {
                       name: "Participation in decision-making processes",
+                      id:"decisionMaking",
                       type: "range",
                       options:  ["Low","High"],
                       value:  getFormValue(["site", "vulnerability", "communityEngagement"]),
@@ -292,18 +301,21 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                   questions : [
 
                     { name :"House Quality", 
+                      id: "houseQuality",
                       type : "range",
                       options:  ["Inadequate","Optimal"],
                       value: getFormValue(["architecture", "physicalNature", "houseQuality"]),
                       info:information["House quality"]
                     },{
                        name : "Materials",
+                       id:"materials",
                        type : "radio",
                        options : ["Mud", "Brick","Concrete","Wood","Corrugated sheet", "Tarpaulin / Tensile structures", "Cardboard","Other"], //Modified
                        value: getFormValue(["architecture", "physicalNature", "materials"]),
                        info:information["Materials"]            
                     },{
                         name: "Development Stage",
+                        id:"devStage",
                         type:"range",
                         options:["Temporary","Established"],
                         value:getFormValue(["architecture", "physicalNature", "developmentState"]),
@@ -314,6 +326,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                   label: "INFRASTRUCTURE",
                   questions:[{
                     name:"Access to Energy",
+                    id:"energyAccess",
                     type:"range",
                     options : ["Low","High"],
                     value: getFormValue(["architecture", "infrastructure", "accessToEnergy"]),
@@ -321,6 +334,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                   },
                   { 
                     name : "Source of Energy",
+                    id:"energySource",
                     type:"radio",
                     options:["Coal","Wood","Gas","Electricity","Other"],
                     value: getFormValue(["architecture", "infrastructure", "sourceOfEnergy"]),
@@ -328,18 +342,21 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
 
                   },{
                     name : "Access to Water",
+                    id:"waterAccess",
                     type : "double-range",
                     options : ["Low","High","Public","Private"],
                     value: getFormValue(["architecture", "infrastructure", "accessToWater"]),
                     info:information["Access to Water"]                  
                   },{
                     name : "Access to Sanitation",
+                    id:"sanitationAccess",
                     type : "double-range",
                     options : ["Low","High","Communal","Private"], //Updated
                     value: getFormValue(["architecture", "infrastructure", "accessToSanitation"]),
                     info:information["Access to sanitation"]
                   },{
                     name:"Internet Access",
+                    id:"internetAccess",
                     type :"range",
                     options : ["Low","High"],
                     value: getFormValue(["architecture", "infrastructure", "accessToInternetOrPhoneFare"]),
@@ -347,12 +364,14 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                   },
                   {
                     name:"Road network",
+                    id:"roadNetwork",
                     type :"range",
                     options : ["Not Paved","Paved"],
                     value: getFormValue(["architecture", "infrastructure", "physicalStateOfStreets"]),
                     info:information["Physical state Of the streets"] 
                   },{
                     name:"Mobility Modes",
+                    id: "mobilityModes",
                     type :"radio",
                     options : ["Walking","Biking", "Animal", "Informal transportation, microbuses","Informal transportation, tuctuc","Car","By Public Transportation","Other"], //added
                     value: getFormValue(["architecture", "infrastructure", "MobilityModes"]),
@@ -365,6 +384,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                   questions:[
                     {
                       name : "Building levels",
+                      id:"buildingLevels",
                       type : "range",
                       options : floors,
                       value: getFormValue(["architecture", "density", "elevation"]),
@@ -372,13 +392,16 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     },
                     {
                       name : "Households",
+                      id: "households",
                       type : "range",
                       options : households,
                       value: getFormValue(["architecture", "density", "Households"]),
                       info:information["Households"]
                     },
                     {
-                      name : "Dweling size", //New!! question
+                      name : "Dwelling size", //New!! question
+
+                      id : "dwellingSize",
                       type : "range",
                       options : households, ////New!!
                       value: getFormValue(["architecture", "density", "Dweling size"]), ////New!!
@@ -399,6 +422,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
          
                     {
                       name : "Proximity to public areas of leisure activities",
+                      id : "publicProximity",
                       type :"range",
                       options: minutes,
                       value:  getFormValue(["populace", "qualityOfLife", "proximity"]),
@@ -407,6 +431,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                    ,
                    {
                       name : "Access to Natural settings",////New!!
+                      id: "naturalSettingsAccess",
                       type :"range",
                       options: minutes,
                       value:  getFormValue(["populace", "qualityOfLife", "AccesstoNaturalsettings"]),////New!!
@@ -414,6 +439,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     },
                     {
                       name : "Access to Health Care",
+                      id : "healthCareAccess",
                       type :"range",
                       options: ["Low","High"],
                       value:  getFormValue(["populace", "qualityOfLife", "accessToHealthCare"]),
@@ -421,6 +447,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     },
                     {
                       name : "Number of Hospitals, Clinics or Health Cares",
+                      id : "hospitalNumber",
                       type :"range",
                       options: clinics,
                       value:  getFormValue(["populace", "qualityOfLife", "numberOfHealthCareFacilities"]),
@@ -428,6 +455,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     },                      
                     {
                       name : "Access to Education",
+                      id : "educationAccess",
                       type:"range",
                       options : ["Low" ,"High"],
                       value:getFormValue(["populace", "qualityOfLife", "accessToEducation"]),
@@ -435,6 +463,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     },
                     {
                       name : "Number of Schools in the Community",
+                      id : "schoolsNumber",
                       type:"range",
                       options : clinics,
                       value:getFormValue(["populace", "qualityOfLife", "numberOfSchools"]),
@@ -442,24 +471,28 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     }                     
                     ,{
                       name :"Unemployment Rate",
+                      id : "unemploymentRate",
                       type:"range",
                       options:["Low","High"],
                       value:getFormValue(["populace", "qualityOfLife", "unemploymentRate"]),
                       info:information["Unemployment rate"]
                     },{
                       name:"Employment in the formal sector",
+                      id : "formalEmployment",
                       type:"range",
                       options :percent,
                       value: getFormValue(["populace", "qualityOfLife", "employmentInTheInformalSector"]),
                       info:information["Employment in the formal sector"]
                     },{
                       name:"Population income", //New
+                      id : "populationIncome",
                       type:"range",
                       options :percent,
                       value: getFormValue(["populace", "qualityOfLife", "Populationincome"]),//New
                       info:information["Population income"]//New
                     },{
                       name :"Tenure",//Updated
+                      id : "tenure",
                       type:"range",
                       options :["No entitlement","Entitlement"], //New
                       value:  getFormValue(["populace", "qualityOfLife", "Tenure"]),//Updated
@@ -484,7 +517,8 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                       info:information["Gender Distribution"] //Updated
                     },
                     {
-                      name:"Etnic Groups",//Updated
+                      name:"Ethnic Groups",//Updated
+                      id  : "ethnicGroups",
                       type:"text",
                       placeholder:"Your Comment",
                       value:getFormValue(["populace", "qualityOfLife", "EtnicGroups"]),//Updated

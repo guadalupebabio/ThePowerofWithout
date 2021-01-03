@@ -150,6 +150,36 @@ html
                                       .link-button(data-name = `${question.name}` data-email = `${email}`)
                                         //- i.fas.fa-link
                                       .chat-button(data-name = `${question.name}` data-email = `${email}`)   
+
+                                  .commentary-level-items
+                                    .box(id=`${question.name}-info` style = "display:none;")
+                                      .close-info(id=`close-info-button` onclick=`onClose("${question.name}-info}")`)
+                                      h1.heading 
+                                      p
+                                    .box(id=`${question.name}-comment` style = "display:none;")
+                                      .close-comment(id=`close-comment-button` onclick=`onClose("${question.name}-comment}")`)
+                                      h1.heading Comment       
+                                      p(id="comment-input").subtitle.is-size-6
+                                      input.text(type = "text") 
+                                      p.help.is-success Successfully saved comment!
+                                      input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                    .box(id=`${question.name}-link` style = "display:none;")
+                                      .close-link(id=`close-link-button` onclick=`onClose("${question.name}-link}")`)
+                                      h1.heading Link
+                                      p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                      input.text(type = "text") 
+                                      p.help.is-success Successfully saved link!
+                                      p.help.is-danger Please enter a valid link
+                                      input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                    .box(id=`${question.name}-chat` style = "display:none;")
+                                      .close-chat(id=`close-chat-button` onclick=`onClose("${question.name}-chat}")`)
+                                      h1.heading Image
+                                      p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+                                      input.text(type = "text") 
+                                      p.help.is-success Successfully saved link!
+                                      p.help.is-danger Please enter a valid link
+                                      input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+
                                 .range
                                   if (question.id)
                                     .range-options                                  
@@ -182,6 +212,36 @@ html
                                       .link-button(data-name = `${question.name}` data-email = `${email}`)
                                         //- i.fas.fa-link
                                       .chat-button(data-name = `${question.name}` data-email = `${email}`)  
+
+                                  .commentary-level-items
+                                    .box(id=`${question.name}-info` style = "display:none;")
+                                      .close-info(id=`close-info-button` onclick=`onClose("${question.name}-info}")`)
+                                      h1.heading 
+                                      p
+                                    .box(id=`${question.name}-comment` style = "display:none;")
+                                      .close-comment(id=`close-comment-button` onclick=`onClose("${question.name}-comment}")`)
+                                      h1.heading Comment       
+                                      p(id="comment-input").subtitle.is-size-6
+                                      input.text(type = "text") 
+                                      p.help.is-success Successfully saved comment!
+                                      input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                    .box(id=`${question.name}-link` style = "display:none;")
+                                      .close-link(id=`close-link-button` onclick=`onClose("${question.name}-link}")`)
+                                      h1.heading Link
+                                      p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                      input.text(type = "text") 
+                                      p.help.is-success Successfully saved link!
+                                      p.help.is-danger Please enter a valid link
+                                      input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                    .box(id=`${question.name}-chat` style = "display:none;")
+                                      .close-chat(id=`close-chat-button` onclick=`onClose("${question.name}-chat}")`)
+                                      h1.heading Image
+                                      p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+                                      input.text(type = "text") 
+                                      p.help.is-success Successfully saved link!
+                                      p.help.is-danger Please enter a valid link
+                                      input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+
                                 .range
                                   .range-options
                                     label(for = question.name)= question.options[0]
@@ -209,6 +269,36 @@ html
                                       .link-button(data-name = `${question.name}` data-email = `${email}`)
                                         //- i.fas.fa-link
                                       .chat-button(data-name = `${question.name}` data-email = `${email}`)  
+
+                                  .commentary-level-items
+                                    .box(id=`${question.name}-info` style = "display:none;")
+                                      .close-info(id=`close-info-button` onclick=`onClose("${question.name}-info}")`)
+                                      h1.heading 
+                                      p
+                                    .box(id=`${question.name}-comment` style = "display:none;")
+                                      .close-comment(id=`close-comment-button` onclick=`onClose("${question.name}-comment}")`)
+                                      h1.heading Comment       
+                                      p(id="comment-input").subtitle.is-size-6
+                                      input.text(type = "text") 
+                                      p.help.is-success Successfully saved comment!
+                                      input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                    .box(id=`${question.name}-link` style = "display:none;")
+                                      .close-link(id=`close-link-button` onclick=`onClose("${question.name}-link}")`)
+                                      h1.heading Link
+                                      p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                      input.text(type = "text") 
+                                      p.help.is-success Successfully saved link!
+                                      p.help.is-danger Please enter a valid link
+                                      input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                    .box(id=`${question.name}-chat` style = "display:none;")
+                                      .close-chat(id=`close-chat-button` onclick=`onClose("${question.name}-chat}")`)
+                                      h1.heading Image
+                                      p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+                                      input.text(type = "text") 
+                                      p.help.is-success Successfully saved link!
+                                      p.help.is-danger Please enter a valid link
+                                      input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+  
                                 .grid
                                   .column1
                                     for option,index in question.options[0] 
@@ -264,7 +354,36 @@ html
                                 .level-item-right
                                   .comment-button(data-name = `${question.name}` data-email = `${email}`)
                                   .link-button(data-name = `${question.name}` data-email = `${email}`) 
-                                  .chat-button(data-name = `${question.name}` data-email = `${email}`)                   
+                                  .chat-button(data-name = `${question.name}` data-email = `${email}`)     
+
+                              .commentary-level-items
+                                .box(id=`${question.name}-info` style = "display:none;")
+                                  .close-info(id=`close-info-button` onclick=`onClose("${question.name}-info}")`)
+                                  h1.heading 
+                                  p
+                                .box(id=`${question.name}-comment` style = "display:none;")
+                                  .close-comment(id=`close-comment-button` onclick=`onClose("${question.name}-comment}")`)
+                                  h1.heading Comment       
+                                  p(id="comment-input").subtitle.is-size-6
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved comment!
+                                  input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                .box(id=`${question.name}-link` style = "display:none;")
+                                  .close-link(id=`close-link-button` onclick=`onClose("${question.name}-link}")`)
+                                  h1.heading Link
+                                  p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved link!
+                                  p.help.is-danger Please enter a valid link
+                                  input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                .box(id=`${question.name}-chat` style = "display:none;")
+                                  .close-chat(id=`close-chat-button` onclick=`onClose("${question.name}-chat}")`)
+                                  h1.heading Image
+                                  p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved link!
+                                  p.help.is-danger Please enter a valid link
+                                  input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
                           br
                           br
                   br
@@ -386,34 +505,34 @@ html
                     #streets
                       p Map
 
-        else 
-          #info.box(style = "display:none;")
-            #close-info
-            h1.heading 
-            p
-          #comment.box(style = "display:none;")
-            #close-comment
-            h1.heading Comment       
-            p(id="comment-input").subtitle.is-size-6
-            input.text(type = "text") 
-            p.help.is-success Successfully saved comment!
-            input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
-          #link.box(style = "display:none;")
-            #close-link
-            h1.heading Link
-            p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
-            input.text(type = "text") 
-            p.help.is-success Successfully saved link!
-            p.help.is-danger Please enter a valid link
-            input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)
-          #chat.box(style = "display:none;")
-            #close-chat
-            h1.heading Image
-            p.subtitle.is-size-6 Add an image with supporting information, if necessary.
-            input.text(type = "text") 
-            p.help.is-success Successfully saved link!
-            p.help.is-danger Please enter a valid link
-            input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+        //- else 
+        //-   #info.box(style = "display:none;")
+        //-     #close-info
+        //-     h1.heading 
+        //-     p
+        //-   #comment.box(style = "display:none;")
+        //-     #close-comment
+        //-     h1.heading Comment       
+        //-     p(id="comment-input").subtitle.is-size-6
+        //-     input.text(type = "text") 
+        //-     p.help.is-success Successfully saved comment!
+        //-     input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+        //-   #link.box(style = "display:none;")
+        //-     #close-link
+        //-     h1.heading Link
+        //-     p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+        //-     input.text(type = "text") 
+        //-     p.help.is-success Successfully saved link!
+        //-     p.help.is-danger Please enter a valid link
+        //-     input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)
+        //-   #chat.box(style = "display:none;")
+        //-     #close-chat
+        //-     h1.heading Image
+        //-     p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+        //-     input.text(type = "text") 
+        //-     p.help.is-success Successfully saved link!
+        //-     p.help.is-danger Please enter a valid link
+        //-     input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
     if comments && links 
       script.
         let comments = !{JSON.stringify(comments)};
