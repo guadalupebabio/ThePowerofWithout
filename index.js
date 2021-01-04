@@ -205,7 +205,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     },
                     {
                       name: "Population",
-                      id:"causes",
+                      id:"population",
                       type: "text",
                       info: information["Population"],
                       value: getFormValue(["site", "origin", "population"]),

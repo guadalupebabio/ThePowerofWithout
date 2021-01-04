@@ -195,9 +195,11 @@ function goToSection(i){
 function showInfo(info){
 
   console.log("i did receive",info);
-  $(`#${info.header}-info`).show();
-  $(`#${info.header}-info h1`).text(`${info.header}: `);
-  $(`#${info.header}-info p`).text(`${info.text}`);
+
+  $(`#${info.id}-info`).show();
+  $(`#${info.id}-info h1`).text(`${info.header}: `);
+  $(`#${info.id}-info p`).text(`${info.text}`);
+
 }
 
 function closeModal(){
@@ -220,6 +222,7 @@ function hideAll(){
 
 
 function onClose(id){
+  console.log("I clicked on close");
   $(`#${id}`).hide();
 
 }
@@ -281,16 +284,13 @@ $(".comment-button").click(function(e){
   hideAll();
   e.stopPropagation();
   let data = $(this).data(),
-      commentI = comments.findIndex((d) =>
-         
+      commentI = comments.findIndex((d) =>      
       {
         // Add some clarifying information about this question, if necessary.
         // console.log("Form field name",d.formFieldName)
         document.getElementById("comment-input").innerText= `Feedback for the ${`"${data.name}"`} question`;
         d.formFieldName == data.name
-      }
-      
-      
+      }   
       )
   //Set value of input text based on what's stored in the database
   if(commentI == -1) $("#comment input.text").val("");

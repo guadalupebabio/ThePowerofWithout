@@ -101,6 +101,7 @@ Range styling
 form .range {
   display: flex;
   flex-direction: column;
+  width:100%;
 }
 form .range-options {
   width: 100%;
@@ -360,8 +361,8 @@ Contains the form structure
 */
 
 .middle-column {
-  width: 50%;
-  margin: 2rem;
+  width: 100%;
+  /* margin: 2rem; */
 }
 
 /* 
@@ -369,10 +370,11 @@ Can contain either the map or the popup modals
 */
 
 .right-column {
-  width: 40%;
+  width: 50%;
   margin: 2rem;
-  position: relative;
-  left: 5%;
+  /* position: relative;
+  left: 5%; */
+  height:inherit;
 }
 
 .button-level {
@@ -399,12 +401,13 @@ For the fill-in form
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 1rem;
+  width:100%;
 }
 
 .range-level-items {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width:40%;
 }
 
 .fill-in-row .fill-in-level-row-item {
@@ -446,7 +449,7 @@ For the fill-in form
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 80%;
+  width: 100%;
 }
 
 .chat-button {
@@ -542,7 +545,7 @@ For the fill-in form
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 800px;
+  /* width: 800px; */
   /* margin-top:3rem; */
 }
 .level-item-left label {
@@ -674,7 +677,7 @@ Close buttons for info, link, comment, image boxes in Contribute form
 
 */
 
-#close-info {
+.close-info {
   position: relative;
   background-image: url("../../assets/clear_24px\ \(1\).png");
   width: 24px;
@@ -682,7 +685,7 @@ Close buttons for info, link, comment, image boxes in Contribute form
   top: 2%;
   left: 95%;
 }
-#close-comment {
+.close-comment {
   position: relative;
   width: 24px;
   height: 24px;
@@ -690,7 +693,7 @@ Close buttons for info, link, comment, image boxes in Contribute form
   top: 2%;
   left: 95%;
 }
-#close-link {
+.close-link {
   position: relative;
   width: 24px;
   height: 24px;
@@ -699,13 +702,29 @@ Close buttons for info, link, comment, image boxes in Contribute form
   left: 95%;
 }
 
-#close-chat {
+.close-chat {
   position: relative;
   width: 24px;
   height: 24px;
   background-image: url("../../assets/clear_24px\ \(1\).png");
   top: 2%;
   left: 95%;
+}
+
+/**
+ additions
+*/
+
+.box{
+  width:450px;
+  height:auto;
+}
+
+.question{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+width: 35%;
 }
 
 
@@ -743,6 +762,8 @@ Close buttons for info, link, comment, image boxes in Contribute form
 
   }
 
+
+
   #basemaps-wrapper {
 
 
@@ -779,5 +800,29 @@ Close buttons for info, link, comment, image boxes in Contribute form
 
 
   }
+  .level-item-question{
+    flex-direction:column!important;
+  }
+  .columns{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .question{
+    width:100%;
 
+  }
+  .box{
+    width:inherit!important;
+  }
+  .level-item-header label {
+    font-size: 0.8rem!important;
+
+    height: 1rem;
+    transform: rotate(-90deg) translateX(-2rem);
+}
+
+.range-level-items{
+  width:auto!important;
+}
 }

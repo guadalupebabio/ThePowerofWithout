@@ -48,8 +48,8 @@ html
           input.button.is-black(id="previous-continue-button" style="position:relative;left:30%;width:100px" type="submit" value="Continue")
 
       
-    .columns.is-variable.is-8
-
+    //- .columns.is-variable.is-8
+    .columns
       if sectionData.header=="update-settlement"     
         #sidebar.nav-column
           .nav
@@ -141,7 +141,7 @@ html
                                       label(for = "hilz")= question.name 
                                     .question-info
                                       if question.info
-                                        .alert-button(onclick=`showInfo({header: "${question.name}",text:"${question.info}"})`)      
+                                        .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)      
                                   br
                                   .right-level-items
                                     .level-item-right
@@ -151,37 +151,8 @@ html
                                         //- i.fas.fa-link
                                       .chat-button(data-name = `${question.name}` data-email = `${email}`)   
 
-                                  .commentary-level-items
-                                    .box(id=`${question.name}-info` style = "display:none;")
-                                      .close-info(id=`close-info-button` onclick=`onClose("${question.name}-info}")`)
-                                      h1.heading 
-                                      p
-                                    .box(id=`${question.name}-comment` style = "display:none;")
-                                      .close-comment(id=`close-comment-button` onclick=`onClose("${question.name}-comment}")`)
-                                      h1.heading Comment       
-                                      p(id="comment-input").subtitle.is-size-6
-                                      input.text(type = "text") 
-                                      p.help.is-success Successfully saved comment!
-                                      input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
-                                    .box(id=`${question.name}-link` style = "display:none;")
-                                      .close-link(id=`close-link-button` onclick=`onClose("${question.name}-link}")`)
-                                      h1.heading Link
-                                      p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
-                                      input.text(type = "text") 
-                                      p.help.is-success Successfully saved link!
-                                      p.help.is-danger Please enter a valid link
-                                      input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
-                                    .box(id=`${question.name}-chat` style = "display:none;")
-                                      .close-chat(id=`close-chat-button` onclick=`onClose("${question.name}-chat}")`)
-                                      h1.heading Image
-                                      p.subtitle.is-size-6 Add an image with supporting information, if necessary.
-                                      input.text(type = "text") 
-                                      p.help.is-success Successfully saved link!
-                                      p.help.is-danger Please enter a valid link
-                                      input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
-
                                 .range
-                                  if (question.id)
+                                  if (question.options.length==4)
                                     .range-options                                  
                                       label(id= question.id + "-label1" for = question.name)= !isNaN((parseInt(question.value)))? question.options[parseInt(question.value)][0] : question.options[0][1]
                                       label(id= question.id + "-label2" for = question.name)= !isNaN((parseInt(question.value)))? question.options[parseInt(question.value)][1] : question.options[0][0]
@@ -191,7 +162,37 @@ html
                                     .range-options                                  
                                       label(for = question.name)= question.options[0]
                                       label(for = question.name)= question.options[question.options.length-1]
-                                    input(type = "range"  min = "0" max = `100` value = (question.value ? question.value : null) name = question.name id = question.name)                                
+                                    input(type = "range"  min = "0" max = `100` value = (question.value ? question.value : null) name = question.name id = question.name)   
+                              .commentary-level-items
+                                .box(id=`${question.id}-info` style = "display:none;")
+                                  .close-info(id=`close-info-button` onclick=`onClose("${question.id}-info")`)
+                                  h1.heading 
+                                  p
+                                .box(id=`${question.id}-comment` style = "display:none;")
+                                  .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
+                                  h1.heading Comment       
+                                  p(id="comment-input").subtitle.is-size-6
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved comment!
+                                  input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                .box(id=`${question.id}-link` style = "display:none;")
+                                  .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
+                                  h1.heading Link
+                                  p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved link!
+                                  p.help.is-danger Please enter a valid link
+                                  input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                .box(id=`${question.id}-chat` style = "display:none;")
+                                  .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
+                                  h1.heading Image
+                                  p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved link!
+                                  p.help.is-danger Please enter a valid link
+                                  input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+
+                             
 
                             else if question.type=="double-range"
                               .range-level-items
@@ -203,7 +204,7 @@ html
                                       if question.info
                                         //- .info-button.level-item(data-label = `${category.label}` data-info = `${question.info}`)
                                         //- i.fas.fa-info-circle
-                                        .alert-button(onclick=`showInfo({header: "${question.name}",text:"${question.info}"})`)        
+                                        .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)        
                                   br
                                   .right-level-items
                                     .level-item-right
@@ -212,36 +213,6 @@ html
                                       .link-button(data-name = `${question.name}` data-email = `${email}`)
                                         //- i.fas.fa-link
                                       .chat-button(data-name = `${question.name}` data-email = `${email}`)  
-
-                                  .commentary-level-items
-                                    .box(id=`${question.name}-info` style = "display:none;")
-                                      .close-info(id=`close-info-button` onclick=`onClose("${question.name}-info}")`)
-                                      h1.heading 
-                                      p
-                                    .box(id=`${question.name}-comment` style = "display:none;")
-                                      .close-comment(id=`close-comment-button` onclick=`onClose("${question.name}-comment}")`)
-                                      h1.heading Comment       
-                                      p(id="comment-input").subtitle.is-size-6
-                                      input.text(type = "text") 
-                                      p.help.is-success Successfully saved comment!
-                                      input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
-                                    .box(id=`${question.name}-link` style = "display:none;")
-                                      .close-link(id=`close-link-button` onclick=`onClose("${question.name}-link}")`)
-                                      h1.heading Link
-                                      p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
-                                      input.text(type = "text") 
-                                      p.help.is-success Successfully saved link!
-                                      p.help.is-danger Please enter a valid link
-                                      input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
-                                    .box(id=`${question.name}-chat` style = "display:none;")
-                                      .close-chat(id=`close-chat-button` onclick=`onClose("${question.name}-chat}")`)
-                                      h1.heading Image
-                                      p.subtitle.is-size-6 Add an image with supporting information, if necessary.
-                                      input.text(type = "text") 
-                                      p.help.is-success Successfully saved link!
-                                      p.help.is-danger Please enter a valid link
-                                      input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
-
                                 .range
                                   .range-options
                                     label(for = question.name)= question.options[0]
@@ -250,7 +221,37 @@ html
                                   .range-options
                                     label(for = question.name)= question.options[2]
                                     label(for = question.name)= question.options[3]  
-                                  input(type = "range"  min = "0" max =  `100` value = (question.value!=null ? question.value[1] : null) name = question.name id = question.name)                    
+                                  input(type = "range"  min = "0" max =  `100` value = (question.value!=null ? question.value[1] : null) name = question.name id = question.name)   
+
+                              .commentary-level-items
+                                .box(id=`${question.id}-info` style = "display:none;")
+                                  .close-info(id=`close-info-button` onclick=`onClose("${question.id}-info")`)
+                                  h1.heading 
+                                  p
+                                .box(id=`${question.id}-comment` style = "display:none;")
+                                  .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
+                                  h1.heading Comment       
+                                  p(id="comment-input").subtitle.is-size-6
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved comment!
+                                  input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                .box(id=`${question.id}-link` style = "display:none;")
+                                  .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
+                                  h1.heading Link
+                                  p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved link!
+                                  p.help.is-danger Please enter a valid link
+                                  input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                .box(id=`${question.id}-chat` style = "display:none;")
+                                  .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
+                                  h1.heading Image
+                                  p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved link!
+                                  p.help.is-danger Please enter a valid link
+                                  input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+                
                            
                             else if question.type=="grid"
                               .range-level-items
@@ -260,7 +261,7 @@ html
                                       label(for = question.id)= question.name 
                                     .question-info
                                       if question.info
-                                        .alert-button(onclick=`showInfo({header: "${question.name}",text:"${question.info}"})`)   
+                                        .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)  
                                   br
                                   .right-level-items
                                     .level-item-right
@@ -270,35 +271,34 @@ html
                                         //- i.fas.fa-link
                                       .chat-button(data-name = `${question.name}` data-email = `${email}`)  
 
-                                  .commentary-level-items
-                                    .box(id=`${question.name}-info` style = "display:none;")
-                                      .close-info(id=`close-info-button` onclick=`onClose("${question.name}-info}")`)
-                                      h1.heading 
-                                      p
-                                    .box(id=`${question.name}-comment` style = "display:none;")
-                                      .close-comment(id=`close-comment-button` onclick=`onClose("${question.name}-comment}")`)
-                                      h1.heading Comment       
-                                      p(id="comment-input").subtitle.is-size-6
-                                      input.text(type = "text") 
-                                      p.help.is-success Successfully saved comment!
-                                      input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
-                                    .box(id=`${question.name}-link` style = "display:none;")
-                                      .close-link(id=`close-link-button` onclick=`onClose("${question.name}-link}")`)
-                                      h1.heading Link
-                                      p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
-                                      input.text(type = "text") 
-                                      p.help.is-success Successfully saved link!
-                                      p.help.is-danger Please enter a valid link
-                                      input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
-                                    .box(id=`${question.name}-chat` style = "display:none;")
-                                      .close-chat(id=`close-chat-button` onclick=`onClose("${question.name}-chat}")`)
-                                      h1.heading Image
-                                      p.subtitle.is-size-6 Add an image with supporting information, if necessary.
-                                      input.text(type = "text") 
-                                      p.help.is-success Successfully saved link!
-                                      p.help.is-danger Please enter a valid link
-                                      input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
-  
+                                .commentary-level-items
+                                  .box(id=`${question.id}-info` style = "display:none;")
+                                    .close-info(id=`close-info-button` onclick=`onClose("${question.id}-info")`)
+                                    h1.heading 
+                                    p
+                                  .box(id=`${question.id}-comment` style = "display:none;")
+                                    .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
+                                    h1.heading Comment       
+                                    p(id="comment-input").subtitle.is-size-6
+                                    input.text(type = "text") 
+                                    p.help.is-success Successfully saved comment!
+                                    input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                  .box(id=`${question.id}-link` style = "display:none;")
+                                    .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
+                                    h1.heading Link
+                                    p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                    input.text(type = "text") 
+                                    p.help.is-success Successfully saved link!
+                                    p.help.is-danger Please enter a valid link
+                                    input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                  .box(id=`${question.id}-chat` style = "display:none;")
+                                    .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
+                                    h1.heading Image
+                                    p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+                                    input.text(type = "text") 
+                                    p.help.is-success Successfully saved link!
+                                    p.help.is-danger Please enter a valid link
+                                    input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
                                 .grid
                                   .column1
                                     for option,index in question.options[0] 
@@ -319,71 +319,73 @@ html
                                           input(id= option.id name = option.id  value=option.value type = "text" onchange=`validateUpdateInput("${option.id}")`  placeholder = "0") 
                                           label(for=option.id)= "/100%"
 
-                            else                 
-                              .left-level-items
-                                .level-item-left
-                                  .label
-                                    label(for = "hilz")= question.name 
-                                  .question-info
-                                    if question.info
-                                      .alert-button(onclick=`showInfo({header: "${question.name}",text:"${question.info}"})`)              
-                                //- br
-                                if question.type == "coords"                               
-                                  input#coords(name = question.name type = "text" readonly placeholder = "Select a point on the map")  
-                                else if question.type == "text"    
-                                  if question.disabled
-                                    input(name = question.name type = question.type readonly value = question.value  placeholder=question.placeholder)
-                                  else
-                                    input(name = question.name type = question.type value = question.value  placeholder=!(question.placeholder==null) ? question.placeholder : null)
-                                else if question.type == "radio" || question.type == "checkbox"
-                                  each val, index in question.options                           
-                                    if question.type == "radio"                                                                         
-                                      if val == "Other"
-                                        .other-radio-div
-                                          input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))   
-                                          input( style="margin-bottom:0!important; font-weight:bold;font-size:14px;" name = question.name type = "text" value= (question.value!=null ? question.value[1] : null) placeholder = "Other")                  
-                                      else  
-                                        input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))                                                                                                                    
+                            else  
+                              .question               
+                                .left-level-items
+                                  .level-item-left
+                                    .label
+                                      label(for = "hilz")= question.name 
+                                    .question-info
+                                      if question.info
+                                        .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)              
+                                  //- br
+                                  if question.type == "coords"                               
+                                    input#coords(name = question.name type = "text" readonly placeholder = "Select a point on the map")  
+                                  else if question.type == "text"    
+                                    if question.disabled
+                                      input(name = question.name type = question.type readonly value = question.value  placeholder=question.placeholder)
                                     else
-                                      input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
-                                    if val != "Other"
-                                      label(for = question.name + "-" + index)= val
-                                    br    
+                                      input(name = question.name type = question.type value = question.value  placeholder=!(question.placeholder==null) ? question.placeholder : null)
+                                  else if question.type == "radio" || question.type == "checkbox"
+                                    each val, index in question.options                           
+                                      if question.type == "radio"                                                                         
+                                        if val == "Other"
+                                          .other-radio-div
+                                            input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))   
+                                            input( style="margin-bottom:0!important; font-weight:bold;font-size:14px;" name = question.name type = "text" value= (question.value!=null ? question.value[1] : null) placeholder = "Other")                  
+                                        else  
+                                          input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))                                                                                                                    
+                                      else
+                                        input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
+                                      if val != "Other"
+                                        label(for = question.name + "-" + index)= val
+                                      br    
 
-                              .right-level-items
-                                .level-item-right
-                                  .comment-button(data-name = `${question.name}` data-email = `${email}`)
-                                  .link-button(data-name = `${question.name}` data-email = `${email}`) 
-                                  .chat-button(data-name = `${question.name}` data-email = `${email}`)     
+                                .right-level-items
+                                  .level-item-right
+                                    .comment-button(data-name = `${question.name}` data-email = `${email}`)
+                                    .link-button(data-name = `${question.name}` data-email = `${email}`) 
+                                    .chat-button(data-name = `${question.name}` data-email = `${email}`)     
 
                               .commentary-level-items
-                                .box(id=`${question.name}-info` style = "display:none;")
-                                  .close-info(id=`close-info-button` onclick=`onClose("${question.name}-info}")`)
+                                .box(id=`${question.id}-info` style = "display:none;")
+                                  .close-info(id=`close-info-button` onclick=`onClose("${question.id}-info")`)
                                   h1.heading 
                                   p
-                                .box(id=`${question.name}-comment` style = "display:none;")
-                                  .close-comment(id=`close-comment-button` onclick=`onClose("${question.name}-comment}")`)
+                                .box(id=`${question.id}-comment` style = "display:none;")
+                                  .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
                                   h1.heading Comment       
                                   p(id="comment-input").subtitle.is-size-6
                                   input.text(type = "text") 
                                   p.help.is-success Successfully saved comment!
                                   input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
-                                .box(id=`${question.name}-link` style = "display:none;")
-                                  .close-link(id=`close-link-button` onclick=`onClose("${question.name}-link}")`)
+                                .box(id=`${question.id}-link` style = "display:none;")
+                                  .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                   h1.heading Link
                                   p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
                                   input.text(type = "text") 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
                                   input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
-                                .box(id=`${question.name}-chat` style = "display:none;")
-                                  .close-chat(id=`close-chat-button` onclick=`onClose("${question.name}-chat}")`)
+                                .box(id=`${question.id}-chat` style = "display:none;")
+                                  .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
                                   h1.heading Image
                                   p.subtitle.is-size-6 Add an image with supporting information, if necessary.
                                   input.text(type = "text") 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
                                   input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+
                           br
                           br
                   br
@@ -414,7 +416,7 @@ html
                             label(for=question.id)= question.name
                           .question-info
                             if question.info
-                              .alert-button(onclick=`showInfo("${question.info}")`)       
+                              .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)       
                         br
                       .range
                         .range-options
@@ -429,7 +431,7 @@ html
                             label(for = question.id)= question.name 
                           .question-info
                             if question.info
-                              .alert-button(onclick=`showInfo("${question.info}")`) 
+                              .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`) 
                       br           
                       if question.type == "coords"                               
                         input#coords(name = question.id type = "text" readonly placeholder = "Select a point on the map")  
@@ -493,17 +495,18 @@ html
               input.button.is-dark(style="position:relative;left:70%;width:300px" type="submit" value="Submit" )
 
 
-      .right-column#right-sidebar
-        if sectionData.header=="fill-in-form" 
-          section
-            if map
-              #map
-                #basemaps-wrapper
-                  #basemaps
-                    #imagery
-                      p Satellite                  
-                    #streets
-                      p Map
+      //- .right-column#right-sidebar
+
+      if sectionData.header=="fill-in-form" 
+        section.right-column#right-sidebar
+          if map
+            #map
+              #basemaps-wrapper
+                #basemaps
+                  #imagery
+                    p Satellite                  
+                  #streets
+                    p Map
 
         //- else 
         //-   #info.box(style = "display:none;")
