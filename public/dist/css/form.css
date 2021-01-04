@@ -819,7 +819,7 @@ width: 35%;
     font-size: 0.8rem!important;
 
     height: 1rem;
-    transform: rotate(-90deg) translateX(-2rem);
+    transform: rotate(-90deg) translate(-2rem,-2rem);
 }
 
 .range-level-items{
