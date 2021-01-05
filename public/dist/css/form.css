@@ -817,12 +817,19 @@ width: 35%;
   }
   .level-item-header label {
     font-size: 0.8rem!important;
-
+    width:3rem; /**just shortened it for sake of ui*/
     height: 1rem;
+    left:30%;
     transform: rotate(-90deg) translate(-2rem,-2rem);
 }
 
 .range-level-items{
   width:auto!important;
+}
+.nav{
+  top: 15%!important;
+  left: 5%!important;
+  transform: none!important;
+  z-index:999;
 }
 }
