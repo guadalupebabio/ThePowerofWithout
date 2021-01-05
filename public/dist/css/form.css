@@ -404,6 +404,7 @@ For the fill-in form
   width:100%;
 }
 
+
 .range-level-items {
   display: flex;
   flex-direction: column;
@@ -500,7 +501,7 @@ For the fill-in form
 .level-middle .level-item-left {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   /* align-items: center; */
   /* width : 100px; */
 }
@@ -509,7 +510,7 @@ For the fill-in form
   flex-direction: row;
   /* align-items: center; */
   height: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 0.8rem;
 }
 .level-item-right {
   display: flex;
@@ -637,12 +638,12 @@ For the fill-in form
   flex-direction: column;
 }
 
-.level-item-left {
+/* .level-item-left {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}
+} */
 
 .survey-buttons {
   display: flex;
@@ -831,5 +832,15 @@ width: 35%;
   position:unset!important;
   transform: none!important;
   z-index:999;
+}
+.top-level-items .level-item-left{
+  width:70%;
+}
+.top-level-items .level-item-left label{
+  display: flex;
+  flex-direction: row;
+  width:65%!important;
+  margin:0.2rem !important
+
 }
 }
