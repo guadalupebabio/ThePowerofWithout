@@ -827,8 +827,8 @@ width: 35%;
   width:auto!important;
 }
 .nav{
-  top: 15%!important;
-  left: 5%!important;
+
+  position:unset!important;
   transform: none!important;
   z-index:999;
 }
