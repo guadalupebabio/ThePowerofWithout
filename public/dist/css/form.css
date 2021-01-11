@@ -729,6 +729,11 @@ width: 35%;
 }
 
 
+.is-dark{
+
+  position:relative;left:40%;width:300px!important
+}
+
 /* .fill-in-column-mobile{
   display:none;
 } */
@@ -843,4 +848,13 @@ width: 35%;
   margin:0.2rem !important
 
 }
+.is-dark{
+
+  position:unset!important;
+}
+.button-level{
+  margin: 30px;
+}
+
+
 }

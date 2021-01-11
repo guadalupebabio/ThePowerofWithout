@@ -511,18 +511,18 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     },{
                       name : "Gender Distribution", //Updated
                       type:"range",
-                      id:"Gender",
+                      id:"gender",
                       options : differences,
                       value:getFormValue(["populace", "qualityOfLife", "GenderDistribution"]),//Updated
                       info:information["Gender Distribution"] //Updated
                     },
                     {
                       name:"Ethnic Groups",//Updated
-                      id  : "ethnicGroups",
+                      id  : "ethinicIdentities",
                       type:"text",
                       placeholder:"Your Comment",
-                      value:getFormValue(["populace", "qualityOfLife", "EtnicGroups"]),//Updated
-                      info:information["Etnic Groups"]//Updated
+                      value:getFormValue(["populace", "qualityOfLife", "ethinicIdentities"]),//Updated
+                      info:information["Ethnic Groups"]//Updated
                     }
                     
                   ]  

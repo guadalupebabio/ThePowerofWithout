@@ -144,14 +144,13 @@ html
                                   br
                                   .right-level-items
                                     .level-item-right
-                                      .comment-button(data-name = `${question.name}` data-email = `${email}`)
-                                        //- i.fa-comment.fas
-                                      .link-button(data-name = `${question.name}` data-email = `${email}`)
-                                        //- i.fas.fa-link
-                                      .chat-button(data-name = `${question.name}` data-email = `${email}`)   
+                                      .comment-button(onclick=`showComment({id:"${question.id}" name:"${question.name}" email:"${email}"})`)                            
+                                      .link-button(onclick=`showLink({id:"${question.id}" name:"${question.name}" email:"${email}"})`)  
+                                      .chat-button(data-id = `${question.id}` data-name = `${question.name}` data-email = `${email}` ) 
+                          
 
                                 .range
-                                  if (question.options.length==4)
+                                  if (question.options.length>4)
                                     .range-options                                  
                                       label(id= question.id + "-label1" for = question.name)= !isNaN((parseInt(question.value)))? question.options[parseInt(question.value)][0] : question.options[0][1]
                                       label(id= question.id + "-label2" for = question.name)= !isNaN((parseInt(question.value)))? question.options[parseInt(question.value)][1] : question.options[0][0]
@@ -173,7 +172,7 @@ html
                                   p(id="comment-input").subtitle.is-size-6
                                   input.text(type = "text") 
                                   p.help.is-success Successfully saved comment!
-                                  input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                  input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url data-id = question.id)
                                 .box(id=`${question.id}-link` style = "display:none;")
                                   .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                   h1.heading Link
@@ -181,7 +180,7 @@ html
                                   input.text(type = "text") 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
-                                  input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                  input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url data-id = question.id)                                      
                                 .box(id=`${question.id}-chat` style = "display:none;")
                                   .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
                                   h1.heading Image
@@ -198,7 +197,7 @@ html
                                 .top-level-items
                                   .level-item-left
                                     .label
-                                      label(for = "hilz")= question.name 
+                                      label()= question.name 
                                     .question-info
                                       if question.info
                                         //- .info-button.level-item(data-label = `${category.label}` data-info = `${question.info}`)
@@ -207,11 +206,10 @@ html
                                   br
                                   .right-level-items
                                     .level-item-right
-                                      .comment-button(data-name = `${question.name}` data-email = `${email}`) 
-                                        //- i.fa-comment.fas
-                                      .link-button(data-name = `${question.name}` data-email = `${email}`)
-                                        //- i.fas.fa-link
-                                      .chat-button(data-name = `${question.name}` data-email = `${email}`)  
+                                      .comment-button(onclick=`showComment({id:"${question.id}" name:"${question.name}" email:"${email}"})`)                            
+                                      .link-button(onclick=`showLink({id:"${question.id}" name:"${question.name}" email:"${email}"})`)        
+                                      .chat-button(data-id = `${question.id}` data-name = `${question.name}` data-email = `${email}` ) 
+
                                 .range
                                   .range-options
                                     label(for = question.name)= question.options[0]
@@ -264,11 +262,9 @@ html
                                   br
                                   .right-level-items
                                     .level-item-right
-                                      .comment-button(data-name = `${question.name}` data-email = `${email}`) 
-                                        //- i.fa-comment.fas
-                                      .link-button(data-name = `${question.name}` data-email = `${email}`)
-                                        //- i.fas.fa-link
-                                      .chat-button(data-name = `${question.name}` data-email = `${email}`)  
+                                      .comment-button(onclick=`showComment({id:"${question.id}" name:"${question.name}" email:"${email}"})`)                            
+                                      .link-button(onclick=`showLink({id:"${question.id}" name:"${question.name}" email:"${email}"})`)    
+                                      .chat-button(data-id = `${question.id}` data-name = `${question.name}` data-email = `${email}` ) 
 
                                 .commentary-level-items
                                   .box(id=`${question.id}-info` style = "display:none;")
@@ -352,9 +348,9 @@ html
 
                                 .right-level-items
                                   .level-item-right
-                                    .comment-button(data-name = `${question.name}` data-email = `${email}`)
-                                    .link-button(data-name = `${question.name}` data-email = `${email}`) 
-                                    .chat-button(data-name = `${question.name}` data-email = `${email}`)     
+                                      .comment-button(onclick=`showComment({id:"${question.id}" name:"${question.name}" email:"${email}"})`)                            
+                                      .link-button(onclick=`showLink({id:"${question.id}" name:"${question.name}" email:"${email}"})`)  
+                                      .chat-button(data-id = `${question.id}` data-name = `${question.name}` data-email = `${email}` )   
 
                               .commentary-level-items
                                 .box(id=`${question.id}-info` style = "display:none;")
@@ -491,7 +487,7 @@ html
                 a(href=redirectUrl id ="edit-previous-button-link" name = "edit-previous-button" type = "button" value = "Edit a previous settlement") Edit previous settlement
                 input.button.is-black(id="start-button" style="font-size:1.2rem;width:300px;margin:0.5rem" type="submit" value="Finalize")          
             else        
-              input.button.is-dark(style="position:relative;left:40%;width:300px" type="submit" value="Submit" )
+              input.button.is-dark(type="submit" value="Submit" )
 
 
       //- .right-column#right-sidebar
