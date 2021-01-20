@@ -82,9 +82,11 @@
     background-repeat: no-repeat;
     background-size: 206px 60px;
     padding: 0;
+    margin-left:1rem;
     /* margin:3rem; */
 
   }
+  
 
   /* @media only screen and (max-width: 800px) {
    
