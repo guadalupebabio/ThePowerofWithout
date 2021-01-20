@@ -573,17 +573,27 @@ For the fill-in form
 *Final survey css
 * 
 */
+.final-survey{
 
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
 .level-category-survey {
-  position: relative;
-  left: 40%;
+  /* position: relative; */
+  /* left: 40%; */
+  /* margin: 100px 300px 0 300px; */
+
+  width:70%;
   color: black;
   /* font-size:1.2rem; */
 }
 .final-survey-questions {
-  position: relative;
-  left: 40%;
+  /* position: relative;
+  left: 40%; */
   color: black;
+  width:70%;
+  /* margin: 0 300px 0 300px; */
   /* font-size:5rem; */
 }
 .final-survey-question {
@@ -591,6 +601,10 @@ For the fill-in form
   flex-direction: row;
   /* align-items: center; */
 }
+.final-survey-question .level-item-left{
+
+  display: flex;
+ }
 .final-question-level-items {
   width: 100%;
 }

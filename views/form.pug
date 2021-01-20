@@ -386,96 +386,97 @@ html
                   br
 
           else if sectionData.header=="final-survey"
-            .level-category-survey
-              .appreciation-message
-                p #{sectionData.appreciationMessage1}
-                br
-                p #{sectionData.appreciationMessage2}
-                br
-                p #{sectionData.appreciationMessage3}
-                br
-                p #{sectionData.appreciationMessage4}
-                br
-                p #{sectionData.appreciationMessage5}                
-            br
-            br
-            br
-            .final-survey-questions
-              for question in sectionData.questions
-                .final-survey-question
-                  if question.type =="range"
-                    .range-level-items
-                      .top-level-items
-                        .level-item-left
-                          .label
-                            label(for=question.id)= question.name
-                          .question-info
-                            if question.info
-                              .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)       
-                        br
-                      .range
-                        .range-options
-                          each option in question.options
-                            label(for = option)= option
-                        input(type = "range"  min = "0" max = `100`  value = (question.value ? question.value : null) name=question.id id=question.id)
-                  else                 
-                    .final-question-level-items
-                      .final-question-level-item
-                        .level-item-left
-                          .label
-                            label(for = question.id)= question.name 
-                          .question-info
-                            if question.info
-                              .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`) 
-                      br           
-                      if question.type == "coords"                               
-                        input#coords(name = question.id type = "text" readonly placeholder = "Select a point on the map")  
-                      else if question.type == "text"    
-                        if question.disabled
-                          input(name = question.id type = question.type readonly value = question.value  placeholder=question.placeholder)
-                        else
-                          input(name = question.id type = question.type value = question.value placeholder=question.placeholder)
-                    
-                      else if question.type=="grid"
-                        .grid
-                          .column1
-                            for option,index in question.options[0] 
-                                .grid-cell
-                                  label(for=option.id)= option.label
-                                  input(id= option.id    name = option.id type = "text" onchange=`validateInput(${option.id})`  placeholder = "0") 
-                                  label(for=option.id)= "/10"
-                          .column2
-                            for option,index in question.options[1] 
-                                .grid-cell
-                                  label(for=option.id)= option.label
-                                  input(id= option.id name = option.id type = "text" onchange=`validateInput(${option.id})`  placeholder = "0") 
-                                  label(for=option.id)= "/10"
-                          .column3                       
-                            for option,index in question.options[2] 
-                                .grid-cell
-                                  label(for=option.id)= option.label
-                                  input(id= option.id name = option.id type = "text" onchange=`validateInput(${option.id})`  placeholder = "0") 
-                                  label(for=option.id)= "/10"
-
-
-                      else if question.type == "radio" || question.type == "checkbox"
-                        each val, index in question.options                           
-                          if question.type == "radio"                                                                         
-                            if val == "Other"
-                              .other-radio-div
-                                input(type = question.type name = question.id id = question.id + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))   
-                                input( style="margin-bottom:0!important; font-weight:bold;font-size:14px;" name = question.id type = "text" value= (question.value!=null ? question.value[1] : null) placeholder = "Other")                  
-                            else  
-                              input(type = question.type name = question.id id = question.id + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))                                                                                                                    
+            .final-survey
+              .level-category-survey
+                .appreciation-message
+                  p #{sectionData.appreciationMessage1}
+                  br
+                  p #{sectionData.appreciationMessage2}
+                  br
+                  p #{sectionData.appreciationMessage3}
+                  br
+                  p #{sectionData.appreciationMessage4}
+                  br
+                  p #{sectionData.appreciationMessage5}                
+              br
+              br
+              br
+              .final-survey-questions
+                for question in sectionData.questions
+                  .final-survey-question
+                    if question.type =="range"
+                      .range-level-items
+                        .top-level-items
+                          .level-item-left
+                            .label
+                              label(for=question.id)= question.name
+                            .question-info
+                              if question.info
+                                .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)       
+                          br
+                        .range
+                          .range-options
+                            each option in question.options
+                              label(for = option)= option
+                          input(type = "range"  min = "0" max = `100`  value = (question.value ? question.value : null) name=question.id id=question.id)
+                    else                 
+                      .final-question-level-items
+                        .final-question-level-item
+                          .level-item-left
+                            .label
+                              label(for = question.id)= question.name 
+                            .question-info
+                              if question.info
+                                .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`) 
+                        br           
+                        if question.type == "coords"                               
+                          input#coords(name = question.id type = "text" readonly placeholder = "Select a point on the map")  
+                        else if question.type == "text"    
+                          if question.disabled
+                            input(name = question.id type = question.type readonly value = question.value  placeholder=question.placeholder)
                           else
-                            input(type = question.type name = question.id id = question.id + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
-                          if val != "Other"
-                            label(for = question.id + "-" + index)= val
-                          br   
-                          br 
-                    br                                
-                br
-                br
+                            input(name = question.id type = question.type value = question.value placeholder=question.placeholder)
+                      
+                        else if question.type=="grid"
+                          .grid
+                            .column1
+                              for option,index in question.options[0] 
+                                  .grid-cell
+                                    label(for=option.id)= option.label
+                                    input(id= option.id    name = option.id type = "text" onchange=`validateInput(${option.id})`  placeholder = "0") 
+                                    label(for=option.id)= "/10"
+                            .column2
+                              for option,index in question.options[1] 
+                                  .grid-cell
+                                    label(for=option.id)= option.label
+                                    input(id= option.id name = option.id type = "text" onchange=`validateInput(${option.id})`  placeholder = "0") 
+                                    label(for=option.id)= "/10"
+                            .column3                       
+                              for option,index in question.options[2] 
+                                  .grid-cell
+                                    label(for=option.id)= option.label
+                                    input(id= option.id name = option.id type = "text" onchange=`validateInput(${option.id})`  placeholder = "0") 
+                                    label(for=option.id)= "/10"
+
+
+                        else if question.type == "radio" || question.type == "checkbox"
+                          each val, index in question.options                           
+                            if question.type == "radio"                                                                         
+                              if val == "Other"
+                                .other-radio-div
+                                  input(type = question.type name = question.id id = question.id + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))   
+                                  input( style="margin-bottom:0!important; font-weight:bold;font-size:14px;" name = question.id type = "text" value= (question.value!=null ? question.value[1] : null) placeholder = "Other")                  
+                              else  
+                                input(type = question.type name = question.id id = question.id + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))                                                                                                                    
+                            else
+                              input(type = question.type name = question.id id = question.id + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
+                            if val != "Other"
+                              label(for = question.id + "-" + index)= val
+                            br   
+                            br 
+                      br                                
+                  br
+                  br
           .button-level
             if sectionData.header=="fill-in-form" 
 

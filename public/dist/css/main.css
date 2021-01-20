@@ -449,8 +449,28 @@ nav a:hover {
     transform: translateY(1rem)!important;
     transition: transform 0.5s;
    
-  
+  }
+  .black-collapsed-links{
 
+    display:flex!important;
+    visibility:visible!important;
+    background-color: #242424;
+    color:white;
+    width:80%;
+    opacity:0.9;
+    margin:0.5rem;
+    /* transform: translateY(1rem)!important; */
+    transition: transform 0.5s;
+    flex-direction:column;
+
+  }
+
+
+  .black-collapsed-links a {
+
+    color:white;
+    font-weight:bold;
+    margin:0.5rem;
   }
   .collapsed-links-hidden{
     /* display:none; */

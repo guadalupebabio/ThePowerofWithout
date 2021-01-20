@@ -603,9 +603,11 @@ function editRangeLabels(info){
 var hamburgerMenu = document.getElementById("nav-hamburger-menu");
 if (hamburgerMenu){  
   hamburgerMenu.addEventListener("click",()=>{
-    var mobileMenuLinks = document.getElementById("mobile-links");
-    if (mobileMenuLinks){
-      mobileMenuLinks.classList.toggle("collapsed-links");
+    var blackMobileMenuLinks = document.getElementById("black-mobile-links");
+
+    if (blackMobileMenuLinks){
+      blackMobileMenuLinks.classList.toggle("black-collapsed-links");
     }
+
   });
 }
