@@ -341,7 +341,8 @@ nav a:hover {
   }
   .project-description{
     position: unset!important;
-    width:inherit!important;
+    /* width:inherit!important; */
+    width:100%!important;
 
     left:0px!important;
     height:100%!important;
@@ -373,6 +374,10 @@ nav a:hover {
     font-weight:bold;
   }
 
+  .second-layer{
+
+    flex-direction: column;
+  }
   .footer{
     display:none!important;
   }
