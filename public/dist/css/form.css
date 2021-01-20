@@ -745,7 +745,6 @@ width: 35%;
 
 @media only screen and (max-width: 468px) {
 
-
   .fill-in-row{
     display:flex;
     flex-direction:column;
@@ -772,8 +771,6 @@ width: 35%;
 
 
   }
-
-
 
   #basemaps-wrapper {
 

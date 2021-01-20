@@ -362,7 +362,10 @@ nav a:hover {
      */
      width: 85vw!important;
     height:202px!important;
-    background-size: 353px 202px!important;
+    /* background-size: 353px 202px!important; */
+    background-size:100%;
+    background-repeat: no-repeat
+
 
   }
   .picture-2{
@@ -473,12 +476,20 @@ nav a:hover {
     background-image: url("../../assets/Rectangle\ 14.png");
     /* width: 686px;
     height: 631px; */
-    width:100%!important;
-    height:325px!important;
+
+    height:686px!important;
     background-size: 100%;
     background-repeat: no-repeat;
   
   }
+
+  .picture-1{
+
+    width: 100%!important;
+    height: 500px!important;
+    background-size: 100%!important;
+    background-repeat: no-repeat
+}
   
 
 }
