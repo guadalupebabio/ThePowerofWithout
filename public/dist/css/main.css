@@ -316,10 +316,11 @@ nav a:hover {
   .taxonomy-architecture-div-mobile{
     display:block!important;
     background-image: url("../../assets/Rectangle\ 14.png");
-    /* width: 686px;
-    height: 631px; */
-    width:100%!important;
-    height:325px!important;
+    /* /* width: 686px; */
+    width:686px;
+    /* height: 631px;  */
+    /* width:100%!important; */
+    /* height:325px!important; */
     /* height:40%!important; */
     
     background-size: 100%;
@@ -456,6 +457,50 @@ nav a:hover {
     margin:1rem;
   }
 
+  
+
+}
+
+@media only screen and (min-width:768px) and (max-width: 910px) {
+
+  .taxonomy-architecture-div-mobile{
+    display:block!important;
+    background-image: url("../../assets/Rectangle\ 14.png");
+    /* width: 686px;
+    height: 631px; */
+    width:100%!important;
+    height:325px!important;
+    background-size: 100%;
+    background-repeat: no-repeat;
+  
+  }
+  
+
+}
+
+
+@media only screen and (max-width: 721px) {
+
+  /* .taxonomy-architecture-div-mobile{
+
+    height:325px!important;
+
+  
+  } */
+  
+
+}
+
+@media only screen  and (min-width: 464px) and (max-width: 721px) {
+
+  .taxonomy-architecture-div-mobile{
+
+    width:100%!important;
+    height:500px!important;
+
+
+  
+  }
   
 
 }
