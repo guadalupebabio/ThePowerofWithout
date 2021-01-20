@@ -193,6 +193,7 @@ nav a:hover {
     z-index:2000;
     position:fixed;
     top:0;
+    width: 100vw;
   
   }
   .nav-collapsed-menu {
@@ -343,7 +344,9 @@ nav a:hover {
   .picture-1{
 
     position:unset!important;
-    width:353px!important;
+    /* width:300px!important;
+     */
+     width: 85vw!important;
     height:202px!important;
     background-size: 353px 202px!important;
 
@@ -370,6 +373,7 @@ nav a:hover {
     flex-direction:row!important;
     margin:0.5rem;
     justify-content:space-between;
+    /* width:100vw; */
   }
   .footer-copy-right{
 
@@ -382,7 +386,7 @@ nav a:hover {
     
   }
   .team{
-    width:100%!important;
+    width:auto!important;
     height:auto!important;
   }
   .team-summary-text{

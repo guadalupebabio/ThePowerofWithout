@@ -152,3 +152,20 @@ h1{
   .footer-copy-right p {
     padding: 1rem;
   }
+
+  .footer-mobile{
+    display:none;
+  }
+  
+  @media only screen and (max-width: 468px) {
+  .about-info-container{
+
+    padding:2rem!important;
+    width:auto!important;
+
+  }
+  .footer-mobile{
+
+    display:block!important;
+  }
+}

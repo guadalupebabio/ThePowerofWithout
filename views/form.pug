@@ -144,13 +144,13 @@ html
                                   br
                                   .right-level-items
                                     .level-item-right
-                                      .comment-button(onclick=`showComment({id:"${question.id}" name:"${question.name}" email:"${email}"})`)                            
-                                      .link-button(onclick=`showLink({id:"${question.id}" name:"${question.name}" email:"${email}"})`)  
+                                      .comment-button(onclick=`showComment({id:"${question.id}" ,name:"${question.name}", email:"${email}"})`)                            
+                                      .link-button(onclick=`showLink({id:"${question.id}", name:"${question.name}", email:"${email}"})`)  
                                       .chat-button(data-id = `${question.id}` data-name = `${question.name}` data-email = `${email}` ) 
                           
 
                                 .range
-                                  if (question.options.length>4)
+                                  if (question.id=="gender")
                                     .range-options                                  
                                       label(id= question.id + "-label1" for = question.name)= !isNaN((parseInt(question.value)))? question.options[parseInt(question.value)][0] : question.options[0][1]
                                       label(id= question.id + "-label2" for = question.name)= !isNaN((parseInt(question.value)))? question.options[parseInt(question.value)][1] : question.options[0][0]
@@ -169,18 +169,18 @@ html
                                 .box(id=`${question.id}-comment` style = "display:none;")
                                   .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
                                   h1.heading Comment       
-                                  p(id="comment-input").subtitle.is-size-6
+                                  p(id=`${question.id}-comment-input`).subtitle.is-size-6
                                   input.text(type = "text") 
                                   p.help.is-success Successfully saved comment!
-                                  input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url data-id = question.id)
+                                  input.button.is-black(type="button" value="Save Comment" onclick = "saveComment()" data-url = url data-id = question.id)
                                 .box(id=`${question.id}-link` style = "display:none;")
                                   .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                   h1.heading Link
-                                  p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                  p(id=`${question.id}-link-input`).subtitle.is-size-6 Add a link with supporting information, if necessary.
                                   input.text(type = "text") 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
-                                  input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url data-id = question.id)                                      
+                                  input.button.is-black(type="button" value="Save Link" onclick = "saveLink()" data-url = url data-id = question.id)                                      
                                 .box(id=`${question.id}-chat` style = "display:none;")
                                   .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
                                   h1.heading Image
@@ -188,7 +188,7 @@ html
                                   input.text(type = "text") 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
-                                  input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+                                  input.button.is-black(type="button" value="Save Link" onclick = "" data-url = url)
 
                              
 
@@ -206,8 +206,8 @@ html
                                   br
                                   .right-level-items
                                     .level-item-right
-                                      .comment-button(onclick=`showComment({id:"${question.id}" name:"${question.name}" email:"${email}"})`)                            
-                                      .link-button(onclick=`showLink({id:"${question.id}" name:"${question.name}" email:"${email}"})`)        
+                                      .comment-button(onclick=`showComment({id:"${question.id}" ,name:"${question.name}", email:"${email}"})`)                            
+                                      .link-button(onclick=`showLink({id:"${question.id}", name:"${question.name}", email:"${email}"})`)       
                                       .chat-button(data-id = `${question.id}` data-name = `${question.name}` data-email = `${email}` ) 
 
                                 .range
@@ -228,18 +228,18 @@ html
                                 .box(id=`${question.id}-comment` style = "display:none;")
                                   .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
                                   h1.heading Comment       
-                                  p(id="comment-input").subtitle.is-size-6
+                                  p(id=`${question.id}-comment-input`).subtitle.is-size-6
                                   input.text(type = "text") 
                                   p.help.is-success Successfully saved comment!
-                                  input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                  input.button.is-black(type="button" value="Save Comment" onclick = "saveComment()" data-url = url)
                                 .box(id=`${question.id}-link` style = "display:none;")
                                   .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                   h1.heading Link
-                                  p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                  p(id=`${question.id}-link-input`).subtitle.is-size-6 Add a link with supporting information, if necessary.
                                   input.text(type = "text") 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
-                                  input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                  input.button.is-black(type="button" value="Save Link" onclick = "saveLink()" data-url = url)                                      
                                 .box(id=`${question.id}-chat` style = "display:none;")
                                   .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
                                   h1.heading Image
@@ -247,7 +247,7 @@ html
                                   input.text(type = "text") 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
-                                  input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+                                  input.button.is-black(type="button" value="Save Link" onclick = "" data-url = url)
                 
                            
                             else if question.type=="grid"
@@ -262,8 +262,8 @@ html
                                   br
                                   .right-level-items
                                     .level-item-right
-                                      .comment-button(onclick=`showComment({id:"${question.id}" name:"${question.name}" email:"${email}"})`)                            
-                                      .link-button(onclick=`showLink({id:"${question.id}" name:"${question.name}" email:"${email}"})`)    
+                                      .comment-button(onclick=`showComment({id:"${question.id}" ,name:"${question.name}", email:"${email}"})`)                            
+                                      .link-button(onclick=`showLink({id:"${question.id}", name:"${question.name}", email:"${email}"})`) 
                                       .chat-button(data-id = `${question.id}` data-name = `${question.name}` data-email = `${email}` ) 
 
                                 .commentary-level-items
@@ -274,18 +274,18 @@ html
                                   .box(id=`${question.id}-comment` style = "display:none;")
                                     .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
                                     h1.heading Comment       
-                                    p(id="comment-input").subtitle.is-size-6
+                                    p(id=`${question.id}-comment-input`).subtitle.is-size-6
                                     input.text(type = "text") 
                                     p.help.is-success Successfully saved comment!
-                                    input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                    input.button.is-black(type="button" value="Save Comment" onclick = "saveComment()" data-url = url)
                                   .box(id=`${question.id}-link` style = "display:none;")
                                     .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                     h1.heading Link
-                                    p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                    p(id=`${question.id}-link-input`).subtitle.is-size-6 Add a link with supporting information, if necessary.
                                     input.text(type = "text") 
                                     p.help.is-success Successfully saved link!
                                     p.help.is-danger Please enter a valid link
-                                    input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                    input.button.is-black(type="button" value="Save Link" onclick = "saveLink()" data-url = url)                                      
                                   .box(id=`${question.id}-chat` style = "display:none;")
                                     .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
                                     h1.heading Image
@@ -293,7 +293,7 @@ html
                                     input.text(type = "text") 
                                     p.help.is-success Successfully saved link!
                                     p.help.is-danger Please enter a valid link
-                                    input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+                                    input.button.is-black(type="button" value="Save Link" onclick = "" data-url = url)
                                 .grid
                                   .column1
                                     for option,index in question.options[0] 
@@ -319,7 +319,7 @@ html
                                 .left-level-items
                                   .level-item-left
                                     .label
-                                      label(for = "hilz")= question.name 
+                                      label()= question.name 
                                     .question-info
                                       if question.info
                                         .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)              
@@ -348,8 +348,8 @@ html
 
                                 .right-level-items
                                   .level-item-right
-                                      .comment-button(onclick=`showComment({id:"${question.id}" name:"${question.name}" email:"${email}"})`)                            
-                                      .link-button(onclick=`showLink({id:"${question.id}" name:"${question.name}" email:"${email}"})`)  
+                                      .comment-button(onclick=`showComment({id:"${question.id}" ,name:"${question.name}", email:"${email}"})`)                            
+                                      .link-button(onclick=`showLink({id:"${question.id}", name:"${question.name}", email:"${email}"})`) 
                                       .chat-button(data-id = `${question.id}` data-name = `${question.name}` data-email = `${email}` )   
 
                               .commentary-level-items
@@ -360,14 +360,14 @@ html
                                 .box(id=`${question.id}-comment` style = "display:none;")
                                   .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
                                   h1.heading Comment       
-                                  p(id="comment-input").subtitle.is-size-6
+                                  p(id=`${question.id}-comment-input`).subtitle.is-size-6
                                   input.text(type = "text") 
                                   p.help.is-success Successfully saved comment!
                                   input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
                                 .box(id=`${question.id}-link` style = "display:none;")
                                   .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                   h1.heading Link
-                                  p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                  p(id=`${question.id}-link-input`).subtitle.is-size-6 Add a link with supporting information, if necessary.
                                   input.text(type = "text") 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
@@ -503,34 +503,6 @@ html
                   #streets
                     p Map
 
-        //- else 
-        //-   #info.box(style = "display:none;")
-        //-     #close-info
-        //-     h1.heading 
-        //-     p
-        //-   #comment.box(style = "display:none;")
-        //-     #close-comment
-        //-     h1.heading Comment       
-        //-     p(id="comment-input").subtitle.is-size-6
-        //-     input.text(type = "text") 
-        //-     p.help.is-success Successfully saved comment!
-        //-     input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
-        //-   #link.box(style = "display:none;")
-        //-     #close-link
-        //-     h1.heading Link
-        //-     p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
-        //-     input.text(type = "text") 
-        //-     p.help.is-success Successfully saved link!
-        //-     p.help.is-danger Please enter a valid link
-        //-     input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)
-        //-   #chat.box(style = "display:none;")
-        //-     #close-chat
-        //-     h1.heading Image
-        //-     p.subtitle.is-size-6 Add an image with supporting information, if necessary.
-        //-     input.text(type = "text") 
-        //-     p.help.is-success Successfully saved link!
-        //-     p.help.is-danger Please enter a valid link
-        //-     input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
     if comments && links 
       script.
         let comments = !{JSON.stringify(comments)};

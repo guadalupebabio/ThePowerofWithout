@@ -644,6 +644,7 @@ function getObjects(obj, key, val) {
 $.ajax({}).done(function(data){
 
   var fh = countries.responseJSON;
+  console.log(fh)
   geojson= L.geoJson(fh, {
               pointToLayer:
               function(feature,latlng){

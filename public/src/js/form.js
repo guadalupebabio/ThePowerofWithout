@@ -196,6 +196,7 @@ function showInfo(info){
 
   // console.log("i did receive",info);
 
+  hideAll(info.id);
   $(`#${info.id}-info`).show();
   $(`#${info.id}-info h1`).text(`${info.header}: `);
   $(`#${info.id}-info p`).text(`${info.text}`);
@@ -213,10 +214,38 @@ function googleTranslateElementInit() {
 }
 
 // Icon Button Handlers
-function hideAll(){
-  $("#info").hide();
-  $("#comment").hide();
-  $("#link").hide();
+function hideAll(id){
+
+  // console.log("im hiding",id)
+  //  id.hide();
+  
+  var infoBox = document.getElementById(`${id}-info`);
+  var commentBox = document.getElementById(`${id}-comment`);
+  var linkBox = document.getElementById(`${id}-link`);
+
+  if (infoBox){
+    infoBox.style ="display:none;"
+  }
+
+  if (commentBox){
+    commentBox.style = "display:none;"
+  }
+
+  if (linkBox){
+    linkBox.style = "display:none;"
+  }
+
+  // if ($(`#${id}-info`)){
+  //   $(`#${id}-info`).hide();
+  // }
+  // if ($(`#${id}-comment`)){
+  //   $(`#${id}-comment`).hide();
+  // }
+  // if($(`#${id}-link`)){
+  //   $(`#${id}-link`).hide();
+  // }
+
+
   // $("#previous-modal-div").hide();
 }
 
@@ -324,13 +353,17 @@ $(".alert-button").click(function(e){
 
 
 
-function showComment(){
+function showComment(data){
 
-  let   data = $(this).data(), commentI = comments.findIndex((d) =>      
+  // console.log(data)
+  hideAll(data.id);
+  document.getElementById(`${data.id}-comment-input`).innerText= `Feedback for the ${`"${data.name}"`} question`;
+  let commentI = comments.findIndex((d) =>      
   {
     // Add some clarifying information about this question, if necessary.
     // console.log("Form field name",d.formFieldName)
-    document.getElementById(`${data.id}-comment`).innerText= `Feedback for the ${`"${data.name}"`} question`;
+    // console.log("so it's nothing",document.getElementById(`${data.id}-comment-input`).innerText)
+    
     d.formFieldName == data.name
   }   
   )
@@ -343,14 +376,16 @@ function showComment(){
 
 }
 
-function showLink(){
+function showLink(data){
  
-  let data = $(this).data(), linkI = links.findIndex((d) => {
-    document.getElementById(`#${data.id}-link`).innerText= `Insert a reference link for the ${`"${data.name}"`} question`;
+  hideAll(data.id);
+  document.getElementById(`${data.id}-link-input`).innerText= `Insert a reference link for the ${`"${data.name}"`} question`;
+
+  let linkI = links.findIndex((d) => {
+
     d.formFieldName == data.name
   })
-  console.log(data)
-  console.log($(this))
+
     //Set value of input text based on what's stored in the database
     if(linkI == -1) $(`${data.id}-link input.text`).val("");
     else $(`#${data.id}-link input.text`).val(links[linkI].link);
@@ -385,6 +420,7 @@ function saveComment(){
 
 
 function saveLink(){
+  
   let data = $(`#${data.id}-link input.button`).data(),
       link = $(`#${data.id}-link input.text`).val();
 
@@ -552,8 +588,6 @@ if (editPreviousButton){
 
 function editRangeLabels(info){
   let id = info.id
-
-
   let options = info.options
   const slider = document.getElementById(id);
   const label1 =  document.getElementById(id+"-label1");
@@ -562,10 +596,7 @@ function editRangeLabels(info){
   label1.innerText = options[parseInt(input)][1]
   label2.innerText = options[parseInt(input)][0]
 
-  // console.log(options[parseInt(input)]);
-  
 
-  // return "showRange"
 }
 
 
