@@ -64,23 +64,21 @@ html
           //- Autofill questions from JSON object passed
           if sectionData.header=="fill-in-form"                     
                 .fill-in-row
-                  each question, line in sectionData.sections
-                    if line < 2
-                      .fill-in-level-row-item
-                        .fill-in-level-row-title                  
-                          label(for = question.name + "-" + index)=question.label
-                        br
-                        .fill-in-level-row-input
-                          if question.type == "text"    
-                            if question.disabled
-                              input(name = question.name type = question.type readonly value = question.value required)
-                            else
-                              input(name = question.name type = question.type placeholder = question.value required) 
+                  //- each question, line in sectionData.sections
+                  //-   if line < 2
+                  //-     .fill-in-level-row-item
+                  //-       .fill-in-level-row-title                  
+                  //-         label(for = question.name + "-" + index)=question.label
+                  //-       br
+                  //-       .fill-in-level-row-input
+                  //-         if question.type == "text"    
+                  //-           if question.disabled
+                  //-             input(name = question.name type = question.type readonly value = question.value required)
+                  //-           else
+                  //-             input(name = question.name type = question.type placeholder = question.value required) 
 
                 each question, line in sectionData.sections 
-                  if line>1
-                    br
-                    
+                    br                
                     .fill-in-level-row-item
                       .fill-in-level-row-title                  
                         label(for = question.name + "-" + index)=question.label

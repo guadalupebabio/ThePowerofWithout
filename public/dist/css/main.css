@@ -62,7 +62,10 @@ nav a {
 nav a:hover {
   color: #242424;
   font-weight: bold;
-  border-bottom: 5px solid #242424;
+  background-color:white;
+  opacity:0.8
+
+
 }
 
 .nav-collapsed-container{
@@ -471,7 +474,14 @@ nav a:hover {
     color:white;
     font-weight:bold;
     margin:0.5rem;
+    width: fit-content
   }
+  .black-collapsed-links a:hover{
+
+     color:#242424;
+     background-color:white;
+  }
+
   .collapsed-links-hidden{
     /* display:none; */
     visibility:hidden;
@@ -534,8 +544,6 @@ nav a:hover {
     width:100%!important;
     height:500px!important;
 
-
-  
   }
   
 

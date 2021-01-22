@@ -370,7 +370,7 @@ Can contain either the map or the popup modals
 */
 
 .right-column {
-  width: 50%;
+  width: 100%;
   margin: 2rem;
   /* position: relative;
   left: 5%; */
@@ -757,7 +757,7 @@ width: 35%;
   display:none;
 } */
 
-@media only screen and (max-width: 468px) {
+@media only screen and (max-width: 910px) {
 
   .fill-in-row{
     display:flex;
