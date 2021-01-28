@@ -20,17 +20,17 @@ html
 
     include includes/nav-black.pug
     
-    if (modalData)
-      #modal-div(class=`${modalClass}`)
-        .modal-description
-          p #{modalData.description}
-        .modal-items-description
-          each icon in modalData.icons
-            .modal-item 
-              .modal-icon(style=`background-image:url(${icon.image})`)
-              .modal-icon-description          
-                p #{icon.description}             
-        a(href=`${redirectUrl}` id="continue-button") Continue
+    //- if (modalData)
+    //-   #modal-div.modal-container-hide
+    //-     .modal-description
+    //-       p #{modalData.description}
+    //-     .modal-items-description
+    //-       each icon in modalData.icons
+    //-         .modal-item 
+    //-           .modal-icon(style=`background-image:url(${icon.image})`)
+    //-           .modal-icon-description          
+    //-             p #{icon.description}             
+    //-     a(href=`${redirectUrl}` id="continue-button") Continue
 
     if (previousModalClass)
      #previous-modal-div(class=`${previousModalClass}`)  
@@ -62,6 +62,20 @@ html
       .middle-column#content         
         form(action = url method = "POST" onsubmit="validateForm()")
           //- Autofill questions from JSON object passed
+
+          if (modalData)
+            #modal-div.modal-container-hide
+              .modal-description
+                p #{modalData.description}
+              .modal-items-description
+                each icon in modalData.icons
+                  .modal-item 
+                    .modal-icon(style=`background-image:url(${icon.image})`)
+                    .modal-icon-description          
+                      p #{icon.description}   
+              input.button.is-black(id="continue-button" type="submit" value="Continue")          
+              //- a(href=`${redirectUrl}` id="continue-button") Continue
+
           if sectionData.header=="fill-in-form"                     
                 .fill-in-row
                   //- each question, line in sectionData.sections
@@ -98,7 +112,7 @@ html
                             if question.type == "radio"
                               input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == question.value) required)
                             else 
-                              input(type = question.type name = question.name id = question.name + "-" + index val = "Privacy" checked = false required)
+                              input(type = question.type name = question.name id = question.name + "-" + index val = "Privacy" checked = false )
                             label( style="font-size:0.8rem" for = question.name + "-" + index)= val
                             br
                         else if question.type == "range"
@@ -168,9 +182,9 @@ html
                                   .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
                                   h1.heading Comment       
                                   p(id=`${question.id}-comment-input`).subtitle.is-size-6
-                                  input.text(type = "text") 
+                                  input.text(type = "text" id=`${question.id}-comment-input-text`)  
                                   p.help.is-success Successfully saved comment!
-                                  input.button.is-black(type="button" value="Save Comment" onclick = "saveComment()" data-url = url data-id = question.id)
+                                  input.button.is-black(type="button" value="Save Comment" onclick = `saveComment({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)
                                 .box(id=`${question.id}-link` style = "display:none;")
                                   .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                   h1.heading Link
@@ -227,9 +241,11 @@ html
                                   .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
                                   h1.heading Comment       
                                   p(id=`${question.id}-comment-input`).subtitle.is-size-6
-                                  input.text(type = "text") 
+                                  input.text(type = "text" id=`${question.id}-comment-input-text`) 
                                   p.help.is-success Successfully saved comment!
-                                  input.button.is-black(type="button" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                  input.button.is-black(type="button" value="Save Comment" onclick = `saveComment({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)
+
+
                                 .box(id=`${question.id}-link` style = "display:none;")
                                   .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                   h1.heading Link
@@ -273,9 +289,9 @@ html
                                     .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
                                     h1.heading Comment       
                                     p(id=`${question.id}-comment-input`).subtitle.is-size-6
-                                    input.text(type = "text") 
+                                    input.text(type = "text" id=`${question.id}-comment-input-text`) 
                                     p.help.is-success Successfully saved comment!
-                                    input.button.is-black(type="button" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                    input.button.is-black(type="button" value="Save Comment" onclick = `saveComment({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)
                                   .box(id=`${question.id}-link` style = "display:none;")
                                     .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                     h1.heading Link
@@ -359,9 +375,9 @@ html
                                   .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
                                   h1.heading Comment       
                                   p(id=`${question.id}-comment-input`).subtitle.is-size-6
-                                  input.text(type = "text") 
+                                  input.text(type = "text" id=`${question.id}-comment-input-text`) 
                                   p.help.is-success Successfully saved comment!
-                                  input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                  input.button.is-black(type="button" value="Save Comment" onclick = `saveComment({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)
                                 .box(id=`${question.id}-link` style = "display:none;")
                                   .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                   h1.heading Link
@@ -479,7 +495,10 @@ html
             if sectionData.header=="fill-in-form" 
 
               input(id ="edit-previous-button" name = "edit-previous-button" type = "button" value = "Edit a previous settlement")
-              input.button.is-black(id="start-button" style="font-size:1.2rem;width:250px;margin:0.5rem" type="submit" value="Start")
+              //- button.is-black(id="start-button" style="font-size:1.2rem;width:250px;margin:0.5rem" ) Start
+              .start-button(id="start-button" style="background-color:#242424;color:white;font-size:1.2rem;width:250px;margin:0.5rem") Start
+               
+              //- input.button.is-black(id="start-button" style="font-size:1.2rem;width:250px;margin:0.5rem" type="submit" value="Start")
 
             else if sectionData.header=="final-survey" 
               .survey-buttons

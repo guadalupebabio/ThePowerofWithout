@@ -3,6 +3,8 @@
 
 
 
+
+
 function drawMap(mapID){
     const myMap = document.getElementById(mapID);
     if(myMap){ // if map exists, create it
@@ -52,14 +54,34 @@ function drawMap(mapID){
         .querySelector('#imagery')
         .addEventListener('click', function (e) {
           var basemap = "ImageryClarity";
+          console.log("I have clicked imagery")
           setBasemap(basemap);
         });
       document
         .querySelector('#streets')
         .addEventListener('click', function (e) {
           var basemap = "Streets"
+          console.log("I have clicked streets")
           setBasemap(basemap);
         });
+
+     var imageryButton = document.getElementById("imagery");
+     var streetsButton = document.getElementById("streets");
+
+     if (imageryButton){
+     imageryButton.addEventListener("click",()=>{
+
+        console.log("I have clicked imagery")
+
+     })
+    }
+
+    if (streetsButton){
+      streetsButton.addEventListener("click",()=>{
+
+        console.log("I have seen streets")
+      })
+    }
 
     // Initialise the FeatureGroup to store editable layers
     var editableLayers = new L.FeatureGroup();
@@ -170,6 +192,7 @@ function drawMap(mapID){
   }
 
 var maps = ["map-mobile","map"]
+// var maps = ["map"]
 
 for (let i = 0 ; i < maps.length; i++) {
    drawMap(maps[i]);
@@ -358,15 +381,17 @@ function showComment(data){
   // console.log(data)
   hideAll(data.id);
   document.getElementById(`${data.id}-comment-input`).innerText= `Feedback for the ${`"${data.name}"`} question`;
+  console.log(comments)
   let commentI = comments.findIndex((d) =>      
   {
     // Add some clarifying information about this question, if necessary.
-    // console.log("Form field name",d.formFieldName)
     // console.log("so it's nothing",document.getElementById(`${data.id}-comment-input`).innerText)
     
-    d.formFieldName == data.name
+    return d.formFieldName == data.name
+
   }   
   )
+  console.log(commentI)
     //Set value of input text based on what's stored in the database
     if(commentI == -1)$(`${data.id}-comment input.text`).val("");
     else $(`#${data.id}-comment input.text`).val(comments[commentI].comment);
@@ -398,10 +423,15 @@ function showLink(data){
 
 
 
-function saveComment(){
-  let data = $(`#${data.id}-comment input.button`).data(),
-      comment = $(`#${data.id}-comment input.text`).val();
+function saveComment(data){
+  console.log("I clicked on save Comment",data)
+  // let data = $(`#${data.id}-comment input.button`).data(),
+  //     comment = $(`#${data.id}-comment input.text`).val();
 
+  let comment = document.getElementById(`${data.id}-comment-input-text`).value
+
+      // let data = $(`#${data.id}-comment input.button`).data(),
+      // comment = $(`#${data.id}-comment input.text`).val();
   // Save new comment to server
   $.post(`${data.url}/comment`, {email: data.email, comment: comment, formFieldName: data.name}, function(res) {
     $(`#${data.id}-comment .help`).show();
@@ -479,7 +509,42 @@ const startButton = document.getElementById("start-button");
 if (startButton){
 startButton.addEventListener("click",()=>{
 
-  validateForm();
+  let validated = validateForm();
+  if (validated){
+    var modal = document.getElementById("modal-div");
+    modal.style=`
+    
+    height: 475px;
+    width: 850px;
+    display: flex!important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 1rem;
+    z-index: 99999;
+    position: fixed;
+    top: 20%;
+    left: 20%;
+    background-color: white;
+    border: 1px solid black;`
+  }
+
+  // modal.className = "modal-container";
+  // console.log(modal.classList)
+  // modal.style="display:block!important"
+
+
+  // let validated = validateForm();
+  // if (validated){
+  //   var modal = document.getElementById("modal-div");
+  //   console.log(modal)
+  //   // modal.classList.toggle("modal-container");
+  //   modal.className = "modal-container";
+  //   modal.classList.remove("modal-container-hide")
+  //   document.getElementById("modal-div").className="modal-container"
+  //   // console.log("I changed")
+  
+  // }
 });
 }
 
@@ -487,14 +552,18 @@ function validateForm(){
 
  const coords = document.getElementById("coords");
  const area = document.getElementById("area");
-//  console.log(area);
-if (coords) {
-  if ((coords.value=="")||(area.value=="")){
-    // console.log("alert message");
-    alert("Please make sure you have drawn coords on the map");
-    // break;
+  //  console.log(area);
+  if (coords) {
+    if ((coords.value=="")||(area.value=="")){
+      // console.log("alert message");
+      alert("Please make sure you have drawn coords on the map");
+      return false;
+    }else{
+
+      return true
+    }
   }
-}
+  return false
 
 }
 

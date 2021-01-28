@@ -65,7 +65,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
   });
 
   // Add new settlement to database
-  router.post("/settlements", preventEmptyFormFields, cleanFormFields, validateEmail,checkPrivacyChecked, function(req, res){
+  router.post("/settlements", preventEmptyFormFields, cleanFormFields, validateEmail, function(req, res){
 
    
     // console.log(req.body);
@@ -108,23 +108,23 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
         user.save(function(){
           sendEmail(req.body.email, settlement._id, token);
           req.flash('form-notification', "Thanks for contributing a settlement! You can work on adding more information now, or complete it at a later date—we've sent a link to your email!");
-          // res.redirect("/contribute/u/" + settlement._id + "/" + token);
+          res.redirect("/contribute/u/" + settlement._id + "/" + token);
           // res.send("all is well");
           // res.redirect("/contribute")
           // console.log(fillInFormData);
           // console.log(modalData);
-          res.render("form", {
-            sectionData: sectionDataContainer,
-            modalData : modalData,
-            modalClass : "modal-container",
-            redirectUrl : "/contribute/u/" + settlement._id + "/" + token,
-            url: "/api/settlements",
-            notification:
-              'Already created a settlement? Edit it <a href = "/contribute/u">here</a>',
-            map: true,
-            error: req.flash("form-error"),
-          });
-          // res.status(200);
+          // res.render("form", {
+          //   sectionData: sectionDataContainer,
+          //   modalData : modalData,
+          //   modalClass : "modal-container",
+          //   redirectUrl : "/contribute/u/" + settlement._id + "/" + token,
+          //   url: "/api/settlements",
+          //   notification:
+          //     'Already created a settlement? Edit it <a href = "/contribute/u">here</a>',
+          //   map: true,
+          //   error: req.flash("form-error"),
+          // });
+          // // res.status(200);
 
         })
       });
@@ -318,7 +318,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
   router.post("/settlements/u/:id/:secret/comment", function(req, res){
     User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
       Comment.updateOne(
-        { settlementId: req.params.id },
+        { settlementId: req.params.id, email: req.body.email,formFieldName: req.body.formFieldName},
         { $set: {
           email: req.body.email,
           formFieldName: req.body.formFieldName,
@@ -326,7 +326,14 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
         } },
         { upsert: true },
         function(err, comment){
-          res.send(200);
+          // res.send(200);
+
+          if (err){
+            console.log(err)
+          }
+          else{
+            console.log("successfully saved comment")
+          }
         }
       );
     })
