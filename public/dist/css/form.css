@@ -370,7 +370,7 @@ Can contain either the map or the popup modals
 */
 
 .right-column {
-  width: 50%;
+  width: 100%;
   margin: 2rem;
   /* position: relative;
   left: 5%; */
@@ -562,6 +562,7 @@ For the fill-in form
 }
 .level-item-left label {
   width: 80%;
+  margin-top: 0.2rem;
   margin-right: 1rem;
 }
 .alert-button {
@@ -583,17 +584,27 @@ For the fill-in form
 *Final survey css
 * 
 */
+.final-survey{
 
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
 .level-category-survey {
-  position: relative;
-  left: 40%;
+  /* position: relative; */
+  /* left: 40%; */
+  /* margin: 100px 300px 0 300px; */
+
+  width:70%;
   color: black;
   /* font-size:1.2rem; */
 }
 .final-survey-questions {
-  position: relative;
-  left: 40%;
+  /* position: relative;
+  left: 40%; */
   color: black;
+  width:70%;
+  /* margin: 0 300px 0 300px; */
   /* font-size:5rem; */
 }
 .final-survey-question {
@@ -601,6 +612,10 @@ For the fill-in form
   flex-direction: row;
   /* align-items: center; */
 }
+.final-survey-question .level-item-left{
+
+  display: flex;
+ }
 .final-question-level-items {
   width: 100%;
 }
@@ -739,6 +754,10 @@ Close buttons for info, link, comment, image boxes in Contribute form
   width:450px;
   height:auto;
 }
+.box p{
+  font-size: 1rem !important;
+  font-weight:normal!important;
+}
 
 .question{
 display: flex;
@@ -748,12 +767,16 @@ width: 35%;
 }
 
 
+.is-dark{
+
+  position:relative;left:40%;width:300px!important
+}
+
 /* .fill-in-column-mobile{
   display:none;
 } */
 
-@media only screen and (max-width: 468px) {
-
+@media only screen and (max-width: 910px) {
 
   .fill-in-row{
     display:flex;
@@ -781,8 +804,6 @@ width: 35%;
 
 
   }
-
-
 
   #basemaps-wrapper {
 
@@ -866,8 +887,38 @@ width: 35%;
   display: flex;
   flex-direction: row;
   width:65%!important;
-  margin:0.2rem !important
+  margin:0.2rem!important
 
 }
+.is-dark{
+
+  position:unset!important;
+}
+.button-level{
+  margin: 30px;
+}
+<<<<<<< HEAD
 >>>>>>> a36b717eabdcf416e699c2dd0645a142ba6c6a9e
+=======
+
+.level-category-survey{
+  position:unset;
+  margin: 1rem;
+
+
+}
+.final-survey-questions{
+  position:unset;
+}
+
+.survey-buttons{
+  position:unset;
+  flex-direction:column!important;
+
+}
+.final-survey-question .level-item-left{
+  display: flex;
+}
+
+>>>>>>> a69c43abdd6256188d922385bdf296a983e1e2e1
 }

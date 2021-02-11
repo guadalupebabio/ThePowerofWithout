@@ -1,32 +1,33 @@
 .black-nav
-  .black-nav-left 
-    a(class="logo-div-white" href = "/" id="logo-div") 
-    a(class="black-nav-left-a" style="height:24px; margin-top:1rem;" href = "/map") MAP OF INFORMALITY
-    a(class="black-nav-left-a" style="height:24px;margin-top:1rem" href = "/contribute") CONTRIBUTE
-    a(class="black-nav-left-a" style="height:24px;margin-top:1rem" href = "/") THE TOOLS
-  .black-nav-right
-    #google_translate_element
-    a.level-item( class="black-nav-left-a" style="height:24px;margin-top:1rem" href = "/about") About
+  .logo-div-white(id="logo-div")
+  .links
+    .black-nav-left  
+      //- a(class="black-nav-left-a" style="height:24px; margin-top:1rem;" href = "/map") MAP OF INFORMALITY
+      //- a(class="black-nav-left-a" style="height:24px;margin-top:1rem" href = "/contribute") CONTRIBUTE
+      //- a(class="black-nav-left-a" style="height:24px;margin-top:1rem" href = "/") THE TOOLS
+      a(class = (activeTab == 1 ? "active" : "")  href = "/map") MAP OF INFORMALITY
+      a(class = (activeTab == 2 ? "active" : "") href = "/contribute") CONTRIBUTE
+      a(class = (activeTab == 3 ? "active" : "") href = "/") THE TOOLS
+    .black-nav-right
+      #google_translate_element.google-element-view
+      //- a.level-item( class="black-nav-left-a" style="height:24px;margin-top:1rem" href = "/about") About
+      a(class = (activeTab == 4 ? "active" : "") href = "/about") ABOUT
 
-//- .black-nav-mobile
-//-   .black-nav-left 
-//-     a(class="logo-div-white" href = "/" id="logo-div") 
-//-     a(class="black-nav-left-a" style="height:24px; margin-top:1rem;" href = "/map") MAP OF INFORMALITY
-//-     a(class="black-nav-left-a" style="height:24px;margin-top:1rem" href = "/contribute") CONTRIBUTE
-//-     a(class="black-nav-left-a" style="height:24px;margin-top:1rem" href = "/") THE TOOLS
-//-   .black-nav-right
-//-     #google_translate_element
-//-     a.level-item( class="black-nav-left-a" style="height:24px;margin-top:1rem" href = "/about") About
 
 
 .black-nav-collapsed-container
   .nav-collapsed-top
     #nav-hamburger-menu.black-nav-collapsed-menu 
     .logo-div-white(id="logo-div") 
-  #mobile-links.collapsed-links-hidden
+    #google_translate_element.google-element-mobile
+
+  
+  #black-mobile-links.collapsed-links-hidden
     a(class = (activeTab == 1 ? "active" : "")  href = "/map") MAP OF INFORMALITY
     a(class = (activeTab == 2 ? "active" : "") href = "/contribute") CONTRIBUTE
     a(class = (activeTab == 3 ? "active" : "") href = "/") THE TOOLS
     a(class = (activeTab == 4 ? "active" : "") href = "/about") ABOUT
+    //- #google_translate_element
+
 
 script(type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit")

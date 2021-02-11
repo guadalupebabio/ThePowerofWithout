@@ -1,4 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+.links{
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+}
 nav {
   height: 60px;
   position: fixed;
@@ -6,11 +13,13 @@ nav {
   width: 100vw;
   transition: 0.2s all;
   z-index: 2000;
+  display:flex;
 }
 nav a {
   color: #242424;
   transition: 0.2s all;
-  margin: 0 40px;
+  /* margin: 0 40px; */
+  margin:1rem;
   font-weight: bold;
 }
 
@@ -47,13 +56,16 @@ nav a {
   height: 60px;
   background-size: 206px 60px;
   background-repeat: no-repeat;
-  margin: 3rem;
+  margin-left: 1rem;
 }
 
 nav a:hover {
   color: #242424;
   font-weight: bold;
-  border-bottom: 5px solid #242424;
+  background-color:white;
+  opacity:0.8
+
+
 }
 
 .nav-collapsed-container{
@@ -63,7 +75,7 @@ nav a:hover {
 /* nav a.active {
       border-bottom: 5px solid #FFFFFF; 
     } */
-@media only screen and (min-width:468px) and (max-width: 768px) {
+/* @media only screen and (min-width:468px) and (max-width: 768px) {
   .nav-collapsed-container{
     display:none;
   }
@@ -104,16 +116,16 @@ nav a:hover {
   }
   .level-item{
 
-    /* width : 0%!important;
-     */
      justify-content:normal!important;
   }
 
-}
+} */
+
+
 
 @media only screen and (min-width:768px) and (max-width: 1200px) {
 
-  .logo-div-black{
+  /* .logo-div-black{
     margin:0.1rem!important;
   }
   .nav-collapsed-container{
@@ -131,16 +143,17 @@ nav a:hover {
 
     width: 25%;
     justify-content:space-around!important;
-  }
+  } */
 
-  nav a{
+  /* nav a{
 
-    height:80%;
-    font-size:0.8rem;
+
     margin: 1.5rem!important;
 
-  }
-  #google_translate_element{
+  } */
+
+  
+  /* #google_translate_element{
 
     width : 40%!important;
   }
@@ -158,13 +171,13 @@ nav a:hover {
   .goog-logo-link{
 
     width: 20%;
-  }
+  } */
  
 
 }
 
 
-@media only screen and (max-width: 468px) {
+@media only screen and (max-width: 910px) {
 
   #jumbotron{
 
@@ -193,6 +206,7 @@ nav a:hover {
     z-index:2000;
     position:fixed;
     top:0;
+    width: 100vw;
   
   }
   .nav-collapsed-menu {
@@ -305,10 +319,13 @@ nav a:hover {
   .taxonomy-architecture-div-mobile{
     display:block!important;
     background-image: url("../../assets/Rectangle\ 14.png");
-    /* width: 686px;
-    height: 631px; */
-    width:100%!important;
-    height:325px!important;
+    /* /* width: 686px; */
+    width:686px;
+    /* height: 631px;  */
+    /* width:100%!important; */
+    /* height:325px!important; */
+    /* height:40%!important; */
+    
     background-size: 100%;
     background-repeat: no-repeat;
 
@@ -327,7 +344,8 @@ nav a:hover {
   }
   .project-description{
     position: unset!important;
-    width:inherit!important;
+    /* width:inherit!important; */
+    width:100%!important;
 
     left:0px!important;
     height:100%!important;
@@ -343,9 +361,14 @@ nav a:hover {
   .picture-1{
 
     position:unset!important;
-    width:353px!important;
+    /* width:300px!important;
+     */
+     width: 85vw!important;
     height:202px!important;
-    background-size: 353px 202px!important;
+    /* background-size: 353px 202px!important; */
+    background-size:100%;
+    background-repeat: no-repeat
+
 
   }
   .picture-2{
@@ -357,6 +380,10 @@ nav a:hover {
     font-weight:bold;
   }
 
+  .second-layer{
+
+    flex-direction: column;
+  }
   .footer{
     display:none!important;
   }
@@ -370,6 +397,7 @@ nav a:hover {
     flex-direction:row!important;
     margin:0.5rem;
     justify-content:space-between;
+    /* width:100vw; */
   }
   .footer-copy-right{
 
@@ -382,7 +410,7 @@ nav a:hover {
     
   }
   .team{
-    width:100%!important;
+    width:auto!important;
     height:auto!important;
   }
   .team-summary-text{
@@ -424,9 +452,36 @@ nav a:hover {
     transform: translateY(1rem)!important;
     transition: transform 0.5s;
    
-  
+  }
+  .black-collapsed-links{
+
+    display:flex!important;
+    visibility:visible!important;
+    background-color: #242424;
+    color:white;
+    width:80%;
+    opacity:0.9;
+    margin:0.5rem;
+    /* transform: translateY(1rem)!important; */
+    transition: transform 0.5s;
+    flex-direction:column;
 
   }
+
+
+  .black-collapsed-links a {
+
+    color:white;
+    font-weight:bold;
+    margin:0.5rem;
+    width: fit-content
+  }
+  .black-collapsed-links a:hover{
+
+     color:#242424;
+     background-color:white;
+  }
+
   .collapsed-links-hidden{
     /* display:none; */
     visibility:hidden;
@@ -440,6 +495,56 @@ nav a:hover {
     margin:1rem;
   }
 
+  
+
+}
+
+@media only screen and (min-width:768px) and (max-width: 910px) {
+
+  .taxonomy-architecture-div-mobile{
+    display:block!important;
+    background-image: url("../../assets/Rectangle\ 14.png");
+    /* width: 686px;
+    height: 631px; */
+
+    height:686px!important;
+    background-size: 100%;
+    background-repeat: no-repeat;
+  
+  }
+
+  .picture-1{
+
+    width: 100%!important;
+    height: 500px!important;
+    background-size: 100%!important;
+    background-repeat: no-repeat
+}
+  
+
+}
+
+
+@media only screen and (max-width: 721px) {
+
+  /* .taxonomy-architecture-div-mobile{
+
+    height:325px!important;
+
+  
+  } */
+  
+
+}
+
+@media only screen  and (min-width: 464px) and (max-width: 721px) {
+
+  .taxonomy-architecture-div-mobile{
+
+    width:100%!important;
+    height:500px!important;
+
+  }
   
 
 }

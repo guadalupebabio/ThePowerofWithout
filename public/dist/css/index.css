@@ -295,22 +295,34 @@
 }
 
 
+.first-layer{
+  display:flex;
 
+}
+.second-layer{
+  display:flex;
+}
 .taxonomy-architecture-div {
   background-image: url("../../assets/Rectangle\ 14.png");
-  width: 686px;
+  /* width: 686px; */
+  width:50%;
   height: 631px;
-  position: absolute;
+  background-size:100%;
+  background-repeat:no-repeat;
+
+  /* position: absolute; */
   /* top:1040px; */
-  top: 1040px;
+  /* top: 1040px; */
 }
 
 .project-description {
-  position: absolute;
+  /* position: absolute;
   top: 1042px;
-  left: 742px;
-  width: 614px;
-  height: 392px;
+  left: 742px; */
+  /* width: 614px; */
+  width:50%;
+  padding:1rem;
+  /* height: 392px; */
 
 }
 .project-description-mainspan {
@@ -335,16 +347,18 @@
 }
 
 .picture-1 {
+  /* width: 686px;
+  height: 392px;
+  position: absolute; */
+  /* top: 1700px; */
   width: 686px;
   height: 392px;
-  position: absolute;
-  top: 1700px;
   background-image: url("../../assets/Rectangle\ 16.png");
 }
 .picture-2 {
-  position: absolute;
+  /* position: absolute;
   top: 1700px;
-  left: 742px;
+  left: 742px; */
   background-image: url("../../assets/Rectangle\ 17.png");
   width: 670px;
   height: 392px;
@@ -369,7 +383,10 @@
   position: absolute;
   top: 2117px;
   left: 0px;
-  width: 1440px;
+  /* width: 1440px;
+  w */
+
+  width:100vw;
   display: flex;
   flex-direction: column;
   margin:5px;
@@ -394,6 +411,7 @@
   display: flex;
   flex-direction: row;
   /* align-items:center; */
+  width: 85%;
   font-size: 12px;
   /* margin: 2rem!important; */
   /* justify-content:space-evenly;  */
@@ -437,9 +455,10 @@
 }
 .links-summary {
   transform: rotate(-90deg);
-  position: relative;
-  top: 50px;
-  left: 350px;
+  /* position: relative; */
+  position:absolute;
+  /* top: 50px; */
+  left: 92vw;
   height: 20px;
   width: 150px;
   display: flex;
@@ -487,9 +506,11 @@
   display: flex;
   flex-direction: row;
   /* justify-content: space-evenly; */
-  position: relative;
+  /* position: relative; */
   /* top :10px; */
-  left: 840px;
+  position:absolute;
+  left:87vw;
+  /* left: 840px; */
 }
 
 .footer-bottom-half-logo-1 {
@@ -532,4 +553,29 @@
 }
 #column-text .column.right p {
   padding-right: 10vw;
+}
+
+
+@media only screen and (min-width:910px) and (max-width: 1200px) {
+
+  .footer-bottom-half-logos {
+
+    left: 82vw!important;
+
+  }
+
+  .links-summary{
+
+    left: 90vw!important;
+
+  }
+
+  .footer-copy-right{
+
+    margin-top:2rem;
+
+  }
+
+  
+
 }

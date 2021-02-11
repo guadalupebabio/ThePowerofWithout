@@ -194,8 +194,9 @@ function goToSection(i){
 
 function showInfo(info){
 
-  console.log("i did receive",info);
+  // console.log("i did receive",info);
 
+  hideAll(info.id);
   $(`#${info.id}-info`).show();
   $(`#${info.id}-info h1`).text(`${info.header}: `);
   $(`#${info.id}-info p`).text(`${info.text}`);
@@ -213,10 +214,38 @@ function googleTranslateElementInit() {
 }
 
 // Icon Button Handlers
-function hideAll(){
-  $("#info").hide();
-  $("#comment").hide();
-  $("#link").hide();
+function hideAll(id){
+
+  // console.log("im hiding",id)
+  //  id.hide();
+  
+  var infoBox = document.getElementById(`${id}-info`);
+  var commentBox = document.getElementById(`${id}-comment`);
+  var linkBox = document.getElementById(`${id}-link`);
+
+  if (infoBox){
+    infoBox.style ="display:none;"
+  }
+
+  if (commentBox){
+    commentBox.style = "display:none;"
+  }
+
+  if (linkBox){
+    linkBox.style = "display:none;"
+  }
+
+  // if ($(`#${id}-info`)){
+  //   $(`#${id}-info`).hide();
+  // }
+  // if ($(`#${id}-comment`)){
+  //   $(`#${id}-comment`).hide();
+  // }
+  // if($(`#${id}-link`)){
+  //   $(`#${id}-link`).hide();
+  // }
+
+
   // $("#previous-modal-div").hide();
 }
 
@@ -265,64 +294,47 @@ $(".alert-button").click(function(e){
 })
 
 
-// function showInfo(data){
 
+// $(".comment-button").click(function(e){
 //   hideAll();
-//   const infoDiv = document.getElementById("info");
-//   if (info){
-//   infoDiv.className = "info-div";
-//   infoDiv.childNodes[1].innerText = data;
-//   infoDiv.style="display:block!important;"
-//   console.log(data);
-//   }
+//   e.stopPropagation();
+//   let data = $(this).data(),
+//       commentI = comments.findIndex((d) =>      
+//       {
+//         // Add some clarifying information about this question, if necessary.
+//         // console.log("Form field name",d.formFieldName)
+//         document.getElementById("comment-input").innerText= `Feedback for the ${`"${data.name}"`} question`;
+//         d.formFieldName == data.name
+//       }   
+//       )
+//   //Set value of input text based on what's stored in the database
+//   if(commentI == -1) $("#comment input.text").val("");
+//   else $("#comment input.text").val(comments[commentI].comment);
+//   $("#comment").show();
+//   $("#comment input.button").data(data); //Bind this current question's data to the input
+//   $("#comment .help").hide();
+
+// })
+
+// $(".link-button").click(function(e){
+//   hideAll();
+//   e.stopPropagation();
   
 
+//   let data = $(this).data(),
+//       linkI = links.findIndex((d) => {
+//         document.getElementById("link-input").innerText= `Insert a reference link for the ${`"${data.name}"`} question`;
+//         d.formFieldName == data.name
+//       })
 
-// }
+//   //Set value of input text based on what's stored in the database
+//   if(linkI == -1) $("#link input.text").val("");
+//   else $("#link input.text").val(links[linkI].link);
 
-$(".comment-button").click(function(e){
-  hideAll();
-  e.stopPropagation();
-  let data = $(this).data(),
-      commentI = comments.findIndex((d) =>      
-      {
-        // Add some clarifying information about this question, if necessary.
-        // console.log("Form field name",d.formFieldName)
-        document.getElementById("comment-input").innerText= `Feedback for the ${`"${data.name}"`} question`;
-        d.formFieldName == data.name
-      }   
-      )
-  //Set value of input text based on what's stored in the database
-  if(commentI == -1) $("#comment input.text").val("");
-  else $("#comment input.text").val(comments[commentI].comment);
-  $("#comment").show();
-  $("#comment input.button").data(data); //Bind this current question's data to the input
-  $("#comment .help").hide();
-
-})
-
-
-
-
-$(".link-button").click(function(e){
-  hideAll();
-  e.stopPropagation();
-  
-
-  let data = $(this).data(),
-      linkI = links.findIndex((d) => {
-        document.getElementById("link-input").innerText= `Insert a reference link for the ${`"${data.name}"`} question`;
-        d.formFieldName == data.name
-      })
-
-  //Set value of input text based on what's stored in the database
-  if(linkI == -1) $("#link input.text").val("");
-  else $("#link input.text").val(links[linkI].link);
-
-  $("#link").show();
-  $("#link input.button").data(data); //Bind this current question's data to the input
-  $("#link .help").hide();
-})
+//   $("#link").show();
+//   $("#link input.button").data(data); //Bind this current question's data to the input
+//   $("#link .help").hide();
+// })
 
 
 // $(".chat-button").click(function(e){
@@ -341,13 +353,58 @@ $(".link-button").click(function(e){
 
 
 
+function showComment(data){
+
+  // console.log(data)
+  hideAll(data.id);
+  document.getElementById(`${data.id}-comment-input`).innerText= `Feedback for the ${`"${data.name}"`} question`;
+  let commentI = comments.findIndex((d) =>      
+  {
+    // Add some clarifying information about this question, if necessary.
+    // console.log("Form field name",d.formFieldName)
+    // console.log("so it's nothing",document.getElementById(`${data.id}-comment-input`).innerText)
+    
+    d.formFieldName == data.name
+  }   
+  )
+    //Set value of input text based on what's stored in the database
+    if(commentI == -1)$(`${data.id}-comment input.text`).val("");
+    else $(`#${data.id}-comment input.text`).val(comments[commentI].comment);
+    $(`#${data.id}-comment`).show();
+    $(`#${data.id}-comment input.button`).data(data); //Bind this current question's data to the input
+    $(`#${data.id}-comment .help`).hide();
+
+}
+
+function showLink(data){
+ 
+  hideAll(data.id);
+  document.getElementById(`${data.id}-link-input`).innerText= `Insert a reference link for the ${`"${data.name}"`} question`;
+
+  let linkI = links.findIndex((d) => {
+
+    d.formFieldName == data.name
+  })
+
+    //Set value of input text based on what's stored in the database
+    if(linkI == -1) $(`${data.id}-link input.text`).val("");
+    else $(`#${data.id}-link input.text`).val(links[linkI].link);
+
+    $(`#${data.id}-link`).show();
+    $(`#${data.id}-link input.button`).data(data); //Bind this current question's data to the input
+    $(`#${data.id}-link .help`).hide();
+}
+
+
+
+
 function saveComment(){
-  let data = $("#comment input.button").data(),
-      comment = $("#comment input.text").val();
+  let data = $(`#${data.id}-comment input.button`).data(),
+      comment = $(`#${data.id}-comment input.text`).val();
 
   // Save new comment to server
   $.post(`${data.url}/comment`, {email: data.email, comment: comment, formFieldName: data.name}, function(res) {
-    $("#comment .help").show();
+    $(`#${data.id}-comment .help`).show();
 
     // Save new comment for this browser session
     let commentI = comments.findIndex((d) => d.formFieldName == data.name);
@@ -363,10 +420,11 @@ function saveComment(){
 
 
 function saveLink(){
-  let data = $("#link input.button").data(),
-      link = $("#link input.text").val();
+  
+  let data = $(`#${data.id}-link input.button`).data(),
+      link = $(`#${data.id}-link input.text`).val();
 
-  $("#link .help").hide();
+  $(`#${data.id}-link .help`).hide();
 
   let isLink = (link) => {
     var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -378,9 +436,9 @@ function saveLink(){
     return pattern.test(link);
   }
 
-  if(!isLink(link)) $("#link .help.is-danger").show();
+  if(!isLink(link)) $(`#${data.id}-link .help.is-danger`).show();
   else $.post(`${data.url}/link`, {email: data.email, link: link, formFieldName: data.name}, function(res) {
-    $("#link .help.is-success").show();
+    $(`#${data.id}-link .help.is-success`).show();
 
     // Save new link for this browser session
     let linkI = links.findIndex((d) => d.formFieldName == data.name);
@@ -530,8 +588,6 @@ if (editPreviousButton){
 
 function editRangeLabels(info){
   let id = info.id
-
-
   let options = info.options
   const slider = document.getElementById(id);
   const label1 =  document.getElementById(id+"-label1");
@@ -540,19 +596,18 @@ function editRangeLabels(info){
   label1.innerText = options[parseInt(input)][1]
   label2.innerText = options[parseInt(input)][0]
 
-  // console.log(options[parseInt(input)]);
-  
 
-  // return "showRange"
 }
 
 
 var hamburgerMenu = document.getElementById("nav-hamburger-menu");
 if (hamburgerMenu){  
   hamburgerMenu.addEventListener("click",()=>{
-    var mobileMenuLinks = document.getElementById("mobile-links");
-    if (mobileMenuLinks){
-      mobileMenuLinks.classList.toggle("collapsed-links");
+    var blackMobileMenuLinks = document.getElementById("black-mobile-links");
+
+    if (blackMobileMenuLinks){
+      blackMobileMenuLinks.classList.toggle("black-collapsed-links");
     }
+
   });
 }

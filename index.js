@@ -287,7 +287,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                       type: "range",
                       options:  ["Low","High"],
                       value:  getFormValue(["site", "vulnerability", "communityEngagement"]),
-                      info:information["Community Engagement"]                      
+                      info:information["Participation in decision-making processes"]                      
 
                     }
                   ],
@@ -512,18 +512,18 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     },{
                       name : "Gender Distribution", //Updated
                       type:"range",
-                      id:"Gender",
+                      id:"gender",
                       options : differences,
                       value:getFormValue(["populace", "qualityOfLife", "GenderDistribution"]),//Updated
                       info:information["Gender Distribution"] //Updated
                     },
                     {
                       name:"Ethnic Groups",//Updated
-                      id  : "ethnicGroups",
+                      id  : "ethinicIdentities",
                       type:"text",
                       placeholder:"Your Comment",
-                      value:getFormValue(["populace", "qualityOfLife", "EtnicGroups"]),//Updated
-                      info:information["Etnic Groups"]//Updated
+                      value:getFormValue(["populace", "qualityOfLife", "ethinicIdentities"]),//Updated
+                      info:information["Ethnic Groups"]//Updated
                     }
                     
                   ]  
