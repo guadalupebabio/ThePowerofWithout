@@ -545,9 +545,6 @@ function polygonHover(e) {
   settlename.update(data);
   }
 
-  
-      
-      
   //check if they're in the same country
   function checkCountries(country){
     for (var i = 0; i < countrieslist.length; i++){
