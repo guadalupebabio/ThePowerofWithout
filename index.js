@@ -40,8 +40,13 @@ const main_conn = mongoose.createConnection(DB_URL),
   Comment = require("./app/db/models/Comment")(main_conn),
   Link = require("./app/db/models/Link")(main_conn),
   Survey = require("./app/db/models/Survey")(main_conn),
+<<<<<<< HEAD
   Image = require("./app/db/models/Image")(main_conn),
   Pin = require("./app/db/models/Pin")(app_conn);
+=======
+  Pin = require("./app/db/models/Pin")(app_conn), 
+  Country=require("./app/db/models/Country")(main_conn);
+>>>>>>> 4ef68f4dd10b2ea1627529809ac485233b33f229
 
 app.use(
   session({
@@ -643,7 +648,11 @@ app.get("/map", function (req, res) {
 
 app.use(
   "/api",
+<<<<<<< HEAD
   require("./app/routes/api.js")(User, Settlement, Survey, Pin, Comment, Link,Image)
+=======
+  require("./app/routes/api.js")(User, Settlement, Survey, Pin, Comment, Link, Country)
+>>>>>>> 4ef68f4dd10b2ea1627529809ac485233b33f229
 );
 
 // ** START THE SERVER **

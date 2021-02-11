@@ -149,7 +149,12 @@ html
                               .range-level-items
                                 .top-level-items
                                   .level-item-left
+<<<<<<< HEAD
+                                    .label
+                                      label(for = "hilz")= question.name 
+=======
                                     label(for = question.id)= question.name 
+>>>>>>> a36b717eabdcf416e699c2dd0645a142ba6c6a9e
                                     .question-info
                                       if question.info
                                         .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)      

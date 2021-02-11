@@ -39,7 +39,11 @@ const e = require("express");
 // const Survey = require("../db/models/Survey.js");
 
 
+<<<<<<< HEAD
 module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image){
+=======
+module.exports = function(User, Settlement, Survey, Pin, Comment, Link, Country){
+>>>>>>> 4ef68f4dd10b2ea1627529809ac485233b33f229
   let router = express.Router();
 
   // Returns a JSON array containing settlement data
@@ -58,6 +62,14 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image){
   //       lon = parseFloat(req.query.lon);
   //   res.send(geo.getCountry(lat, lon));
   // });
+
+  //Returns countries in JSON format from db
+  router.get("/countries", function(req, res){
+    Country.find({}, function(err, docs){
+      if(err) throw err;
+      res.json(docs);
+    });
+  });
 
   // Given name and email, redirect to the correct settlement.
   router.post("/get-settlement", preventEmptyFormFields, cleanFormFields, validateEmail, function(req, res){
@@ -163,12 +175,12 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image){
   // Update existing settlement
   // router.post("/settlements/u/:id/:secret", cleanFormFields, function(req, res){
     router.post("/settlements/u/:id/:secret",function(req, res){
-
+      
       // console.log(req.body["Causes"]);
       // console.log(req.body)
       let siteOriginCauses = req.body["Causes"] ;
       let siteOriginPopulation = req.body["Population"]!= null && !isNaN(parseInt(req.body["Population"])) ? parseInt(req.body["Population"]) : null;
-      let siteGeographyTopography =   req.body["Topography Feautures"] ;
+      let siteGeographyTopography =   req.body["Topography Feautures"];
       let siteGeographyWithin = req.body["Location within the city"] ;
       let siteVulnerabilityResilience = req.body["Resilience to natural conditions"];
       let siteVulnerabilityCrimeRate = req.body["Crime rate"];

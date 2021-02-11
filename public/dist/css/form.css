@@ -404,7 +404,10 @@ For the fill-in form
   width:100%;
 }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> a36b717eabdcf416e699c2dd0645a142ba6c6a9e
 .range-level-items {
   display: flex;
   flex-direction: column;
@@ -501,7 +504,11 @@ For the fill-in form
 .level-middle .level-item-left {
   display: flex;
   flex-direction: row;
+<<<<<<< HEAD
+  justify-content: space-between;
+=======
   /* justify-content: space-between; */
+>>>>>>> a36b717eabdcf416e699c2dd0645a142ba6c6a9e
   /* align-items: center; */
   /* width : 100px; */
 }
@@ -510,7 +517,11 @@ For the fill-in form
   flex-direction: row;
   /* align-items: center; */
   height: 1rem;
+<<<<<<< HEAD
+  margin-top: 0.5rem;
+=======
   margin-top: 0.8rem;
+>>>>>>> a36b717eabdcf416e699c2dd0645a142ba6c6a9e
 }
 .level-item-right {
   display: flex;
@@ -653,12 +664,20 @@ For the fill-in form
   flex-direction: column;
 }
 
+<<<<<<< HEAD
+.level-item-left {
+=======
 /* .level-item-left {
+>>>>>>> a36b717eabdcf416e699c2dd0645a142ba6c6a9e
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+<<<<<<< HEAD
+}
+=======
 } */
+>>>>>>> a36b717eabdcf416e699c2dd0645a142ba6c6a9e
 
 .survey-buttons {
   display: flex;
@@ -839,15 +858,22 @@ width: 35%;
   }
   .level-item-header label {
     font-size: 0.8rem!important;
+<<<<<<< HEAD
+
+    height: 1rem;
+=======
     width:3rem; /**just shortened it for sake of ui*/
     height: 1rem;
     left:30%;
+>>>>>>> a36b717eabdcf416e699c2dd0645a142ba6c6a9e
     transform: rotate(-90deg) translate(-2rem,-2rem);
 }
 
 .range-level-items{
   width:auto!important;
 }
+<<<<<<< HEAD
+=======
 .nav{
 
   position:unset!important;
@@ -871,6 +897,9 @@ width: 35%;
 .button-level{
   margin: 30px;
 }
+<<<<<<< HEAD
+>>>>>>> a36b717eabdcf416e699c2dd0645a142ba6c6a9e
+=======
 
 .level-category-survey{
   position:unset;
@@ -891,4 +920,5 @@ width: 35%;
   display: flex;
 }
 
+>>>>>>> a69c43abdd6256188d922385bdf296a983e1e2e1
 }
