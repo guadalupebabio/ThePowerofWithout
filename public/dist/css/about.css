@@ -1,0 +1,154 @@
+.about-info-container{
+
+    width:80%;
+    display:flex;
+    flex-direction:column;
+    padding:5rem;
+
+}
+
+h1{
+    font-weight:bold;
+}
+
+.footer a {
+
+    color: #242424;
+}
+.footer {
+    /* position: absolute; */
+    /* top: 2117px;
+    left: 0px; */
+    width: 1440px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer-top-half {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .summary-of-site {
+    display: flex;
+    flex-direction: row;
+    /* align-items:center; */
+    font-size: 12px;
+    /* margin: 2rem!important; */
+    /* justify-content:space-evenly;  */
+  }
+  .map-of-informality-summary {
+    margin: 2rem 0rem 0 0rem !important;
+    height: 167px;
+    width: 167px;
+  
+  }
+  .map-of-informality-summary-text{
+  
+    display:flex;
+    flex-direction:column
+  }
+  .contribute-summary {
+    margin: 2rem !important;
+    height: 167px;
+    width: 167px;
+  }
+  .contribute-summary-text{
+  
+    display:flex;
+    flex-direction:column
+  }
+  .tools-summary {
+    margin: 2rem !important;
+    height: 170px;
+    width: 145px;
+  }
+  .tool-summary-text{
+  
+    display:flex;
+    flex-direction:column
+  }
+  
+  .team {
+    margin: 2rem !important;
+    height: 166px;
+    width: 300px;
+  }
+  .links-summary {
+    transform: rotate(-90deg);
+    position: relative;
+    top: 50px;
+    left: 350px;
+    height: 20px;
+    width: 150px;
+    display: flex;
+    flex-direction: row;
+    /* margin:0.5rem!important; */
+    align-items: flex-end;
+  }
+  .links-summary a {
+    color: #242424;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0.5rem !important;
+  }
+  .links-summary a:hover {
+    color: #242424;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  
+  .footer {
+    height: 376px;
+  }
+  .footer-top-half {
+    margin-bottom: 1rem;
+  }
+  
+  .footer-bottom-half {
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    margin-top: 1rem;
+  }
+  .footer-bottom-half-accessories {
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+  }
+  .footer-bottom-half-description {
+    font-size: 11px;
+  }
+  
+  .footer-bottom-half-logos {
+    width: 250px;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-evenly; */
+    position: relative;
+    /* top :10px; */
+    left: 840px;
+  }
+  
+  .footer-bottom-half-logo-1 {
+    background-image: url(../../assets/image\ 4.png);
+    background-repeat: no-repeat;
+    width: 72px;
+    height: 72px;
+    margin: 0.2rem;
+  }
+  
+  .footer-bottom-half-logo-2 {
+    background-image: url(../../assets/ML\ logo_black\ 1.png);
+    background-repeat: no-repeat;
+    width: 72px;
+    height: 72px;
+    margin: 0.2rem;
+  }
+  .footer-copy-right {
+    height: 50px;
+  }
+  .footer-copy-right p {
+    padding: 1rem;
+  }

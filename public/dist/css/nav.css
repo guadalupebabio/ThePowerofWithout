@@ -1,0 +1,123 @@
+.black-nav{
+    background: #242424!important;
+    display:flex;
+    flex-direction:row;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    transition: 0.2s all;
+    z-index: 2000; 
+    justify-content:space-between;
+    font-weight: bold;
+  
+  }
+  .black-nav a {
+
+    color:white;
+    border:none!important;
+    align-items: center;
+    display: flex;
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    justify-content: space-evenly;
+
+  }
+  .black-nav-left-a{
+
+    color:white;
+    height:24px;
+
+  }
+  .black-nav-left-a :hover{
+
+    color: #242424!important;
+    background-color:white!important;
+    font-weight :bold;
+    height:24px;
+
+  }
+  .black-nav-left{
+
+    display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
+    width:60%;
+  }
+  .black-nav-right{
+
+    display:flex;
+    flex-direction:row;
+    width:20%;
+    justify-content:space-evenly;
+  }
+
+    /* .black-nav-left :hover{
+      transition: 0.2s all!important;
+      color: #242424!important;
+      background-color:white!important;
+      font-weight :bold!important;   
+    }   */
+
+    #google_translate_element{
+      margin-top: 10px;
+  
+  
+    }
+    .goog-logo-link{
+      vertical-align: middle;
+    }
+
+.black-nav-collapsed-container{
+  display:none;
+}
+
+
+.logo-div-white{
+    
+    background-image:url("../../assets/W_white.png");
+    width: 206px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 206px 60px;
+    padding: 0;
+    /* margin:3rem; */
+
+  }
+
+  /* @media only screen and (max-width: 800px) {
+   
+    .black-nav{
+      width:60%;
+    }
+
+  
+
+  } */
+
+
+  @media only screen and (max-width: 468px) {
+   
+    .black-nav{
+      display:none!important;
+    }
+
+    .black-nav-collapsed-menu{
+
+      background-image:url("../../assets/menu_white_24px.png");
+      width:30px;
+      height:30px;
+      background-repeat:no-repeat;
+      background-size:30px 30px;
+      margin:1rem 0 1rem 1rem;
+ 
+    }
+    .black-nav-collapsed-container{
+
+      display:block!important;
+      background-color:#242424;
+    }
+  
+
+  }

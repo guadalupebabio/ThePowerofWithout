@@ -1,0 +1,129 @@
+.columns{
+  margin-top: 100px;
+  padding: 0 5vw;
+  #sidebar{
+
+    .nav-column{
+      
+      background-color:#242424!important;
+      transform:rotate(-90deg);
+  
+    }
+    & > a{
+      font-family: Roboto;
+      font-weight: bold;
+      font-size: 24px;
+      color: black;
+      transition: 0.2s all;
+    }
+
+
+  
+
+    .active{
+      border-bottom: 4px solid black;
+    }
+  }
+
+  // #google_translate_element{
+  //   margin-top: 10px;
+
+  //   .goog-logo-link{
+  //     vertical-align: middle;
+  //   }
+  // }
+}
+
+input[type = "text"]{
+  font-family: Roboto;
+  width: 100%;
+  margin-bottom: 30px;
+  margin-top: 6px;
+  padding: 6px 8px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid black;
+
+  &:focus{
+    outline: none;
+    border-bottom-color: #3a539b;
+  }
+}
+
+form{
+  label{
+    font-family: Roboto;
+    font-size: 14px;
+  }
+
+  .range{
+    display: flex;
+    width: 100%;
+
+    input[type = "range"]{
+      // width: calc(100% - 20px);
+      margin: 0 10px;
+      flex: 1
+    }
+  }
+
+  input[type = "radio"], input[type = "checkbox"]{
+    margin-right: 8px;
+    margin-top: -1px;
+    vertical-align: middle;
+  }
+
+  .button-level{
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .button{
+    font-weight: bold;
+    width: 32%;
+
+    &:nth-child(2), &:nth-child(3){
+      margin-left: 2%;
+    }
+  }
+
+
+  // .level{
+  //   margin-bottom: -20px !important;
+
+  //   .level-right .level-item{
+  //     cursor: pointer;
+  //   }
+  // }
+  // .level .is-narrow{
+  //   margin-bottom: -20px !important;
+  //   background-color:#242424;
+
+  //   // .level-right .level-item{
+  //   //   cursor: pointer;
+  //   // }
+  // }
+
+
+
+}
+
+section{
+  height: 100%;
+}
+
+#map{
+  width: 100%;
+  height: 100%;
+}
+
+#info, #comment, #link{
+  position: sticky;
+  top: 100px;
+
+  .help{
+    display: none;
+    margin-top: -25px;
+    margin-bottom: 30px;
+  }
+}

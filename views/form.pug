@@ -1,0 +1,554 @@
+doctype html
+html 
+  head 
+    include includes/head.pug
+    title The Power of Without
+    link(rel='stylesheet', href='https://unpkg.com/leaflet@1.6.0/dist/leaflet.css')
+    script(src='https://unpkg.com/leaflet@1.6.0/dist/leaflet.js')
+    script(src="src/GIBSMetadata.js")
+    script(src="src/GIBSLayer.js")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js")
+    script(src="https://unpkg.com/esri-leaflet@2.5.1/dist/esri-leaflet.js"
+    integrity="sha512-q7X96AASUF0hol5Ih7AeZpRF6smJS55lcvy+GLWzJfZN+31/BQ8cgNx2FGF+IQSA4z2jHwB20vml+drmooqzzQ=="
+    crossorigin="")
+
+
+    link(rel="stylesheet" href="/dist/css/form.css")
+  body 
+    - let activeTab = 2;
+
+    include includes/nav-black.pug
+    
+    if (modalData)
+      #modal-div(class=`${modalClass}`)
+        .modal-description
+          p #{modalData.description}
+        .modal-items-description
+          each icon in modalData.icons
+            .modal-item 
+              .modal-icon(style=`background-image:url(${icon.image})`)
+              .modal-icon-description          
+                p #{icon.description}             
+        a(href=`${redirectUrl}` id="continue-button") Continue
+
+    if (previousModalClass)
+     #previous-modal-div(class=`${previousModalClass}`)  
+      .previous-modal-close-button(onclick="closeModal()")
+      .previous-modal-description 
+        form(action = "/api/get-settlement" method = "POST") 
+          each field in previousModalData
+            .fill-in-level-row-item
+              label(for = field.name + "-" + index)= field.label
+              br          
+            if field.type == "text"  
+              input(id=field.id name = field.name type = "text" placeholder = field.placeholder) 
+              br
+              br
+          input.button.is-black(id="previous-continue-button" style="position:relative;left:30%;width:100px" type="submit" value="Continue")
+
+      
+    //- .columns.is-variable.is-8
+    .columns
+      if sectionData.header=="update-settlement"     
+        #sidebar.nav-column
+          .nav
+            a.active(onclick = "goToSection(2)") Populace
+            br
+            a(onclick = "goToSection(1)") Architecture
+            br
+            a(onclick = "goToSection(0)") Site
+        
+      .middle-column#content         
+        form(action = url method = "POST" onsubmit="validateForm()")
+          //- Autofill questions from JSON object passed
+          if sectionData.header=="fill-in-form"                     
+                .fill-in-row
+                  each question, line in sectionData.sections
+                    if line < 2
+                      .fill-in-level-row-item
+                        .fill-in-level-row-title                  
+                          label(for = question.name + "-" + index)=question.label
+                        br
+                        .fill-in-level-row-input
+                          if question.type == "text"    
+                            if question.disabled
+                              input(name = question.name type = question.type readonly value = question.value required)
+                            else
+                              input(name = question.name type = question.type placeholder = question.value required) 
+
+                each question, line in sectionData.sections 
+                  if line>1
+                    br
+                    
+                    .fill-in-level-row-item
+                      .fill-in-level-row-title                  
+                        label(for = question.name + "-" + index)=question.label
+                      br
+                      .fill-in-level-row-input
+                        if question.type == "coords"
+                          input(id = "coords" name = question.name type = "text" placeholder = question.value required)   
+                        else if question.type == "area"
+                          input(id ="area" name = question.name type = "text" placeholder = question.value required)  
+                        else if question.type == "text"    
+                          if question.disabled
+                            input(name = question.name type = question.type readonly value = question.value required)
+                          else
+                            input(name = question.name type = question.type placeholder = question.value required)        
+                        else if question.type == "radio" || question.type == "checkbox"
+                          each val, index in question.options
+                            if question.type == "radio"
+                              input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == question.value) required)
+                            else 
+                              input(type = question.type name = question.name id = question.name + "-" + index val = "Privacy" checked = false required)
+                            label( style="font-size:0.8rem" for = question.name + "-" + index)= val
+                            br
+                        else if question.type == "range"
+                          .range
+                            label(for = question.name)= question.options[0]
+                            input(type = "range" min = "0" max =  `100` value = (question.value ? question.value : null) name = question.name id = question.name)
+                            label(for = question.name)= question.options[question.options.length - 1]
+                          br
+
+                    if question.name == "geolocation"
+                      if map
+                        #map-mobile
+                          #basemaps-wrapper
+                            #basemaps
+                              #imagery
+                                p Satellite                  
+                              #streets
+                                p Map         
+
+          else if sectionData.header=="update-settlement"
+            each section, index in sectionData.sections
+              br
+              //- section(class = (index == 0 ? "" : "is-hidden"))  
+              section(class = (index))                   
+                each category, index in section.subsections        
+                  .level-category
+                    .level-left-category 
+                      .level-item-header
+                        label(for = "")= category.label               
+                      .level-middle
+                        each question, j in category.questions
+                          .level-item-question
+                            if question.type =="range"
+                              .range-level-items
+                                .top-level-items
+                                  .level-item-left
+                                    .label
+                                      label(for = "hilz")= question.name 
+                                    .question-info
+                                      if question.info
+                                        .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)      
+                                  br
+                                  .right-level-items
+                                    .level-item-right
+                                      .comment-button(data-name = `${question.name}` data-email = `${email}`)
+                                        //- i.fa-comment.fas
+                                      .link-button(data-name = `${question.name}` data-email = `${email}`)
+                                        //- i.fas.fa-link
+                                      .chat-button(data-name = `${question.name}` data-email = `${email}`)   
+
+                                .range
+                                  if (question.options.length==4)
+                                    .range-options                                  
+                                      label(id= question.id + "-label1" for = question.name)= !isNaN((parseInt(question.value)))? question.options[parseInt(question.value)][0] : question.options[0][1]
+                                      label(id= question.id + "-label2" for = question.name)= !isNaN((parseInt(question.value)))? question.options[parseInt(question.value)][1] : question.options[0][0]
+                                    input( oninput=onchange=`editRangeLabels({id:"${question.id}",options:[${question.options.map((value)=>{{ return `["${value[0]}","${value[1]}"]`}})}]})` onchange=`editRangeLabels({id:"${question.id}",options:[${question.options.map((value)=>{{ return `["${value[0]}","${value[1]}"]`}})}]})` id=`${question.id}` type = "range"  min = "0" max = `${question.options.length-1}` value = (question.value ? question.value : null) name = question.name )
+
+                                  else
+                                    .range-options                                  
+                                      label(for = question.name)= question.options[0]
+                                      label(for = question.name)= question.options[question.options.length-1]
+                                    input(type = "range"  min = "0" max = `100` value = (question.value ? question.value : null) name = question.name id = question.name)   
+                              .commentary-level-items
+                                .box(id=`${question.id}-info` style = "display:none;")
+                                  .close-info(id=`close-info-button` onclick=`onClose("${question.id}-info")`)
+                                  h1.heading 
+                                  p
+                                .box(id=`${question.id}-comment` style = "display:none;")
+                                  .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
+                                  h1.heading Comment       
+                                  p(id="comment-input").subtitle.is-size-6
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved comment!
+                                  input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                .box(id=`${question.id}-link` style = "display:none;")
+                                  .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
+                                  h1.heading Link
+                                  p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved link!
+                                  p.help.is-danger Please enter a valid link
+                                  input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                .box(id=`${question.id}-chat` style = "display:none;")
+                                  .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
+                                  h1.heading Image
+                                  p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved link!
+                                  p.help.is-danger Please enter a valid link
+                                  input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+
+                             
+
+                            else if question.type=="double-range"
+                              .range-level-items
+                                .top-level-items
+                                  .level-item-left
+                                    .label
+                                      label(for = "hilz")= question.name 
+                                    .question-info
+                                      if question.info
+                                        //- .info-button.level-item(data-label = `${category.label}` data-info = `${question.info}`)
+                                        //- i.fas.fa-info-circle
+                                        .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)        
+                                  br
+                                  .right-level-items
+                                    .level-item-right
+                                      .comment-button(data-name = `${question.name}` data-email = `${email}`) 
+                                        //- i.fa-comment.fas
+                                      .link-button(data-name = `${question.name}` data-email = `${email}`)
+                                        //- i.fas.fa-link
+                                      .chat-button(data-name = `${question.name}` data-email = `${email}`)  
+                                .range
+                                  .range-options
+                                    label(for = question.name)= question.options[0]
+                                    label(for = question.name)= question.options[1]  
+                                  input(type = "range"  min = "0" max =  `100` value = (question.value!=null ? question.value[0] : null) name = question.name id = question.name)                                                      
+                                  .range-options
+                                    label(for = question.name)= question.options[2]
+                                    label(for = question.name)= question.options[3]  
+                                  input(type = "range"  min = "0" max =  `100` value = (question.value!=null ? question.value[1] : null) name = question.name id = question.name)   
+
+                              .commentary-level-items
+                                .box(id=`${question.id}-info` style = "display:none;")
+                                  .close-info(id=`close-info-button` onclick=`onClose("${question.id}-info")`)
+                                  h1.heading 
+                                  p
+                                .box(id=`${question.id}-comment` style = "display:none;")
+                                  .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
+                                  h1.heading Comment       
+                                  p(id="comment-input").subtitle.is-size-6
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved comment!
+                                  input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                .box(id=`${question.id}-link` style = "display:none;")
+                                  .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
+                                  h1.heading Link
+                                  p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved link!
+                                  p.help.is-danger Please enter a valid link
+                                  input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                .box(id=`${question.id}-chat` style = "display:none;")
+                                  .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
+                                  h1.heading Image
+                                  p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved link!
+                                  p.help.is-danger Please enter a valid link
+                                  input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+                
+                           
+                            else if question.type=="grid"
+                              .range-level-items
+                                .top-level-items
+                                  .level-item-left
+                                    .label
+                                      label(for = question.id)= question.name 
+                                    .question-info
+                                      if question.info
+                                        .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)  
+                                  br
+                                  .right-level-items
+                                    .level-item-right
+                                      .comment-button(data-name = `${question.name}` data-email = `${email}`) 
+                                        //- i.fa-comment.fas
+                                      .link-button(data-name = `${question.name}` data-email = `${email}`)
+                                        //- i.fas.fa-link
+                                      .chat-button(data-name = `${question.name}` data-email = `${email}`)  
+
+                                .commentary-level-items
+                                  .box(id=`${question.id}-info` style = "display:none;")
+                                    .close-info(id=`close-info-button` onclick=`onClose("${question.id}-info")`)
+                                    h1.heading 
+                                    p
+                                  .box(id=`${question.id}-comment` style = "display:none;")
+                                    .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
+                                    h1.heading Comment       
+                                    p(id="comment-input").subtitle.is-size-6
+                                    input.text(type = "text") 
+                                    p.help.is-success Successfully saved comment!
+                                    input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                  .box(id=`${question.id}-link` style = "display:none;")
+                                    .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
+                                    h1.heading Link
+                                    p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                    input.text(type = "text") 
+                                    p.help.is-success Successfully saved link!
+                                    p.help.is-danger Please enter a valid link
+                                    input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                  .box(id=`${question.id}-chat` style = "display:none;")
+                                    .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
+                                    h1.heading Image
+                                    p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+                                    input.text(type = "text") 
+                                    p.help.is-success Successfully saved link!
+                                    p.help.is-danger Please enter a valid link
+                                    input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+                                .grid
+                                  .column1
+                                    for option,index in question.options[0] 
+                                        .grid-cell
+                                          label(for=option.id)= option.label
+                                          input(id= option.id    value=option.value  name = option.id type = "text" onchange=`validateUpdateInput("${option.id}")`  placeholder = "0") 
+                                          label(for=option.id)= "/100%"
+                                  .column2
+                                    for option,index in question.options[1] 
+                                        .grid-cell
+                                          label(for=option.id)= option.label
+                                          input(id= option.id name = option.id value=option.value  type = "text" onchange=`validateUpdateInput("${option.id}")`  placeholder = "0") 
+                                          label(for=option.id)= "/100%"
+                                  .column3                       
+                                    for option,index in question.options[2] 
+                                        .grid-cell
+                                          label(for=option.id)= option.label
+                                          input(id= option.id name = option.id  value=option.value type = "text" onchange=`validateUpdateInput("${option.id}")`  placeholder = "0") 
+                                          label(for=option.id)= "/100%"
+
+                            else  
+                              .question               
+                                .left-level-items
+                                  .level-item-left
+                                    .label
+                                      label(for = "hilz")= question.name 
+                                    .question-info
+                                      if question.info
+                                        .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)              
+                                  //- br
+                                  if question.type == "coords"                               
+                                    input#coords(name = question.name type = "text" readonly placeholder = "Select a point on the map")  
+                                  else if question.type == "text"    
+                                    if question.disabled
+                                      input(name = question.name type = question.type readonly value = question.value  placeholder=question.placeholder)
+                                    else
+                                      input(name = question.name type = question.type value = question.value  placeholder=!(question.placeholder==null) ? question.placeholder : null)
+                                  else if question.type == "radio" || question.type == "checkbox"
+                                    each val, index in question.options                           
+                                      if question.type == "radio"                                                                         
+                                        if val == "Other"
+                                          .other-radio-div
+                                            input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))   
+                                            input( style="margin-bottom:0!important; font-weight:bold;font-size:14px;" name = question.name type = "text" value= (question.value!=null ? question.value[1] : null) placeholder = "Other")                  
+                                        else  
+                                          input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))                                                                                                                    
+                                      else
+                                        input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
+                                      if val != "Other"
+                                        label(for = question.name + "-" + index)= val
+                                      br    
+
+                                .right-level-items
+                                  .level-item-right
+                                    .comment-button(data-name = `${question.name}` data-email = `${email}`)
+                                    .link-button(data-name = `${question.name}` data-email = `${email}`) 
+                                    .chat-button(data-name = `${question.name}` data-email = `${email}`)     
+
+                              .commentary-level-items
+                                .box(id=`${question.id}-info` style = "display:none;")
+                                  .close-info(id=`close-info-button` onclick=`onClose("${question.id}-info")`)
+                                  h1.heading 
+                                  p
+                                .box(id=`${question.id}-comment` style = "display:none;")
+                                  .close-comment(id=`close-comment-button` onclick=`onClose("${question.id}-comment")`)
+                                  h1.heading Comment       
+                                  p(id="comment-input").subtitle.is-size-6
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved comment!
+                                  input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+                                .box(id=`${question.id}-link` style = "display:none;")
+                                  .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
+                                  h1.heading Link
+                                  p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved link!
+                                  p.help.is-danger Please enter a valid link
+                                  input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                .box(id=`${question.id}-chat` style = "display:none;")
+                                  .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
+                                  h1.heading Image
+                                  p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+                                  input.text(type = "text") 
+                                  p.help.is-success Successfully saved link!
+                                  p.help.is-danger Please enter a valid link
+                                  input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+
+                          br
+                          br
+                  br
+
+          else if sectionData.header=="final-survey"
+            .level-category-survey
+              .appreciation-message
+                p #{sectionData.appreciationMessage1}
+                br
+                p #{sectionData.appreciationMessage2}
+                br
+                p #{sectionData.appreciationMessage3}
+                br
+                p #{sectionData.appreciationMessage4}
+                br
+                p #{sectionData.appreciationMessage5}                
+            br
+            br
+            br
+            .final-survey-questions
+              for question in sectionData.questions
+                .final-survey-question
+                  if question.type =="range"
+                    .range-level-items
+                      .top-level-items
+                        .level-item-left
+                          .label
+                            label(for=question.id)= question.name
+                          .question-info
+                            if question.info
+                              .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`)       
+                        br
+                      .range
+                        .range-options
+                          each option in question.options
+                            label(for = option)= option
+                        input(type = "range"  min = "0" max = `100`  value = (question.value ? question.value : null) name=question.id id=question.id)
+                  else                 
+                    .final-question-level-items
+                      .final-question-level-item
+                        .level-item-left
+                          .label
+                            label(for = question.id)= question.name 
+                          .question-info
+                            if question.info
+                              .alert-button(onclick=`showInfo({id: "${question.id}", header: "${question.name}",text:"${question.info}"})`) 
+                      br           
+                      if question.type == "coords"                               
+                        input#coords(name = question.id type = "text" readonly placeholder = "Select a point on the map")  
+                      else if question.type == "text"    
+                        if question.disabled
+                          input(name = question.id type = question.type readonly value = question.value  placeholder=question.placeholder)
+                        else
+                          input(name = question.id type = question.type value = question.value placeholder=question.placeholder)
+                    
+                      else if question.type=="grid"
+                        .grid
+                          .column1
+                            for option,index in question.options[0] 
+                                .grid-cell
+                                  label(for=option.id)= option.label
+                                  input(id= option.id    name = option.id type = "text" onchange=`validateInput(${option.id})`  placeholder = "0") 
+                                  label(for=option.id)= "/10"
+                          .column2
+                            for option,index in question.options[1] 
+                                .grid-cell
+                                  label(for=option.id)= option.label
+                                  input(id= option.id name = option.id type = "text" onchange=`validateInput(${option.id})`  placeholder = "0") 
+                                  label(for=option.id)= "/10"
+                          .column3                       
+                            for option,index in question.options[2] 
+                                .grid-cell
+                                  label(for=option.id)= option.label
+                                  input(id= option.id name = option.id type = "text" onchange=`validateInput(${option.id})`  placeholder = "0") 
+                                  label(for=option.id)= "/10"
+
+
+                      else if question.type == "radio" || question.type == "checkbox"
+                        each val, index in question.options                           
+                          if question.type == "radio"                                                                         
+                            if val == "Other"
+                              .other-radio-div
+                                input(type = question.type name = question.id id = question.id + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))   
+                                input( style="margin-bottom:0!important; font-weight:bold;font-size:14px;" name = question.id type = "text" value= (question.value!=null ? question.value[1] : null) placeholder = "Other")                  
+                            else  
+                              input(type = question.type name = question.id id = question.id + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))                                                                                                                    
+                          else
+                            input(type = question.type name = question.id id = question.id + "-" + index value = val checked = (question.value != null && question.value.indexOf(val) != -1))
+                          if val != "Other"
+                            label(for = question.id + "-" + index)= val
+                          br   
+                          br 
+                    br                                
+                br
+                br
+          .button-level
+            if sectionData.header=="fill-in-form" 
+
+              input(id ="edit-previous-button" name = "edit-previous-button" type = "button" value = "Edit a previous settlement")
+              input.button.is-black(id="start-button" style="font-size:1.2rem;width:250px;margin:0.5rem" type="submit" value="Start")
+
+            else if sectionData.header=="final-survey" 
+              .survey-buttons
+                a(href=redirectUrl id ="edit-previous-button-link" name = "edit-previous-button" type = "button" value = "Edit a previous settlement") Edit previous settlement
+                input.button.is-black(id="start-button" style="font-size:1.2rem;width:300px;margin:0.5rem" type="submit" value="Finalize")          
+            else        
+              input.button.is-dark(style="position:relative;left:70%;width:300px" type="submit" value="Submit" )
+
+
+      //- .right-column#right-sidebar
+
+      if sectionData.header=="fill-in-form" 
+        section.right-column#right-sidebar
+          if map
+            #map
+              #basemaps-wrapper
+                #basemaps
+                  #imagery
+                    p Satellite                  
+                  #streets
+                    p Map
+
+        //- else 
+        //-   #info.box(style = "display:none;")
+        //-     #close-info
+        //-     h1.heading 
+        //-     p
+        //-   #comment.box(style = "display:none;")
+        //-     #close-comment
+        //-     h1.heading Comment       
+        //-     p(id="comment-input").subtitle.is-size-6
+        //-     input.text(type = "text") 
+        //-     p.help.is-success Successfully saved comment!
+        //-     input.button.is-black(type="submit" value="Save Comment" onclick = "saveComment()" data-url = url)
+        //-   #link.box(style = "display:none;")
+        //-     #close-link
+        //-     h1.heading Link
+        //-     p(id="link-input").subtitle.is-size-6 Add a link with supporting information, if necessary.
+        //-     input.text(type = "text") 
+        //-     p.help.is-success Successfully saved link!
+        //-     p.help.is-danger Please enter a valid link
+        //-     input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)
+        //-   #chat.box(style = "display:none;")
+        //-     #close-chat
+        //-     h1.heading Image
+        //-     p.subtitle.is-size-6 Add an image with supporting information, if necessary.
+        //-     input.text(type = "text") 
+        //-     p.help.is-success Successfully saved link!
+        //-     p.help.is-danger Please enter a valid link
+        //-     input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+    if comments && links 
+      script.
+        let comments = !{JSON.stringify(comments)};
+        let links = !{JSON.stringify(links)};
+
+    .form-footer(style="background-color:#242424;color:white;height:4rem;display:flex;align-items:center;flex-direction:row")
+      .footer-copy-right(style="margin:28px;")
+        <hr style="height:2px;background-color:#242424;margin:2px;color:white">
+          p &copy; City Science 2020
+
+      
+    script(src = "/src/js/form.js")
+
+    //- script(type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit")
+
+    

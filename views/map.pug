@@ -1,0 +1,60 @@
+doctype html
+html(style = {background: 'black', text: 'white'})
+  head
+  
+    link(rel='stylesheet', href='https://unpkg.com/leaflet@1.6.0/dist/leaflet.css')
+    script(src='https://unpkg.com/leaflet@1.6.0/dist/leaflet.js')
+    link(rel='stylesheet' href='../dist/css/MarkerCluster.css')
+    link(rel='stylesheet' href='../dist/css/map.css')
+    link(rel='stylesheet' href='../dist/css/MarkerCluster.Default.css')
+    script(src='https://cdn.anychart.com/js/8.0.1/anychart-core.min.js')
+    script(src='https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js')
+    script(src='../dist/leaflet.markercluster-src.js')
+    link(href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet')
+    link(rel = "stylesheet" href="https://unpkg.com/leaflet-sidebar@0.2.0/src/L.Control.Sidebar.css")
+    script(src = '../dist/control.sidebar.js')
+    link(rel='stylesheet' href = '../dist/css/L.Control.Sidebar.css')
+    script(src = '../dist/SliderControl.js')
+    script(src = 'countrydataex.js')
+    include includes/head.pug
+  
+  body
+    - let activeTab = 1;
+    #sidebar
+      h1 leaflet-sidebar
+    #totalpop
+      span.tpopulation
+      span.people people
+    #informality
+      canvas#popinform(width='123', height='19')
+      span.informality POPULATION
+    #poprates
+      span.lowpop 0%
+      span.highpop 100%
+    ul.buttonnavigate#buttonnavigate
+      li
+        a.country(href = '#', data-target = 'country', title = 'country', id = "clicked") Country
+      li
+        a.settlement(href = '#', data-target = 'settlement', title = 'settlement') Settlement
+      li
+        a.appdata(href = '#', data-target = 'appdata', title = 'appdata') App Data
+    ul.settlementnavigate#settlementnavigate
+      li
+        a.site(href = '#', data-target = 'site', title = 'site') SITE
+      li
+        a.site(href = '#', data-target = 'architecture', title = 'architecture') ARCHITECTURE
+      li
+        a.site(href = '#', data-target = 'populace', title = 'populace') POPULACE
+    .sidebar
+    include includes/nav-black.pug
+    #map
+  
+    //data is parsed here
+    script.
+      var points = !{JSON.stringify(settlements)};
+      var pointsByCountry = !{JSON.stringify(countries)};
+      var pins = !{JSON.stringify(pins)};
+      var countrydata = countrydata;
+      var countries = countries;
+    script(src = "/src/js/map.js")
+     
