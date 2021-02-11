@@ -8,13 +8,38 @@ let express = require("express"),
     sendEmail = require("../util/email.js"),
     checkPrivacyChecked = require("../middleware/checkPrivacyChecked.js");
     
+const firebase = require("firebase")
+
+// Set the configuration for your app
+// TODO: Replace with your app's config object
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAY4TLs19RV3dQdhmMW5NplTw4sxxc-izY",
+  authDomain: "the-power-of-without.firebaseapp.com",
+  projectId: "the-power-of-without",
+  storageBucket: "the-power-of-without.appspot.com",
+  messagingSenderId: "436165625393",
+  appId: "1:436165625393:web:33cf6b8c45399b1d75b710",
+  measurementId: "G-YCLSSE2FL6"
+};
+
+// Get a reference to the storage service, which is used to create references in your storage bucket
+firebase.initializeApp(firebaseConfig)
+
+
+// 
+
+
+
+
+
 const {information} = require("../../00infromationdefs.js");
 const {finalSurveyData, previousSettlementModal,sectionDataContainer , modalData}= require("../../data.js");
 const e = require("express");
 // const Survey = require("../db/models/Survey.js");
 
 
-module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
+module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image){
   let router = express.Router();
 
   // Returns a JSON array containing settlement data
@@ -24,6 +49,8 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
       res.json(docs);
     });
   });
+
+
 
   // Given Lat and Lon, return what country the point is.
   // router.get("/get-country", function(req, res){
@@ -337,6 +364,32 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link){
         }
       );
     })
+  })
+
+  router.post("/settlements/u/:id/:secret/image", function(req, res){
+
+    var storage = firebase.storage();
+    console.log(storage)
+
+    // User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
+    //   Image.updateOne(
+    //     { settlementId: req.params.id, email: req.body.email,formFieldName: req.body.formFieldName},
+    //     { $set: {
+    //       email: req.body.email,
+    //       formFieldName: req.body.formFieldName,
+    //       imageUrl: req.body.imageUrl
+    //     } },
+    //     { upsert: true },
+    //     function(err){
+    //       if (err){
+    //         console.log(err)
+    //       }
+    //       else{
+    //         console.log("successfully saved image url")
+    //       }
+    //     }
+    //   );
+    // })
   })
 
   router.post("/settlements/u/:id/:secret/link", function(req, res){

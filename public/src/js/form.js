@@ -1,7 +1,20 @@
-// const { info } = require("node-sass");
 
 
 
+// const firebase = require("firebase")
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAY4TLs19RV3dQdhmMW5NplTw4sxxc-izY",
+//   authDomain: "the-power-of-without.firebaseapp.com",
+//   projectId: "the-power-of-without",
+//   storageBucket: "the-power-of-without.appspot.com",
+//   messagingSenderId: "436165625393",
+//   appId: "1:436165625393:web:33cf6b8c45399b1d75b710",
+//   measurementId: "G-YCLSSE2FL6"
+// };
+
+// // Get a reference to the storage service, which is used to create references in your storage bucket
+// firebase.initializeApp(firebaseConfig)
 
 
 
@@ -421,6 +434,27 @@ function showLink(data){
 }
 
 
+function showChat(data){
+  hideAll(data.id)
+  let chatI = links.findIndex((d) => {
+    d.formFieldName == data.name
+  })
+
+    //Set value of input text based on what's stored in the database
+    // if(chatI == -1) $(`${data.id}-link input.text`).val("");
+    // else $(`#${data.id}-link input.text`).val(links[linkI].link);
+
+
+
+    $(`#${data.id}-chat`).show();
+    // $(`#${data.id}-link input.button`).data(data); //Bind this current question's data to the input
+    $(`#${data.id}-chat .help`).hide();
+
+
+
+
+}
+
 
 
 function saveComment(data){
@@ -480,6 +514,35 @@ function saveLink(){
   });
 }
 
+
+function saveImage(data){
+
+  $.post(`${data.url}/image`, {email: data.email, file:data.id, formFieldName: data.name}, function(res) {
+    // $(`#${data.id}-link .help.is-success`).show();
+
+    // Save new link for this browser session
+    // let linkI = links.findIndex((d) => d.formFieldName == data.name);
+    // if(linkI == -1) links.push({
+    //   formFieldName: data.name,
+    //   link: link
+    // })
+    // else links[linkI].link = link;
+  });
+  // const imageInput = document.getElementById(`${data.id}-chat-input-file`)
+  // if (imageInput.files.length > 0){
+  //   var uploadedImage =imageInput.files[0];
+
+  //   console.log(storage)
+  //   // var storage =  firebase.storage()
+
+  //   // console.log(uploadedImage)
+
+
+
+  // }
+  
+
+}
 $(document).on("focusin", "#coords", function() {
   $(this).prop('readonly', true);  
 });

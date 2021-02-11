@@ -40,6 +40,7 @@ const main_conn = mongoose.createConnection(DB_URL),
   Comment = require("./app/db/models/Comment")(main_conn),
   Link = require("./app/db/models/Link")(main_conn),
   Survey = require("./app/db/models/Survey")(main_conn),
+  Image = require("./app/db/models/Image")(main_conn),
   Pin = require("./app/db/models/Pin")(app_conn);
 
 app.use(
@@ -642,7 +643,7 @@ app.get("/map", function (req, res) {
 
 app.use(
   "/api",
-  require("./app/routes/api.js")(User, Settlement, Survey, Pin, Comment, Link)
+  require("./app/routes/api.js")(User, Settlement, Survey, Pin, Comment, Link,Image)
 );
 
 // ** START THE SERVER **

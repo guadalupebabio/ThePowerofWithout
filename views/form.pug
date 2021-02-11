@@ -158,9 +158,7 @@ html
                                     .level-item-right
                                       .comment-button(onclick=`showComment({id:"${question.id}" ,name:"${question.name}", email:"${email}"})`)                            
                                       .link-button(onclick=`showLink({id:"${question.id}", name:"${question.name}", email:"${email}"})`)  
-                                      .chat-button(data-id = `${question.id}` data-name = `${question.name}` data-email = `${email}` ) 
-                          
-
+                                      .chat-button(onclick=`showChat({id:"${question.id}", name:"${question.name}", email:"${email}"})`) 
                                 .range
                                   if (question.id=="gender")
                                     .range-options                                  
@@ -197,10 +195,10 @@ html
                                   .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
                                   h1.heading Image
                                   p.subtitle.is-size-6 Add an image with supporting information, if necessary.
-                                  input.text(type = "text") 
+                                  input.text(id=`${question.id}-chat-input-file` type = "file" accept="image/*" multiple) 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
-                                  input.button.is-black(type="button" value="Save Link" onclick = "" data-url = url)
+                                  input.button.is-black(type="button" value="Save Image" onclick = `saveImage({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)
 
                              
 
@@ -220,7 +218,7 @@ html
                                     .level-item-right
                                       .comment-button(onclick=`showComment({id:"${question.id}" ,name:"${question.name}", email:"${email}"})`)                            
                                       .link-button(onclick=`showLink({id:"${question.id}", name:"${question.name}", email:"${email}"})`)       
-                                      .chat-button(data-id = `${question.id}` data-name = `${question.name}` data-email = `${email}` ) 
+                                      .chat-button(onclick=`showChat({id:"${question.id}", name:"${question.name}", email:"${email}"})`) 
 
                                 .range
                                   .range-options
@@ -258,10 +256,10 @@ html
                                   .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
                                   h1.heading Image
                                   p.subtitle.is-size-6 Add an image with supporting information, if necessary.
-                                  input.text(type = "text") 
+                                  input.text(id=`${question.id}-chat-input-file` type = "file" accept="image/*" multiple) 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
-                                  input.button.is-black(type="button" value="Save Link" onclick = "" data-url = url)
+                                  input.button.is-black(type="button" value="Save Image" onclick = `saveImage({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)
                 
                            
                             else if question.type=="grid"
@@ -278,7 +276,7 @@ html
                                     .level-item-right
                                       .comment-button(onclick=`showComment({id:"${question.id}" ,name:"${question.name}", email:"${email}"})`)                            
                                       .link-button(onclick=`showLink({id:"${question.id}", name:"${question.name}", email:"${email}"})`) 
-                                      .chat-button(data-id = `${question.id}` data-name = `${question.name}` data-email = `${email}` ) 
+                                      .chat-button(onclick=`showChat({id:"${question.id}", name:"${question.name}", email:"${email}"})`) 
 
                                 .commentary-level-items
                                   .box(id=`${question.id}-info` style = "display:none;")
@@ -304,10 +302,10 @@ html
                                     .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
                                     h1.heading Image
                                     p.subtitle.is-size-6 Add an image with supporting information, if necessary.
-                                    input.text(type = "text") 
+                                    input.text(id=`${question.id}-chat-input-file` type = "file" accept="image/*" multiple) 
                                     p.help.is-success Successfully saved link!
                                     p.help.is-danger Please enter a valid link
-                                    input.button.is-black(type="button" value="Save Link" onclick = "" data-url = url)
+                                    input.button.is-black(type="button" value="Save Image" onclick = `saveImage({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)
                                 .grid
                                   .column1
                                     for option,index in question.options[0] 
@@ -364,7 +362,7 @@ html
                                   .level-item-right
                                       .comment-button(onclick=`showComment({id:"${question.id}" ,name:"${question.name}", email:"${email}"})`)                            
                                       .link-button(onclick=`showLink({id:"${question.id}", name:"${question.name}", email:"${email}"})`) 
-                                      .chat-button(data-id = `${question.id}` data-name = `${question.name}` data-email = `${email}` )   
+                                      .chat-button(onclick=`showChat({id:"${question.id}", name:"${question.name}", email:"${email}"})`)   
 
                               .commentary-level-items
                                 .box(id=`${question.id}-info` style = "display:none;")
@@ -390,10 +388,10 @@ html
                                   .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
                                   h1.heading Image
                                   p.subtitle.is-size-6 Add an image with supporting information, if necessary.
-                                  input.text(type = "text") 
+                                  input.text(id=`${question.id}-chat-input-file` type = "file" accept="image/*" multiple) 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
-                                  input.button.is-black(type="submit" value="Save Link" onclick = "" data-url = url)
+                                  input.button.is-black(type="button" value="Save Image" onclick = `saveImage({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)
 
                           br
                           br
@@ -531,8 +529,30 @@ html
         <hr style="height:2px;background-color:#242424;margin:2px;color:white">
           p &copy; City Science 2020
 
-      
-    script(src = "/src/js/form.js")
+
+script(src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js")
+
+script(src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js")
+
+script.
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyAY4TLs19RV3dQdhmMW5NplTw4sxxc-izY",
+      authDomain: "the-power-of-without.firebaseapp.com",
+      projectId: "the-power-of-without",
+      storageBucket: "the-power-of-without.appspot.com",
+      messagingSenderId: "436165625393",
+      appId: "1:436165625393:web:33cf6b8c45399b1d75b710",
+      measurementId: "G-YCLSSE2FL6"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    //- var storage = firebase.storage().ref();
+    firebase.analytics();
+
+
+script(src = "/src/js/form.js")
 
     //- script(type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit")
 
