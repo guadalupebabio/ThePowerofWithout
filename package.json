@@ -35,10 +35,7 @@
     "i18n-iso-countries": "^6.0.0",
     "leaflet": "^1.7.1",
     "mongoose": "^5.9.16",
-<<<<<<< HEAD
     "node-fetch": "^2.6.1",
-=======
->>>>>>> a36b717eabdcf416e699c2dd0645a142ba6c6a9e
     "nodemailer": "^6.4.11",
     "nodemon": "^2.0.4",
     "pug": "^3.0.0"

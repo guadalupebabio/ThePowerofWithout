@@ -39,11 +39,8 @@ const e = require("express");
 // const Survey = require("../db/models/Survey.js");
 
 
-<<<<<<< HEAD
-module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image){
-=======
-module.exports = function(User, Settlement, Survey, Pin, Comment, Link, Country){
->>>>>>> 4ef68f4dd10b2ea1627529809ac485233b33f229
+module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Country){
+
   let router = express.Router();
 
   // Returns a JSON array containing settlement data
