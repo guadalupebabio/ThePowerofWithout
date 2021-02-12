@@ -4,6 +4,7 @@ let express = require("express"),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
   flash = require("connect-flash"),
+  multer = require("multer"),
   cookieParser = require("cookie-parser"),
   session = require("express-session"),
   snapPointsToGrid = require("./app/util/snapPointsToGrid.js"),
@@ -12,6 +13,9 @@ let express = require("express"),
 let app = express(),
   router = express.Router();
 
+
+// let upload = multer();
+var upload = multer({ dest: 'uploads/' })
 
 const { information } = require("./00infromationdefs.js");
 
@@ -28,6 +32,8 @@ const PORT = process.env.PORT || 3000,
 // ** SETUP **
 app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({ extended: true }));
+// for parsing multipart/form-data
+// app.use(upload.array());
 app.use(bodyParser.json());
 app.set("views", "./views");
 app.set("view engine", "pug");
@@ -52,6 +58,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(flash());
+
 
 // ** ROUTES **
 app.get("/", function (req, res) {
@@ -541,17 +548,20 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
           Link.find({
             settlementId: user.contribution,
           }),
+          Image.find({
+            settlementId: user.contribution,
+          })
         ]).then(function (data) {
           res.render("form", {
             settlement: settlement,
             comments: data[0],
             links: data[1],
+            images:data[2],
             sectionData: sectionDataContainer,
             modalData : { 
                 description:"",
                 icons:[]
             },     
-
             modalClass : "modal-container-hide",
             previousModalData: previousSettlementModal,
             previousModalClass : "previous-modal-container-hide",
@@ -644,7 +654,7 @@ app.get("/map", function (req, res) {
 
 app.use(
   "/api",
-  require("./app/routes/api.js")(User, Settlement, Survey, Pin, Comment, Link,Image,Country)
+  require("./app/routes/api.js")(User, Settlement, Survey, Pin, Comment, Link,Image,Country,upload)
 
 );
 

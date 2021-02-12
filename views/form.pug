@@ -158,7 +158,7 @@ html
                                     .level-item-right
                                       .comment-button(onclick=`showComment({id:"${question.id}" ,name:"${question.name}", email:"${email}"})`)                            
                                       .link-button(onclick=`showLink({id:"${question.id}", name:"${question.name}", email:"${email}"})`)  
-                                      .chat-button(onclick=`showChat({id:"${question.id}", name:"${question.name}", email:"${email}"})`) 
+                                      .chat-button(onclick=`showChat({url:"${url}", id:"${question.id}", name:"${question.name}", email:"${email}"})`)
                                 .range
                                   if (question.id=="gender")
                                     .range-options                                  
@@ -187,18 +187,23 @@ html
                                   .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                   h1.heading Link
                                   p(id=`${question.id}-link-input`).subtitle.is-size-6 Add a link with supporting information, if necessary.
-                                  input.text(type = "text") 
+                                  input.text(id=`${question.id}-link-input-text` type = "text") 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
-                                  input.button.is-black(type="button" value="Save Link" onclick = "saveLink()" data-url = url data-id = question.id)                                      
+                                  input.button.is-black(type="button" value="Save Link" onclick = `saveLink({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)                                        
                                 .box(id=`${question.id}-chat` style = "display:none;")
                                   .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
                                   h1.heading Image
                                   p.subtitle.is-size-6 Add an image with supporting information, if necessary.
-                                  input.text(id=`${question.id}-chat-input-file` type = "file" accept="image/*" multiple) 
+                                  input.text(id=`${question.id}-chat-input-file` onchange=`onchangePreview("${question.id}")`  type = "file" accept="image/*" multiple) 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
+                                  .preview(id=`${question.id}-preview`)
                                   input.button.is-black(type="button" value="Save Image" onclick = `saveImage({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)
+                                  .current-images(id=`${question.id}-current-images`)
+
+
+
 
                              
 
@@ -218,7 +223,7 @@ html
                                     .level-item-right
                                       .comment-button(onclick=`showComment({id:"${question.id}" ,name:"${question.name}", email:"${email}"})`)                            
                                       .link-button(onclick=`showLink({id:"${question.id}", name:"${question.name}", email:"${email}"})`)       
-                                      .chat-button(onclick=`showChat({id:"${question.id}", name:"${question.name}", email:"${email}"})`) 
+                                      .chat-button(onclick=`showChat({url:"${url}", id:"${question.id}", name:"${question.name}", email:"${email}"})`)
 
                                 .range
                                   .range-options
@@ -248,18 +253,20 @@ html
                                   .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                   h1.heading Link
                                   p(id=`${question.id}-link-input`).subtitle.is-size-6 Add a link with supporting information, if necessary.
-                                  input.text(type = "text") 
+                                  input.text(id=`${question.id}-link-input-text` type = "text") 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
-                                  input.button.is-black(type="button" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                  input.button.is-black(type="button" value="Save Link" onclick = `saveLink({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)                                      
                                 .box(id=`${question.id}-chat` style = "display:none;")
                                   .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
                                   h1.heading Image
                                   p.subtitle.is-size-6 Add an image with supporting information, if necessary.
-                                  input.text(id=`${question.id}-chat-input-file` type = "file" accept="image/*" multiple) 
+                                  input.text(id=`${question.id}-chat-input-file` onchange=`onchangePreview("${question.id}")`  type = "file" accept="image/*" multiple) 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
+                                  .preview(id=`${question.id}-preview`)
                                   input.button.is-black(type="button" value="Save Image" onclick = `saveImage({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)
+                                  .current-images(id=`${question.id}-current-images`)
                 
                            
                             else if question.type=="grid"
@@ -276,7 +283,7 @@ html
                                     .level-item-right
                                       .comment-button(onclick=`showComment({id:"${question.id}" ,name:"${question.name}", email:"${email}"})`)                            
                                       .link-button(onclick=`showLink({id:"${question.id}", name:"${question.name}", email:"${email}"})`) 
-                                      .chat-button(onclick=`showChat({id:"${question.id}", name:"${question.name}", email:"${email}"})`) 
+                                      .chat-button(onclick=`showChat({url:"${url}", id:"${question.id}", name:"${question.name}", email:"${email}"})`) 
 
                                 .commentary-level-items
                                   .box(id=`${question.id}-info` style = "display:none;")
@@ -294,18 +301,20 @@ html
                                     .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                     h1.heading Link
                                     p(id=`${question.id}-link-input`).subtitle.is-size-6 Add a link with supporting information, if necessary.
-                                    input.text(type = "text") 
+                                    input.text(id=`${question.id}-link-input-text` type = "text") 
                                     p.help.is-success Successfully saved link!
                                     p.help.is-danger Please enter a valid link
-                                    input.button.is-black(type="button" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                    input.button.is-black(type="button" value="Save Link" onclick = `saveLink({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)                                   
                                   .box(id=`${question.id}-chat` style = "display:none;")
                                     .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
                                     h1.heading Image
                                     p.subtitle.is-size-6 Add an image with supporting information, if necessary.
-                                    input.text(id=`${question.id}-chat-input-file` type = "file" accept="image/*" multiple) 
+                                    input.text(id=`${question.id}-chat-input-file` onchange=`onchangePreview("${question.id}")`  type = "file" accept="image/*" multiple) 
                                     p.help.is-success Successfully saved link!
                                     p.help.is-danger Please enter a valid link
+                                    .preview(id=`${question.id}-preview`)
                                     input.button.is-black(type="button" value="Save Image" onclick = `saveImage({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)
+                                    .current-images(id=`${question.id}-current-images`)
                                 .grid
                                   .column1
                                     for option,index in question.options[0] 
@@ -362,7 +371,7 @@ html
                                   .level-item-right
                                       .comment-button(onclick=`showComment({id:"${question.id}" ,name:"${question.name}", email:"${email}"})`)                            
                                       .link-button(onclick=`showLink({id:"${question.id}", name:"${question.name}", email:"${email}"})`) 
-                                      .chat-button(onclick=`showChat({id:"${question.id}", name:"${question.name}", email:"${email}"})`)   
+                                      .chat-button(onclick=`showChat({url:"${url}", id:"${question.id}", name:"${question.name}", email:"${email}"})`)    
 
                               .commentary-level-items
                                 .box(id=`${question.id}-info` style = "display:none;")
@@ -380,18 +389,20 @@ html
                                   .close-link(id=`close-link-button` onclick=`onClose("${question.id}-link")`)
                                   h1.heading Link
                                   p(id=`${question.id}-link-input`).subtitle.is-size-6 Add a link with supporting information, if necessary.
-                                  input.text(type = "text") 
+                                  input.text(id=`${question.id}-link-input-text` type = "text") 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
-                                  input.button.is-black(type="submit" value="Save Link" onclick = "saveLink()" data-url = url)                                      
+                                  input.button.is-black(type="button" value="Save Link" onclick = `saveLink({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)                                      
                                 .box(id=`${question.id}-chat` style = "display:none;")
                                   .close-chat(id=`close-chat-button` onclick=`onClose("${question.id}-chat")`)
                                   h1.heading Image
                                   p.subtitle.is-size-6 Add an image with supporting information, if necessary.
-                                  input.text(id=`${question.id}-chat-input-file` type = "file" accept="image/*" multiple) 
+                                  input.text(id=`${question.id}-chat-input-file` onchange=`onchangePreview("${question.id}")` type = "file" accept="image/*" multiple) 
                                   p.help.is-success Successfully saved link!
                                   p.help.is-danger Please enter a valid link
+                                  .preview(id=`${question.id}-preview`)
                                   input.button.is-black(type="button" value="Save Image" onclick = `saveImage({url:"${url}", id:"${question.id}",email:"${email}",name:"${question.name}"})` data-url = url)
+                                  .current-images(id=`${question.id}-current-images`)
 
                           br
                           br
@@ -523,6 +534,7 @@ html
       script.
         let comments = !{JSON.stringify(comments)};
         let links = !{JSON.stringify(links)};
+        let images = !{JSON.stringify(images)};
 
     .form-footer(style="background-color:#242424;color:white;height:4rem;display:flex;align-items:center;flex-direction:row")
       .footer-copy-right(style="margin:28px;")
@@ -530,26 +542,6 @@ html
           p &copy; City Science 2020
 
 
-script(src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js")
-
-script(src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js")
-
-script.
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
-      apiKey: "AIzaSyAY4TLs19RV3dQdhmMW5NplTw4sxxc-izY",
-      authDomain: "the-power-of-without.firebaseapp.com",
-      projectId: "the-power-of-without",
-      storageBucket: "the-power-of-without.appspot.com",
-      messagingSenderId: "436165625393",
-      appId: "1:436165625393:web:33cf6b8c45399b1d75b710",
-      measurementId: "G-YCLSSE2FL6"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    //- var storage = firebase.storage().ref();
-    firebase.analytics();
 
 
 script(src = "/src/js/form.js")

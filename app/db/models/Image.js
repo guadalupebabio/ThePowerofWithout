@@ -10,7 +10,7 @@ let imageSchema = new Schema({
   email: String,
   settlementId: String,
   formFieldName: String,
-  imageUrl: Array
+  image: Array
 });
 
 module.exports = function(conn){
