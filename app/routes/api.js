@@ -43,7 +43,7 @@ const e = require("express");
 // const Survey = require("../db/models/Survey.js");
 
 
-module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Country,upload){
+module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Country,upload,Subscriber){
 
   let router = express.Router();
 
@@ -125,7 +125,13 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     //   return;
     // }
 
-    // console.log(req.body);
+    console.log(req.body);
+    if ("privacy-checkbox" in req.body){
+
+      let sub = new Subscriber({email:req.body.email,subscribed:true});
+      sub.save((err)=>{if (err) {console.log(err)}else{console.log("saved")}});
+
+    }
 
     crypto.randomBytes(12, function(err, buffer) {
       let token = buffer.toString('hex');
@@ -143,6 +149,9 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
         "contribution": settlement._id,
         "secret": token
       })
+
+
+
 
       settlement.save(function(){
         user.save(function(){
@@ -472,6 +481,17 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     console.log("req.body",req.body)
     let imageUrl = req.body.imageUrl;
     let name =  req.body.imageName
+
+
+    async function deleteFile() {
+      // Deletes the file from the bucket
+      await storage.bucket(bucketName).file(name).delete();
+  
+      console.log(`gs://${bucketName}/${name} deleted.`);
+    }
+  
+    deleteFile().catch(console.error);
+
     User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
           Image.updateOne(
             { settlementId: req.params.id, email: req.body.email,formFieldName: req.body.formFieldName},
@@ -488,7 +508,6 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
           );
         })
       }
-  
   )
 
 
@@ -509,6 +528,21 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     })
   })
 
+  router.post("/user/subscribe",function(req,res){
+
+    let sub = new Subscriber({email:req.body.email,subscribed:true});
+    sub.save((err)=>{if (err) {console.log(err)}else{console.log("saved")}});
+
+  });
+  router.post("/user/unsubscribe",function(req,res){
+    Subscriber.updateOne({email:req.body.email},{$set:{subscribed:false}},function(err,user){
+      if (err){console.log(err)}
+      else{
+        // console.log(user.email + "subscribed");
+      }
+    })
+
+  })
   return router;
 };
 

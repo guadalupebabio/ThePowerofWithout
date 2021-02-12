@@ -27,9 +27,9 @@ html
             a <b>Subscribe</b>
           #update-contents-subcribe-email.update-div-contents-subscribe-email        
             input(
-              type="text"
+              id="subcribe-email-input"
+              type="email"
               placeholder="Email"
-              value="Email"
             )
             #subscribe-button.update-div-contents-subscribe-button
     section.full-height 
@@ -191,6 +191,18 @@ html
       });
       const updateContentSubscribeEmailButton = document.getElementById("subscribe-button");
       updateContentSubscribeEmailButton.addEventListener("click",()=>{
+        let email = document.getElementById("subcribe-email-input").value
+        if (email!==""){
+          $.post(`/api/user/subscribe`,{email:email},function(res){
+              //- console.log(res);
+              alert(`"${email}" subscribed. Thank you for subscribing`);
+              document.getElementById("subcribe-email-input").value = ""
+
+          })
+        }else{
+
+
+        }
         const updateContentSubscribeEmailDiv = document.getElementById("update-contents-subcribe-email");
         updateContentSubscribeEmailDiv.className="update-div-contents-subscribe-email"
         updateContentSubscribeButton.className= "update-div-contents-subscribe"

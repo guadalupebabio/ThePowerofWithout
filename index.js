@@ -48,6 +48,7 @@ const main_conn = mongoose.createConnection(DB_URL),
   Survey = require("./app/db/models/Survey")(main_conn),
   Image = require("./app/db/models/Image")(main_conn),
   Pin = require("./app/db/models/Pin")(app_conn), 
+  Subscriber = require("./app/db/models/Subscriber")(main_conn), 
   Country=require("./app/db/models/Country")(main_conn);
 
 app.use(
@@ -654,7 +655,7 @@ app.get("/map", function (req, res) {
 
 app.use(
   "/api",
-  require("./app/routes/api.js")(User, Settlement, Survey, Pin, Comment, Link,Image,Country,upload)
+  require("./app/routes/api.js")(User, Settlement, Survey, Pin, Comment, Link,Image,Country,upload,Subscriber)
 
 );
 
