@@ -327,7 +327,7 @@ const finalSurveyData = {
         //       name: "siteGeographyWithinCities",
         //       type: "radio",
         //       value: getFormValue(["site", "geography", "withinCities"]),
-        //       options: ["Squatting on the fringe", "In the path of development", "In the heart of the city", "Along railway tracks", "Residential centers", "Suburban industrial areas", "Old city slum"],
+        //       options: ["Squatting on the fringe", "In the path of development", "In the heart of the city", "Along railway tracks", "Residential centers", "Suburban industrial areas", "Old city Settlement"],
         //       info: "Relationship between the settlement geolocation and the city of reference"
         //     },
         //     {

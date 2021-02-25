@@ -252,7 +252,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                         "In the heart of the city",
                         "Along railway tracks",
                         "Residential Centers",
-                        "Old City Slum",
+                        "Old City Settlement",
                         "Rural Area",
                         "Other",
                       ],
