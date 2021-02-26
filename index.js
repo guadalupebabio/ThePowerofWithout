@@ -253,7 +253,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                         "Along railway tracks",
                         "Residential Centers",
                         "Old City Settlement",
-                        "Rural Area",
+                        "Rural Settlement",
                         "Other",
                       ],
                       value: getFormValue(["site", "geography", "withinCities"]),
@@ -329,7 +329,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                         type:"range",
                         options:["Temporary","Established"],
                         value:getFormValue(["architecture", "physicalNature", "developmentState"]),
-                        info:information["Materials"] 
+                        info:information["Development Stage"] 
                     }
                   ]
                 },{
@@ -346,9 +346,9 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     name : "Source of Energy",
                     id:"energySource",
                     type:"radio",
-                    options:["Coal","Wood","Gas","Electricity","Other"],
+                    options:["Coal","Wood","Gas / Propane","Electricity","Other"],
                     value: getFormValue(["architecture", "infrastructure", "sourceOfEnergy"]),
-                    info:information["Access to Energy"]
+                    info:information["Source of Energy"]
 
                   },{
                     name : "Access to Water",
@@ -383,7 +383,7 @@ app.get("/contribute/u/:contribution/:secret", function (req, res) {
                     name:"Mobility Modes",
                     id: "mobilityModes",
                     type :"radio",
-                    options : ["Walking","Biking", "Animal", "Informal transportation, microbuses","Informal transportation, tuctuc","Car","By Public Transportation","Other"], //added
+                    options : ["Walking","Biking","Motorcycling", "Animal", "Informal transportation, microbuses","Informal transportation, tuctuc","Car","By Public Transportation","Other"], //added
                     value: getFormValue(["architecture", "infrastructure", "MobilityModes"]),
                     info:information["Mobility Modes"]
 
