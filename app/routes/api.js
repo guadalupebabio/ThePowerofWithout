@@ -77,7 +77,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     console.log('This is the data I am getting',req.body);
     // res.render("form")
     if(req.error) {
-      res.get("/contribute/")
+      res.get("/shareknowledge/")
       console.log(req.error);
       ;}
     else Settlement.findOne({
@@ -89,17 +89,17 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
       }, function(err, user){
         if(!err && user){
           console.log("I've found it");
-          res.redirect("/contribute/u/" + settlement._id + "/" + user.secret);
+          res.redirect("/shareknowledge/u/" + settlement._id + "/" + user.secret);
         }
         else{
           req.flash('form-notification', "No settlement found");
-          res.redirect("/contribute");
+          res.redirect("/shareknowledge");
         }
       })
       else {
         console.log("no settlement found");
         req.flash('form-notification', "No settlement found");
-        res.redirect("/contribute");
+        res.redirect("/shareknowledge");
       }
     });
   });
@@ -111,19 +111,14 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     // console.log(req.body);
 
     if(req.error) {
-      // res.redirect("/contribute");
+      
       req.flash("form-error", "Invalid Coordinates")
       return
     }
 
     let coords = req.body.geolocation.split(",").map((d) => parseFloat(d));
 
-    
-    // if(coords.length != 2 || isNaN(coords[0]) || isNaN(coords[1])){
-    //   req.flash("form-error", "Invalid Coordinates");
-    //   res.redirect("/contribute");
-    //   return;
-    // }
+  
 
     console.log(req.body);
     if ("privacy-checkbox" in req.body){
@@ -157,23 +152,8 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
         user.save(function(){
           sendEmail(req.body.email, settlement._id, token);
           req.flash('form-notification', "Thanks for contributing a settlement! You can work on adding more information now, or complete it at a later date—we've sent a link to your email!");
-          res.redirect("/contribute/u/" + settlement._id + "/" + token);
-          // res.send("all is well");
-          // res.redirect("/contribute")
-          // console.log(fillInFormData);
-          // console.log(modalData);
-          // res.render("form", {
-          //   sectionData: sectionDataContainer,
-          //   modalData : modalData,
-          //   modalClass : "modal-container",
-          //   redirectUrl : "/contribute/u/" + settlement._id + "/" + token,
-          //   url: "/api/settlements",
-          //   notification:
-          //     'Already created a settlement? Edit it <a href = "/contribute/u">here</a>',
-          //   map: true,
-          //   error: req.flash("form-error"),
-          // });
-          // // res.status(200);
+          res.redirect("/shareknowledge/u/" + settlement._id + "/" + token);
+          
 
         })
       });
@@ -311,10 +291,10 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
           modalClass : "modal-container-hide",
           previousModalData: "",
           previousModalClass : "previous-modal-container-hide",
-          redirectUrl : "/contribute/u/" + req.params.id + "/" +req.params.secret,
+          redirectUrl : "/shareknowledge/u/" + req.params.id + "/" +req.params.secret,
           url: "/api/final-survey/" + req.params.id + "/" +req.params.secret,
           notification:
-            'Already created a settlement? Edit it <a href = "/contribute/u">here</a>',
+            'Already created a settlement? Edit it <a href = "/shareknowledge/u">here</a>',
           map: true,
           error: req.flash("form-error"),
           email: "",

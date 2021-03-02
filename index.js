@@ -66,7 +66,7 @@ app.get("/", function (req, res) {
   res.render("index");
 });
 
-app.get("/contribute", function (req, res) {
+app.get("/shareknowledge", function (req, res) {
 
   res.render("form", {
     sectionData: sectionDataContainer,
@@ -74,16 +74,16 @@ app.get("/contribute", function (req, res) {
     modalClass : "modal-container-hide",
     previousModalData: previousSettlementModal,
     previousModalClass : "previous-modal-container-hide",
-    redirectUrl : "/contribute",
+    redirectUrl : "/shareknowledge",
     url: "/api/settlements",
     notification:
-      'Already created a settlement? Edit it <a href = "/contribute/u">here</a>',
+      'Already created a settlement? Edit it <a href = "/shareknowledge/u">here</a>',
     map: true,
     error: req.flash("form-error"),
   });
 });
 
-app.get("/contribute/u/", function (req, res) {
+app.get("/shareknowledge/u/", function (req, res) {
   // Find settlement that you've already created
   let sections = [
     {
@@ -122,7 +122,7 @@ app.get("/contribute/u/", function (req, res) {
   });
 });
 
-app.get("/contribute/u/:contribution/:secret", function (req, res) {
+app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
   // Update the settlement
   User.findOne(
     { secret: req.params.secret, contribution: req.params.contribution },
