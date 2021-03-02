@@ -78,19 +78,6 @@ html
 
           if sectionData.header=="fill-in-form"                     
                 .fill-in-row
-                  //- each question, line in sectionData.sections
-                  //-   if line < 2
-                  //-     .fill-in-level-row-item
-                  //-       .fill-in-level-row-title                  
-                  //-         label(for = question.name + "-" + index)=question.label
-                  //-       br
-                  //-       .fill-in-level-row-input
-                  //-         if question.type == "text"    
-                  //-           if question.disabled
-                  //-             input(name = question.name type = question.type readonly value = question.value required)
-                  //-           else
-                  //-             input(name = question.name type = question.type placeholder = question.value required) 
-
                 each question, line in sectionData.sections 
                     br                
                     .fill-in-level-row-item
@@ -353,8 +340,8 @@ html
                                     else
                                       input(name = question.name type = question.type value = question.value  placeholder=!(question.placeholder==null) ? question.placeholder : null)
                                   else if question.type == "radio" || question.type == "checkbox"
-                                    each val, index in question.options                           
-                                      if question.type == "radio"                                                                         
+                                    each val, index in question.options      
+                                      if question.type == "radio" || question.type == "checkbox"                                                                                             
                                         if val == "Other"
                                           .other-radio-div
                                             input(type = question.type name = question.name id = question.name + "-" + index value = val checked = (val == (question.value!=null ? question.value[0] : null)))   
