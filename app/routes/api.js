@@ -111,7 +111,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     // console.log(req.body);
 
     if(req.error) {
-      
+      res.redirect("/shareknowledge");
       req.flash("form-error", "Invalid Coordinates")
       return
     }
