@@ -199,10 +199,16 @@ app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
                   label: "ORIGIN",
                   questions: [
                     {
-                      name: "Original causes",
+
+                      name: "Causes",
                       id:"causes",
-                      type: "checkbox",
-                      options: ["Squatting","Refugee Camp","Illegal Subdivision","Other",],
+                      type: "radio",
+                      options: [
+                        "Squatting",
+                        "Refugee Camp",
+                        "Illegal Subdivision",
+                        "Other",
+                      ],
                       value: getFormValue(["site", "origin", "causes"]),
                       info: information["Origin"]
                         ,
@@ -211,9 +217,9 @@ app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
                       name: "Population",
                       id:"population",
                       type: "text",
-                      placeholder : "Number",
+                      info: information["Population"],
                       value: getFormValue(["site", "origin", "population"]),
-                      info: information["Population"]
+                      placeholder : "Number"
                     },
                   ],
                 },
@@ -223,16 +229,33 @@ app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
                     {
                       name: "Topography Feautures",
                       id:"topographyFeatures",
-                      type: "checkbox",
-                      options: ["Desert","Water","By the Coast","Valley","Mountain","Forest","Other",],
+                      type: "radio",
+                      options: [
+                        "Dessert",
+                        "Water",
+                        "By the Coast",
+                        "Valley",
+                        "Mountain",
+                        "Forest",
+                        "Other",
+                      ],
                       value: getFormValue(["site", "geography", "topography"]),
                       info:information["Topography features"]
                     },
                     {
                       name: "Location within the city",
                       id:"cityLocation",
-                      type: "checkbox",
-                      options: ["Squatting on the fringe","In the path of development","In the heart of the city","Railroad","Residential Centers","Old City Settlement","Rural Settlement","Other",],
+                      type: "radio",
+                      options: [
+                        "Squatting on the fringe",
+                        "In the path of development",
+                        "In the heart of the city",
+                        "Along railway tracks",
+                        "Residential Centers",
+                        "Old City Settlement",
+                        "Rural Settlement",
+                        "Other",
+                      ],
                       value: getFormValue(["site", "geography", "withinCities"]),
                       info:information["Location within the city"]
                     },
@@ -287,16 +310,16 @@ app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
                 { label : "PHYSICAL NATURE",
                   questions : [
 
-                    { name :"Housing Quality", 
+                    { name :"House Quality", 
                       id: "houseQuality",
                       type : "range",
                       options:  ["Inadequate","Optimal"],
                       value: getFormValue(["architecture", "physicalNature", "houseQuality"]),
-                      info:information["Housing quality"]
+                      info:information["House quality"]
                     },{
                        name : "Materials",
                        id:"materials",
-                       type : "checkbox",
+                       type : "radio",
                        options : ["Mud", "Brick","Concrete","Wood","Corrugated sheet", "Tarpaulin / Tensile structures", "Cardboard","Other"], //Modified
                        value: getFormValue(["architecture", "physicalNature", "materials"]),
                        info:information["Materials"]            
@@ -320,23 +343,14 @@ app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
                     info:information["Access to Energy"]
                   },
                   { 
-                    name : "Energy Sources",
+                    name : "Source of Energy",
                     id:"energySource",
-                    type:"checkbox",
-                    options:["Electricity","LPG, natural gas","Kerosene, other liquid fuel","Coal, lignite","Firewood, straw, dung or charcoal","Don’t cook","Other"],
+                    type:"radio",
+                    options:["Coal","Wood","Gas / Propane","Electricity","Other"],
                     value: getFormValue(["architecture", "infrastructure", "sourceOfEnergy"]),
-                    info:information["Energy"]
+                    info:information["Source of Energy"]
 
-                  },{ 
-                    name : "Energy source used for cooking",
-                    id:"sourceOfEnergycook",
-                    type:"checkbox",
-                    options:["Electricity","LPG, natural gas","Kerosene, other liquid fuel","Coal, lignite","Firewood, straw, dung or charcoal","Don’t cook","Other"],
-                    value: getFormValue(["architecture", "infrastructure", "sourceOfEnergycook"]),
-                    info:information["Energy for Cooking"]
-
-                  }
-                  ,{
+                  },{
                     name : "Access to Water",
                     id:"waterAccess",
                     type : "double-range",
@@ -351,20 +365,14 @@ app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
                     value: getFormValue(["architecture", "infrastructure", "accessToSanitation"]),
                     info:information["Access to sanitation"]
                   },{
-                    name:"Access to telecommunications",
-                    id:"internetAccess",
-                    type :"range",
-                    options : ["Low","High"],
-                    value: getFormValue(["architecture", "infrastructure", "accessToInternetOrPhoneFare"]),
-                    info:information["Access to telecommunications"]
-                  },{
-                    name:"Access to Internet",
+                    name:"Internet Access",
                     id:"internetAccess",
                     type :"range",
                     options : ["Low","High"],
                     value: getFormValue(["architecture", "infrastructure", "accessToInternetOrPhoneFare"]),
                     info:information["Access to internet"]
-                  },{
+                  },
+                  {
                     name:"Road network",
                     id:"roadNetwork",
                     type :"range",
@@ -374,8 +382,8 @@ app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
                   },{
                     name:"Mobility Modes",
                     id: "mobilityModes",
-                    type :"checkbox",
-                    options : ["Walk","Bike","Motorcycle", "Animal","Informal transportation, tuctuc", "Informal transportation, microbuses","Car","Public Transportation, bus","Public Transportation, subway","Other"], 
+                    type :"radio",
+                    options : ["Walking","Biking","Motorcycling", "Animal", "Informal transportation, microbuses","Informal transportation, tuctuc","Car","By Public Transportation","Other"], //added
                     value: getFormValue(["architecture", "infrastructure", "MobilityModes"]),
                     info:information["Mobility Modes"]
 
@@ -390,7 +398,7 @@ app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
                       type : "range",
                       options : floors,
                       value: getFormValue(["architecture", "density", "elevation"]),
-                      info:information["Building levels"]
+                      info:information["Elevation"]
                     },
                     {
                       name : "Households",
@@ -423,14 +431,16 @@ app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
                   questions : [
          
                     {
-                      name : "Proximity to amenities",
+                      name : "Proximity to public areas of leisure activities",
                       id : "publicProximity",
                       type :"range",
                       options: minutes,
                       value:  getFormValue(["populace", "qualityOfLife", "proximity"]),
                       info:information["Distance to public areas"]
-                   },{
-                      name : "Access to green spaces",////New!!
+                   }
+                   ,
+                   {
+                      name : "Access to Natural settings",////New!!
                       id: "naturalSettingsAccess",
                       type :"range",
                       options: minutes,
@@ -446,7 +456,7 @@ app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
                       info:information["Access to Health Care"]
                     },
                     {
-                      name : "Number of Health Care Facilities",
+                      name : "Number of Hospitals, Clinics or Health Cares",
                       id : "hospitalNumber",
                       type :"range",
                       options: clinics,
@@ -462,11 +472,11 @@ app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
                       info:information["Access to Education"]
                     },
                     {
-                      name : "Number of Schools",
+                      name : "Number of Schools in the Community",
                       id : "schoolsNumber",
-                      type:"text",
-                      placeholder:"Number",
-                      value:getFormValue(["populace", "qualityOfLife", "schoolsNumber"]),
+                      type:"range",
+                      options : clinics,
+                      value:getFormValue(["populace", "qualityOfLife", "numberOfSchools"]),
                       info: information["Number of Schools in the Community"]
                     }                     
                     ,{
@@ -507,22 +517,22 @@ app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
                       {label:"31-50 years",id:"31-50years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","31-50years"])}],
                       [{label:"13-18 years",id:"13-18years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","13-18years"])},
                       {label:"50 or more",id:"50+years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","50+years"])}]],
-                      info:information["Age Distribution"]
+                      info:information["Age Distribution"]//Updated
                     },{
-                      name : "Gender Distribution", 
+                      name : "Gender Distribution", //Updated
                       type:"range",
                       id:"gender",
                       options : differences,
-                      value:getFormValue(["populace", "qualityOfLife", "GenderDistribution"]),
-                      info:information["Gender Distribution"] 
+                      value:getFormValue(["populace", "qualityOfLife", "GenderDistribution"]),//Updated
+                      info:information["Gender Distribution"] //Updated
                     },
                     {
-                      name:"Ethnic Groups",
+                      name:"Ethnic Groups",//Updated
                       id  : "ethinicIdentities",
                       type:"text",
-                      placeholder:"List groups",
-                      value:getFormValue(["populace", "qualityOfLife", "ethinicIdentities"]),
-                      info:information["Ethnic Groups"]
+                      placeholder:"Your Comment",
+                      value:getFormValue(["populace", "qualityOfLife", "ethinicIdentities"]),//Updated
+                      info:information["Ethnic Groups"]//Updated
                     }
                     
                   ]  
@@ -583,6 +593,33 @@ app.get("/about", function (req, res) {
 }
   );
 });
+
+// app.get("/final-survey",function(req,res){
+
+//   res.render("form", {
+//     settlement: "",
+//     comments: "",
+//     links: "",
+//     sectionData:"",
+//     modalData : { 
+//         description:"",
+//         icons:[]
+//     },     
+//     modalClass : "modal-container-hide",
+//     previousModalData: "",
+//     previousModalClass : "previous-modal-container-hide",
+//     redirectUrl:"",
+//     notification: req.flash("form-notification"),
+//     url:"",
+//     error: req.flash("form-error"),
+//     email: "",
+//     finalSurveyData:finalSurveyData
+
+//   });
+// })
+
+
+
 
 
 app.get("/map", function (req, res) {
