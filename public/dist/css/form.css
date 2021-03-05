@@ -266,7 +266,7 @@ Modal CSS
 */
 
 .modal-container {
-  height: 475px;
+  /* height: 475px;
   width: 850px;
   display: flex!important;
   flex-direction: column;
@@ -278,7 +278,7 @@ Modal CSS
   top: 20%;
   left: 20%;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid black; */
 }
 
 .modal-container-hide {
@@ -806,7 +806,7 @@ width: 35%;
       width:auto!important;
       left:0!important;
       height:auto!important;
-      position:absolute!important;
+      position:relative!important;
       padding: 0.5rem!important;
 
 

@@ -742,17 +742,19 @@ startButton.addEventListener("click",()=>{
     var modal = document.getElementById("modal-div");
     modal.style=`
     
-    height: 475px;
-    width: 850px;
+    height: 80%;
+    width: 80%;
     display: flex!important;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     margin: 1rem;
     z-index: 99999;
+    top: 10%;
+    bottom: 10%;
+    left: 10;
+    right; 10;
     position: fixed;
-    top: 20%;
-    left: 20%;
     background-color: white;
     border: 1px solid black;`
   }
