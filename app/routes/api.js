@@ -147,6 +147,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
 
 
 
+      console.log(user)
 
       settlement.save(function(){
         user.save(function(){

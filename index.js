@@ -122,11 +122,12 @@ app.get("/shareknowledge/u/", function (req, res) {
   });
 });
 
-app.get("/shareknowledge/u/:shareknowledge/:secret", function (req, res) {
+app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
   // Update the settlement
   User.findOne(
     { secret: req.params.secret, contribution: req.params.contribution },
     function (err, user) {
+      console.log()
       Settlement.findOne({ _id: user.contribution }, function (
         err,
         settlement
