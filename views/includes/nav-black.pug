@@ -1,13 +1,12 @@
 .black-nav
-  .logo-div-white(id="logo-div")
+  a(class ="logo-div-white" id="logo-div" href = "/") 
+  //- .logo-div-white(id="logo-div")
   .links
     .black-nav-left  
-      //- a(class="black-nav-left-a" style="height:24px; margin-top:1rem;" href = "/map") MAP OF INFORMALITY
-      //- a(class="black-nav-left-a" style="height:24px;margin-top:1rem" href = "/contribute") CONTRIBUTE
-      //- a(class="black-nav-left-a" style="height:24px;margin-top:1rem" href = "/") THE TOOLS
+      
       a(class = (activeTab == 1 ? "active" : "")  href = "/map") MAP OF INFORMALITY
-      a(class = (activeTab == 2 ? "active" : "") href = "/contribute") CONTRIBUTE
-      a(class = (activeTab == 3 ? "active" : "") href = "/") THE TOOLS
+      a(class = (activeTab == 2 ? "active" : "") href = "/shareknowledge") SHARE KNOWLEDGE
+      //- a(class = (activeTab == 3 ? "active" : "") href = "/") THE TOOLS
     .black-nav-right
       #google_translate_element.google-element-view
       //- a.level-item( class="black-nav-left-a" style="height:24px;margin-top:1rem" href = "/about") About
@@ -24,8 +23,8 @@
   
   #black-mobile-links.collapsed-links-hidden
     a(class = (activeTab == 1 ? "active" : "")  href = "/map") MAP OF INFORMALITY
-    a(class = (activeTab == 2 ? "active" : "") href = "/contribute") CONTRIBUTE
-    a(class = (activeTab == 3 ? "active" : "") href = "/") THE TOOLS
+    a(class = (activeTab == 2 ? "active" : "") href = "/shareknowledge") SHARE KNOWLEDGE
+    //- a(class = (activeTab == 3 ? "active" : "") href = "/") THE TOOLS
     a(class = (activeTab == 4 ? "active" : "") href = "/about") ABOUT
     //- #google_translate_element
 

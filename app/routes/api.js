@@ -1,5 +1,6 @@
 let express = require("express"),
     mongoose = require("mongoose"),
+    fs = require("fs"),
     crypto = require('crypto'),
     // geo = require("../util/geo.js"),
     cleanFormFields = require("../middleware/cleanFormFields.js"),
@@ -8,28 +9,31 @@ let express = require("express"),
     sendEmail = require("../util/email.js"),
     checkPrivacyChecked = require("../middleware/checkPrivacyChecked.js");
     
-const firebase = require("firebase")
-
-// Set the configuration for your app
-// TODO: Replace with your app's config object
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAY4TLs19RV3dQdhmMW5NplTw4sxxc-izY",
-  authDomain: "the-power-of-without.firebaseapp.com",
-  projectId: "the-power-of-without",
-  storageBucket: "the-power-of-without.appspot.com",
-  messagingSenderId: "436165625393",
-  appId: "1:436165625393:web:33cf6b8c45399b1d75b710",
-  measurementId: "G-YCLSSE2FL6"
-};
-
-// Get a reference to the storage service, which is used to create references in your storage bucket
-firebase.initializeApp(firebaseConfig)
+// Imports the Google Cloud client library.
+const {Storage} = require('@google-cloud/storage');
+const bucketName  = "the-power-of-without.appspot.com";
 
 
-// 
+// Instantiates a client. If you don't specify credentials when constructing
+// the client, the client library will look for credentials in the
+// environment.
+const storage = new Storage();
+// Makes an authenticated API request.
+// async function listBuckets() {
+//   try {
+//     const results = await storage.getBuckets();
 
+//     const [buckets] = results;
 
+//     console.log('Buckets:');
+//     buckets.forEach(bucket => {
+//       console.log(bucket.name);
+//     });
+//   } catch (err) {
+//     console.error('ERROR:', err);
+//   }
+// }
+// listBuckets();
 
 
 
@@ -39,7 +43,7 @@ const e = require("express");
 // const Survey = require("../db/models/Survey.js");
 
 
-module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Country){
+module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Country,upload,Subscriber){
 
   let router = express.Router();
 
@@ -73,7 +77,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     console.log('This is the data I am getting',req.body);
     // res.render("form")
     if(req.error) {
-      res.get("/contribute/")
+      res.get("/shareknowledge/")
       console.log(req.error);
       ;}
     else Settlement.findOne({
@@ -85,17 +89,17 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
       }, function(err, user){
         if(!err && user){
           console.log("I've found it");
-          res.redirect("/contribute/u/" + settlement._id + "/" + user.secret);
+          res.redirect("/shareknowledge/u/" + settlement._id + "/" + user.secret);
         }
         else{
           req.flash('form-notification', "No settlement found");
-          res.redirect("/contribute");
+          res.redirect("/shareknowledge");
         }
       })
       else {
         console.log("no settlement found");
         req.flash('form-notification', "No settlement found");
-        res.redirect("/contribute");
+        res.redirect("/shareknowledge");
       }
     });
   });
@@ -107,21 +111,22 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     // console.log(req.body);
 
     if(req.error) {
-      // res.redirect("/contribute");
+      res.redirect("/shareknowledge");
       req.flash("form-error", "Invalid Coordinates")
       return
     }
 
     let coords = req.body.geolocation.split(",").map((d) => parseFloat(d));
 
-    
-    // if(coords.length != 2 || isNaN(coords[0]) || isNaN(coords[1])){
-    //   req.flash("form-error", "Invalid Coordinates");
-    //   res.redirect("/contribute");
-    //   return;
-    // }
+  
 
-    // console.log(req.body);
+    console.log(req.body);
+    if ("privacy-checkbox" in req.body){
+
+      let sub = new Subscriber({email:req.body.email,subscribed:true});
+      sub.save((err)=>{if (err) {console.log(err)}else{console.log("saved")}});
+
+    }
 
     crypto.randomBytes(12, function(err, buffer) {
       let token = buffer.toString('hex');
@@ -140,27 +145,16 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
         "secret": token
       })
 
+
+
+      console.log(user)
+
       settlement.save(function(){
         user.save(function(){
           sendEmail(req.body.email, settlement._id, token);
           req.flash('form-notification', "Thanks for contributing a settlement! You can work on adding more information now, or complete it at a later date—we've sent a link to your email!");
-          res.redirect("/contribute/u/" + settlement._id + "/" + token);
-          // res.send("all is well");
-          // res.redirect("/contribute")
-          // console.log(fillInFormData);
-          // console.log(modalData);
-          // res.render("form", {
-          //   sectionData: sectionDataContainer,
-          //   modalData : modalData,
-          //   modalClass : "modal-container",
-          //   redirectUrl : "/contribute/u/" + settlement._id + "/" + token,
-          //   url: "/api/settlements",
-          //   notification:
-          //     'Already created a settlement? Edit it <a href = "/contribute/u">here</a>',
-          //   map: true,
-          //   error: req.flash("form-error"),
-          // });
-          // // res.status(200);
+          res.redirect("/shareknowledge/u/" + settlement._id + "/" + token);
+          
 
         })
       });
@@ -298,10 +292,10 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
           modalClass : "modal-container-hide",
           previousModalData: "",
           previousModalClass : "previous-modal-container-hide",
-          redirectUrl : "/contribute/u/" + req.params.id + "/" +req.params.secret,
+          redirectUrl : "/shareknowledge/u/" + req.params.id + "/" +req.params.secret,
           url: "/api/final-survey/" + req.params.id + "/" +req.params.secret,
           notification:
-            'Already created a settlement? Edit it <a href = "/contribute/u">here</a>',
+            'Already created a settlement? Edit it <a href = "/shareknowledge/u">here</a>',
           map: true,
           error: req.flash("form-error"),
           email: "",
@@ -375,36 +369,133 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     })
   })
 
-  router.post("/settlements/u/:id/:secret/image", function(req, res){
+  router.post("/settlements/u/:id/:secret/image", upload.single("file"),function(req, res){
 
-    var storage = firebase.storage();
-    console.log(storage)
+    console.log(req.body)
+    console.log(req.file.path)
 
-    // User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
-    //   Image.updateOne(
-    //     { settlementId: req.params.id, email: req.body.email,formFieldName: req.body.formFieldName},
-    //     { $set: {
-    //       email: req.body.email,
-    //       formFieldName: req.body.formFieldName,
-    //       imageUrl: req.body.imageUrl
-    //     } },
-    //     { upsert: true },
-    //     function(err){
-    //       if (err){
-    //         console.log(err)
-    //       }
-    //       else{
-    //         console.log("successfully saved image url")
-    //       }
-    //     }
-    //   );
-    // })
+
+    // console.log(req.data)
+
+    // stored in the storage db like so, id/secret/formfieldname/imagename
+
+    let filename  = req.file.path;
+    let imageName = req.file.originalname;
+    let formFieldName =  req.body.formFieldName;
+    let secretSession = req.params.secret
+    let id = req.params.id
+    let destination = id + "/" + secretSession + "/"+ formFieldName + "/"  + imageName;
+
+     
+
+   
+    async function uploadFile() {
+      // Uploads a local file to the bucket
+       let response = await storage.bucket(bucketName).upload(filename, {
+        // By setting the option `destination`, you can change the name of the
+        destination: destination,
+        // object you are uploading to a bucket.
+        metadata: {
+          // Enable long-lived HTTP caching headers
+          // Use only if the contents of the file will never change
+          // (If the contents will change, use cacheControl: 'no-cache')
+          cacheControl: 'no-cache',
+        },
+      });
+  
+      
+      console.log(`${filename} uploaded to ${bucketName}.`);
+      // // console.log(response)
+      await storage.bucket(bucketName).file(destination).makePublic();
+  
+      console.log(`gs://${bucketName}/${filename} is now public.`);
+
+
+      try {
+        fs.unlinkSync(req.file.path);
+        console.log("file removed")
+        //file removed
+      } catch(err) {
+        console.error(err)
+      }
+
+      let imageUrl= response[0].metadata.mediaLink;
+      console.log("here is the image url",imageUrl)
+
+      if (imageUrl){
+
+        User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
+          Image.updateOne(
+            { settlementId: req.params.id, email: req.body.email,formFieldName: req.body.formFieldName},
+            { $set: {
+              email: req.body.email,
+              formFieldName: req.body.formFieldName,      
+            }, $push:{image: {name:destination,url:imageUrl}}},
+            { upsert: true },
+            function(err){
+              if (err){
+                console.log(err)
+              }
+              else{
+                console.log("successfully saved image url")
+              }
+            }
+          );
+        })
+
+      }else{
+
+        console.log("failed to upload file")
+      }
+
+   
+    }
+
+    uploadFile().catch(console.error);
+
+
   })
+
+
+  router.post("/settlements/u/:id/:secret/deleteimg",function(req, res){
+
+    console.log("req.body",req.body)
+    let imageUrl = req.body.imageUrl;
+    let name =  req.body.imageName
+
+
+    async function deleteFile() {
+      // Deletes the file from the bucket
+      await storage.bucket(bucketName).file(name).delete();
+  
+      console.log(`gs://${bucketName}/${name} deleted.`);
+    }
+  
+    deleteFile().catch(console.error);
+
+    User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
+          Image.updateOne(
+            { settlementId: req.params.id, email: req.body.email,formFieldName: req.body.formFieldName},
+            { $pull:{image: {name:name,url:imageUrl}}},
+            { upsert: true },
+            function(err){
+              if (err){
+                console.log(err)
+              }
+              else{
+                console.log("successfully deleted image from database")
+              }
+            }
+          );
+        })
+      }
+  )
+
 
   router.post("/settlements/u/:id/:secret/link", function(req, res){
     User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
       Link.updateOne(
-        { settlementId: req.params.id },
+        { settlementId: req.params.id, email: req.body.email,formFieldName: req.body.formFieldName},
         { $set: {
           email: req.body.email,
           formFieldName: req.body.formFieldName,
@@ -418,6 +509,21 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     })
   })
 
+  router.post("/user/subscribe",function(req,res){
+
+    let sub = new Subscriber({email:req.body.email,subscribed:true});
+    sub.save((err)=>{if (err) {console.log(err)}else{console.log("saved")}});
+
+  });
+  router.post("/user/unsubscribe",function(req,res){
+    Subscriber.updateOne({email:req.body.email},{$set:{subscribed:false}},function(err,user){
+      if (err){console.log(err)}
+      else{
+        // console.log(user.email + "subscribed");
+      }
+    })
+
+  })
   return router;
 };
 

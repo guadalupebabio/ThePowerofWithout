@@ -1,15 +1,13 @@
 /*
-  User.js
-  Stores a user-settlement they created pair
+  Subscriber.js
+  Stores a user subscription
 */
 
 let mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-let userSchema = new Schema({
+let subSchema = new Schema({
   email: String,
-  contribution: String,
-  secret: String,
   subscribed:{
     type:Boolean,
     default:false,
@@ -17,5 +15,5 @@ let userSchema = new Schema({
 });
 
 module.exports = function(conn){
-  return conn.model('User', userSchema);
+  return conn.model('Subscriber', subSchema);
 }

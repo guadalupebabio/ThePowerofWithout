@@ -6,7 +6,6 @@
 let mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-
 let settlementSchema = new Schema({
   name: String,
   country: String,
@@ -42,6 +41,7 @@ let settlementSchema = new Schema({
         communityEngagement:String,
     }
   },
+
   architecture: {
     physicalNature: {
       houseQuality: String,
@@ -51,6 +51,7 @@ let settlementSchema = new Schema({
     infrastructure: {
       accessToEnergy: String,
       sourceOfEnergy:Array,
+      sourceOfEnergycook: Array,
       accessToWater: Array,
       accessToSanitation: Array,
       accessToInternetOrPhoneFare: String,
@@ -58,19 +59,19 @@ let settlementSchema = new Schema({
       mobilitySystems: Array,
     },
     density:{
-
       elevation:String,
       householdPerHouseSize:String,
 
     }
-
   },
+
   populace: {
     qualityOfLife: {
       proximity:String,
       accessToHealthCare: String,
       numberOfHealthCareFacilities:String,
       accessToEducation: String,
+      schoolsNumber: Number,
       unemploymentRate: Number,
       employmentInTheInformalSector:String,
       ownershipRights: String,
@@ -84,7 +85,6 @@ let settlementSchema = new Schema({
         "13-18years": Number,
         "50+years": Number
       },
-
     }
   },
 

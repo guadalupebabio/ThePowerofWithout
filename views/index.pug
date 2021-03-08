@@ -10,11 +10,11 @@ html
 
     #jumbotron
       .taxonomy-description
-        p The Taxonomy helps us to understand informality
+        p The Taxonomy helps us to understand informality 
       .contribution-description
         p Help to create a global database
       .contribution-link
-        a(href = "/contribute") Contribute
+        a(href = "/shareknowledge") Share Knowledge
       //- i.fas.fa-arrow-down
       #update-shortened.update-div-shortened
         p Subscribe
@@ -27,9 +27,9 @@ html
             a <b>Subscribe</b>
           #update-contents-subcribe-email.update-div-contents-subscribe-email        
             input(
-              type="text"
+              id="subcribe-email-input"
+              type="email"
               placeholder="Email"
-              value="Email"
             )
             #subscribe-button.update-div-contents-subscribe-button
     section.full-height 
@@ -45,8 +45,8 @@ html
             br
             .project-description-subspan
               p As the world moves towards urbanization, cities are becoming increasingly complex. By 2050, about 70% of the world's population is expected to live in urban areas,  projected to reach 6.3 billion people. To keep up with the growing urban population, traditional infrastructure systems are estimated to cost $57-trillion. Few experts anticipate that this is even remotely possible and that new strategies are needed. The cost of conventional infrastructure would exceed the combined annual GDP of the USA, China, and Europe,  and 90% of this urbanization will be in Africa and Asia.
-              must find new solutions to meet the complex challenges of the future. We pose an opportunity to rethink current models and invent new systems and strategies for a more livable, equitable, and resilient future. 
-              The Power of Without is a collaborative initiative among institutions and local communities for identifying cost-efficient, lightweight infrastructure systems for deployment in informal settlements, to foster sustainable, resilient, and autonomous communities. A taxonomy, and methodology based in a set of workshops and classes has been developed to learn from informality.
+              p We must find new solutions to meet the complex challenges of the future. We pose an opportunity to rethink current models and invent new systems and strategies for a more livable, equitable, and resilient future. 
+              p The Power of Without is a collaborative initiative among institutions and local communities for identifying cost-efficient, lightweight infrastructure systems for deployment in informal settlements, to foster sustainable, resilient, and autonomous communities. A taxonomy, and methodology based in a set of workshops and classes has been developed to learn from informality.
             .project-description-gif 
         .second-layer
           .picture-1
@@ -64,18 +64,18 @@ html
           p <b> Kent Larson </b>, Director
           p <b> Maggie Church</b>, Program Coordinator, Communications
           <br/>
-          p <b> Luis Alonso </b>, Research Lead
-          p <b> Guadalupe Babio</b>, Research Lead, Design Manager
+          p <b>Luis Alonso </b>, Research Lead
+          p <b>Guadalupe Babio</b>, Research Lead, Design Manager
           p <b>Maitane Iruretagoyena </b>, Research Lead
-          p <b> Leticia Izquierdo</b>, Research Assistant
+          p <b>Markus Elkatsha</b>, Research Affiliate
+          p <b>Leticia Izquierdo</b>, Research Assistant
           <br/>
-          p <b> Jeffrey J Shen </b>, Research Assistant, Web Developer
-          p <b>Cherie Wang </b>, Research Assistant, Web Developer
-          p <b>Hillary Tamirepi </b>, Research Assistant, Web Developer   
+          p <b>Technical Assistants and Web Developers:</b>
+          p Jeffrey J Shen, Cherie Wang, Hillary Tamirepi and Ariadne Dulchinos   
 
       .footer-mobile-bottom-half 
         .footer-copy-right
-            p &copy; City Science 2020
+            p &copy; City Science 2021
         .footer-bottom-half-accessories
           .footer-bottom-half-logos   
             .footer-bottom-half-logo-1
@@ -85,6 +85,13 @@ html
     .footer
       .footer-top-half
         .summary-of-site
+          .tools-summary
+            .tool-summary-title
+              <b> WITHOUT TOOLS</b>
+            .tool-summary-text  
+              a(href="https://www.media.mit.edu/projects/toolkit/overview/" target="_blank") The Toolkit
+              a MAS.552 Settlements Without
+              a Security App 
           .map-of-informality-summary
             .map-of-informality-summary-title
               <b>MAP OF INFORMALITY</b>
@@ -93,21 +100,12 @@ html
               a Settlement
               <br/>
               a Report error on the map
-              a Send feedback
           .contribute-summary
             .contribute-summary-title
-              <b>CONTRIBUTE</b> 
+              <b>SHARE KNOWLEDGE</b> 
             .contribute-summary-text
-              a(href="/contribute") Add a missing settlement
-              a(href="/contribute") Edit a previous entry
-          .tools-summary
-            .tool-summary-title
-              <b> THE TOOLS</b>
-            .tool-summary-text  
-              a(href="") The Toolkit
-              a MAS.552 Settlements Without
-              a Security App 
-              a The Platform
+              a(href="/shareknowledge") Add a missing settlement
+              a(href="/shareknowledge") Edit a previous entry
           .team
             .tool-summary-title
               <b> THE TEAM </b>
@@ -115,14 +113,14 @@ html
               p <b> Kent Larson </b>, Director
               p <b> Maggie Church</b>, Program Coordinator, Communications
               <br/>
-              p <b> Luis Alonso </b>, Research Lead
-              p <b> Guadalupe Babio</b>, Research Lead, Design Manager
-              p <b>Maitane Iruretagoyena </b>, Research Lead
-              p <b> Leticia Izquierdo</b>, Research Assistant
+              p <b>Luis Alonso </b>, Research Lead
+              p <b>Guadalupe Babio</b>, Research Lead, Design Manager
+              p <b>Maitane Iruretagoyena </b>, Research Lead\
+              p <b>Markus Elkatsha</b>, Research Affiliate
+              p <b>Leticia Izquierdo</b>, Research Assistant
               <br/>
-              p <b> Jeffrey J Shen </b>, Research Assistant, Web Developer
-              p <b>Cherie Wang </b>, Research Assistant, Web Developer
-              p <b>Hillary Tamirepi </b>, Research Assistant, Web Developer
+              p <b>Technical Assistants and Web Developers:</b>
+              p Jeffrey J Shen, Cherie Wang, Hillary Tamirepi and Ariadne Dulchinos 
         .links-summary
           a(href="https://www.facebook.com/MITCities" target="_blank")  Facebook
           a(href="https://www.instagram.com/mitcityscience/" target="_blank")  Instagram
@@ -139,7 +137,7 @@ html
             .footer-bottom-half-logo-2 
       .footer-copy-right
             <hr style="height:2px;background-color:#242424;margin:0px">
-              p &copy; City Science 2020
+              p &copy; City Science 2021
     script.
       let checkScroll = function(){
         //- const navbar = document.getEleme
@@ -191,6 +189,18 @@ html
       });
       const updateContentSubscribeEmailButton = document.getElementById("subscribe-button");
       updateContentSubscribeEmailButton.addEventListener("click",()=>{
+        let email = document.getElementById("subcribe-email-input").value
+        if (email!==""){
+          $.post(`/api/user/subscribe`,{email:email},function(res){
+              //- console.log(res);
+              alert(`"${email}" subscribed. Thank you for subscribing`);
+              document.getElementById("subcribe-email-input").value = ""
+
+          })
+        }else{
+
+
+        }
         const updateContentSubscribeEmailDiv = document.getElementById("update-contents-subcribe-email");
         updateContentSubscribeEmailDiv.className="update-div-contents-subscribe-email"
         updateContentSubscribeButton.className= "update-div-contents-subscribe"

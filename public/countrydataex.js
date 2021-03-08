@@ -2,7 +2,7 @@ var countrydata =  [
     {
       "Aruba": "Afghanistan",
       "ABW": "AFG",
-      "Population living in slums (% of urban population)": "Population living in slums (% of urban population)",
+      "Population living in the community (% of urban population)": "Population living in the community  (% of urban population)",
       "EN.POP.SLUM.UR.ZS": "EN.POP.SLUM.UR.ZS",
       "": "",
       "__1": "",
@@ -69,7 +69,7 @@ var countrydata =  [
     {
       "Aruba": "Angola",
       "ABW": "AGO",
-      "Population living in slums (% of urban population)": "Population living in slums (% of urban population)",
+      "Population living in the community (% of urban population)": "Population living in the community (% of urban population)",
       "EN.POP.SLUM.UR.ZS": "EN.POP.SLUM.UR.ZS",
       "": "",
       "__1": "",
@@ -136,7 +136,7 @@ var countrydata =  [
     {
       "Aruba": "Albania",
       "ABW": "ALB",
-      "Population living in slums (% of urban population)": "Population living in slums (% of urban population)",
+      "Population living in the community (% of urban population)": "Population living in the community the community (% of urban population)",
       "EN.POP.SLUM.UR.ZS": "EN.POP.SLUM.UR.ZS",
       "": "",
       "__1": "",
@@ -203,7 +203,7 @@ var countrydata =  [
     {
       "Aruba": "Andorra",
       "ABW": "AND",
-      "Population living in slums (% of urban population)": "Population living in slums (% of urban population)",
+      "Population living in the community (% of urban population)": "Population living in the community (% of urban population)",
       "EN.POP.SLUM.UR.ZS": "EN.POP.SLUM.UR.ZS",
       "": "",
       "__1": "",
@@ -270,7 +270,7 @@ var countrydata =  [
     {
       "Aruba": "Arab World",
       "ABW": "ARB",
-      "Population living in slums (% of urban population)": "Population living in slums (% of urban population)",
+      "Population living in the community  (% of urban population)": "Population living in the community  (% of urban population)",
       "EN.POP.SLUM.UR.ZS": "EN.POP.SLUM.UR.ZS",
       "": "",
       "__1": "",
@@ -337,7 +337,7 @@ var countrydata =  [
     {
       "Aruba": "United Arab Emirates",
       "ABW": "ARE",
-      "Population living in slums (% of urban population)": "Population living in slums (% of urban population)",
+      "Population living in the community (% of urban population)": "Population living in the community (% of urban population)",
       "EN.POP.SLUM.UR.ZS": "EN.POP.SLUM.UR.ZS",
       "": "",
       "__1": "",
@@ -404,7 +404,7 @@ var countrydata =  [
     {
       "Aruba": "Argentina",
       "ABW": "ARG",
-      "Population living in slums (% of urban population)": "Population living in slums (% of urban population)",
+      "Population living in the community (% of urban population)": "Population living in the community (% of urban population)",
       "EN.POP.SLUM.UR.ZS": "EN.POP.SLUM.UR.ZS",
       "": "",
       "__1": "",
@@ -471,7 +471,7 @@ var countrydata =  [
     {
       "Aruba": "Armenia",
       "ABW": "ARM",
-      "Population living in slums (% of urban population)": "Population living in slums (% of urban population)",
+      "Population living in the community (% of urban population)": "Population living in the community (% of urban population)",
       "EN.POP.SLUM.UR.ZS": "EN.POP.SLUM.UR.ZS",
       "": "",
       "__1": "",
@@ -538,7 +538,7 @@ var countrydata =  [
     {
       "Aruba": "American Samoa",
       "ABW": "ASM",
-      "Population living in slums (% of urban population)": "Population living in slums (% of urban population)",
+      "Population living in the community  (% of urban population)": "Population living in the community  (% of urban population)",
       "EN.POP.SLUM.UR.ZS": "EN.POP.SLUM.UR.ZS",
       "": "",
       "__1": "",
@@ -605,7 +605,7 @@ var countrydata =  [
     {
       "Aruba": "Antigua and Barbuda",
       "ABW": "ATG",
-      "Population living in slums (% of urban population)": "Population living in slums (% of urban population)",
+      "Population living in the community  (% of urban population)": "Population living in the community  (% of urban population)",
       "EN.POP.SLUM.UR.ZS": "EN.POP.SLUM.UR.ZS",
       "": "",
       "__1": "",

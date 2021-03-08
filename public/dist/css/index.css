@@ -42,11 +42,11 @@
   font-weight: bold;
   font-size: 20px;
   color: #242424;
-  width: 79px;
-  height: 23px;
-  position: absolute;
+  /* width: 79px;
+  height: 23px; */
+  position: absolute; 
   top: 435px;
-  left: 24px;
+  left: 64px; 
   background: none;
   outline: 0;
   text-decoration: underline;

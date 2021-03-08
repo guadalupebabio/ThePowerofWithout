@@ -17,6 +17,8 @@
 // firebase.initializeApp(firebaseConfig)
 
 
+// Imports the Google Cloud client library.
+
 
 function drawMap(mapID){
     const myMap = document.getElementById(mapID);
@@ -421,7 +423,7 @@ function showLink(data){
 
   let linkI = links.findIndex((d) => {
 
-    d.formFieldName == data.name
+    return d.formFieldName == data.name
   })
 
     //Set value of input text based on what's stored in the database
@@ -435,10 +437,99 @@ function showLink(data){
 
 
 function showChat(data){
+
   hideAll(data.id)
-  let chatI = links.findIndex((d) => {
-    d.formFieldName == data.name
+  console.log("these are the images",images)
+  let imageI = images.findIndex((d) => {
+    return d.formFieldName == data.name
   })
+
+  if(imageI==-1){
+    console.log("no images")
+  }else{
+    console.log("there's an image",images[imageI].image)
+
+    let imagesUrls = images[imageI].image;
+
+    if (imagesUrls.length>0){
+
+      var currentImagesContainer = document.getElementById(`${data.id}-current-images`)
+      if (currentImagesContainer.hasChildNodes()){
+        while (currentImagesContainer.firstChild) {
+          currentImagesContainer.removeChild(currentImagesContainer.firstChild);
+      }
+      }
+
+      for (let index=0;index<imagesUrls.length;index++){
+
+        let img = imagesUrls[index];
+        // console.log(img.url)
+
+        var thumbNailContainer = document.createElement("div");
+        thumbNailContainer.style=`
+        display:flex;
+        flex-direction:row;
+        justify-content:space-around;
+        height: 175px;
+        `
+        
+        var thumbnail = document.createElement("div");
+        thumbnail.id = `${data.id}-image-${index}`
+        thumbnail.style=`
+          background-image:url("${img.url}");
+          background-size:100%;
+          background-repeat:no-repeat;
+          width:150px;
+          height:150px; 
+        `
+    
+        var thumbnailClose = document.createElement("div");
+        thumbnailClose.innerText ="Delete"
+        thumbnailClose.style = `
+          background-color:black;
+          height:25px;
+          color:white;
+          font-size:15px;
+          font-weight:bold;
+          text-align:center;
+          border-radius:5px;
+          width:80px;  
+          `
+        
+        thumbnailClose.addEventListener("click",()=>{
+
+          currentImagesContainer.removeChild(thumbNailContainer);
+          // console.log(`${data.url}/deleteimg`)
+          $.post(`${data.url}/deleteimg`, {email: data.email, imageUrl:img.url, imageName:img.name, formFieldName: data.name}, function(res) {
+
+          })
+ 
+
+        })
+    
+        thumbNailContainer.appendChild(thumbnail)
+        thumbNailContainer.appendChild(thumbnailClose);
+
+        currentImagesContainer.appendChild(thumbNailContainer);
+
+      }
+    }
+
+   
+
+
+
+
+
+
+
+
+
+
+
+  }
+
+
 
     //Set value of input text based on what's stored in the database
     // if(chatI == -1) $(`${data.id}-link input.text`).val("");
@@ -458,7 +549,7 @@ function showChat(data){
 
 
 function saveComment(data){
-  console.log("I clicked on save Comment",data)
+  // console.log("I clicked on save Comment",data)
   // let data = $(`#${data.id}-comment input.button`).data(),
   //     comment = $(`#${data.id}-comment input.text`).val();
 
@@ -468,7 +559,7 @@ function saveComment(data){
       // comment = $(`#${data.id}-comment input.text`).val();
   // Save new comment to server
   $.post(`${data.url}/comment`, {email: data.email, comment: comment, formFieldName: data.name}, function(res) {
-    $(`#${data.id}-comment .help`).show();
+    $(`#${data.id}-comment p.help.is-success`).show();
 
     // Save new comment for this browser session
     let commentI = comments.findIndex((d) => d.formFieldName == data.name);
@@ -483,12 +574,20 @@ function saveComment(data){
 
 
 
-function saveLink(){
+function saveLink(data){
   
-  let data = $(`#${data.id}-link input.button`).data(),
-      link = $(`#${data.id}-link input.text`).val();
+  // let data = $(`#${data.id}-link input.button`).data(),
+  //     link = $(`#${data.id}-link input.text`).val();
 
-  $(`#${data.id}-link .help`).hide();
+  let link = document.getElementById(`${data.id}-link-input-text`).value
+
+
+
+  // console.log(link)
+
+  // console.log(data)
+
+  // $(`#${data.id}-link .help`).hide();
 
   let isLink = (link) => {
     var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -500,9 +599,13 @@ function saveLink(){
     return pattern.test(link);
   }
 
-  if(!isLink(link)) $(`#${data.id}-link .help.is-danger`).show();
-  else $.post(`${data.url}/link`, {email: data.email, link: link, formFieldName: data.name}, function(res) {
-    $(`#${data.id}-link .help.is-success`).show();
+  // console.log("the link is true,", isLink)
+
+  if(!isLink(link)){$(`#${data.id}-link .help.is-danger`).show()}
+  else {
+        $(`#${data.id}-link .help.is-danger`).hide();
+       $.post(`${data.url}/link`, {email: data.email, link: link, formFieldName: data.name}, function(res) {
+      $(`#${data.id}-link .help.is-success`).show();
 
     // Save new link for this browser session
     let linkI = links.findIndex((d) => d.formFieldName == data.name);
@@ -513,11 +616,74 @@ function saveLink(){
     else links[linkI].link = link;
   });
 }
+}
 
+function onchangePreview(id){
+  const imageInput = document.getElementById(`${id}-chat-input-file`)
+  if (imageInput.files.length > 0){
+    var uploadedImage =imageInput.files[0];
+
+    var blobToTransfer = URL.createObjectURL(uploadedImage);
+    var previewContainer = document.getElementById(`${id}-preview`)
+    previewContainer.style=
+    ` background-image:url(${blobToTransfer});
+      display:block;
+      background-size:100%;
+      background-repeat:no-repeat;
+      width : 250px;
+      height: 250px;
+
+  `
+  }
+}
 
 function saveImage(data){
 
-  $.post(`${data.url}/image`, {email: data.email, file:data.id, formFieldName: data.name}, function(res) {
+  // $.post(`${data.url}/image`, {email: data.email, file:data.id, formFieldName: data.name}, function(res) {
+  //   // $(`#${data.id}-link .help.is-success`).show();
+
+  //   // Save new link for this browser session
+  //   // let linkI = links.findIndex((d) => d.formFieldName == data.name);
+  //   // if(linkI == -1) links.push({
+  //   //   formFieldName: data.name,
+  //   //   link: link
+  //   // })
+  //   // else links[linkI].link = link;
+  // });
+
+  const imageInput = document.getElementById(`${data.id}-chat-input-file`)
+  if (imageInput.files.length > 0){
+    var uploadedImage =imageInput.files[0];
+
+
+
+
+
+    var formData = new FormData()
+
+    formData.append('email', data.email)
+    formData.append('file',uploadedImage)
+    formData.append('imageName',uploadedImage.name)
+    formData.append('formFieldName',data.name)
+
+  
+    $.ajax({
+      url: `${data.url}/image`, 
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(data) {
+          console.log(data);
+      }
+  });
+
+
+
+
+    // $.post(`${data.url}/image`, {email: data.email, file:uploadedImage, imageName:uploadedImage.name, formFieldName: data.name}, function(res) {
+        
+            // console.log("this is the response",res)
     // $(`#${data.id}-link .help.is-success`).show();
 
     // Save new link for this browser session
@@ -527,19 +693,18 @@ function saveImage(data){
     //   link: link
     // })
     // else links[linkI].link = link;
-  });
-  // const imageInput = document.getElementById(`${data.id}-chat-input-file`)
-  // if (imageInput.files.length > 0){
-  //   var uploadedImage =imageInput.files[0];
-
-  //   console.log(storage)
-  //   // var storage =  firebase.storage()
-
-  //   // console.log(uploadedImage)
 
 
+  // });
 
-  // }
+    // console.log(storage)
+    // var storage =  firebase.storage()
+
+    // console.log(uploadedImage)
+
+
+
+  }
   
 
 }
@@ -577,17 +742,19 @@ startButton.addEventListener("click",()=>{
     var modal = document.getElementById("modal-div");
     modal.style=`
     
-    height: 475px;
-    width: 850px;
+    height: 80%;
+    width: 80%;
     display: flex!important;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     margin: 1rem;
     z-index: 99999;
+    top: 10%;
+    bottom: 10%;
+    left: 10;
+    right; 10;
     position: fixed;
-    top: 20%;
-    left: 20%;
     background-color: white;
     border: 1px solid black;`
   }

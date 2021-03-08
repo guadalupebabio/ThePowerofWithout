@@ -668,13 +668,13 @@ function polygonHover(e) {
 
     info.update = function (value, pop) {
       if (pop == 0){
-        this._div.innerHTML = '<h4>Population living in slums (% of urban population)</h4>' + value + ': no specific population at this slum';
+        this._div.innerHTML = '<h4>Population living in informal settlements (% of urban population)</h4>' + value + ': no specific population at this slum';
       }
       else if (pop == -1){
-        this._div.innerHTML = '<h4>Population living in slums (% of urban population)</h4>' + value + ': no recorded slums here';
+        this._div.innerHTML = '<h4>Population living in informal settlements (% of urban population)</h4>' + value + ': no data';
       }
       else{
-        this._div.innerHTML = '<h4>Population living in slums (% of urban population)</h4>' + value + ": " 
+        this._div.innerHTML = '<h4>Population living in informal settlements (% of urban population)</h4>' + value + ": " 
         + pop;
         }
     };
@@ -714,7 +714,7 @@ function polygonHover(e) {
         labels = ['<strong> Population of Settlements in each Country </strong> <br>'];
         labels.push(
           '<i style="background:' + getColor(-1) + '"></i> ' +
-          ('no settlements recorded'+ '<br>'));
+          ('no data'+ '<br>'));
       for (var i = 0; i < popvalues.length; i++){
         from = popvalues[i];
         to = popvalues[i+1];
