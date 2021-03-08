@@ -232,9 +232,14 @@ settlements.then(response => response.json())
             coords.push(coord);
           };
           var settlementdatas = data[i];
+          console.log(coords[0])
           var polygon = L.polygon(coords, {color: 'red', data: data[i]}).on({mouseover: polygonHover, click: polygonClick});
           //polygon.options = data;
           polygon.addTo(settlementslayer);
+          var marker = new L.marker(coords[0]).on('click', function(e){
+              map.setView(e.latlng, 13);
+          });
+          marker.addTo(settlementslayer);
           }
       });
       
