@@ -93,10 +93,7 @@ form label {
 }
 
 /* 
-
 Range styling
-
-
 */
 form .range {
   display: flex;
@@ -262,7 +259,6 @@ section {
 
 /* 
 Modal CSS
-
 */
 
 .modal-container {
@@ -305,8 +301,8 @@ Modal CSS
 }
 
 #continue-button {
-  width: 20%;
-  height: 10%;
+  width: auto;
+  /* height: 10%; */
   border: 0;
   /* border-bottom: 1px solid black; */
   text-decoration: underline;
@@ -356,7 +352,6 @@ Modal CSS
   padding: 1rem;
 }
 /* 
-
 Contains the form structure
 */
 
@@ -383,7 +378,6 @@ Can contain either the map or the popup modals
 }
 
 /* 
-
 The long update form with Site, Populace and Architecture
 */
 
@@ -435,7 +429,6 @@ For the fill-in form
 /* 
  
  For sample update form
-
  */
 
 .level-middle {
@@ -486,8 +479,6 @@ For the fill-in form
   /* display:flex!important; */
 }
 /* .info-div-hide{
-
-
   display:none!important;
 } */
 
@@ -690,10 +681,7 @@ For the fill-in form
 }
 
 /**
-
 Close buttons for info, link, comment, image boxes in Contribute form
-
-
 */
 
 .close-info {

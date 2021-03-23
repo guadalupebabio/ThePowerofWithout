@@ -173,7 +173,7 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
           differences.push([ string1 +  "% Male" , string2 + "% Female"])
         }
         var households = []
-        for (let i =0 ; i< 6;i++){
+        for (let i =1 ; i< 6;i++){
           let stringI = i.toString();      
           households.push(stringI)
         }
@@ -184,14 +184,8 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
           floors.push(stringI)
         }
         floors =floors.concat(["6 or more"])
-        // console.log(minutes);
-        // console.log(clinics);
-        // console.log(percent);
-        // console.log(differences);
         let sectionDataContainer = {
-          // Site
           header: "update-settlement",
-
           sections: [
             {
               section: "Site",
@@ -233,7 +227,7 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                       name: "Location within the city",
                       id:"cityLocation",
                       type: "checkbox",
-                      options: ["Squatting on the fringe","In the path of development","In the heart of the city","Railroad","Residential Centers","Old City Settlement","Rural Settlement","Other",],
+                      options: ["On the fringe of the city","In the path of development","In the heart of the city","Railroad","Residential Centers","Old City Settlement","Rural Settlement","Other",],
                       value: getFormValue(["site", "geography", "withinCities"]),
                       info:information["Location within the city"]
                     },
@@ -324,12 +318,12 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                     name : "Energy Sources",
                     id:"energySource",
                     type:"checkbox",
-                    options:["Electricity","LPG, natural gas","Kerosene, other liquid fuel","Coal, lignite","Firewood, straw, dung or charcoal","Don’t cook","Other"],
+                    options:["Electricity","LPG, natural gas","Kerosene, other liquid fuel","Coal, lignite","Firewood, straw, dung or charcoal","Other"],
                     value: getFormValue(["architecture", "infrastructure", "sourceOfEnergy"]),
                     info:information["Energy"]
 
                   },{ 
-                    name : "Energy source used for cooking",
+                    name : "Energy source for cooking",
                     id:"sourceOfEnergycook",
                     type:"checkbox",
                     options:["Electricity","LPG, natural gas","Kerosene, other liquid fuel","Coal, lignite","Firewood, straw, dung or charcoal","Don’t cook","Other"],
@@ -386,12 +380,12 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                   label: "DENSITY",
                   questions:[
                     {
-                      name : "Building levels",
+                      name : "Storeys per building",
                       id:"buildingLevels",
                       type : "range",
                       options : floors,
                       value: getFormValue(["architecture", "density", "elevation"]),
-                      info:information["Building levels"]
+                      info:information["Storeys per building"]
                     },
                     {
                       name : "Households",
@@ -403,7 +397,6 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                     },
                     {
                       name : "Dwelling size", //New!! question
-
                       id : "dwellingSize",
                       type : "range",
                       options : households, ////New!!
@@ -424,7 +417,7 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                   questions : [
          
                     {
-                      name : "Proximity to amenities",
+                      name : "Proximity to urban amenities",
                       id : "publicProximity",
                       type :"range",
                       options: minutes,

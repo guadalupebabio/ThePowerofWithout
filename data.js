@@ -206,7 +206,7 @@ const finalSurveyData = {
       placeholder:"Your Comment"
     },
     {
-      name:"How would you rate the importance of these aspects to measure informality?",
+      name:"How would you rate the importance of these aspects to measure informality in general?",
       type:"grid",
       id:"gridData",
       options:[
