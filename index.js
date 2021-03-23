@@ -143,7 +143,6 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
           
           return val;
         }
-        // console.log(getFormValue(["site", "origin", "causes"]));
         
 
         var minutes = ["0min"];
@@ -327,7 +326,7 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                     id:"sourceOfEnergycook",
                     type:"checkbox",
                     options:["Electricity","LPG, natural gas","Kerosene, other liquid fuel","Coal, lignite","Firewood, straw, dung or charcoal","Don’t cook","Other"],
-                    value: getFormValue(["architecture", "infrastructure", "sourceOfEnergycook"]),
+                    value: getFormValue(["architecture", "infrastructure", "sourceOfEnergyCook"]),
                     info:information["Energy for Cooking"]
 
                   }

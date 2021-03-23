@@ -51,7 +51,7 @@ let settlementSchema = new Schema({
     infrastructure: {
       accessToEnergy: String,
       sourceOfEnergy:Array,
-      sourceOfEnergycook: Array,
+      sourceOfEnergyCook: Array,
       accessToWater: Array,
       accessToSanitation: Array,
       accessToInternetOrPhoneFare: String,
@@ -72,7 +72,7 @@ let settlementSchema = new Schema({
       numberOfHealthCareFacilities:String,
       accessToEducation: String,
       schoolsNumber: Number,
-      unemploymentRate: Number,
+      unemploymentRate: String,
       employmentInTheInformalSector:String,
       ownershipRights: String,
       ethinicIdentities:String,
