@@ -63,19 +63,6 @@ html
         form(action = url method = "POST" onsubmit="validateForm()")
           //- Autofill questions from JSON object passed
 
-          if (modalData)
-            #modal-div.modal-container-hide
-              .modal-description
-                p #{modalData.description}
-              .modal-items-description
-                each icon in modalData.icons
-                  .modal-item 
-                    .modal-icon(style=`background-image:url(${icon.image})`)
-                    .modal-icon-description          
-                      p #{icon.description}   
-              input.button.is-black(id="continue-button" type="submit" value="Continue")          
-              //- a(href=`${redirectUrl}` id="continue-button") Continue
-
           if sectionData.header=="fill-in-form"                     
                 .fill-in-row
                 each question, line in sectionData.sections 
@@ -120,6 +107,9 @@ html
                                 p Map         
 
           else if sectionData.header=="update-settlement"
+
+            .update-settlement-message
+              p Hey thank you    
             each section, index in sectionData.sections
               br
               //- section(class = (index == 0 ? "" : "is-hidden"))  
@@ -492,10 +482,9 @@ html
 
               input(id ="edit-previous-button" name = "edit-previous-button" type = "button" value = "Edit a previous settlement")
               //- button.is-black(id="start-button" style="font-size:1.2rem;width:250px;margin:0.5rem" ) Start
-              .start-button(id="start-button" style="background-color:#242424;color:white;font-size:1.2rem;width:250px;margin:0.5rem") Start
-               
+              //.start-button(id="start-button" style="background-color:#242424;color:white;font-size:1.2rem;width:250px;margin:0.5rem") Start
+              input.button.is-black(id="continue-button" type="submit" value="Continue" style="background-color:#242424;color:white;font-size:1.2rem;width:250px;margin:0.5rem")    
               //- input.button.is-black(id="start-button" style="font-size:1.2rem;width:250px;margin:0.5rem" type="submit" value="Start")
-
             else if sectionData.header=="final-survey" 
               .survey-buttons
                 a(href=redirectUrl id ="edit-previous-button-link" name = "edit-previous-button" type = "button" value = "Edit a previous settlement") Edit previous settlement
