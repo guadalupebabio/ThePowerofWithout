@@ -109,7 +109,8 @@ html
           else if sectionData.header=="update-settlement"
 
             .update-settlement-message
-              p Hey thank you    
+              p Thank you for taking the time to part take in our survey. This version of the platform is the first we are sharing with collaborators, your patience is appreciated. Moreover, your feedback is welcome to help us improve our work. Since every question informs a different part of the taxonomy it is very important that we ask for feedback on each question individually. Following each question, there are four icons that complement your response with additional information: Information about the question, comments, additional links, and attach an image.
+     
             each section, index in sectionData.sections
               br
               //- section(class = (index == 0 ? "" : "is-hidden"))  
@@ -483,7 +484,7 @@ html
               input(id ="edit-previous-button" name = "edit-previous-button" type = "button" value = "Edit a previous settlement")
               //- button.is-black(id="start-button" style="font-size:1.2rem;width:250px;margin:0.5rem" ) Start
               //.start-button(id="start-button" style="background-color:#242424;color:white;font-size:1.2rem;width:250px;margin:0.5rem") Start
-              input.button.is-black(id="continue-button" type="submit" value="Continue" style="background-color:#242424;color:white;font-size:1.2rem;width:250px;margin:0.5rem")    
+              input.button.is-black(id="continue-button" type="submit" value="Start" style="background-color:#242424;color:white;text-decoration: none;font-size:1.2rem;width:250px;margin:0.5rem")    
               //- input.button.is-black(id="start-button" style="font-size:1.2rem;width:250px;margin:0.5rem" type="submit" value="Start")
             else if sectionData.header=="final-survey" 
               .survey-buttons
