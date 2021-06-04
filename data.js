@@ -145,7 +145,7 @@
     },
     {
       label : "WITHOUT COLLABORATORS",
-      info : "Norman Foster Foundation, Universidad de Guadalajara, Ciuculo de amigos, SuSanA, EACO Uganda, Indian Dreams Foundation, among others."
+      info : "Norman Foster Foundation, Universidad de Guadalajara, Círculo de Amigos Treffpunkt Internacional A.C., Colectivo El Guamúchil, SuSanA, EACO Uganda, Indian Dreams Foundation, among others."
 
     },
 
