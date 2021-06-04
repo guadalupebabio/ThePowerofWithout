@@ -143,6 +143,11 @@
       info : "settlements@media.mit.edu"
 
     },
+    {
+      label : "WITHOUT PARTNERS",
+      info : "Norman Foster Foundation, Universidad de Guadalajara, Ciuculo de amigos, SuSanA, EACO Uganda, among others."
+
+    },
 
   ]
 
