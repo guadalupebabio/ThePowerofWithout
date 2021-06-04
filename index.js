@@ -1,3 +1,9 @@
+/*
+  Index.js
+  Includes all the questions of the survey
+*/
+
+
 require("dotenv").config();
 
 let express = require("express"),
@@ -13,8 +19,6 @@ let express = require("express"),
 let app = express(),
   router = express.Router();
 
-
-// let upload = multer();
 var upload = multer({ dest: 'uploads/' })
 
 const { information } = require("./00infromationdefs.js");
@@ -144,7 +148,6 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
           return val;
         }
         
-
         var minutes = ["0min"];
         for (let i =1 ; i< 20;i++){
           let stringI = i.toString();      
@@ -183,6 +186,8 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
           floors.push(stringI)
         }
         floors =floors.concat(["6 or more"])
+
+        // ** QUESTIONS OF TEH SURVEY **
         let sectionDataContainer = {
           header: "update-settlement",
           sections: [
@@ -341,7 +346,7 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                       name : "Access to Sanitation",
                       id:"sanitationAccess",
                       type : "double-range",
-                      options : ["Low","High","Communal","Private"], //Updated
+                      options : ["Low","High","Communal","Private"], 
                       value: getFormValue(["architecture", "infrastructure", "accessToSanitation"]),
                       info:information["Access to sanitation"]
                     },

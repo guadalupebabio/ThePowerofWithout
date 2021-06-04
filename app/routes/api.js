@@ -1,8 +1,13 @@
+/*
+  api.js
+  Makes the connection with MongoDB
+*/
+
+
 let express = require("express"),
     mongoose = require("mongoose"),
     fs = require("fs"),
     crypto = require('crypto'),
-    // geo = require("../util/geo.js"),
     cleanFormFields = require("../middleware/cleanFormFields.js"),
     preventEmptyFormFields = require("../middleware/preventEmptyFormFields.js"),
     validateEmail = require("../middleware/validateEmail.js"),
@@ -18,30 +23,10 @@ const bucketName  = "the-power-of-without.appspot.com";
 // the client, the client library will look for credentials in the
 // environment.
 const storage = new Storage();
-// Makes an authenticated API request.
-// async function listBuckets() {
-//   try {
-//     const results = await storage.getBuckets();
-
-//     const [buckets] = results;
-
-//     console.log('Buckets:');
-//     buckets.forEach(bucket => {
-//       console.log(bucket.name);
-//     });
-//   } catch (err) {
-//     console.error('ERROR:', err);
-//   }
-// }
-// listBuckets();
-
-
 
 const {information} = require("../../00infromationdefs.js");
 const {finalSurveyData, previousSettlementModal,sectionDataContainer , modalData}= require("../../data.js");
 const e = require("express");
-// const Survey = require("../db/models/Survey.js");
-
 
 module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Country,upload,Subscriber){
 
@@ -55,14 +40,6 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     });
   });
 
-
-
-  // Given Lat and Lon, return what country the point is.
-  // router.get("/get-country", function(req, res){
-  //   let lat = parseFloat(req.query.lat),
-  //       lon = parseFloat(req.query.lon);
-  //   res.send(geo.getCountry(lat, lon));
-  // });
 
   //Returns countries in JSON format from db
   router.get("/countries", function(req, res){
@@ -108,8 +85,6 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
   router.post("/settlements", preventEmptyFormFields, cleanFormFields, validateEmail, function(req, res){
 
    
-    // console.log(req.body);
-
     if(req.error) {
       res.redirect("/shareknowledge");
       req.flash("form-error", "Invalid Coordinates")
@@ -164,11 +139,9 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
 
 
   // Update existing settlement
-  // router.post("/settlements/u/:id/:secret", cleanFormFields, function(req, res){
     router.post("/settlements/u/:id/:secret",function(req, res){
       
-      // console.log(req.body["Causes"]);
-      // console.log(req.body)
+
       let siteOriginCauses = req.body["Original causes"] ;
       let siteOriginPopulation = req.body["Population"]!= null && !isNaN(parseInt(req.body["Population"])) ? parseInt(req.body["Population"]) : null;
       let siteGeographyTopography =   req.body["Topography Feautures"];
@@ -177,7 +150,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
       let siteVulnerabilityCrimeRate = req.body["Crime rate"];
       let siteVulnerabilityPerception = req.body["Perception of Insecurity"];
       let siteVulnerabilityCommunityEngagement =  req.body['Participation in decision-making processes'];
-      let siteVulnerabilityPrevalance = req.body["Prevalence"];
+
       let architecturePhysicalNatureHouseQuality = req.body["Housing Quality"];
       let architecturePhysicalNatureMaterials  =  req.body["Materials"] ;
       let architecturePhysicalNatureDev = req.body["Development Stage"];
@@ -200,20 +173,15 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
       let populaceLifeQualityAccesstoNaturalsettings = req.body['Access to green spaces'];
       let populaceLifeQualityHealthCare = req.body["Access to Health Care"] ;
       let populaceLifeQualityNumberOfHealthCareFacilities = req.body["Access to Health Care"];
-
       let populaceeconomyunemploymentRate =req.body['Unemployment Rate'];
       let populaceeconomyInformalSector =req.body['Employment in the formal sector']; 
       let populaceeconomypopulationIncome =req.body['Population income'];
       let populaceeconomyTenure =req.body["Tenure"];
-
       let populacedemographyGender=req.body["Gender Distribution"];
       let populacedemographyEthnicity=req.body["Ethnic Groups"];
       let populacedemographyageGroups =req.body['Age groups'];
       let populacedemographyEducation=req.body['Access to Education'];
       let populacedemographyNumberOfSchools=req.body["Number of Schools in the Community"];
-
-      // console.log(req.body)
-      // console.log("Healthcare",populaceLifeQualityHealthCare )
 
 
 
@@ -236,7 +204,6 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
               "resilienceToNaturalConditions": siteVulnerabilityResilience,
               "crimeRate": siteVulnerabilityCrimeRate,
               "perceptionOfInsecurity": siteVulnerabilityPerception,
-              // "prevalance":siteVulnerabilityPrevalance,
               "communityEngagement": siteVulnerabilityCommunityEngagement
           }
         },
@@ -302,7 +269,6 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
       
        else{
         console.log("successfully updated");
-        // req.flash('form-notification', "Successfully updated settlement data!");
         res.render("form", {
           sectionData: finalSurveyData,
           modalData : { 
@@ -320,19 +286,13 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
           error: req.flash("form-error"),
           email: "",
         });
-
-
        }
       })
     })
-
-
-
   });
 
   router.post("/final-survey/:id/:secret",(req,res)=>{
 
-    //  console.log(req.body);
      let finalSurvey = new Survey({
       settlementID: req.params.id,
       userSession:req.params.secret,
@@ -351,7 +311,6 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
       qualityOfLifeImportanceScale: isNaN(parseInt(req.body["qualityOfLifeImportanceScale"])) ? 0 : parseInt(req.body["qualityOfLifeImportanceScale"]),
       economyImportanceScale:  isNaN(parseInt(req.body["economyImportanceScale"])) ? 0:parseInt(req.body["economyImportanceScale"]),
       demographyImportanceScale:isNaN(parseInt(req.body["demographyImportanceScale"])) ? 0 :parseInt(req.body["demographyImportanceScale"])
-
      })
      !isNaN(parseInt(req.body["Population"])) ? parseInt(req.body["Population"]) : null
      finalSurvey.save((err)=>{
@@ -376,7 +335,6 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
         } },
         { upsert: true },
         function(err, comment){
-          // res.send(200);
 
           if (err){
             console.log(err)
@@ -395,7 +353,6 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     console.log(req.file.path)
 
 
-    // console.log(req.data)
 
     // stored in the storage db like so, id/secret/formfieldname/imagename
 
@@ -406,9 +363,6 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     let id = req.params.id
     let destination = id + "/" + secretSession + "/"+ formFieldName + "/"  + imageName;
 
-     
-
-   
     async function uploadFile() {
       // Uploads a local file to the bucket
        let response = await storage.bucket(bucketName).upload(filename, {
@@ -434,7 +388,6 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
       try {
         fs.unlinkSync(req.file.path);
         console.log("file removed")
-        //file removed
       } catch(err) {
         console.error(err)
       }
@@ -467,13 +420,8 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
 
         console.log("failed to upload file")
       }
-
-   
     }
-
     uploadFile().catch(console.error);
-
-
   })
 
 
@@ -539,7 +487,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
     Subscriber.updateOne({email:req.body.email},{$set:{subscribed:false}},function(err,user){
       if (err){console.log(err)}
       else{
-        // console.log(user.email + "subscribed");
+        //console.log(user.email + "subscribed");
       }
     })
 

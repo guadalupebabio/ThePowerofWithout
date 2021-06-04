@@ -104,18 +104,6 @@ let settlementSchema = new Schema({
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = function(conn){
   return conn.model('SettlementData', settlementSchema);
 }
