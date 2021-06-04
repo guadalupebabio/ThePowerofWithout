@@ -54,13 +54,15 @@ let settlementSchema = new Schema({
       sourceOfEnergyCook: Array,
       accessToWater: Array,
       accessToSanitation: Array,
-      accessToInternetOrPhoneFare: String,
+      accessToPhoneFare : String,
+      accessToInternet: String,
       physicalStateOfStreets:String,
-      mobilitySystems: Array,
+      mobilityModes: Array,
     },
     density:{
       elevation:String,
       householdPerHouseSize:String,
+      dwellingSize : String,
 
     }
   },

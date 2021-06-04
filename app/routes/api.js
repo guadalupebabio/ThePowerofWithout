@@ -186,26 +186,31 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
       let architectureInfrastructureEnergySourceCook =   req.body["Energy source for cooking"] ;
       let architectureInfrastructureWaterAccess = req.body["Access to Water"] ;
       let architectureInfrastructureSanitationAccess = req.body["Access to Sanitation"] ;
-      let architectureInfrastructureInternetAccess = req.body["Access to Internet"] ;
       let architectureInfrastructureTelecom = req.body["Access to telecommunications"] ;
+      let architectureInfrastructureInternetAccess = req.body["Access to Internet"] ;
       let architectureInfrastructureStreetState = req.body["Road network"] ;
-      let architectureMobilitySystems =   req.body["Mobility Modes"];
-      let architectureDensityHouseHold  = req.body["Households"] ;
+      let architectureInfrastructuremobilityModes = req.body['Mobility Modes'];
       let architectureDensityElevation = req.body["Storeys per building"];
+      let architectureDensityHouseHold  = req.body["Households"] ;
+      let architectureDensitydwellingSize = req.body["Dwelling size"] ;
 
-
-      // let populaceLifeQualityHouseHold =req.body["Household per house"] ;
+      let populaceLifeQualityhappiness = req.body['Level of happiness'];
+      let populaceLifeQualityfood = req.body['Access to food'];
       let populaceLifeQualityProximity = req.body["Proximity to urban amenities"];
+      let populaceLifeQualityAccesstoNaturalsettings = req.body['Access to green spaces'];
       let populaceLifeQualityHealthCare = req.body["Access to Health Care"] ;
-      let populaceLifeQualityEducation=  req.body['Access to Education'] ;
-      let populaceLifeQualityNumberOfSchools = req.body["Number of Schools in the Community"];
-      let populaceLifeQualityInformalSector =req.body['Employment in the formal sector']; 
-      let populaceLifeQualityunemploymentRate = req.body['Unemployment Rate'];
-      let populaceLifeQualityTenure = req.body["Tenure"];
-      let populaceLifeQualityageGroups =req.body['Age groups'];
-      let populaceLifeQualityGender =req.body["Gender Distribution"];
       let populaceLifeQualityNumberOfHealthCareFacilities = req.body["Access to Health Care"];
-      let populaceLifeQualityEthnicity = req.body["Ethnic Groups"]
+
+      let populaceeconomyunemploymentRate =req.body['Unemployment Rate'];
+      let populaceeconomyInformalSector =req.body['Employment in the formal sector']; 
+      let populaceeconomypopulationIncome =req.body['Population income'];
+      let populaceeconomyTenure =req.body["Tenure"];
+
+      let populacedemographyGender=req.body["Gender Distribution"];
+      let populacedemographyEthnicity=req.body["Ethnic Groups"];
+      let populacedemographyageGroups =req.body['Age groups'];
+      let populacedemographyEducation=req.body['Access to Education'];
+      let populacedemographyNumberOfSchools=req.body["Number of Schools in the Community"];
 
       // console.log(req.body)
       // console.log("Healthcare",populaceLifeQualityHealthCare )
@@ -247,36 +252,47 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
             "sourceOfEnergyCook": architectureInfrastructureEnergySourceCook,
             "accessToWater": architectureInfrastructureWaterAccess ,
             "accessToSanitation": architectureInfrastructureSanitationAccess,
-            "physicalStateOfStreets": architectureInfrastructureStreetState,
-            "accessToInternet": architectureInfrastructureInternetAccess,
             "accessToPhoneFare": architectureInfrastructureTelecom,
-            "mobilitySystems":architectureMobilitySystems ,
-          },"density":{
+            "accessToInternet": architectureInfrastructureInternetAccess,
+            "physicalStateOfStreets": architectureInfrastructureStreetState,
+            "mobilityModes":architectureInfrastructuremobilityModes ,
+          },
+          "density":{
             "elevation": architectureDensityElevation,
-            "householdPerHouseSize":architectureDensityHouseHold  ,
+            "householdPerHouseSize":architectureDensityHouseHold,
+            "dwellingSize" : architectureDensitydwellingSize,
           }
         },
         "populace": {
 
-          qualityOfLife:{
+          "qualityOfLife":{
+            "happiness": populaceLifeQualityhappiness,
+            "food": populaceLifeQualityfood,
             "proximity": populaceLifeQualityProximity ,
+            "AccesstoNaturalsettings": populaceLifeQualityAccesstoNaturalsettings,
             "accessToHealthCare":populaceLifeQualityHealthCare,
             "numberOfHealthCareFacilities": populaceLifeQualityNumberOfHealthCareFacilities,
-            "accessToEducation": populaceLifeQualityEducation,
-            "numberOfSchools" :populaceLifeQualityNumberOfSchools ,
-            "unemploymentRate": populaceLifeQualityunemploymentRate,
-            "employmentInTheInformalSector":populaceLifeQualityInformalSector,
-            "tenureRights": populaceLifeQualityTenure,
+          },
+          "economy":{
+            "unemploymentRate": populaceeconomyunemploymentRate,
+            "formalEmployment":populaceeconomyInformalSector,
+            "populationIncome" : populaceeconomypopulationIncome,
+            "tenure": populaceeconomyTenure,
+
+          },
+          "demography":{
+            "gender":populacedemographyGender,
+            "ethinicIdentities": populacedemographyEthnicity , 
             "ageGroups":{          
               "0-5years" :!isNaN(parseInt(req.body["0-5years"])) ?  parseInt(req.body["0-5years"])  : null,
               "19-30years":!isNaN(parseInt(req.body["19-30years"]))?  parseInt(req.body["19-30years"]) : null,
-              "6-12years": !isNaN(parseInt(req.body["6-12years"]))? parseInt(req.body["6-12years"]) : null,
+              "6-12years": !isNaN(parseInt(req.body["6-12years"])) ? parseInt(req.body["6-12years"]) : null,
               "31-50years" : !isNaN(parseInt(req.body["31-50years"])) ?parseInt(req.body["31-50years"]) : null,
               "13-18years": !isNaN(parseInt(req.body["13-18years"]))? parseInt(req.body["13-18years"]) : null ,
               "50+years": !isNaN(parseInt(req.body["50+years"])) ? parseInt(req.body["50+years"]) : null
             },
-            "ethinicIdentities": populaceLifeQualityEthnicity ,
-            "gender":populaceLifeQualityGender
+            "accessToEducation": populacedemographyEducation,
+            "numberOfSchools" :populacedemographyNumberOfSchools
 
           }
         }

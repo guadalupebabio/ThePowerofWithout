@@ -350,7 +350,7 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                       id:"internetAccess",
                       type :"range",
                       options : ["Low","High"],
-                      value: getFormValue(["architecture", "infrastructure", "accessToInternetOrPhoneFare"]),
+                      value: getFormValue(["architecture", "infrastructure", "accessToPhoneFare"]),
                       info:information["Access to telecommunications"]
                     },
                     {
@@ -358,7 +358,7 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                       id:"internetAccess",
                       type :"range",
                       options : ["Low","High"],
-                      value: getFormValue(["architecture", "infrastructure", "accessToInternetOrPhoneFare"]),
+                      value: getFormValue(["architecture", "infrastructure", "accessToInternet"]),
                       info:information["Access to internet"]
                     },
                     {
@@ -399,12 +399,12 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                       info:information["Households"]
                     },
                     {
-                      name : "Dwelling size", //New!! question
+                      name : "Dwelling size", 
                       id : "dwellingSize",
                       type : "range",
-                      options : households, ////New!!
-                      value: getFormValue(["architecture", "density", "Dweling size"]), ////New!!
-                      info:information["Dweling size"] ////New!!
+                      options : households, 
+                      value: getFormValue(["architecture", "density", "dwellingSize"]),
+                      info:information["Dweling size"] 
                     }
                   ],
                 },
