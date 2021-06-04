@@ -136,7 +136,7 @@
         This is a critical challenge that will impact a large number of cities and segments of the global population.\
       Since last year, we’ve been researching and building the tools that are displayed on this website as a sum-up of our research on informlaity.\
        This platform in particular will help individuals advocate for themselves and raise awareness. We’ve spent the last few weeks changing gears\
-        to be able to quickly launch this tool that will help people most unheard but those who should play the main role in this conversation"
+       to be able to quickly launch this tool that will help people most unheard but those who should play the main role in this conversation"
     },
     {
       label : "GET IN TOUCH",
@@ -144,8 +144,8 @@
 
     },
     {
-      label : "WITHOUT PARTNERS",
-      info : "Norman Foster Foundation, Universidad de Guadalajara, Ciuculo de amigos, SuSanA, EACO Uganda, among others."
+      label : "WITHOUT COLLABORATORS",
+      info : "Norman Foster Foundation, Universidad de Guadalajara, Ciuculo de amigos, SuSanA, EACO Uganda, Indian Dreams Foundation, among others."
 
     },
 
