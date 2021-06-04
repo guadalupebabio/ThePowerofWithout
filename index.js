@@ -30,14 +30,10 @@ const PORT = process.env.PORT || 3000,
     process.env.MONGODB_PASSWORD
   )}@cluster0-d6pne.mongodb.net/the_power_of_without?retryWrites=true&w=majority`,
   APP_DB_URL = `mongodb+srv://${process.env.APP_MONGODB_USERNAME}:${process.env.APP_MONGODB_PASSWORD}@cluster1.oxiff.mongodb.net/test?retryWrites=true&w=majority`;
-// const PORT = process.env.PORT || 3000,
-//       DB_URL = `mongodb+srv://hillaryt:${encodeURIComponent("tapiwa")}@cluster0-d6pne.mongodb.net/the_power_of_without?retryWrites=true&w=majority`,
-//       APP_DB_URL = `mongodb+srv://hillaryt:tapiwa@cluster1.oxiff.mongodb.net/test?retryWrites=true&w=majority`;
+
 // ** SETUP **
 app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({ extended: true }));
-// for parsing multipart/form-data
-// app.use(upload.array());
 app.use(bodyParser.json());
 app.set("views", "./views");
 app.set("view engine", "pug");

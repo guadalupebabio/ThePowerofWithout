@@ -243,23 +243,6 @@ settlements.then(response => response.json())
           }
       });
       
-    /*Set real sum 
-      settlements.then(response => response.json())
-      .then(data => {
-        console.log(data)
-        let totalpop = 0;
-        for (var i = 0; i < data.length; ++i){
-          let pop = data[i]["site"]["origin"]["population"];
-          if (typeof pop == Number) {
-            totalpop+=pop;
-          }
-        };
-      });*/
-/*sliderControl2 = L.control.sliderControl({
-  position: "topright",
-  layer: settlementslayer,
-  range: true
-})*/
 
   //create legend for app map
   var legendapp = L.control({position: 'bottomright'});
@@ -348,8 +331,7 @@ settlements.then(response => response.json())
         checkCountries(country); //adds country into list if not there already
 
         addclustergroup(country, circle); //adds the circle into a clustergroup based on the country
-        //perhaps comment out this line?
-        //markers.addLayer(circle);
+
           }
       }
 
@@ -423,12 +405,7 @@ settlements.then(response => response.json())
     let popQuaAge = getFormValue(["populace","qualityOfLife","ageGroups"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ageGroups"]);
     let popQuaEth = getFormValue(["populace","qualityOfLife","ethinicIdentities"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ethinicIdentities"]);
     let popQuaGen = getFormValue(["populace","qualityOfLife","gender"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","gender"]);
-    //getFormValue("site","origin","population")
-    //getFormValue("site","geography","topography")
 
-    //let strtest = (data["site"]["vulnerability"] == null ? "N/A": data["site"]["vulnerability"]["resilienceToNaturalConditions"]);
-    //console.log(strtest)
-    
     sidebarinst.innerHTML=
       "<span class = \"name\"> Name:</span>" + data["name"] == null ? "Unnamed Settlement": data["name"] + "<br>" 
       + "<span class = \"labels\">SITE</span>" + "<br>" 
@@ -471,18 +448,7 @@ settlements.then(response => response.json())
       + "<span class = \"ageGroups\"> Age Groups: </span>" + popQuaAge + "<br>" 
       + "<span class = \"ethinicIdentities\"> Ethnic Identities: </span>" +  popQuaEth + "<br>" 
       + "<span class = \"gender\"> Gender Roles: </span>" + popQuaGen + "<br>" 
-    
-
-      /*"<span class = \"name\">" + name.toUpperCase() + "</span>" + "<br>" +
-      "<span class = \"country\">" + country + ", " + continent + "</span>" +  "<br>" + "<br>" + "<br>" +
-      "<span class = \"labels\">ORIGIN</span>" + "<br>" +  "<br>" +
-      "<span class = \"tags\">" + wcauses.bold() + ": " + finalcauses + "</span>"  + 
-      "<span class = \"tags\">" + wpop.bold() + ": " + finalpop + "</span>" + 
-      createspans(origins) +  "<br>" +
-      "<span class = \"labels\">ARCHITECTURE</span>" + "<br>" + "<br>" + "<br>" + 
-      createspans(architectures)+ "<br>"+
-      "<span class = \"labels\">POPULACE </span>" + "<br>"+ "<br>" + "<br>" +
-      createspans(populaces) + "<br>"*/
+  
       
   }
 

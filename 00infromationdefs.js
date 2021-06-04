@@ -40,8 +40,6 @@ const information = {
     "Gender Distribution": "Community population gender distribution.",
     "Access to Education":" Percentage of people with access to primary schools.",
     "Number of Schools in the Community" : "Number of Schools in the Community"
-
-
 };
 
 module.exports ={information}
