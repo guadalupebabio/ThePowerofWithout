@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 .links{
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -21,7 +20,6 @@ nav a {
   margin:1rem;
   font-weight: bold;
 }
-
 .nav-after-scroll {
   background: #242424;
   color: white;
@@ -42,7 +40,6 @@ nav a {
   background-color: white;
   font-weight: bold;
 }
-
 #google_translate_element {
   margin-top: 10px;
 }
@@ -57,14 +54,11 @@ nav a {
   background-repeat: no-repeat;
   margin-left: 1rem;
 }
-
 nav a:hover {
   color: #242424;
   font-weight: bold;
   background-color:white;
   opacity:0.8
-
-
 }
 
 .nav-collapsed-container{
@@ -73,21 +67,14 @@ nav a:hover {
 
 
 @media only screen and (min-width:768px) and (max-width: 1200px) {
-
-
 }
 
 
 @media only screen and (max-width: 910px) {
-
   #jumbotron{
 
     height:100vh!important;
     background-position: inherit!important;
-
-
-
-
   }
   nav {
     display:none!important;
@@ -114,8 +101,6 @@ nav a:hover {
      background-repeat:no-repeat;
      background-size:30px 30px;
      margin:1rem 0 1rem 1rem;
-
-
   }
   .taxonomy-description{
     left:24px!important;
@@ -128,14 +113,10 @@ nav a:hover {
   }
   .contribution-description{
     left:24px!important;
-
   }
 
-
   .contribution-link a{
-
     left:24px!important;
-
   }
   .update-div{
 
@@ -146,10 +127,8 @@ nav a:hover {
 
   }
   .update-div-alternate{
-
     position:relative!important;
     top:72%!important;
-
   }
 
   .update-div-shortened{
@@ -161,14 +140,12 @@ nav a:hover {
   .update-div-shortened-alternate{
     position:relative!important;
     top:72%!important;
-
   }
   .level-left{
     width: 60%;
-
   }
-  .level-right{
 
+  .level-right{
     width: 40%;
   }
 
@@ -177,27 +154,21 @@ nav a:hover {
 
   }
   #google_translate_element{
-
     width : 40%!important;
   }
 
   .goog-te-combo{
-
     width : 50%!important;
-
   }
   .skiptranslate{
-
    display:flex;
    flex-direction:column
   }
   .goog-logo-link{
-
     width: 20%;
   }
 
   .full-height{
-
     height:auto!important;
   }
  
@@ -208,24 +179,22 @@ nav a:hover {
     width:686px;
     background-size: 100%;
     background-repeat: no-repeat;
-
   }
+
   .taxonomy-architecture-div{
     display:none;
   }
 
   .section-container{
-
      width:inherit;
      height:inherit;
      display:flex;
-     flex-direction:column;
-    
+     flex-direction:column; 
   }
+
   .project-description{
     position: unset!important;
     width:100%!important;
-
     left:0px!important;
     height:100%!important;
   }
@@ -237,14 +206,11 @@ nav a:hover {
   }
 
   .picture-1{
-
     position:unset!important;
     width: 85vw!important;
     height:202px!important;
     background-size:100%;
     background-repeat: no-repeat
-
-
   }
   .picture-2{
     display:none;
@@ -274,13 +240,11 @@ nav a:hover {
     justify-content:space-between;
   }
   .footer-copy-right{
-
     margin-top:1rem!important;
   }
 
   .team-summary-title{
-    margin-bottom:1rem!important;
-    
+    margin-bottom:1rem!important; 
   }
   .team{
     width:auto!important;
@@ -302,7 +266,6 @@ nav a:hover {
   .nav-collapsed-top{
     display:flex;
     flex-direction:row;
-    
   }
 
   .nav-collapsed-container{
@@ -321,7 +284,6 @@ nav a:hover {
    
   }
   .black-collapsed-links{
-
     display:flex!important;
     visibility:visible!important;
     background-color: #242424;
@@ -331,19 +293,16 @@ nav a:hover {
     margin:0.5rem;
     transition: transform 0.5s;
     flex-direction:column;
-
   }
 
 
   .black-collapsed-links a {
-
     color:white;
     font-weight:bold;
     margin:0.5rem;
     width: fit-content
   }
   .black-collapsed-links a:hover{
-
      color:#242424;
      background-color:white;
   }
@@ -369,11 +328,9 @@ nav a:hover {
     height:686px!important;
     background-size: 100%;
     background-repeat: no-repeat;
-  
   }
 
   .picture-1{
-
     width: 100%!important;
     height: 500px!important;
     background-size: 100%!important;
@@ -385,18 +342,11 @@ nav a:hover {
 
 
 @media only screen and (max-width: 721px) {
-  
-
 }
 
 @media only screen  and (min-width: 464px) and (max-width: 721px) {
-
   .taxonomy-architecture-div-mobile{
-
     width:100%!important;
     height:500px!important;
-
-  }
-  
-
+  }  
 }
