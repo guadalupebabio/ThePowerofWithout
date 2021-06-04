@@ -275,15 +275,18 @@
   font-size: 14px;
 }
 .project-description-gif {
-  
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
   width: 500px;
-  height: 250px;
+  height: 150px;
   background: url("../../assets/CW_mutant-gif_05.gif");
   background-repeat: no-repeat ; 
   object-fit: scale-down;
   background-size: 500px ;
-  margin-top: 5rem;
-  margin-left:5rem;
+  margin-top: 3rem;
+
 }
 
 .picture-1 {
