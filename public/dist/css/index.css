@@ -335,15 +335,16 @@
   font-size: 14px;
 }
 .project-description-gif {
+  
   width: 500px;
   height: 250px;
-  /* background-image:url("../../assets/CW_mutant-gif_05.gif"); */
   background: url("../../assets/CW_mutant-gif_05.gif");
   background-repeat: no-repeat ; 
-  background-size : 500px 200px;
-  margin-left:4rem;
-  /* background-image: url("https://dam-prod.media.mit.edu/thumb/2020/01/28/Comp 1.gif.1400x1400.gif");  */
-  /* background-position: 44.4566158862791% 51.449602601156094%; */
+  object-fit: scale-down;
+  /* background-size : 500px 200px; */
+  background-size: 500px ;
+  margin-top: 5rem;
+  margin-left:5rem;
 }
 
 .picture-1 {
