@@ -125,7 +125,7 @@ app.get("/shareknowledge/u/", function (req, res) {
 app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
   // Update the settlement
   User.findOne(
-    { secret: req.params.secret, contribution: req.params.contribution },
+    {secret: req.params.secret, contribution: req.params.contribution },
     function (err, user) {
       console.log()
       Settlement.findOne({ _id: user.contribution }, function (
@@ -199,7 +199,6 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                       options: ["Squatting","Refugee Camp","Illegal Subdivision","Other",],
                       value: getFormValue(["site", "origin", "causes"]),
                       info: information["Origin"]
-                        ,
                     },
                     {
                       name: "Population",
@@ -251,8 +250,6 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                       value: getFormValue(["site", "vulnerability", "crimeRate"]),
                       info: information["Crime Rate"]
                     },
-
-
                     {
                       name: "Perception of Insecurity",
                       id:"perceptionOfInsecurity",
@@ -268,114 +265,121 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                       options:  ["Low","High"],
                       value:  getFormValue(["site", "vulnerability", "communityEngagement"]),
                       info:information["Participation in decision-making processes"]                      
-
                     }
                   ],
                 },
               ],
-            },{
-
+            },
+            {
               section: "Architecture",
               subsections:[
-
                 { label : "PHYSICAL NATURE",
                   questions : [
-
-                    { name :"Housing Quality", 
+                    { 
+                      name :"Housing Quality", 
                       id: "houseQuality",
                       type : "range",
                       options:  ["Inadequate","Optimal"],
                       value: getFormValue(["architecture", "physicalNature", "houseQuality"]),
                       info:information["Housing quality"]
-                    },{
-                       name : "Materials",
-                       id:"materials",
-                       type : "checkbox",
-                       options : ["Mud", "Brick","Concrete","Wood","Corrugated sheet", "Tarpaulin / Tensile structures", "Cardboard","Other"], //Modified
-                       value: getFormValue(["architecture", "physicalNature", "materials"]),
-                       info:information["Materials"]            
-                    },{
-                        name: "Development Stage",
-                        id:"devStage",
-                        type:"range",
-                        options:["Temporary","Established"],
-                        value:getFormValue(["architecture", "physicalNature", "developmentState"]),
-                        info:information["Development Stage"] 
+                    },
+                    {
+                      name : "Materials",
+                      id:"materials",
+                      type : "checkbox",
+                      options : ["Mud", "Brick","Concrete","Wood","Corrugated sheet", "Tarpaulin / Tensile structures", "Cardboard","Other"], //Modified
+                      value: getFormValue(["architecture", "physicalNature", "materials"]),
+                      info:information["Materials"]            
+                    },
+                    {
+                      name: "Development Stage",
+                      id:"devStage",
+                      type:"range",
+                      options:["Temporary","Established"],
+                      value:getFormValue(["architecture", "physicalNature", "developmentState"]),
+                      info:information["Development Stage"] 
                     }
                   ]
-                },{
+                },
+                {
                   label: "INFRASTRUCTURE",
-                  questions:[{
-                    name:"Access to Energy",
-                    id:"energyAccess",
-                    type:"range",
-                    options : ["Low","High"],
-                    value: getFormValue(["architecture", "infrastructure", "accessToEnergy"]),
-                    info:information["Access to Energy"]
-                  },
-                  { 
-                    name : "Energy Sources",
-                    id:"energySource",
-                    type:"checkbox",
-                    options:["Electricity","LPG, natural gas","Kerosene, other liquid fuel","Coal, lignite","Firewood, straw, dung or charcoal","Other"],
-                    value: getFormValue(["architecture", "infrastructure", "sourceOfEnergy"]),
-                    info:information["Energy"]
+                  questions:[
+                    {
+                      name:"Access to Energy",
+                      id:"energyAccess",
+                      type:"range",
+                      options : ["Low","High"],
+                      value: getFormValue(["architecture", "infrastructure", "accessToEnergy"]),
+                      info:information["Access to Energy"]
+                    },
+                    { 
+                      name : "Energy Sources",
+                      id:"energySource",
+                      type:"checkbox",
+                      options:["Electricity","LPG, natural gas","Kerosene, other liquid fuel","Coal, lignite","Firewood, straw, dung or charcoal","Other"],
+                      value: getFormValue(["architecture", "infrastructure", "sourceOfEnergy"]),
+                      info:information["Energy"]
 
-                  },{ 
-                    name : "Energy source for cooking",
-                    id:"sourceOfEnergycook",
-                    type:"checkbox",
-                    options:["Electricity","LPG, natural gas","Kerosene, other liquid fuel","Coal, lignite","Firewood, straw, dung or charcoal","Don’t cook","Other"],
-                    value: getFormValue(["architecture", "infrastructure", "sourceOfEnergyCook"]),
-                    info:information["Energy for Cooking"]
-
-                  }
-                  ,{
-                    name : "Access to Water",
-                    id:"waterAccess",
-                    type : "double-range",
-                    options : ["Low","High","Public","Private"],
-                    value: getFormValue(["architecture", "infrastructure", "accessToWater"]),
-                    info:information["Access to Water"]                  
-                  },{
-                    name : "Access to Sanitation",
-                    id:"sanitationAccess",
-                    type : "double-range",
-                    options : ["Low","High","Communal","Private"], //Updated
-                    value: getFormValue(["architecture", "infrastructure", "accessToSanitation"]),
-                    info:information["Access to sanitation"]
-                  },{
-                    name:"Access to telecommunications",
-                    id:"internetAccess",
-                    type :"range",
-                    options : ["Low","High"],
-                    value: getFormValue(["architecture", "infrastructure", "accessToInternetOrPhoneFare"]),
-                    info:information["Access to telecommunications"]
-                  },{
-                    name:"Access to Internet",
-                    id:"internetAccess",
-                    type :"range",
-                    options : ["Low","High"],
-                    value: getFormValue(["architecture", "infrastructure", "accessToInternetOrPhoneFare"]),
-                    info:information["Access to internet"]
-                  },{
-                    name:"Road network",
-                    id:"roadNetwork",
-                    type :"range",
-                    options : ["Not Paved","Paved"],
-                    value: getFormValue(["architecture", "infrastructure", "physicalStateOfStreets"]),
-                    info:information["Physical state Of the streets"] 
-                  },{
-                    name:"Mobility Modes",
-                    id: "mobilityModes",
-                    type :"checkbox",
-                    options : ["Walk","Bike","Motorcycle", "Animal","Informal transportation, tuctuc", "Informal transportation, microbuses","Car","Public Transportation, bus","Public Transportation, subway","Other"], 
-                    value: getFormValue(["architecture", "infrastructure", "MobilityModes"]),
-                    info:information["Mobility Modes"]
-
-                  }
-                ]
-                },{
+                    },
+                    { 
+                      name : "Energy source for cooking",
+                      id:"sourceOfEnergycook",
+                      type:"checkbox",
+                      options:["Electricity","LPG, natural gas","Kerosene, other liquid fuel","Coal, lignite","Firewood, straw, dung or charcoal","Don’t cook","Other"],
+                      value: getFormValue(["architecture", "infrastructure", "sourceOfEnergyCook"]),
+                      info:information["Energy for Cooking"]
+                    },
+                    {
+                      name : "Access to Water",
+                      id:"waterAccess",
+                      type : "double-range",
+                      options : ["Low","High","Public","Private"],
+                      value: getFormValue(["architecture", "infrastructure", "accessToWater"]),
+                      info:information["Access to Water"]                  
+                    },
+                    {
+                      name : "Access to Sanitation",
+                      id:"sanitationAccess",
+                      type : "double-range",
+                      options : ["Low","High","Communal","Private"], //Updated
+                      value: getFormValue(["architecture", "infrastructure", "accessToSanitation"]),
+                      info:information["Access to sanitation"]
+                    },
+                    {
+                      name:"Access to telecommunications",
+                      id:"internetAccess",
+                      type :"range",
+                      options : ["Low","High"],
+                      value: getFormValue(["architecture", "infrastructure", "accessToInternetOrPhoneFare"]),
+                      info:information["Access to telecommunications"]
+                    },
+                    {
+                      name:"Access to Internet",
+                      id:"internetAccess",
+                      type :"range",
+                      options : ["Low","High"],
+                      value: getFormValue(["architecture", "infrastructure", "accessToInternetOrPhoneFare"]),
+                      info:information["Access to internet"]
+                    },
+                    {
+                      name:"Road network",
+                      id:"roadNetwork",
+                      type :"range",
+                      options : ["Not Paved","Paved"],
+                      value: getFormValue(["architecture", "infrastructure", "physicalStateOfStreets"]),
+                      info:information["Physical state Of the streets"] 
+                    },
+                    {
+                      name:"Mobility Modes",
+                      id: "mobilityModes",
+                      type :"checkbox",
+                      options : ["Walk","Bike","Motorcycle", "Animal","Informal transportation, tuctuc", "Informal transportation, microbuses","Car","Public Transportation, bus","Public Transportation, subway","Other"], 
+                      value: getFormValue(["architecture", "infrastructure", "MobilityModes"]),
+                      info:information["Mobility Modes"]
+                    }
+                  ],
+                },
+                {
                   label: "DENSITY",
                   questions:[
                     {
@@ -402,19 +406,31 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                       value: getFormValue(["architecture", "density", "Dweling size"]), ////New!!
                       info:information["Dweling size"] ////New!!
                     }
-
-
-                  ]
-
-                }
-              ]
-            },{
+                  ],
+                },
+              ],
+            },
+            {
               section : "POPULACE",
               subsections : [
-
                 { label : "QUALITY OF LIFE",
                   questions : [
-         
+                    {
+                      name : "Level of happiness",
+                      id : "happiness",
+                      type :"range",
+                      options: ["Low","High"],
+                      value:  getFormValue(["populace", "qualityOfLife", "happiness"]),
+                      info:information["Level of happiness"]
+                    },
+                    {
+                      name : "Access to food",
+                      id : "food",
+                      type :"range",
+                      options: ["Low","High"],
+                      value:  getFormValue(["populace", "qualityOfLife", "food"]),
+                      info:information["Access to food"]
+                    },
                     {
                       name : "Proximity to urban amenities",
                       id : "publicProximity",
@@ -422,7 +438,8 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                       options: minutes,
                       value:  getFormValue(["populace", "qualityOfLife", "proximity"]),
                       info:information["Distance to public areas"]
-                   },{
+                    },
+                    {
                       name : "Access to green spaces",////New!!
                       id: "naturalSettingsAccess",
                       type :"range",
@@ -445,52 +462,64 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                       options: clinics,
                       value:  getFormValue(["populace", "qualityOfLife", "numberOfHealthCareFacilities"]),
                       info:information["HealthCare Facilities"]
-                    },                      
-                    {
-                      name : "Access to Education",
-                      id : "educationAccess",
-                      type:"range",
-                      options : ["Low" ,"High"],
-                      value:getFormValue(["populace", "qualityOfLife", "accessToEducation"]),
-                      info:information["Access to Education"]
                     },
+                  ],
+                },
+                { label : "ECONOMY",
+                  questions : [
                     {
-                      name : "Number of Schools",
-                      id : "schoolsNumber",
-                      type:"text",
-                      placeholder:"Number",
-                      value:getFormValue(["populace", "qualityOfLife", "schoolsNumber"]),
-                      info: information["Number of Schools in the Community"]
-                    }                     
-                    ,{
                       name :"Unemployment Rate",
                       id : "unemploymentRate",
                       type:"range",
                       options:["Low","High"],
-                      value:getFormValue(["populace", "qualityOfLife", "unemploymentRate"]),
+                      value:getFormValue(["populace", "economy", "unemploymentRate"]),
                       info:information["Unemployment rate"]
-                    },{
+                    },
+                    {
                       name:"Employment in the formal sector",
                       id : "formalEmployment",
                       type:"range",
                       options :percent,
-                      value: getFormValue(["populace", "qualityOfLife", "employmentInTheInformalSector"]),
+                      value: getFormValue(["populace", "economy", "formalEmployment"]),
                       info:information["Employment in the formal sector"]
-                    },{
+                    },
+                    {
                       name:"Population income", //New
                       id : "populationIncome",
                       type:"range",
                       options :percent,
-                      value: getFormValue(["populace", "qualityOfLife", "Populationincome"]),//New
+                      value: getFormValue(["populace", "economy", "Populationincome"]),//New
                       info:information["Population income"]//New
-                    },{
+                    },
+                    {
                       name :"Tenure",//Updated
                       id : "tenure",
                       type:"range",
                       options :["No entitlement","Entitlement"], //New
-                      value:  getFormValue(["populace", "qualityOfLife", "Tenure"]),//Updated
+                      value:  getFormValue(["populace", "economy", "Tenure"]),//Updated
                       info:information["Tenure"]  //Updated
-                    },{
+                    }
+                  ],
+                },
+                { label : "DEMOGRAPHY",
+                  questions : [
+                    {
+                      name : "Gender Distribution", 
+                      type:"range",
+                      id:"gender",
+                      options : differences,
+                      value:getFormValue(["populace", "demography", "GenderDistribution"]),
+                      info:information["Gender Distribution"] 
+                    },
+                    {
+                      name:"Ethnic Groups",
+                      id  : "ethinicIdentities",
+                      type:"text",
+                      placeholder:"List groups",
+                      value:getFormValue(["populace", "demography", "ethinicIdentities"]),
+                      info:information["Ethnic Groups"]
+                    },
+                    {
                       name : "Age Distribution",//Updated
                       type:"grid",
                       id:"ageGroups",
@@ -499,29 +528,31 @@ app.get("/shareknowledge/u/:contribution/:secret", function (req, res) {
                       [{label:"6-12 years",id:"6-12years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","6-12years"])},
                       {label:"31-50 years",id:"31-50years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","31-50years"])}],
                       [{label:"13-18 years",id:"13-18years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","13-18years"])},
-                      {label:"50 or more",id:"50+years",value:getFormValue(["populace", "qualityOfLife", "ageGroups","50+years"])}]],
+                      {label:"50 or more",id:"50+years",
+                      value:getFormValue(["populace", "demography", "ageGroups","50+years"])}]],
                       info:information["Age Distribution"]
-                    },{
-                      name : "Gender Distribution", 
+                    },                      
+                    {
+                      name : "Access to Education",
+                      id : "accessToEducation",
                       type:"range",
-                      id:"gender",
-                      options : differences,
-                      value:getFormValue(["populace", "qualityOfLife", "GenderDistribution"]),
-                      info:information["Gender Distribution"] 
+                      options : ["Low" ,"High"],
+                      value:getFormValue(["populace", "demography", "accessToEducation"]),
+                      info:information["Access to Education"]
                     },
                     {
-                      name:"Ethnic Groups",
-                      id  : "ethinicIdentities",
+                      name : "Number of Schools",
+                      id : "schoolsNumber",
                       type:"text",
-                      placeholder:"List groups",
-                      value:getFormValue(["populace", "qualityOfLife", "ethinicIdentities"]),
-                      info:information["Ethnic Groups"]
-                    }
-                    
-                  ]  
-                }
-              ]       
-            }
+                      placeholder:"Number",
+                      value:getFormValue(["populace", "demography", "schoolsNumber"]),
+                      info: information["Number of Schools in the Community"]
+                    } 
+
+                  ],
+                },                         
+              ],  
+            },
           ],
         };
 

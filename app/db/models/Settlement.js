@@ -67,16 +67,24 @@ let settlementSchema = new Schema({
 
   populace: {
     qualityOfLife: {
+      happiness: String,
+      food: String,
       proximity:String,
+      AccesstoNaturalsettings: String,
       accessToHealthCare: String,
       numberOfHealthCareFacilities:String,
-      accessToEducation: String,
-      schoolsNumber: Number,
+      
+    },
+    economy:{
       unemploymentRate: String,
-      employmentInTheInformalSector:String,
-      ownershipRights: String,
-      ethinicIdentities:String,
+      formalEmployment:String,
+      populationIncome: String,
+      tenure: String,
+
+    },
+    demography:{
       gender:String,
+      ethinicIdentities:String,
       ageGroups:{
         "0-5years" : Number,
         "19-30years": Number,
@@ -85,6 +93,9 @@ let settlementSchema = new Schema({
         "13-18years": Number,
         "50+years": Number
       },
+      accessToEducation : String,
+      schoolsNumber: String,
+
     }
   },
 

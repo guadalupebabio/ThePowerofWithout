@@ -24,20 +24,22 @@ const information = {
     "Storeys per building": "Average number of storeys/levels per building." ,
     "Households": "Average number of residents per dweling.",
     "Dweling size":"Average number of rooms per dweling",
+    "Level of happiness":"How happy is the people in the community",
+    "Access to food":"availability of sufficient quantities of food of appropriate quality",
     "Distance to public areas": "Average distance to public areas or leisure activities such as playgrounds, small retail, community centres, etc.",
     "Access to Natural settings":"Average distance to green space or natural enviroments.", 
     "Access to public space": "Average proximity to public areas or leisure activities.",
     "Access to Health Care":"Percentage of people with access to health care systems.",
     "HealthCare Facilities":"Number of hospitals, clinics or health cares facilities that cater to the Community.",  
-    "Access to Education":" Percentage of people with access to primary schools.",
-    "Number of Schools in the Community" : "Number of Schools in the Community",
     "Unemployment rate":"Percent of the labor force that is jobless.",
     "Employment in the formal sector": "Percentage of people working in the formal sector with recognized income sources and income taxes.",
     "Population income":"Percentege of population below the poverty line as outlined by United Nations, $1.90 per day",
     "Tenure":"Legal right over dweling tenure.",
     "Age Distribution": "Percentage of population in each age group.",
     "Ethnic Groups" : "Identify Ethnic categories in the Community.",
-    "Gender Distribution": "Community population gender distribution."
+    "Gender Distribution": "Community population gender distribution.",
+    "Access to Education":" Percentage of people with access to primary schools.",
+    "Number of Schools in the Community" : "Number of Schools in the Community"
 
 
 };
