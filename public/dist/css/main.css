@@ -52,9 +52,12 @@ nav a {
 }
 .logo-div-black {
   background-image: url("../../assets/W_black.png");
-  width: 206px;
-  height: 60px;
-  background-size: 206px 60px;
+  /* width: 206px; */
+  width: 200px;
+  /* height: 60px; */
+  object-fit: scale-down;
+  /* background-size: 206px 60px; */
+  background-size: 206px ;
   background-repeat: no-repeat;
   margin-left: 1rem;
 }
@@ -189,15 +192,12 @@ nav a:hover {
 
   }
   nav {
-    /* width: 50%; */
     display:none!important;
   } 
 
   .logo-div-black{
     
     margin:0 0 0 1rem !important;
-    /* margin-left:1rem; */
-
 
   }
   .nav-collapsed-container{
@@ -220,23 +220,16 @@ nav a:hover {
 
   }
   .taxonomy-description{
-    /* width:20%!important; */
-
     left:24px!important;
     top: 141px!important;
     width: 80%!important;
-
-    /* height:0!important; */
   }
 
   .taxonomy-description p{
     font-size: 2rem!important;
-
-    /* height:0!important; */
   }
   .contribution-description{
     left:24px!important;
-
 
   }
 
@@ -252,9 +245,6 @@ nav a:hover {
     width:100%!important;
     position:relative!important;
     top:72%!important;
-
-
-
 
   }
   .update-div-alternate{
@@ -285,8 +275,6 @@ nav a:hover {
   }
 
   nav a{
-
-    /* width:20%; */
     margin:2rem;
 
   }
@@ -319,13 +307,7 @@ nav a:hover {
   .taxonomy-architecture-div-mobile{
     display:block!important;
     background-image: url("../../assets/Rectangle\ 14.png");
-    /* /* width: 686px; */
     width:686px;
-    /* height: 631px;  */
-    /* width:100%!important; */
-    /* height:325px!important; */
-    /* height:40%!important; */
-    
     background-size: 100%;
     background-repeat: no-repeat;
 
@@ -344,7 +326,6 @@ nav a:hover {
   }
   .project-description{
     position: unset!important;
-    /* width:inherit!important; */
     width:100%!important;
 
     left:0px!important;
@@ -361,11 +342,8 @@ nav a:hover {
   .picture-1{
 
     position:unset!important;
-    /* width:300px!important;
-     */
-     width: 85vw!important;
+    width: 85vw!important;
     height:202px!important;
-    /* background-size: 353px 202px!important; */
     background-size:100%;
     background-repeat: no-repeat
 
@@ -397,7 +375,6 @@ nav a:hover {
     flex-direction:row!important;
     margin:0.5rem;
     justify-content:space-between;
-    /* width:100vw; */
   }
   .footer-copy-right{
 
@@ -405,7 +382,6 @@ nav a:hover {
   }
 
   .team-summary-title{
-
     margin-bottom:1rem!important;
     
   }
@@ -432,18 +408,12 @@ nav a:hover {
     
   }
 
-
   .nav-collapsed-container{
-
     display:flex;
     flex-direction:column;
-    /* align-items:center; */
-
-
 
   }
   .collapsed-links{
-    /* margin-left:1rem; */
     display:flex!important;
     visibility:visible!important;
     background-color:white;
@@ -462,7 +432,6 @@ nav a:hover {
     width:80%;
     opacity:0.9;
     margin:0.5rem;
-    /* transform: translateY(1rem)!important; */
     transition: transform 0.5s;
     flex-direction:column;
 
@@ -483,9 +452,7 @@ nav a:hover {
   }
 
   .collapsed-links-hidden{
-    /* display:none; */
     visibility:hidden;
-    /* transform: translateY(-2rem); */
     transition: transform 0.2s!important;
   }
 
@@ -495,8 +462,6 @@ nav a:hover {
     margin:1rem;
   }
 
-  
-
 }
 
 @media only screen and (min-width:768px) and (max-width: 910px) {
@@ -504,9 +469,6 @@ nav a:hover {
   .taxonomy-architecture-div-mobile{
     display:block!important;
     background-image: url("../../assets/Rectangle\ 14.png");
-    /* width: 686px;
-    height: 631px; */
-
     height:686px!important;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -526,13 +488,6 @@ nav a:hover {
 
 
 @media only screen and (max-width: 721px) {
-
-  /* .taxonomy-architecture-div-mobile{
-
-    height:325px!important;
-
-  
-  } */
   
 
 }
