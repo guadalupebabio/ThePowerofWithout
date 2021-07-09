@@ -13,6 +13,14 @@ let express = require("express"),
     validateEmail = require("../middleware/validateEmail.js"),
     sendEmail = require("../util/email.js"),
     checkPrivacyChecked = require("../middleware/checkPrivacyChecked.js");
+    indicator = require("../util/javascript_analysis.js").settlementAnalysis
+
+const util = require('util')
+const csv = require('csv-parser');
+
+async function settAnalysis(data, coords) {
+  return await indicator(data, coords)
+}
     
 // Imports the Google Cloud client library.
 const {Storage} = require('@google-cloud/storage');
@@ -183,111 +191,141 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
       let populacedemographyEducation=req.body['Access to Education'];
       let populacedemographyNumberOfSchools=req.body["Number of Schools in the Community"];
 
-
+      let settlementData = req.body
 
       User.findOne({secret: req.params.secret, contribution: req.params.contribution}, function(err, user){
-      Settlement.findOneAndUpdate(
-        {
-          _id: req.params.id
-        },
-        {
-        "site": {
-          "origin": {
-            "causes": siteOriginCauses,
-            "population":siteOriginPopulation
-          },
-          "geography": {
-            "topography": siteGeographyTopography,
-            "withinCities": siteGeographyWithin,
-          },
-          "vulnerability": {
-              "resilienceToNaturalConditions": siteVulnerabilityResilience,
-              "crimeRate": siteVulnerabilityCrimeRate,
-              "perceptionOfInsecurity": siteVulnerabilityPerception,
-              "communityEngagement": siteVulnerabilityCommunityEngagement
-          }
-        },
-        "architecture": {
-          "physicalNature": {
-            "houseQuality": architecturePhysicalNatureHouseQuality,
-            "materials": architecturePhysicalNatureMaterials,
-            "developmentState": architecturePhysicalNatureDev
-          },
-          "infrastructure": {
-            "accessToEnergy": architectureInfrastructureEnergyAccess,
-            "sourceOfEnergy": architectureInfrastructureEnergySource,
-            "sourceOfEnergyCook": architectureInfrastructureEnergySourceCook,
-            "accessToWater": architectureInfrastructureWaterAccess ,
-            "accessToSanitation": architectureInfrastructureSanitationAccess,
-            "accessToPhoneFare": architectureInfrastructureTelecom,
-            "accessToInternet": architectureInfrastructureInternetAccess,
-            "physicalStateOfStreets": architectureInfrastructureStreetState,
-            "mobilityModes":architectureInfrastructuremobilityModes ,
-          },
-          "density":{
-            "elevation": architectureDensityElevation,
-            "householdPerHouseSize":architectureDensityHouseHold,
-            "dwellingSize" : architectureDensitydwellingSize,
-          }
-        },
-        "populace": {
+        Settlement.findOne({
+          _id: req.params.id,
+        }).then((settlement) => {
+          let coords = settlement['geolocation']['coordinates'];
 
-          "qualityOfLife":{
-            "happiness": populaceLifeQualityhappiness,
-            "food": populaceLifeQualityfood,
-            "proximity": populaceLifeQualityProximity ,
-            "AccesstoNaturalsettings": populaceLifeQualityAccesstoNaturalsettings,
-            "accessToHealthCare":populaceLifeQualityHealthCare,
-            "numberOfHealthCareFacilities": populaceLifeQualityNumberOfHealthCareFacilities,
-          },
-          "economy":{
-            "unemploymentRate": populaceeconomyunemploymentRate,
-            "formalEmployment":populaceeconomyInformalSector,
-            "populationIncome" : populaceeconomypopulationIncome,
-            "tenure": populaceeconomyTenure,
+          const koppenData = [];
 
-          },
-          "demography":{
-            "gender":populacedemographyGender,
-            "ethinicIdentities": populacedemographyEthnicity , 
-            "ageGroups":{          
-              "0-5years" :!isNaN(parseInt(req.body["0-5years"])) ?  parseInt(req.body["0-5years"])  : null,
-              "19-30years":!isNaN(parseInt(req.body["19-30years"]))?  parseInt(req.body["19-30years"]) : null,
-              "6-12years": !isNaN(parseInt(req.body["6-12years"])) ? parseInt(req.body["6-12years"]) : null,
-              "31-50years" : !isNaN(parseInt(req.body["31-50years"])) ?parseInt(req.body["31-50years"]) : null,
-              "13-18years": !isNaN(parseInt(req.body["13-18years"]))? parseInt(req.body["13-18years"]) : null ,
-              "50+years": !isNaN(parseInt(req.body["50+years"])) ? parseInt(req.body["50+years"]) : null
-            },
-            "accessToEducation": populacedemographyEducation,
-            "numberOfSchools" :populacedemographyNumberOfSchools
+          fs.createReadStream('./app/util/koppen_2010.csv').pipe(csv({skipLines: 6, headers: false})).on('data', (data) => koppenData.push(data)).on('end', () => {
 
-          }
-        }
-      },
-      function(err){
-        if (err){ console.log(err);}
+            let obj = indicator(settlementData, coords, koppenData)
+
+          
+            let informalityIndicator = obj['informality']
+            let siteIndicator = obj['site']
+            let architectureIndicator = obj['architecture']
+            let populaceIndicator = obj['populace']
+
+            Settlement.findOneAndUpdate(
+              {
+                _id: req.params.id
+              },
+              {
+              "site": {
+                "origin": {
+                  "causes": siteOriginCauses,
+                  "population":siteOriginPopulation
+                },
+                "geography": {
+                  "topography": siteGeographyTopography,
+                  "withinCities": siteGeographyWithin,
+                },
+                "vulnerability": {
+                    "resilienceToNaturalConditions": siteVulnerabilityResilience,
+                    "crimeRate": siteVulnerabilityCrimeRate,
+                    "perceptionOfInsecurity": siteVulnerabilityPerception,
+                    "communityEngagement": siteVulnerabilityCommunityEngagement
+                }
+              },
+              "architecture": {
+                "physicalNature": {
+                  "houseQuality": architecturePhysicalNatureHouseQuality,
+                  "materials": architecturePhysicalNatureMaterials,
+                  "developmentState": architecturePhysicalNatureDev
+                },
+                "infrastructure": {
+                  "accessToEnergy": architectureInfrastructureEnergyAccess,
+                  "sourceOfEnergy": architectureInfrastructureEnergySource,
+                  "sourceOfEnergyCook": architectureInfrastructureEnergySourceCook,
+                  "accessToWater": architectureInfrastructureWaterAccess ,
+                  "accessToSanitation": architectureInfrastructureSanitationAccess,
+                  "accessToPhoneFare": architectureInfrastructureTelecom,
+                  "accessToInternet": architectureInfrastructureInternetAccess,
+                  "physicalStateOfStreets": architectureInfrastructureStreetState,
+                  "mobilityModes":architectureInfrastructuremobilityModes ,
+                },
+                "density":{
+                  "elevation": architectureDensityElevation,
+                  "householdPerHouseSize":architectureDensityHouseHold,
+                  "dwellingSize" : architectureDensitydwellingSize,
+                }
+              },
+              "populace": {
       
-       else{
-        console.log("successfully updated");
-        res.render("form", {
-          sectionData: finalSurveyData,
-          modalData : { 
-              description:"",
-              icons:[]
-          },     
-          modalClass : "modal-container-hide",
-          previousModalData: "",
-          previousModalClass : "previous-modal-container-hide",
-          redirectUrl : "/shareknowledge/u/" + req.params.id + "/" +req.params.secret,
-          url: "/api/final-survey/" + req.params.id + "/" +req.params.secret,
-          notification:
-            'Already created a settlement? Edit it <a href = "/shareknowledge/u">here</a>',
-          map: true,
-          error: req.flash("form-error"),
-          email: "",
-        });
-       }
-      })
+                "qualityOfLife":{
+                  "happiness": populaceLifeQualityhappiness,
+                  "food": populaceLifeQualityfood,
+                  "proximity": populaceLifeQualityProximity ,
+                  "AccesstoNaturalsettings": populaceLifeQualityAccesstoNaturalsettings,
+                  "accessToHealthCare":populaceLifeQualityHealthCare,
+                  "numberOfHealthCareFacilities": populaceLifeQualityNumberOfHealthCareFacilities,
+                },
+                "economy":{
+                  "unemploymentRate": populaceeconomyunemploymentRate,
+                  "formalEmployment":populaceeconomyInformalSector,
+                  "populationIncome" : populaceeconomypopulationIncome,
+                  "tenure": populaceeconomyTenure,
+      
+                },
+                "demography":{
+                  "gender":populacedemographyGender,
+                  "ethinicIdentities": populacedemographyEthnicity , 
+                  "ageGroups":{          
+                    "0-5years" :!isNaN(parseInt(req.body["0-5years"])) ?  parseInt(req.body["0-5years"])  : null,
+                    "19-30years":!isNaN(parseInt(req.body["19-30years"]))?  parseInt(req.body["19-30years"]) : null,
+                    "6-12years": !isNaN(parseInt(req.body["6-12years"])) ? parseInt(req.body["6-12years"]) : null,
+                    "31-50years" : !isNaN(parseInt(req.body["31-50years"])) ?parseInt(req.body["31-50years"]) : null,
+                    "13-18years": !isNaN(parseInt(req.body["13-18years"]))? parseInt(req.body["13-18years"]) : null ,
+                    "50+years": !isNaN(parseInt(req.body["50+years"])) ? parseInt(req.body["50+years"]) : null
+                  },
+                  "accessToEducation": populacedemographyEducation,
+                  "numberOfSchools" :populacedemographyNumberOfSchools
+      
+                }
+              },
+              "indicator": {
+                "informalityIndicator": informalityIndicator,
+                "siteIndicator": siteIndicator,
+                "architectureIndicator": architectureIndicator,
+                "populaceIndicator": populaceIndicator
+              }
+            },
+            function(err){
+              if (err){ console.log(err);}
+            
+              else{
+              console.log("successfully updated");
+              res.render("form", {
+                sectionData: finalSurveyData,
+                modalData : { 
+                    description:"",
+                    icons:[]
+                },     
+                modalClass : "modal-container-hide",
+                previousModalData: "",
+                previousModalClass : "previous-modal-container-hide",
+                redirectUrl : "/shareknowledge/u/" + req.params.id + "/" +req.params.secret,
+                url: "/api/final-survey/" + req.params.id + "/" +req.params.secret,
+                notification:
+                  'Already created a settlement? Edit it <a href = "/shareknowledge/u">here</a>',
+                map: true,
+                error: req.flash("form-error"),
+                email: "",
+              });
+              }
+          })
+        })
+
+          })
+
+
+
+          
     })
   });
 

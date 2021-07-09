@@ -364,14 +364,24 @@ settlements.then(response => response.json())
       });
       console.log(val)
     
-      if (typeof val == Array) {
-        str = ""
-        for (var i = 0; i < val.length(); i++) {
-          str += val[i]+", ";
+      if (typeof val === 'object') {
+        console.log('array')
+        if (val !== null) {
+          if (val === ['']) {
+            return null;
+          } else {
+            return val.join(', ');
+          }
+        } else {
+          return val;
         }
-        return str;
-      }
-      else {
+      } else if (typeof val === 'string') {
+        if (val === "") {
+          return "N/A";
+        } else {
+          return val;
+        }
+      } else {
         return val;
       }
     }
@@ -410,7 +420,7 @@ settlements.then(response => response.json())
       "<span class = \"name\"> Name:</span>" + data["name"] == null ? "Unnamed Settlement": data["name"] + "<br>" 
       + "<span class = \"labels\">SITE</span>" + "<br>" 
       + "<span class = \"labels\">origin</span>" + "<br>" 
-      + "<span class = \"causes\"> Causes:</span>" + siteOriginCauses + "<br>" 
+      + "<span class = \"causes\"> Causes: </span>" + siteOriginCauses + "<br>" 
       + "<span class = \"population\"> Population: </span>" + siteOriginPop + "<br>" 
       + "<span class = \"labels\">geography</span>" + "<br>" 
       + "<span class = \"topography\"> Topography: </span>" + siteGeoTop + "<br>" 

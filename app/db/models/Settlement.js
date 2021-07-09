@@ -100,6 +100,12 @@ let settlementSchema = new Schema({
 
     }
   },
+  indicator:{
+    informalityIndicator: Number,
+    siteIndicator: Number,
+    architectureIndicator: Number,
+    populaceIndicator: Number,
+  }
 
 });
 
