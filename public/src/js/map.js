@@ -392,6 +392,8 @@ settlements.then(response => response.json())
         return val;
       }
     }
+
+    //Get values from DB to be displayed for each settlement
     let siteOriginCauses = getFormValue(["site","origin","causes"]) == null ? "N/A": getFormValue(["site","origin","causes"]);
     let siteOriginPop = getFormValue(["site","origin","population"]) == null ? "N/A": getFormValue(["site","origin","population"]);
     let siteGeoTop = getFormValue(["site","geography","topography"]) == null ? "N/A": getFormValue(["site","geography","topography"]);
@@ -400,76 +402,137 @@ settlements.then(response => response.json())
     let siteVulCri = getFormValue(["site","vulnerability","crimeRate"]) == null ? "N/A": getFormValue(["site","vulnerability","crimeRate"]);
     let siteVulPer = getFormValue(["site","vulnerability","perceptionOfInsecurity"]) == null ? "N/A": getFormValue(["site","vulnerability","perceptionOfInsecurity"]);
     let siteVulCom = getFormValue(["site","vulnerability","communityEngagement"]) == null ? "N/A": getFormValue(["site","vulnerability","communityEngagement"]);
+    
     let arcPhyHou = getFormValue(["architecture","physicalNature","houseQuality"]) == null ? "N/A": getFormValue(["architecture","physicalNature","houseQuality"]);
     let arcPhyMat = getFormValue(["architecture","physicalNature","materials"]) == null ? "N/A": getFormValue(["architecture","physicalNature","materials"]);
     let arcPhyDev = getFormValue(["architecture","physicalNature","developmentState"]) == null ? "N/A": getFormValue(["architecture","physicalNature","developmentState"]);
     let arcInfAEl = getFormValue(["architecture","infrastructure","accessToEnergy"]) == null ? "N/A": getFormValue(["architecture","infrastructure","accessToEnergy"]);
     let arcInfSEl = getFormValue(["architecture","infrastructure","sourceOfEnergy"]) == null ? "N/A": getFormValue(["architecture","infrastructure","sourceOfEnergy"]);
+    let arcInfSElC = getFormValue(["architecture","infrastructure","sourceOfEnergyCook"]) == null ? "N/A": getFormValue(["architecture","infrastructure","sourceOfEnergyCook"]);
     let arcInfWat = getFormValue(["architecture","infrastructure","accessToWater"]) == null ? "N/A": getFormValue(["architecture","infrastructure","accessToWater"]);
     let arcInfSan = getFormValue(["architecture","infrastructure","accessToSanitation"]) == null ? "N/A": getFormValue(["architecture","infrastructure","accessToSanitation"]);
     let arcInfStr = getFormValue(["architecture","infrastructure","physicalStateOfStreets"]) == null ? "N/A": getFormValue(["architecture","infrastructure","physicalStateOfStreets"]);
-    let arcInfPho = getFormValue(["architecture","infrastructure","accessToInternetOrPhoneFare"]) == null ? "N/A": getFormValue(["architecture","infrastructure","accessToInternetOrPhoneFare"])
+    let arcInfPho = getFormValue(["architecture","infrastructure","accessToPhoneFare"]) == null ? "N/A": getFormValue(["architecture","infrastructure","accessToPhoneFare"])
+    let arcInfInt = getFormValue(["architecture","infrastructure","accessToInternet"]) == null ? "N/A": getFormValue(["architecture","infrastructure","accessToInternet"])
+    let arcInfPhy = getFormValue(["architecture","infrastructure","physicalStateOfStreets"]) == null ? "N/A": getFormValue(["architecture","infrastructure","physicalStateOfStreets"]);
     let arcInfMob = getFormValue(["architecture","infrastructure","mobilitySystems"]) == null ? "N/A": getFormValue(["architecture","infrastructure","mobilitySystems"]);
     let popDenEle = getFormValue(["populace","density","elevation"]) == null ? "N/A": getFormValue(["populace","density","elevation"]);
     let popDenHou = getFormValue(["populace","density","householdPerHouseSize"]) == null ? "N/A": getFormValue(["populace","density","householdPerHouseSize"]) ;
+    let popDenSize = getFormValue(["populace","density","dwellingSize"]) == null ? "N/A": getFormValue(["populace","density","householdPerHouseSize"]) ;
+    
+    let popQuaHap = getFormValue(["populace","qualityOfLife","happiness"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","happiness"]);
+    let popQuaFood = getFormValue(["populace","qualityOfLife","food"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","food"]);
     let popQuaPro = getFormValue(["populace","qualityOfLife","proximity"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","proximity"]);
+    let popQuaNat = getFormValue(["populace","qualityOfLife","AccesstoNaturalsettings"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","AccesstoNaturalsettings"]);
     let popQuaHea = getFormValue(["populace","qualityOfLife","accessToHealthCare"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","accessToHealthCare"]);
     let popQuaFac = getFormValue(["populace","qualityOfLife","numberOfHealthCareFacilities"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","numberOfHealthCareFacilities"]);
-    let popQuaEdu = getFormValue(["populace","qualityOfLife","accessToEducation"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","accessToEducation"]);
     let popQuaUne = getFormValue(["populace","qualityOfLife","unemploymentRate"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","unemploymentRate"])
     let popQuaInf = getFormValue(["populace","qualityOfLife","employmentInTheInformalSector"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","employmentInTheInformalSector"]);
-    let popQuaOwn = getFormValue(["populace","qualityOfLife","ownershipRights"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ownershipRights"]);
+    let popQuaInc = getFormValue(["populace","qualityOfLife","Populationincome"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","Populationincome"]);
+    let popQuaOwn = getFormValue(["populace","qualityOfLife","Tenure"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","Tenure"]);
     let popQuaAge = getFormValue(["populace","qualityOfLife","ageGroups"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ageGroups"]);
     let popQuaEth = getFormValue(["populace","qualityOfLife","ethinicIdentities"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ethinicIdentities"]);
     let popQuaGen = getFormValue(["populace","qualityOfLife","gender"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","gender"]);
     let infInd = getFormValue(["indicator", "informalityIndicator"])
+    let popQuaEdu = getFormValue(["populace","qualityOfLife","accessToEducation"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","accessToEducation"]);
+    let popQuaENum = getFormValue(["populace","qualityOfLife","schoolsNumber"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","schoolsNumber"]);
+ 
     let siteInd = getFormValue(["indicator", "siteIndicator"])
     let archInd = getFormValue(["indicator", "architecturIndicator"])
     let popInd = getFormValue(['indicator', "populationIndicator"])
 
+
+    // This function assigns a range to the numerical value of an indicator
+    function assignrange(indicator) {
+      if (indicator >= 80) {
+        indicator = 'high';
+      } else if (indicator >= 60) {
+        indicator = 'medium-high';
+      } else if (indicator >= 40) {
+        indicator = 'medium';
+      } else if (indicator >= 20) {
+        indicator = 'medium-low';
+      } else {
+        indicator = 'low';
+      }
+      return indicator;
+    }
+
+    function assigndesnsity(indicator) {
+      if (indicator >= 75) {
+        indicator = '10 or more';
+      } else if (indicator >= 50) {
+        indicator = '6 to 10';
+      } else if (indicator >= 25) {
+        indicator = '3 to 6';
+      } else {
+        indicator = '1 to 3';
+      }
+      return indicator;
+    }
+
+
+
     sidebarinst.innerHTML=
       "<span class = \"name\">" + data['name'] + "</span>" + "<br>" 
-      + "<span class = \"labels\">Informality: </span>" + infInd + "<br>" 
-      + "<span class = \"labels\">SITE</span>" + "<br>" 
-      + "<span class = \"labels\">origin</span>" + "<br>" 
+      + "<span class = \"labelstitle\">Informality Index: </span>" + Math.round(infInd) + "<span class = \"labels\">% </span>"+ "<br>" 
+      + "<br>" 
+      + "<span class = \"labelstitle\">SITE</span>" + "<br>" 
+      + "<span class = \"labels\">Origin</span>" + "<br>" 
       + "<span class = \"causes\"> Causes: </span>" + siteOriginCauses + "<br>" 
       + "<span class = \"population\"> Population: </span>" + siteOriginPop + "<br>" 
       + "<span class = \"labels\">Geography</span>" + "<br>" 
       + "<span class = \"topography\"> Topography: </span>" + siteGeoTop + "<br>" 
       + "<span class = \"withinCities\"> Within Cities: </span>" + siteGeoWith + "<br>" 
       + "<span class = \"labels\">Vulnerability</span>" + "<br>" 
-      + "<span class = \"resilienceToNaturalConditions\">Resilience To Natural Conditions: </span>" + siteVulRes + "<br>" 
-      + "<span class = \"crimeRate\"> Crime Rate: </span>" + siteVulCri + "<br>" 
-      + "<span class = \"perceptionOfInsecurity\"> Perception of Insecurity: </span>" + siteVulPer + "<br>" 
-      + "<span class = \"communityEngagement\"> Community Engagement: </span>" + siteVulCom + "<br>" 
+      + "<span class = \"resilienceToNaturalConditions\">Resilience To Natural Conditions: </span>" + assignrange(siteVulRes) + "<br>" 
+      + "<span class = \"crimeRate\"> Crime Rate: </span>" + assignrange(siteVulCri) + "<br>" 
+      + "<span class = \"perceptionOfInsecurity\"> Perception of Insecurity: </span>" + assignrange(siteVulPer) + "<br>" 
+      + "<span class = \"communityEngagement\"> Community Engagement: </span>" + assignrange(siteVulCom) + "<br>" 
+      + "<br>" 
       + "<span class = \"labelstitle\">ARCHITECTURE</span>" + "<br>" 
       + "<span class = \"labels\">PhysicalNature</span>" + "<br>" 
-      + "<span class = \"houseQuality\">House Quality: </span>" + arcPhyHou + "<br>" 
+      + "<span class = \"houseQuality\">House Quality: </span>" + assignrange(arcPhyHou) + "<br>" 
       + "<span class = \"materials\">Materials: </span>" + arcPhyMat + "<br>" 
-      + "<span class = \"developmentState\"> Development State: </span>" + arcPhyDev + "<br>" 
+      + "<span class = \"developmentState\"> Development State: </span>" + assignrange(arcPhyDev) + "<br>" 
       + "<span class = \"labels\">Infrastructure</span>" + "<br>" 
-      + "<span class = \"accessToEnergy\">Access to Energy: </span>" + arcInfAEl + "<br>" 
+      + "<span class = \"accessToEnergy\">Access to Energy: </span>" + assignrange(arcInfAEl) + "<br>" 
       + "<span class = \"sourceOfEnergy\">Source of Energy: </span>" + arcInfSEl + "<br>" 
-      + "<span class = \"accessToWater\">Access to Water: </span>" + arcInfWat + "<br>" 
-      + "<span class = \"accessToSanitation\">Access to Sanitation: </span>" + arcInfSan + "<br>" 
-      + "<span class = \"physicalStateOfStreets\">Physical State of Streets: </span>" + arcInfStr + "<br>" 
-      + "<span class = \"accessToInternetOrPhoneFare\">Access to Internet or Phone Fare: </span>" + arcInfPho + "<br>" 
+      + "<span class = \"sourceOfEnergy\">Energy source for cooking: </span>" + arcInfSElC + "<br>" 
+      + "<span class = \"accessToWater\">Access to Water: </span>" + assignrange(parseInt((arcInfWat.split(','))[0])) + "<br>" 
+      + "<span class = \"accessToWater\">Access to Water directly at home: </span>" + assignrange(parseInt((arcInfWat.split(','))[1])) + "<br>" 
+      + "<span class = \"accessToSanitation\">Access to Sanitation: </span>" + assignrange(parseInt((arcInfSan.split(','))[0])) + "<br>" 
+      + "<span class = \"accessToSanitation\">Access to Sanitation directly at home: </span>" + assignrange(parseInt((arcInfSan.split(','))[2])) + "<br>" 
+      + "<span class = \"physicalStateOfStreets\">Paving standards: </span>" + assignrange(arcInfStr) + "<br>" 
+      + "<span class = \"accessToInternetOrPhoneFare\">Access to Phone Fare: </span>" + assignrange(arcInfPho) + "<br>" 
+      + "<span class = \"accessToInternetOrPhoneFare\">Access to Internet: </span>" + assignrange(arcInfInt) + "<br>" 
+      + "<span class = \"mobilitySystems\">Physical state of the streets: </span>" + assignrange(arcInfPhy) + "<br>" 
       + "<span class = \"mobilitySystems\">Mobility Systems: </span>" + arcInfMob + "<br>" 
       + "<span class = \"labels\">Density</span>" + "<br>" 
-      + "<span class = \"elevation\">Elevation: </span>" + popDenEle + "<br>" 
-      + "<span class = \"householdPerHouseSize\">Household per House Size: </span>" + popDenHou + "<br>" 
+      + "<span class = \"elevation\">Storeys per building: </span>" + assigndesnsity(popDenEle) + "<br>" 
+      + "<span class = \"householdPerHouseSize\">Household per House Size: </span>" + assigndesnsity(popDenHou) + "<br>" 
+      + "<span class = \"householdPerHouseSize\">Dwelling size: </span>" + assigndesnsity(popDenSize) + "<br>"       
+      + "<br>" 
       + "<span class = \"labelstitle\">POPULACE</span>" + "<br>" 
       + "<span class = \"labels\">Quality of Life</span>" + "<br>" 
-      + "<span class = \"proximity\">Proximity:</span>" + popQuaPro + "<br>" 
-      + "<span class = \"accessToHealthCare\">Access To Health Care: </span>" + popQuaHea + "<br>"
-      + "<span class = \"numberOfHealthCareFacilities\">Number of Health Care Facilities: </span>" + popQuaFac + "<br>" 
-      + "<span class = \"accessToEducation\">Access To Education: </span>" + popQuaEdu + "<br>" 
-      + "<span class = \"unemploymentRate\">Unemployment Rate: </span>" + popQuaUne + "<br>" 
-      + "<span class = \"employmentInTheInformalSector\">Employment In the Informal Sector: </span>" + popQuaInf + "<br>" 
-      + "<span class = \"ownershipRights\">Ownership Rights: </span>" + popQuaOwn + "<br>" 
+      + "<span class = \"proximity\">Level of happiness:</span>" + assignrange(popQuaHap) + "<br>" 
+      + "<span class = \"proximity\">Access to food:</span>" + assignrange(popQuaFood) + "<br>" 
+      + "<span class = \"proximity\">Proximity to urban amenities:</span>" + assignrange(popQuaPro) + "<br>" 
+      + "<span class = \"proximity\">Access to green spaces:</span>" + assignrange(popQuaNat) + "<br>" 
+      + "<span class = \"accessToHealthCare\">Access To Health Care: </span>" + assignrange(popQuaHea) + "<br>"
+      + "<span class = \"numberOfHealthCareFacilities\">Number of Health Care Facilities: </span>" + assigndesnsity(popQuaFac) + "<br>" 
+      + "<span class = \"labels\">Economy</span>" + "<br>" 
+      + "<span class = \"unemploymentRate\">Unemployment Rate: </span>" + assignrange(popQuaUne) + "<br>" 
+      + "<span class = \"employmentInTheInformalSector\">Employment In the Informal Sector: </span>" + assignrange(popQuaInf) + "<br>" 
+      + "<span class = \"employmentInTheInformalSector\">Employment In the Informal Sector: </span>" + assignrange(popQuaInc) + "<br>" 
+      + "<span class = \"ownershipRights\">Ownership Rights: </span>" + assignrange(popQuaOwn) + "<br>" 
+      + "<span class = \"labels\">Demography</span>" + "<br>" 
       + "<span class = \"ageGroups\">Age Groups: </span>" + popQuaAge + "<br>" 
       + "<span class = \"ethinicIdentities\">Ethnic Identities: </span>" +  popQuaEth + "<br>" 
       + "<span class = \"gender\">Gender Roles: </span>" + popQuaGen + "<br>" 
+      + "<span class = \"accessToEducation\">Access To Education: </span>" + assignrange(popQuaEdu) + "<br>" 
+      + "<span class = \"accessToEducation\">Number of Schools: </span>" + popQuaENum + "<br>" 
+
   
       
   }
