@@ -257,7 +257,7 @@ span.lowpop{
 
 span.name{
     font-family: 'Roboto';
-    font-size: 25px;
+    font-size: 26px;
     font-weight: bold;
 }
 
@@ -270,10 +270,19 @@ span.country{
 
 span.labels{
     font-family: 'Roboto';
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     padding-top: 30px;
     padding-bottom: 30px;
+}
+
+
+span.labelstitle{
+    font-family: 'Roboto';
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 180px;
+    padding-bottom: 1000px;
 }
 
 span.tags{
