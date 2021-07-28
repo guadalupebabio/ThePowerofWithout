@@ -112,10 +112,12 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
         "country": req.body.country,
         "geolocation": {type: 'polygon', coordinates: coords},
         "email": req.body.email,
+        "area": req.body.area,
       });
 
       let user = new User({
         "email": req.body.email,
+        "area": req.body.area,
         "contribution": settlement._id,
         "secret": token
       })
