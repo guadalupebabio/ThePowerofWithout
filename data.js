@@ -2,13 +2,13 @@
     header: "fill-in-form",
     sections: [
       {
-        label: "Name of the City",
+        label: "Name of City",
         name: "city",
         type: "text",
         value: "City",
       },
       {
-        label: "Name of Informal Community",
+        label: "Name of Community",
         name: "settlement",
         type: "text",
         value: "Community",

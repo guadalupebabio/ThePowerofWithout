@@ -90,7 +90,7 @@ app.get("/shareknowledge/u/", function (req, res) {
       label: "",
       questions: [
         {
-          label: "Name of the Informal Settlement",
+          label: "Name of Community",
           name: "settlement",
           type: "text",
         },
