@@ -20,6 +20,7 @@ const identifyNa = (stat) => {
 
 const nCauses = (cause) => {
     let newCause = cause.toLowerCase();
+    console.log(newCause)
 
     switch (newCause) {
         case 'squatting':
@@ -61,7 +62,7 @@ const nTopography = (top) => {
             newTop = 60;
             break;
         default:
-            newTop = 50;
+            newTop = 15;
     };
 
     return newTop;
@@ -87,7 +88,7 @@ const nTypeOfEnergy = (energy) => {
             newEnergy = 10;
             break;
         default:
-            newEnergy = 50;
+            newEnergy = 15;
     };
 
     return newEnergy;
@@ -125,7 +126,7 @@ const nTypeOfMobility = (mob) => {
             newMob = 80;
             break;
         default:
-            newMob = 50;
+            newMob = 15;
     };
 
     return newMob;
@@ -158,7 +159,7 @@ const nMaterials = (mat, climate) => {
     } else if (newMat === 'cardboard') {
         return climateMaterials[climate][6];
     } else {
-        return 50;
+        return 15;
     };
 };
 

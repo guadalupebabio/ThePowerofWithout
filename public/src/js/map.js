@@ -343,6 +343,7 @@ settlements.then(response => response.json())
     console.log(sidebarinst)
     /*var wcauses = "Causes";
     var wpop = "Population"*/
+    
 
     function getFormValue(tree) {
       // Given the location of a field in a schema (i.e. ["site", "origin", "causes"]), return its value or null if it doesnt exist
@@ -367,10 +368,16 @@ settlements.then(response => response.json())
       if (typeof val === 'object') {
         console.log('array')
         if (val !== null) {
-          if (val === ['']) {
+          if (val === [''] || val === []) {
             return null;
           } else {
-            return val.join(', ');
+            console.log('this is the array', val)
+            try {
+              let lst = val.join(', ')
+              return lst
+            } catch (error) {
+              return val
+            }
           }
         } else {
           return val;
@@ -415,9 +422,14 @@ settlements.then(response => response.json())
     let popQuaAge = getFormValue(["populace","qualityOfLife","ageGroups"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ageGroups"]);
     let popQuaEth = getFormValue(["populace","qualityOfLife","ethinicIdentities"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ethinicIdentities"]);
     let popQuaGen = getFormValue(["populace","qualityOfLife","gender"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","gender"]);
+    let infInd = getFormValue(["indicator", "informalityIndicator"])
+    let siteInd = getFormValue(["indicator", "siteIndicator"])
+    let archInd = getFormValue(["indicator", "architecturIndicator"])
+    let popInd = getFormValue(['indicator', "populationIndicator"])
 
     sidebarinst.innerHTML=
-      "<span class = \"name\"> Name:</span>" + data["name"] == null ? "Unnamed Settlement": data["name"] + "<br>" 
+      "<span class = \"name\"> Name:" + data['name'] + "</span>" + "<br>" 
+      + "<span class = \"labels\">Informality: </span>" + infInd + "<br>" 
       + "<span class = \"labels\">SITE</span>" + "<br>" 
       + "<span class = \"labels\">origin</span>" + "<br>" 
       + "<span class = \"causes\"> Causes: </span>" + siteOriginCauses + "<br>" 
@@ -458,6 +470,7 @@ settlements.then(response => response.json())
       + "<span class = \"ageGroups\"> Age Groups: </span>" + popQuaAge + "<br>" 
       + "<span class = \"ethinicIdentities\"> Ethnic Identities: </span>" +  popQuaEth + "<br>" 
       + "<span class = \"gender\"> Gender Roles: </span>" + popQuaGen + "<br>" 
+      + "<canvas id=\"can\" width=\"100\" height=\"100\"/>"
   
       
   }
@@ -468,6 +481,32 @@ settlements.then(response => response.json())
       finalspan += "<span class = \"tags\">" + array[i].bold() + ": unknown" + "</span>" 
     }
     return finalspan; 
+  }
+
+  try{
+    var canvas = document.getElementById("can");
+    var ctx = canvas.getContext("2d");
+    var lastend = 0;
+    var data = [200,60,15];
+    var myTotal = 0;
+    var myColor = ['red','green','blue'];
+
+    for(var e = 0; e < data.length; e++)
+    {
+      myTotal += data[e];
+    }
+
+    for (var i = 0; i < data.length; i++) {
+    ctx.fillStyle = myColor[i];
+    ctx.beginPath();
+    ctx.moveTo(canvas.width/2,canvas.height/2);
+    ctx.arc(canvas.width/2,canvas.height/2,canvas.height/2,lastend,lastend+(Math.PI*2*(data[i]/myTotal)),false);
+    ctx.lineTo(canvas.width/2,canvas.height/2);
+    ctx.fill();
+    lastend += Math.PI*2*(data[i]/myTotal);
+    }
+  } catch (error) {
+    console.log(error)
   }
 
   //check for attributes
