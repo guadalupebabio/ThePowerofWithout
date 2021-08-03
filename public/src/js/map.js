@@ -26,6 +26,7 @@ var settlements = fetch('/api/settlements')
   var ch = L.layerGroup();
   var pinslayer = L.layerGroup();
   var settlementslayer = L.layerGroup();
+  var bubblelayer = L.layerGroup();
   var maplayer;
   var populationlist = [];
   var fullcircles = [];
@@ -110,13 +111,14 @@ var settlements = fetch('/api/settlements')
   var map = L.map('map', {
       center: [0,0],
       zoom: 3,
-      layers: [dark, ch, googleSat]
+      layers: [dark, ch]
     });
 
   //Add Layer Control UI
   var baseMaps = {
-    "Default": dark2,
-    "Satellite": googleSat
+    "Default": dark,
+    'Dark Mode': dark2,
+    "Satellite": googleSat,
   };
 
   //Draw Layer control UI
@@ -231,15 +233,51 @@ settlements.then(response => response.json())
             let coord = [lat, lon]
             coords.push(coord);
           };
+          let population = data[i]['site']['origin']['population'];
+          let radius = population*0.2 + 100000;
+          let indicator;
+          try{
+            indicator = data[i]['indicator']['informalityIndicator']
+          } catch (error) {
+            indicator = null
+          }
+
+
+          let bubbleColor;
+
+          if (indicator < 20) {
+            bubbleColor = '#072ac8'
+          } else if (indicator >=20 && indicator < 40) {
+            bubbleColor = '#1e96fc'
+          } else if (indicator >= 40 && indicator < 60) {
+            bubbleColor = '#06d6a0'
+          } else if (indicator >= 60 && indicator < 80) {
+            bubbleColor = 'fcf300'
+          } else if (indicator >=80) {
+            bubbleColor = 'ffc600'
+          } else {
+            bubbleColor = 'gray'
+          }
+
+          if (isNaN(radius)) {
+            radius = 100000
+          } else if (radius > 300000) {
+            radius = 300000
+          }
+
           var settlementdatas = data[i];
           console.log(coords[0])
-          var polygon = L.polygon(coords, {color: 'red', data: data[i]}).on({mouseover: polygonHover, click: polygonClick});
+          var polygon = L.polygon(coords, {color: bubbleColor, data: data[i]}).on({mouseover: polygonHover, click: polygonClick});
+          L.circle(coords[0], radius, {color: bubbleColor}).on('click', function() {
+            map.setView(coords[0], 12)
+          }).addTo(bubblelayer)
+
           //polygon.options = data;
           polygon.addTo(settlementslayer);
           var marker = new L.marker(coords[0]).on('click', function(e){
               map.setView(e.latlng, 13);
           });
-          marker.addTo(settlementslayer);
+          // marker.addTo(settlementslayer);
           }
       });
       
@@ -386,10 +424,46 @@ settlements.then(response => response.json())
         if (val === "") {
           return "N/A";
         } else {
-          return val;
+          try { 
+            val = parseInt(val)
+
+            if (val < 20) {
+              return 'Low';
+            } else if (val >= 20 && val < 40) {
+              return 'Medium-Low';
+            } else if (val >= 40 && val < 60) {
+              return 'Medium';
+            } else if (val >= 60 && val < 80) {
+              return 'Medium-High';
+            } else if (val >= 80) {
+              return 'High';
+            } else {
+              return val;
+            }
+
+
+          } catch (error) {
+            return val;
+          }
         }
       } else {
-        return val;
+        if (tree[2] === 'population') {
+          return val;
+        } else {
+          if (val < 20) {
+            return 'Low';
+          } else if (val >= 20 && val < 40) {
+            return 'Medium-Low';
+          } else if (val >= 40 && val < 60) {
+            return 'Medium';
+          } else if (val >= 60 && val < 80) {
+            return 'Medium-High';
+          } else if (val >= 80) {
+            return 'High';
+          } else {
+            return val;
+          }
+        }
       }
     }
     let siteOriginCauses = getFormValue(["site","origin","causes"]) == null ? "N/A": getFormValue(["site","origin","causes"]);
@@ -408,17 +482,17 @@ settlements.then(response => response.json())
     let arcInfWat = getFormValue(["architecture","infrastructure","accessToWater"]) == null ? "N/A": getFormValue(["architecture","infrastructure","accessToWater"]);
     let arcInfSan = getFormValue(["architecture","infrastructure","accessToSanitation"]) == null ? "N/A": getFormValue(["architecture","infrastructure","accessToSanitation"]);
     let arcInfStr = getFormValue(["architecture","infrastructure","physicalStateOfStreets"]) == null ? "N/A": getFormValue(["architecture","infrastructure","physicalStateOfStreets"]);
-    let arcInfPho = getFormValue(["architecture","infrastructure","accessToInternetOrPhoneFare"]) == null ? "N/A": getFormValue(["architecture","infrastructure","accessToInternetOrPhoneFare"])
+    let arcInfPho = getFormValue(["architecture","infrastructure","accessToInternet"]) == null ? "N/A": getFormValue(["architecture","infrastructure","accessToInternetOrPhoneFare"])
     let arcInfMob = getFormValue(["architecture","infrastructure","mobilitySystems"]) == null ? "N/A": getFormValue(["architecture","infrastructure","mobilitySystems"]);
-    let popDenEle = getFormValue(["populace","density","elevation"]) == null ? "N/A": getFormValue(["populace","density","elevation"]);
-    let popDenHou = getFormValue(["populace","density","householdPerHouseSize"]) == null ? "N/A": getFormValue(["populace","density","householdPerHouseSize"]) ;
+    let popDenEle = getFormValue(["architecture","density","elevation"]) == null ? "N/A": getFormValue(["populace","density","elevation"]);
+    let popDenHou = getFormValue(["architecture","density","householdPerHouseSize"]) == null ? "N/A": getFormValue(["populace","density","householdPerHouseSize"]) ;
     let popQuaPro = getFormValue(["populace","qualityOfLife","proximity"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","proximity"]);
     let popQuaHea = getFormValue(["populace","qualityOfLife","accessToHealthCare"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","accessToHealthCare"]);
     let popQuaFac = getFormValue(["populace","qualityOfLife","numberOfHealthCareFacilities"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","numberOfHealthCareFacilities"]);
-    let popQuaEdu = getFormValue(["populace","qualityOfLife","accessToEducation"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","accessToEducation"]);
-    let popQuaUne = getFormValue(["populace","qualityOfLife","unemploymentRate"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","unemploymentRate"])
-    let popQuaInf = getFormValue(["populace","qualityOfLife","employmentInTheInformalSector"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","employmentInTheInformalSector"]);
-    let popQuaOwn = getFormValue(["populace","qualityOfLife","ownershipRights"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ownershipRights"]);
+    let popQuaEdu = getFormValue(["populace","demography","accessToEducation"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","accessToEducation"]);
+    let popQuaUne = getFormValue(["populace","economy","unemploymentRate"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","unemploymentRate"])
+    let popQuaInf = getFormValue(["populace","economy","formalEmployment"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","employmentInTheInformalSector"]);
+    let popQuaOwn = getFormValue(["populace","economy","tenure"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ownershipRights"]);
     let popQuaAge = getFormValue(["populace","qualityOfLife","ageGroups"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ageGroups"]);
     let popQuaEth = getFormValue(["populace","qualityOfLife","ethinicIdentities"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ethinicIdentities"]);
     let popQuaGen = getFormValue(["populace","qualityOfLife","gender"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","gender"]);
@@ -470,7 +544,6 @@ settlements.then(response => response.json())
       + "<span class = \"ageGroups\"> Age Groups: </span>" + popQuaAge + "<br>" 
       + "<span class = \"ethinicIdentities\"> Ethnic Identities: </span>" +  popQuaEth + "<br>" 
       + "<span class = \"gender\"> Gender Roles: </span>" + popQuaGen + "<br>" 
-      + "<canvas id=\"can\" width=\"100\" height=\"100\"/>"
   
       
   }
@@ -483,31 +556,6 @@ settlements.then(response => response.json())
     return finalspan; 
   }
 
-  try{
-    var canvas = document.getElementById("can");
-    var ctx = canvas.getContext("2d");
-    var lastend = 0;
-    var data = [200,60,15];
-    var myTotal = 0;
-    var myColor = ['red','green','blue'];
-
-    for(var e = 0; e < data.length; e++)
-    {
-      myTotal += data[e];
-    }
-
-    for (var i = 0; i < data.length; i++) {
-    ctx.fillStyle = myColor[i];
-    ctx.beginPath();
-    ctx.moveTo(canvas.width/2,canvas.height/2);
-    ctx.arc(canvas.width/2,canvas.height/2,canvas.height/2,lastend,lastend+(Math.PI*2*(data[i]/myTotal)),false);
-    ctx.lineTo(canvas.width/2,canvas.height/2);
-    ctx.fill();
-    lastend += Math.PI*2*(data[i]/myTotal);
-    }
-  } catch (error) {
-    console.log(error)
-  }
 
   //check for attributes
 
@@ -908,6 +956,10 @@ function polygonHover(e) {
       map.removeLayer(clusters[i]);
     }
   }
+
+  function changeText(text, id){
+    document.getElementById(id).innerHTML = text
+  }
   //map zooming
 
   //this is where we add the settlement data
@@ -916,7 +968,7 @@ function polygonHover(e) {
       //altermarkers();
       settlename.addTo(map); 
       info.remove();
-      addtoMap();
+      // addtoMap();
       //add the data (only 709 is tester)
       map.addLayer(dark);
       //legend.remove(map);
@@ -925,17 +977,20 @@ function polygonHover(e) {
       sliderControl.remove();
       map.setView([0,0], 3);
       map.removeLayer(pinslayer);
-      map.addLayer(settlementslayer); //displays every point
+      // map.addLayer(settlementslayer); //displays every point
+      map.addLayer(bubblelayer)
       //adding the settlement layer
       if (map.hasLayer(overlaysObj["countries"])){
         map.removeLayer(overlaysObj["countries"]);
         }
+        changeText('INFORMALITY', 'indicatortext')
       }
+      
       if (layout === "country"){
         sidebar.hide();
         info.addTo(map); 
         settlename.remove();
-        removefromMap();
+        // removefromMap();
         //legend.addTo(map);
         legendapp.remove(map);
         map.addLayer(dark);  
@@ -943,8 +998,16 @@ function polygonHover(e) {
         sliderControl.remove();
         map.removeLayer(dark2);
         map.removeLayer(pinslayer);
-        map.removeLayer(settlementslayer); //displays every point
+        if (map.hasLayer(settlementslayer)) {
+          map.removeLayer(settlementslayer); 
+        }
+
+        if (map.hasLayer(bubblelayer)) {
+          map.removeLayer(bubblelayer);
+        } 
         map.addLayer(overlaysObj["countries"]);
+
+        changeText('POPULATION', 'indicatortext')
       } 
 
       if (layout === "appdata"){
@@ -957,13 +1020,21 @@ function polygonHover(e) {
         } 
         info.remove();
         settlename.remove();
-        map.removeLayer(settlementslayer); 
+        if (map.hasLayer(settlementslayer)) {
+          map.removeLayer(settlementslayer); 
+        }
+
+        if (map.hasLayer(bubblelayer)) {
+          map.removeLayer(bubblelayer);
+        } 
         map.addLayer(pinslayer); //displays every point
         map.addControl(sliderControl); //adjust points of interest
         sliderControl.startSlider();
         legend.remove(map);
-        removefromMap();
+        // removefromMap();
         legendapp.addTo(map);
+
+        changeText('POPULATION', 'indicatortext')
         
       
         
@@ -973,7 +1044,42 @@ function polygonHover(e) {
 
   map.on('baselayerchange', function(a){
     console.log("the layer changed to " + a.name);
-  }) 
+  })
+
+  let initalZoom = 3;
+  let ratio;
+
+
+  map.on('zoomend', function () {
+    let endZoom = map.getZoom()
+    ratio = initalZoom/endZoom
+    let diff = Math.abs(endZoom-initalZoom)
+    if (true) {
+      bubblelayer.eachLayer(function(layer) {
+        radius = layer.getRadius()
+        if (ratio < 1) {
+          new_radius = radius*((ratio)/(1.5**diff))
+        } else {
+          console.log(ratio)
+          new_radius = radius*((ratio)*(1.5**diff))
+        }
+        layer.setRadius(new_radius)
+
+      })
+      initalZoom = map.getZoom()
+
+    }
+
+    if (map.getZoom() < 10 && map.hasLayer(settlementslayer)) {
+      map.addLayer(bubblelayer)
+      map.removeLayer(settlementslayer);
+    }
+    if (map.getZoom() >= 10  && map.hasLayer(bubblelayer)) {
+      map.addLayer(settlementslayer);
+      map.removeLayer(bubblelayer)
+    }
+    
+  })
 
   var defaultClusters = clusters;
 
@@ -986,6 +1092,15 @@ function polygonHover(e) {
     $('.appdata').attr('id', 'notclicked');
     $('.settlement').removeAttr('id');
     $('.settlement').attr('id','notclicked');
+    console.log(event.target)
+    if (event.target.className === 'settlement') {
+      $('canvas').removeAttr('id');
+      $('canvas').attr('id', 'popinform2')
+    } else {
+      $('canvas').removeAttr('id');
+      $('canvas').attr('id', 'popinform')
+    }
+    
     $(event.target).attr('id', 'clicked');
     changeoflayers($(event.target).attr('class'));
   });

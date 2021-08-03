@@ -27,7 +27,7 @@ html(style = {background: 'black', text: 'white'})
       span.people people
     #informality
       canvas#popinform(width='123', height='19')
-      span.informality POPULATION
+      span.informality(id = 'indicatortext') POPULATION
     #poprates
       span.lowpop 0%
       span.highpop 100%
@@ -38,6 +38,8 @@ html(style = {background: 'black', text: 'white'})
         a.settlement(href = '#', data-target = 'settlement', title = 'settlement') Settlement
       li
         a.appdata(href = '#', data-target = 'appdata', title = 'appdata') App Data
+      //- li
+      //-   a.test(href = "#") hola
     ul.settlementnavigate#settlementnavigate
       li
         a.site(href = '#', data-target = 'site', title = 'site') SITE
