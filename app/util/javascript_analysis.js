@@ -440,6 +440,10 @@ function settlementAnalysis(data, coords, koppenData) {
 
     let number_of_hospitals = identifyNa(data['Access to Health Care'])
 
+    if (number_of_hospitals === 0){
+        number_of_hospitals = 1
+    }
+
     //Populace-Economy
     //Inverse
     let unemployment = 100 - identifyNa(data['Unemployment Rate'])
@@ -457,6 +461,10 @@ function settlementAnalysis(data, coords, koppenData) {
 
     //Populace-Demography
     let gender = identifyNa(data['Gender Distribution'])
+
+    if (gender === 0 || gender === 100) {
+        gender = 0.01
+    }
 
     let zero_to_five = ageNa(data['0-5years'])
 
@@ -540,8 +548,9 @@ function settlementAnalysis(data, coords, koppenData) {
 
     let city_dependant = (green_space +  amenities)/2
 
-    let shanon_gender = Math.abs((Math.log(gender/100)*(gender/100) + Math.log(1 - gender/100)*(1 - gender/100))/Math.log(2))*100
+    let shanon_gender = Math.abs(((Math.log(gender/100))*(gender/100) + (Math.log(1 - gender/100))*(1 - gender/100))/Math.log(2))*100
 
+    console.log('gender is', gender)
     let shanon_age = Math.abs(Math.log(zero_to_five/100)*(zero_to_five/100) + Math.log(six_to_twelve/100)*(six_to_twelve/100) + Math.log(thirteen_to_eighteen/100)*(thirteen_to_eighteen/100) + Math.log(nineteen_to_thirty/100)*(nineteen_to_thirty/100) + Math.log(thirtyone_to_fifty/100)*(thirtyone_to_fifty/100) + Math.log(over_fifty/100)*(over_fifty/100))/Math.log(6)*100
     
     //Inverse
@@ -570,6 +579,9 @@ function settlementAnalysis(data, coords, koppenData) {
     let density = (elevation + household_per_house)/2
 
     let demography = (diversity + equity + education)/3
+    console.log('diversity is', diversity)
+    console.log('equity is', equity)
+    console.log('education is', education)
 
     let prevalence = (popslum_per_country + economy + physical_nature + infrastructure + participation + security)/6
 
@@ -588,6 +600,10 @@ function settlementAnalysis(data, coords, koppenData) {
     let quality_life = (dignity + health + emotional_state)/3
 
     //Indicators
+
+    console.log('economy is', economy)
+    console.log('demography is', demography)
+    console.log('quality of life', quality_life)
 
     //Site
     site = (origin + geography + vulnerability)/3

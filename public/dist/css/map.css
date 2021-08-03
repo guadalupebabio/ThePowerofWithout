@@ -242,6 +242,11 @@ span.informality{
     background: linear-gradient(90deg, #E9D48C 17.71%, #C36B6B 81.77%);
 }
 
+#popinform2{
+    background: linear-gradient(to right,
+    #072ac8 20%, #1e96fc 20% 40%, #06d6a0 40% 60%, #fcf300 60% 80%, #ffc600 80%);
+}
+
 #poprates{
     position: absolute;
     top: 113px;
