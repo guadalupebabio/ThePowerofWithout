@@ -112,7 +112,7 @@ var settlements = fetch('/api/settlements')
       center: [0,0],
       zoom: 3,
       minZoom: 1,
-      layers: [dark, ch]
+      layers: [dark, ch, bubblelayer]
     });
 
   //Add Layer Control UI
@@ -655,9 +655,16 @@ settlements.then(response => response.json())
     updateDataInSidebar(name, country, continent, finalcauses, finalpop);
   }
   function polygonClick(e) {
-    console.log(e.target)
+    // console.log(e.target)
     let data = e.target.options.data
-    //console.log(data)
+    let settPop = data['site']['origin']['population']
+    if (settPop) {
+      settPop = numberWithCommas(parseInt(settPop))
+    } else {
+      settPop = 'N/A'
+    }
+    // changeText(`<span class=\'tpopulation\'>${settPop} / ${finalpop}</span>`, 'totalpop')
+    $('#totalpop span.tpopulation').text(`${settPop} / ${numberWithCommas(finalpopulation)}`)
     sidebar.show();
     updateDataInSidebar(data);
   }
@@ -985,7 +992,7 @@ function polygonHover(e) {
           style: style,
           onEachFeature: onEachFeature
         });
-        var allPointsLG = L.layerGroup([geojson]).addTo(map);
+        var allPointsLG = L.layerGroup([geojson]);
           overlaysObj["countries"] = allPointsLG;
 
         //overlaysObj["settlements"] = settlements;
@@ -1146,6 +1153,10 @@ function polygonHover(e) {
       map.removeLayer(bubblelayer)
     }
     
+  })
+
+  sidebar.on('hidden', function() {
+    $('#totalpop span.tpopulation').text(numberWithCommas(finalpopulation))
   })
 
   var defaultClusters = clusters;
