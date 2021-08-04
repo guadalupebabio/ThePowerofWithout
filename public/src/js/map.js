@@ -508,7 +508,7 @@ settlements.then(response => response.json())
     let popQuaEth = getFormValue(["populace","qualityOfLife","ethinicIdentities"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ethinicIdentities"]);
     let popQuaGen = getFormValue(["populace","qualityOfLife","gender"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","gender"]);
     let infInd = getFormValue(["indicator", "informalityIndicator"])
-    let popQuaEdu = getFormValue(["populace","qualityOfLife","accessToEducation"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","accessToEducation"]);
+    // let popQuaEdu = getFormValue(["populace","qualityOfLife","accessToEducation"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","accessToEducation"]);
     let popQuaENum = getFormValue(["populace","qualityOfLife","schoolsNumber"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","schoolsNumber"]);
  
     let siteInd = getFormValue(["indicator", "siteIndicator"])
