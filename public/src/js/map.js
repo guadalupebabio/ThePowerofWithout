@@ -111,6 +111,7 @@ var settlements = fetch('/api/settlements')
   var map = L.map('map', {
       center: [0,0],
       zoom: 3,
+      minZoom: 1,
       layers: [dark, ch]
     });
 
@@ -449,6 +450,8 @@ settlements.then(response => response.json())
       } else {
         if (tree[2] === 'population') {
           return val;
+        } else if (tree[0] === 'indicator') {
+          return val;
         } else {
           if (val < 20) {
             return 'Low';
@@ -492,8 +495,8 @@ settlements.then(response => response.json())
     let arcInfMob = getFormValue(["architecture","infrastructure","mobilitySystems"]) == null ? "N/A": getFormValue(["architecture","infrastructure","mobilitySystems"]);
     let popDenEle = getFormValue(["populace","density","elevation"]) == null ? "N/A": getFormValue(["populace","density","elevation"]);
     let popDenHou = getFormValue(["populace","density","householdPerHouseSize"]) == null ? "N/A": getFormValue(["populace","density","householdPerHouseSize"]) ;
-    let popDenSize = getFormValue(["populace","density","dwellingSize"]) == null ? "N/A": getFormValue(["populace","density","householdPerHouseSize"]) ;
-    
+    let popDenSize = getFormValue(["populace","density","dwellingSize"]) == null ? "N/A": getFormValue(["populace","density","dwellingSize"]) ;
+    let popQuaInc = getFormValue(["populace", 'economy',"populationIncome"]) == null ? "N/A": getFormValue(["populace", "economy","populationIncome"]) ;
     let popQuaHap = getFormValue(["populace","qualityOfLife","happiness"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","happiness"]);
     let popQuaFood = getFormValue(["populace","qualityOfLife","food"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","food"]);
     let popQuaPro = getFormValue(["populace","qualityOfLife","proximity"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","proximity"]);
@@ -504,10 +507,11 @@ settlements.then(response => response.json())
     let popQuaUne = getFormValue(["populace","economy","unemploymentRate"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","unemploymentRate"])
     let popQuaInf = getFormValue(["populace","economy","formalEmployment"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","employmentInTheInformalSector"]);
     let popQuaOwn = getFormValue(["populace","economy","tenure"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ownershipRights"]);
-    let popQuaAge = getFormValue(["populace","qualityOfLife","ageGroups"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ageGroups"]);
-    let popQuaEth = getFormValue(["populace","qualityOfLife","ethinicIdentities"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ethinicIdentities"]);
-    let popQuaGen = getFormValue(["populace","qualityOfLife","gender"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","gender"]);
+    let popQuaAge = getFormValue(["populace","demography","ageGroups"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ageGroups"]);
+    let popQuaEth = getFormValue(["populace","demography","ethinicIdentities"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ethinicIdentities"]);
+    let popQuaGen = getFormValue(["populace","demography","gender"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","gender"]);
     let infInd = getFormValue(["indicator", "informalityIndicator"])
+    console.log('this is informality', infInd)
     // let popQuaEdu = getFormValue(["populace","qualityOfLife","accessToEducation"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","accessToEducation"]);
     let popQuaENum = getFormValue(["populace","qualityOfLife","schoolsNumber"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","schoolsNumber"]);
  
