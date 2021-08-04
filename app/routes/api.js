@@ -16,7 +16,8 @@ let express = require("express"),
     indicator = require("../util/javascript_analysis.js").settlementAnalysis
 
 const util = require('util')
-const csv = require('csv-parser');
+// const csv = require('csv-parser');
+const parse = require('csv-parse')
 
 async function settAnalysis(data, coords) {
   return await indicator(data, coords)
@@ -203,7 +204,7 @@ module.exports = function(User, Settlement,Survey, Pin, Comment, Link,Image,Coun
 
           const koppenData = [];
 
-          fs.createReadStream('./app/util/koppen_2010.csv').pipe(csv({skipLines: 6, headers: false})).on('data', (data) => koppenData.push(data)).on('end', () => {
+          fs.createReadStream('./app/util/koppen_2010.csv').pipe(parse({ delimiter: ',' })).on('data', (data) => koppenData.push(data)).on('end', () => {
 
             let obj = indicator(settlementData, coords, koppenData)
 
