@@ -259,6 +259,11 @@ span.lowpop{
     padding-right: 80px;
 }
 
+span.lowinf{
+    font-family: 'Roboto';
+    padding-right: 100px;
+}
+
 
 span.name{
     font-family: 'Roboto';
@@ -279,6 +284,30 @@ span.labels{
     font-weight: bold;
     padding-top: 30px;
     padding-bottom: 30px;
+}
+
+#inflow{
+    color:#072ac8
+}
+
+#infmediumlow{
+    color: #1e96fc
+}
+
+#infmedium{
+    color: #06d6a0
+}
+
+#infmediumhigh{
+    color: #fcf300
+}
+
+#infhigh{
+    color: #ffc600
+}
+
+#infunknow{
+    color: gray
 }
 
 

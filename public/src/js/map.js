@@ -221,6 +221,26 @@ for (var i = 0; i < settlements.length; ++i){
   circle.options.finalpop = finalpop;
   circle.addTo(settlementslayer);
 };*/
+
+function getRangeColor(indicator) {
+  let bubbleColor;
+  if (indicator < 20) {
+    bubbleColor = 'inflow'
+  } else if (indicator >=20 && indicator < 40) {
+    bubbleColor = 'infmediumlow'
+  } else if (indicator >= 40 && indicator < 60) {
+    bubbleColor = 'infmedium'
+  } else if (indicator >= 60 && indicator < 80) {
+    bubbleColor = 'infmediumhigh'
+  } else if (indicator >=80) {
+    bubbleColor = 'infhigh'
+  } else {
+    bubbleColor = 'infunknown'
+  }
+
+  return bubbleColor
+}
+
 settlements.then(response => response.json())
       .then(data => {
         console.log(data)
@@ -511,13 +531,17 @@ settlements.then(response => response.json())
     let popQuaEth = getFormValue(["populace","demography","ethinicIdentities"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","ethinicIdentities"]);
     let popQuaGen = getFormValue(["populace","demography","gender"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","gender"]);
     let infInd = getFormValue(["indicator", "informalityIndicator"])
+    let infIndRangeColor = getRangeColor(infInd)
     console.log('this is informality', infInd)
     // let popQuaEdu = getFormValue(["populace","qualityOfLife","accessToEducation"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","accessToEducation"]);
     let popQuaENum = getFormValue(["populace","qualityOfLife","schoolsNumber"]) == null ? "N/A": getFormValue(["populace","qualityOfLife","schoolsNumber"]);
  
     let siteInd = getFormValue(["indicator", "siteIndicator"])
+    let siteIndRangeColor = getRangeColor(siteInd)
     let archInd = getFormValue(["indicator", "architecturIndicator"])
+    let archIndRangeColor = getRangeColor(archInd)
     let popInd = getFormValue(['indicator', "populationIndicator"])
+    let popIndRangeColor = getRangeColor(popInd)
 
 
     // This function assigns a range to the numerical value of an indicator
@@ -553,9 +577,9 @@ settlements.then(response => response.json())
 
     sidebarinst.innerHTML=
       "<span class = \"name\">" + data['name'] + "</span>" + "<br>" 
-      + "<span class = \"labelstitle\">Informality Index: </span>" + Math.round(infInd) + "<span class = \"labels\">% </span>"+ "<br>" 
+      + "<span class = \"labelstitle\">Informality Index: </span>" + `<span class = \"labels\" id="${infIndRangeColor}">${Math.round(infInd)}% </span>`+ "<br>" 
       + "<br>" 
-      + "<span class = \"labelstitle\">SITE</span>" + "<br>" 
+      + `<span class = \"labelstitle\" id="${siteIndRangeColor}">SITE</span>` + "<br>" 
       + "<span class = \"labels\">Origin</span>" + "<br>" 
       + "<span class = \"causes\"> Causes: </span>" + siteOriginCauses + "<br>" 
       + "<span class = \"population\"> Population: </span>" + siteOriginPop + "<br>" 
@@ -568,7 +592,7 @@ settlements.then(response => response.json())
       + "<span class = \"perceptionOfInsecurity\"> Perception of Insecurity: </span>" + assignrange(siteVulPer) + "<br>" 
       + "<span class = \"communityEngagement\"> Community Engagement: </span>" + assignrange(siteVulCom) + "<br>" 
       + "<br>" 
-      + "<span class = \"labelstitle\">ARCHITECTURE</span>" + "<br>" 
+      + `<span class = \"labelstitle\" id="${archIndRangeColor}">ARCHITECTURE</span>` + "<br>" 
       + "<span class = \"labels\">PhysicalNature</span>" + "<br>" 
       + "<span class = \"houseQuality\">House Quality: </span>" + assignrange(arcPhyHou) + "<br>" 
       + "<span class = \"materials\">Materials: </span>" + arcPhyMat + "<br>" 
@@ -591,18 +615,18 @@ settlements.then(response => response.json())
       + "<span class = \"householdPerHouseSize\">Household per House Size: </span>" + assigndesnsity(popDenHou) + "<br>" 
       + "<span class = \"householdPerHouseSize\">Dwelling size: </span>" + assigndesnsity(popDenSize) + "<br>"       
       + "<br>" 
-      + "<span class = \"labelstitle\">POPULACE</span>" + "<br>" 
+      + `<span class = \"labelstitle\" id="${popIndRangeColor}">POPULACE</span>` + "<br>" 
       + "<span class = \"labels\">Quality of Life</span>" + "<br>" 
-      + "<span class = \"proximity\">Level of happiness:</span>" + assignrange(popQuaHap) + "<br>" 
-      + "<span class = \"proximity\">Access to food:</span>" + assignrange(popQuaFood) + "<br>" 
-      + "<span class = \"proximity\">Proximity to urban amenities:</span>" + assignrange(popQuaPro) + "<br>" 
-      + "<span class = \"proximity\">Access to green spaces:</span>" + assignrange(popQuaNat) + "<br>" 
+      + "<span class = \"proximity\">Level of happiness: </span>" + assignrange(popQuaHap) + "<br>" 
+      + "<span class = \"proximity\">Access to food: </span>" + assignrange(popQuaFood) + "<br>" 
+      + "<span class = \"proximity\">Proximity to urban amenities: </span>" + assignrange(popQuaPro) + "<br>" 
+      + "<span class = \"proximity\">Access to green spaces: </span>" + assignrange(popQuaNat) + "<br>" 
       + "<span class = \"accessToHealthCare\">Access To Health Care: </span>" + assignrange(popQuaHea) + "<br>"
       + "<span class = \"numberOfHealthCareFacilities\">Number of Health Care Facilities: </span>" + assigndesnsity(popQuaFac) + "<br>" 
       + "<span class = \"labels\">Economy</span>" + "<br>" 
       + "<span class = \"unemploymentRate\">Unemployment Rate: </span>" + assignrange(popQuaUne) + "<br>" 
       + "<span class = \"employmentInTheInformalSector\">Employment In the Informal Sector: </span>" + assignrange(popQuaInf) + "<br>" 
-      + "<span class = \"employmentInTheInformalSector\">Employment In the Informal Sector: </span>" + assignrange(popQuaInc) + "<br>" 
+      + "<span class = \"employmentInTheInformalSector\">Population Income: </span>" + assignrange(popQuaInc) + "<br>" 
       + "<span class = \"ownershipRights\">Ownership Rights: </span>" + assignrange(popQuaOwn) + "<br>" 
       + "<span class = \"labels\">Demography</span>" + "<br>" 
       + "<span class = \"ageGroups\">Age Groups: </span>" + popQuaAge + "<br>" 
@@ -1173,10 +1197,12 @@ function polygonHover(e) {
     console.log(event.target)
     if (event.target.className === 'settlement') {
       $('canvas').removeAttr('id');
-      $('canvas').attr('id', 'popinform2')
+      $('canvas').attr('id', 'popinform2');
+      $('span.lowpop').attr('class', 'lowinf');
     } else {
       $('canvas').removeAttr('id');
-      $('canvas').attr('id', 'popinform')
+      $('canvas').attr('id', 'popinform');
+      $('span.lowinf').attr('class', 'lowpop')
     }
     
     $(event.target).attr('id', 'clicked');
