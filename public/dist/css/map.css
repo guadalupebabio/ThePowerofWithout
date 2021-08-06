@@ -226,7 +226,7 @@ span.people{
 
 #informality{
     position: absolute;
-    top: 80px;
+    top: 90px;
     color: white;
     right: 25px;
 }
@@ -249,9 +249,9 @@ span.informality{
 
 #poprates{
     position: absolute;
-    top: 113px;
+    top: 110px;
     color: white;
-    right: 220px;
+    right: 135px;
     font-size: 10px;
 }
 span.lowpop{
