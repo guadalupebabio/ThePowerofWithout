@@ -1081,7 +1081,7 @@ function polygonHover(e) {
       if (map.hasLayer(overlaysObj["countries"])){
         map.removeLayer(overlaysObj["countries"]);
         }
-        changeText('INFORMALITY', 'indicatortext')
+        changeText('Informality Index', 'indicatortext')
       }
       
       if (layout === "country"){
@@ -1105,7 +1105,7 @@ function polygonHover(e) {
         } 
         map.addLayer(overlaysObj["countries"]);
 
-        changeText('POPULATION', 'indicatortext')
+        changeText('Informality Index', 'indicatortext')
       } 
 
       if (layout === "appdata"){
@@ -1132,7 +1132,7 @@ function polygonHover(e) {
         // removefromMap();
         legendapp.addTo(map);
 
-        changeText('POPULATION', 'indicatortext')
+        changeText('Informality Index', 'indicatortext')
         
       
         
