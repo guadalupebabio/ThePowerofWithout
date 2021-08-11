@@ -1105,7 +1105,7 @@ function polygonHover(e) {
         } 
         map.addLayer(overlaysObj["countries"]);
 
-        changeText('Informality Index', 'indicatortext')
+        changeText('Population', 'indicatortext')
       } 
 
       if (layout === "appdata"){
@@ -1132,7 +1132,7 @@ function polygonHover(e) {
         // removefromMap();
         legendapp.addTo(map);
 
-        changeText('Informality Index', 'indicatortext')
+        changeText('Population', 'indicatortext')
         
       
         
