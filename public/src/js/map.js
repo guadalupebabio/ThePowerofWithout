@@ -577,7 +577,7 @@ settlements.then(response => response.json())
 
     sidebarinst.innerHTML=
       "<span class = \"name\">" + data['name'] + "</span>" + "<br>" 
-      + "<span class = \"labelstitle\">Informality Index: </span>" + `<span class = \"labels\" id="${infIndRangeColor}">${Math.round(infInd)}% </span>`+ "<br>" 
+      + "<span class = \"labelstitle\">Informality Index: </span>" + `<span class = \"labelstitle\" id="${infIndRangeColor}">${Math.round(infInd)}% </span>`+ "<br>" 
       + "<br>" 
       + `<span class = \"labelstitle\" id="${siteIndRangeColor}">SITE</span>` + "<br>" 
       + "<span class = \"labels\">Origin</span>" + "<br>" 
