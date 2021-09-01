@@ -49,6 +49,9 @@ This project runs off a Node.js backend, with a MongoDB database. Follow these s
 * `util`: This folder is deprecated, don't worry about it.
 * `views`: This folder contains the Pug layouts which are rendered by the backend. Read more about Pug files [here](https://pugjs.org/api/getting-started.html).
 
+## Run it locally
+- Go to the folder where the project is locacted and type: `npm start`
+
 ## Deployment
 - Once you update the site locally and push it to Github main. Go to Heroku with the user and password saved in "PoW-Crowdsource data platform" accounts tab (google spreadsheets). In Heroku go to Deploy, scroll down to Manual Deploy and click "Deploy Brunch". 
 - In case it is not working or you want to go back to a previous version, go to Activity and roll back to a previous deployment.
