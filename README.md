@@ -14,7 +14,7 @@ This project runs off a Node.js backend, with a MongoDB database. Follow these s
 
 - Clone the repository locally: `git clone https://github.com/guadalupebabio/ThePowerofWithout.git`
 - In the project folder, install the packages: `npm install`
-  - Make sure npm is installed. If not, you can follow the instructions to download it [here](https://www.npmjs.com/get-npm).
+  - Make sure npm is installed. If not, make sure you have [node.js](https://nodejs.org/en/download/) you can verify it entering: `node -v` you can do the same for NPM: `npm -v`.
 - Install gulp locally: `npm install -g gulp`. This is necessary to compile the styles from SCSS to CSS.
 - The database is hosted on MongoDB Cloud (may be migrated to another service in the future), and requires some security configuration in order for you to connect to it:
   - Email me so I can add you as an admin on the database
@@ -48,3 +48,17 @@ This project runs off a Node.js backend, with a MongoDB database. Follow these s
 * `public`: Everything in this folder is a static file served by the frontend (don't include sensitive information here). Read more about this type of folder [here](https://expressjs.com/en/starter/static-files.html).
 * `util`: This folder is deprecated, don't worry about it.
 * `views`: This folder contains the Pug layouts which are rendered by the backend. Read more about Pug files [here](https://pugjs.org/api/getting-started.html).
+
+## Deployment
+- Once you update the site locally and push it to Github main. Go to Heroku with the user and password saved in "PoW-Crowdsource data platform" accounts tab (google spreadsheets). In Heroku go to Deploy, scroll down to Manual Deploy and click "Deploy Brunch". 
+- In case it is not working or you want to go back to a previous version, go to Activity and roll back to a previous deployment.
+
+## MongoDB
+- Access [MongoDB](https://cloud.mongodb.com/) with your own user or the one you can find "PoW-Crowdsource data platform" spreadsheet. 
+- Go to browse collections. This is the structure of the data:
+  - comments: Comments by questions
+  - Links: Links by questions
+  - settlement_city_science_db: Database from City Science adapted to MongoDB structure.
+  - settlementtsdatas: Data saved by settlement.
+  - surveys: final survey
+- To give access to someone or to edit the password of the `.env` go to Database Access.
