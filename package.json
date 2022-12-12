@@ -30,7 +30,7 @@
     "data.js": "^0.12.11",
     "dotenv": "^8.2.0",
     "esri-leaflet": "^2.5.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-session": "^1.17.1",
     "firebase": "^8.2.5",
     "geo-distance": "^0.2.0",
